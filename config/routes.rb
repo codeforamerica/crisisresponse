@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :people
+  resources :people, only: [:index, :show]
 end
