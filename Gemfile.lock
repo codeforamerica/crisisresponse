@@ -37,9 +37,6 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    airbrake (5.0.3)
-      airbrake-ruby (~> 1.0)
-    airbrake-ruby (1.0.3)
     arel (6.0.3)
     autoprefixer-rails (6.3.1)
       execjs
@@ -251,7 +248,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  airbrake
   autoprefixer-rails
   awesome_print
   bourbon (~> 4.2.0)
