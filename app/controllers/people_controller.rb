@@ -1,23 +1,24 @@
+require "csv"
+
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
-
-  # GET /people
   def index
-    @people = Person.all
+    if params[:name]
+      redirect_to person_path(params[:name])
+    end
   end
 
-  # GET /people/1
   def show
-  end
+    @name = params[:id]
 
-  private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_person
-    @person = Person.find(params[:id])
-  end
+    first, last = @name.split
 
-  # Only allow a trusted parameter "white list" through.
-  def person_params
-    params[:person]
+    @events = CSV.read(Rails.root.join("data.csv"))
+    @headers = @events.shift
+    @events.map! { |e| Event.new(e) }
+
+    @events.select! do |event|
+      event.crisis_contacted_first_name.downcase == first.downcase &&
+        event.crisis_contacted_last_name.downcase == last.downcase
+    end
   end
 end

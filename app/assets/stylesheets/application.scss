@@ -6,3 +6,15 @@
 @import "neat";
 @import "base/base";
 @import "refills/flashes";
+
+h1 {
+  margin-bottom: 12em;
+}
+
+thead td {
+  transform: rotate(-90deg);
+}
+
+td {
+  text-align: center;
+}

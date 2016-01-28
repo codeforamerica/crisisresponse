@@ -1,4 +1,55 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_person_path(@person) %> |
+<h1><%= @name.titleize %></h1>
+
+<table>
+  <thead>
+    <td>go_id</td>
+    <td>reported_on_date</td>
+    <td>reported_on_time</td>
+    <td>report_year</td>
+    <td>report_number</td>
+    <td>chbk_biologically_induced</td>
+    <td>chbk_medically_induced</td>
+    <td>chbk_chemically_induced</td>
+    <td>chbk_unknown_crisis_nature</td>
+    <td>chbk_neglect_self_care</td>
+    <td>chbk_disorganize_communication</td>
+    <td>chbk_disoriented_confused</td>
+    <td>chbk_disorderly_disruptive</td>
+    <td>chbk_unusual_fright_scared</td>
+    <td>chbk_belligerent_uncooperative</td>
+    <td>chbk_hopeless_depressed</td>
+    <td>chbk_bizarre_unusual_behavior</td>
+    <td>chbk_suicide_threat_attempt</td>
+    <td>chbk_mania</td>
+    <td>chbk_out_of_touch_reality</td>
+    <td>chbk_halluc_delusion</td>
+    <td>chbk_wpn_knife</td>
+    <td>chbk_wpn_gun</td>
+    <td>chbk_wpn_oth</td>
+    <td>chbk_verbalization</td>
+    <td>chbk_dispo_chronic</td>
+    <td>chbk_dispo_treatment_referral</td>
+    <td>chbk_dispo_resource_declined</td>
+    <td>chbk_dispo_mobile_crisis_team</td>
+    <td>chbk_dispo_grat</td>
+    <td>chbk_dispo_shelter</td>
+    <td>chbk_dispo_no_action_poss_necc</td>
+    <td>chbk_dispo_casemanager_notice</td>
+    <td>chbk_dispo_dmhp_refer</td>
+    <td>chbk_dispo_crisis_clinic</td>
+    <td>chbk_dispo_emergent_ita</td>
+    <td>chbk_dsipo_voluntary_commit</td>
+    <td>chbk_dispo_arrested</td>
+    <td>crisis_contacted_vet_yn_unk</td>
+    <td>weapon_yn_dk</td>
+    <td>threaten_violence_yn_dk</td>
+    <td>chbk_excited_delirium</td>
+  </thead>
+  <tbody>
+    <%= render @events %>
+  </tbody>
+</table>
+
 <%= link_to 'Back', people_path %>
