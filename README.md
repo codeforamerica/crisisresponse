@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+### 1. Install dependencies
+
 After you have cloned this repo, run this setup script to set up your machine
 with the necessary dependencies to run and test this app:
 
@@ -11,6 +13,14 @@ It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
 your machine with [this script].
 
 [this script]: https://github.com/thoughtbot/laptop
+
+### 2. Add a data set
+
+You'll need to add a CSV file to source the data.
+Place this file in the root of the repository, with the name `data.csv`
+For security & privacy reasons, this file is not stored in version control.
+
+### 3. Run the server
 
 After setting up, you can run the application using [Heroku Local]:
 
