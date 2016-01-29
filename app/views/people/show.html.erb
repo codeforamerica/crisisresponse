@@ -52,4 +52,83 @@
   </tbody>
 </table>
 
+
+<div class="ct-chart"></div>
+
+<% chartFields = [
+  "chbk_biologically_induced",
+  "chbk_medically_induced",
+  "chbk_chemically_induced",
+  "chbk_unknown_crisis_nature",
+  "chbk_neglect_self_care",
+  "chbk_disorganize_communication",
+  "chbk_disoriented_confused",
+  "chbk_disorderly_disruptive",
+  "chbk_unusual_fright_scared",
+  "chbk_belligerent_uncooperative",
+  "chbk_hopeless_depressed",
+  "chbk_bizarre_unusual_behavior",
+  "chbk_suicide_threat_attempt",
+  "chbk_mania",
+  "chbk_out_of_touch_reality",
+  "chbk_halluc_delusion",
+  "chbk_wpn_knife",
+  "chbk_wpn_gun",
+  "chbk_wpn_oth",
+  "chbk_verbalization",
+  "chbk_dispo_chronic",
+  "chbk_dispo_treatment_referral",
+  "chbk_dispo_resource_declined",
+  "chbk_dispo_mobile_crisis_team",
+  "chbk_dispo_grat",
+  "chbk_dispo_shelter",
+  "chbk_dispo_no_action_poss_necc",
+  "chbk_dispo_casemanager_notice",
+  "chbk_dispo_dmhp_refer",
+  "chbk_dispo_crisis_clinic",
+  "chbk_dispo_emergent_ita",
+  "chbk_dsipo_voluntary_commit",
+  "chbk_dispo_arrested",
+  "weapon_yn_dk",
+  "threaten_violence_yn_dk",
+  "chbk_excited_delirium"
+  ]
+
+series = chartFields.map do |field|
+  @events.count { |e| e.send(field).downcase == 'x' }.to_f / @events.count
+end
+%>
+
+<script>
+var data = {
+  // A labels array that can contain any sort of values
+  labels: <%= chartFields.inspect.html_safe %>,
+    // Our series array that contains series objects or in this case series data arrays
+    series: [
+      <%= series.inspect.html_safe %>
+    ]
+
+};
+
+
+// As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+// as you saw in the previous example
+var options = {
+  axisY: {
+    offset: 200,
+  },
+  axisX: {
+    scaleMinSpace: 100,
+  },
+  height: 1000,
+  width: 500,
+  horizontalBars: true
+};
+
+// Create a new line chart object where as first parameter we pass in a selector
+// that is resolving to our chart container element. The Second parameter
+// is the actual data object. As a third parameter we pass in our custom options.
+new Chartist.Bar('.ct-chart', data, options);
+</script>
+
 <%= link_to 'Back', people_path %>
