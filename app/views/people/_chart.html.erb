@@ -22,12 +22,14 @@ var data = {
 
 };
 
-
 // As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
 // as you saw in the previous example
 var options = {
   axisY: {
-    offset: 200,
+    offset: 160,
+    labelInterpolationFnc: function(field, index, domain) {
+      return field.replace("chbk_", "").replace("dispo_", "");
+    },
   },
   axisX: {
     offset: 10,
