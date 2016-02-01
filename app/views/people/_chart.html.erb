@@ -2,6 +2,7 @@
 <div class="ct-chart <%= title.gsub(" ", "").underscore %>"></div>
 
 <%
+fields.reverse!
 positive = ['x', 'yes']
 
 series = fields.map do |field|
