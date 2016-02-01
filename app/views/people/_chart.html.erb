@@ -9,17 +9,18 @@ series = fields.map do |field|
   count = @events.count { |e| positive.include?(e.send(field).downcase) }.to_f
   count / @events.count
 end
+
+nonzero = fields.zip(series).select do |field, value|
+  value > 0
+end
+
+(fields, series) = nonzero.transpose
 %>
 
 <script>
 var data = {
-  // A labels array that can contain any sort of values
   labels: <%= fields.inspect.html_safe %>,
-    // Our series array that contains series objects or in this case series data arrays
-    series: [
-      <%= series.inspect.html_safe %>
-    ]
-
+  series: [ <%= series.inspect.html_safe %> ]
 };
 
 // As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
