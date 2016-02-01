@@ -15,5 +15,9 @@ class PeopleController < ApplicationController
     events.map! { |event_data| EventBuilder.build(event_data) }
 
     @events = @person.events_from(events)
+
+    if @events.none?
+      redirect_to :index, alert: "Could not find any records for #{@person.name}"
+    end
   end
 end

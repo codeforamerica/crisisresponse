@@ -27,8 +27,14 @@ td {
   transform: translateX(-12px);
 }
 
-.ct-label.ct-vertical {
+.ct-label {
   color: #9a9a9a;
+}
+
+.no-data {
+  display: block;
+  padding-left: 3*$base-spacing;
+  margin-top: $base-spacing;
 }
 
 .ct-series-a .ct-bar {
