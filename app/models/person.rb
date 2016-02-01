@@ -17,4 +17,8 @@ class Person
         event.crisis_contacted_last_name.downcase == last_name.downcase
     end
   end
+
+  def to_param
+    name
+  end
 end
