@@ -25,9 +25,6 @@
     <td>chbk_mania</td>
     <td>chbk_out_of_touch_reality</td>
     <td>chbk_halluc_delusion</td>
-    <td>chbk_wpn_knife</td>
-    <td>chbk_wpn_gun</td>
-    <td>chbk_wpn_oth</td>
     <td>chbk_verbalization</td>
     <td>chbk_dispo_chronic</td>
     <td>chbk_dispo_treatment_referral</td>
@@ -72,9 +69,6 @@
   "chbk_mania",
   "chbk_out_of_touch_reality",
   "chbk_halluc_delusion",
-  "chbk_wpn_knife",
-  "chbk_wpn_gun",
-  "chbk_wpn_oth",
   "chbk_verbalization",
   "chbk_dispo_chronic",
   "chbk_dispo_treatment_referral",
@@ -94,8 +88,11 @@
   "chbk_excited_delirium"
   ]
 
+positive = ['x', 'yes']
+
 series = chartFields.map do |field|
-  @events.count { |e| e.send(field).downcase == 'x' }.to_f / @events.count
+  count = @events.count { |e| positive.include?(e.send(field).downcase) }.to_f
+  count / @events.count
 end
 %>
 
