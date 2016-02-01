@@ -14,7 +14,7 @@ class PeopleController < ApplicationController
 
     @events = CSV.read(Rails.root.join("data.csv"))
     @headers = @events.shift
-    @events.map! { |e| Event.new(e) }
+    @events.map! { |event_data| EventBuilder.build(event_data) }
 
     @events.select! do |event|
       event.crisis_contacted_first_name.downcase == first.downcase &&
