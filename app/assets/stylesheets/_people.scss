@@ -1,9 +1,11 @@
-.left-column,
-.right-column {
-  @include span-columns(6 of 12);
+$header-height: 4em;
+
+.left-column {
+  @include span-columns(8 of 12);
 }
 
 .right-column {
+  @include span-columns(4 of 12);
   @include omega;
 
   img {
@@ -11,7 +13,33 @@
   }
 }
 
-.header,
+.header {
+  font-weight: bold;
+  height: $header-height;
+  line-height: $header-height;
+
+  img {
+    max-height: $header-height;
+    vertical-align: middle;
+    margin-right: $base-spacing;
+  }
+
+  .right-column {
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  .red {
+    color: red;
+    margin-right: $base-spacing;
+  }
+}
+
+h1 {
+  @include fill-parent;
+  text-align: center;
+}
+
 .basic_info,
 .response_plan,
 .emergency_contact,
