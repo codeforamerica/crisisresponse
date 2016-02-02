@@ -16,10 +16,18 @@
   <section class="personal_info">
     <h2>Personal Information</h2>
 
+    <div class="address">
+    </div>
   </section>
 
-  <section class="emergency_contact">
-    <h2>Emergency Contact</h2>
+  <section class="response_plan">
+    <h2>Response Plan</h2>
+
+    <ol>
+      <% @plan.action_plan_steps.each do |step| %>
+        <li><%= step %></li>
+      <% end %>
+    </ol>
   </section>
 
   <section class="interaction_history">
