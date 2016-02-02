@@ -8,11 +8,16 @@ $highlight: blue;
 .right-column {
   @include span-columns(4 of 12);
   @include omega;
+  background-color: #eee;
 }
 
 .header {
   height: $header-height;
   line-height: $header-height;
+
+  .right-column {
+    background-color: #fff;
+  }
 
   img {
     max-height: $header-height;
@@ -40,6 +45,7 @@ h1 {
 
 h2 {
   color: $highlight;
+  font-family: "Museo Slab";
 }
 
 section {
@@ -51,15 +57,20 @@ section {
   overflow: hidden;
 
   img {
-    @include span-columns(4 of 8);
+    @include span-columns(5 of 8);
   }
 
   .biometrics {
-    @include span-columns(4 of 8);
+    @include span-columns(3 of 8);
 
     .stat {
       overflow: hidden;
-      border-bottom: 1px solid grey;
+      border-bottom: 1px solid lightgrey;
+      padding: 0.25em 0;
+
+      &:first-child {
+        padding-top: 0;
+      }
 
       &:last-child {
         border-bottom: none;
@@ -83,5 +94,26 @@ section {
     dt:after {
       content: ":"
     }
+  }
+}
+
+p {
+  font-size: 0.8em;
+}
+
+.response_plan {
+  ol {
+    font-size: 0.8em;
+  }
+}
+
+.interaction_history {
+  .date,
+  .time{
+    font-weight: bold;
+  }
+
+  .time {
+    margin-left: $base-spacing;
   }
 }

@@ -10,6 +10,7 @@ class ResponsePlan
     :image,
     :license,
     :name,
+    :past_encounters,
     :race,
     :sex,
     :type,

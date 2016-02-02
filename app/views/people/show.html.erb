@@ -32,6 +32,14 @@
 
   <section class="interaction_history">
     <h2>Interaction History</h2>
+
+    <% @plan.past_encounters.each.with_index do |encounter, index| %>
+      <div class="encounter">
+        <span class="date"><%= @events[index].reported_on_date %></span>
+        <span class="time"><%= "%04d" % @events[index].reported_on_time %> </span>
+        <p><%= encounter %></p>
+      </div>
+    <% end %>
   </section>
 </div>
 
@@ -40,6 +48,12 @@
 </div>
 
 <div class="footer">
-</div>
+  <div class="prepared_by">
+  </div>
 
-<%= link_to 'Back', people_path %>
+  <div class="prepared_by">
+  </div>
+
+  <div class="prepared_by">
+  </div>
+</div>
