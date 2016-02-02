@@ -14,6 +14,12 @@ class ResponsePlanBuilder
       data["Descriptions of Past Encounter (##{n})"]
     end.compact
 
+    preparer = {
+      name: "What is your name?",
+      phone: "What is the best phone number to reach you?",
+      team: "With which team at SPD are you apart?",
+    }
+
     ResponsePlan.new(
       action_plan_steps: action_plan_steps,
       dob: data["Date of Birth"],
@@ -24,8 +30,10 @@ class ResponsePlanBuilder
       license: data["License Number"],
       name: data["Full Name"],
       past_encounters: past_encounters,
+      preparer: preparer,
       race: data["Race"],
       sex: data["Gender"],
+      timestamp: data["Timestamp"].split.first,
       type: data["What prompts you to write this plan?"],
       veteran: data["Veteran?"],
       weight: data["Weight"],

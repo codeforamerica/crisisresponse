@@ -117,3 +117,32 @@ p {
     margin-left: $base-spacing;
   }
 }
+
+.main {
+  overflow: hidden;
+}
+
+.footer {
+  @include row;
+  @include fill-parent;
+  font-size: 0.8em;
+  margin: $base-spacing 0;
+
+  .third {
+    @include span-columns(4 of 12);
+  }
+
+  .label {
+    vertical-align: top;
+    font-weight: bold;
+  }
+
+  .data {
+    display: inline-block;
+    padding-left: $base-spacing;
+  }
+
+  .row {
+    @include row;
+  }
+}

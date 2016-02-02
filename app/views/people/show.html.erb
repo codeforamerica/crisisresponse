@@ -4,56 +4,75 @@
 
 <h1><%= @plan.type %>: <%= @person.name.titleize %></h1>
 
-<div class="left-column">
-  <section class="basic_info">
-    <h2><%= @person.last_name.upcase %>, <%= @person.first_name %></h2>
+<div class="main">
+  <div class="left-column">
+    <section class="basic_info">
+      <h2><%= @person.last_name.upcase %>, <%= @person.first_name %></h2>
 
-    <%= image_tag @plan.image %>
+      <%= image_tag @plan.image %>
 
-    <%= render "biometrics", plan: @plan %>
-  </section>
+      <%= render "biometrics", plan: @plan %>
+    </section>
 
-  <section class="personal_info">
-    <h2>Personal Information</h2>
+    <section class="personal_info">
+      <h2>Personal Information</h2>
 
-    <div class="address">
-    </div>
-  </section>
-
-  <section class="response_plan">
-    <h2>Response Plan</h2>
-
-    <ol>
-      <% @plan.action_plan_steps.each do |step| %>
-        <li><%= step %></li>
-      <% end %>
-    </ol>
-  </section>
-
-  <section class="interaction_history">
-    <h2>Interaction History</h2>
-
-    <% @plan.past_encounters.each.with_index do |encounter, index| %>
-      <div class="encounter">
-        <span class="date"><%= @events[index].reported_on_date %></span>
-        <span class="time"><%= "%04d" % @events[index].reported_on_time %> </span>
-        <p><%= encounter %></p>
+      <div class="address">
       </div>
-    <% end %>
-  </section>
-</div>
+    </section>
 
-<div class="right-column">
-  <%= render "charts", events: @events %>
+    <section class="response_plan">
+      <h2>Response Plan</h2>
+
+      <ol>
+        <% @plan.action_plan_steps.each do |step| %>
+          <li><%= step %></li>
+        <% end %>
+      </ol>
+    </section>
+
+    <section class="interaction_history">
+      <h2>Interaction History</h2>
+
+      <% @plan.past_encounters.each.with_index do |encounter, index| %>
+        <div class="encounter">
+          <span class="date"><%= @events[index].reported_on_date %></span>
+          <span class="time"><%= "%04d" % @events[index].reported_on_time %> </span>
+          <p><%= encounter %></p>
+        </div>
+      <% end %>
+    </section>
+  </div>
+
+  <div class="right-column">
+    <%= render "charts", events: @events %>
+  </div>
 </div>
 
 <div class="footer">
-  <div class="prepared_by">
+  <div class="third prepared_by">
+    <span class="label">Prepared by</span>
+    <span class="data">
+      <%= @plan.preparer[:name] %><br/>
+      <%= @plan.preparer[:team] %><br/>
+      <%= @plan.preparer[:phone] %>
+    </span>
   </div>
-
-  <div class="prepared_by">
+  <div class="third approved_by">
+    <span class="label">Approved by</span>
+    <span class="data">
+      Sgt. E. Pisconski
+    </span>
   </div>
+  <div class="third metadata">
+    <div class="row">
+      <span class="label">GO #</span>
+      <span class="data">2016-00012512</span>
+    </div>
 
-  <div class="prepared_by">
+    <div class="row">
+      <span class="label">Date</span>
+      <span class="data"><%= @plan.timestamp %></span>
+    </div>
   </div>
 </div>
