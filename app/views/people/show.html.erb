@@ -36,7 +36,7 @@
 
       <% @plan.past_encounters.each.with_index do |encounter, index| %>
         <div class="encounter">
-          <span class="date"><%= @events[index].reported_on_date %></span>
+          <span class="date"><%= @events.reverse[index].reported_on_date %></span>
           <span class="time"><%= "%04d" % @events[index].reported_on_time %> </span>
           <p><%= encounter %></p>
         </div>
