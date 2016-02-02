@@ -6,15 +6,34 @@
 
 <div class="left-column">
   <div class="basic_info">
+    <h2>Basic Information</h2>
+
+    <div class="biometrics">
+      <h3><%= @person.last_name %>, <%= @person.first_name %></h3>
+
+      <dt>DOB</dt> <dd><%= @plan.dob %></dd>
+      <dt>Sex</dt> <dd><%= @plan.sex %></dd>
+      <dt>Race</dt> <dd><%= @plan.race %></dd>
+      <dt>Height</dt> <dd><%= @plan.height %></dd>
+      <dt>Weight</dt> <dd><%= @plan.weight %></dd>
+      <dt>Hair</dt> <dd><%= @plan.hair %></dd>
+      <dt>Eyes</dt> <dd><%= @plan.eyes %></dd>
+  </div>
+
+    <div class="legal">
+    </div>
   </div>
 
   <div class="response_plan">
+    <h2>Response Plan</h2>
   </div>
 
   <div class="emergency_contact">
+    <h2>Emergency Contact</h2>
   </div>
 
   <div class="interaction_history">
+    <h2>Interaction History</h2>
   </div>
 </div>
 

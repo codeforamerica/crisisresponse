@@ -40,7 +40,28 @@ h1 {
   text-align: center;
 }
 
-.basic_info,
+.basic_info {
+  overflow: hidden;
+
+  .biometrics {
+    @include span-columns(4 of 8);
+    dt {
+      display: block;
+      @include span-columns(1 of 4);
+    }
+
+    dd {
+      margin: 0;
+      @include span-columns(3 of 4);
+      @include omega;
+    }
+
+    dt:after {
+      content: ":"
+    }
+  }
+}
+
 .response_plan,
 .emergency_contact,
 .interaction_history {

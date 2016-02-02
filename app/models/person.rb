@@ -21,4 +21,12 @@ class Person
   def to_param
     name
   end
+
+  def first_name
+    @first_name.humanize
+  end
+
+  def last_name
+    @last_name.humanize
+  end
 end
