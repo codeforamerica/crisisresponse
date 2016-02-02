@@ -4,5 +4,6 @@ class ResponsePlan
   attr_accessor \
     :name,
     :license,
-    :type
+    :type,
+    :image
 end

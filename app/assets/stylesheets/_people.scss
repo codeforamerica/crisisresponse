@@ -1,0 +1,22 @@
+.left-column,
+.right-column {
+  @include span-columns(6 of 12);
+}
+
+.right-column {
+  @include omega;
+
+  img {
+    max-height: 200px;
+  }
+}
+
+.header,
+.basic_info,
+.response_plan,
+.emergency_contact,
+.interaction_history {
+  @include fill-parent;
+  height: 4em;
+  background-color: black;
+}
