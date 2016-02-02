@@ -5,84 +5,30 @@
 <h1><%= @plan.type %>: <%= @person.name.titleize %></h1>
 
 <div class="left-column">
-  <div class="basic_info">
-    <h2>Basic Information</h2>
+  <section class="basic_info">
+    <h2><%= @person.last_name.upcase %>, <%= @person.first_name %></h2>
 
-    <div class="biometrics">
-      <h3><%= @person.last_name %>, <%= @person.first_name %></h3>
+    <%= image_tag @plan.image %>
 
-      <dt>DOB</dt> <dd><%= @plan.dob %></dd>
-      <dt>Sex</dt> <dd><%= @plan.sex %></dd>
-      <dt>Race</dt> <dd><%= @plan.race %></dd>
-      <dt>Height</dt> <dd><%= @plan.height %></dd>
-      <dt>Weight</dt> <dd><%= @plan.weight %></dd>
-      <dt>Hair</dt> <dd><%= @plan.hair %></dd>
-      <dt>Eyes</dt> <dd><%= @plan.eyes %></dd>
-  </div>
+    <%= render "biometrics", plan: @plan %>
+  </section>
 
-    <div class="legal">
-    </div>
-  </div>
+  <section class="personal_info">
+    <h2>Personal Information</h2>
 
-  <div class="response_plan">
-    <h2>Response Plan</h2>
-  </div>
+  </section>
 
-  <div class="emergency_contact">
+  <section class="emergency_contact">
     <h2>Emergency Contact</h2>
-  </div>
+  </section>
 
-  <div class="interaction_history">
+  <section class="interaction_history">
     <h2>Interaction History</h2>
-  </div>
+  </section>
 </div>
 
 <div class="right-column">
-  <%= image_tag @plan.image %>
-
-  <div class="charts">
-    <%= render "chart", title: "Officer Safety", fields: [
-      "weapon_yn_dk",
-      "threaten_violence_yn_dk",
-    ] %>
-    <%= render "chart", title: "Crisis Nature", fields: [
-      "chbk_biologically_induced",
-      "chbk_medically_induced",
-      "chbk_chemically_induced",
-      "chbk_unknown_crisis_nature",
-    ] %>
-    <%= render "chart", title: "Behavioral History", fields: [
-      "chbk_neglect_self_care",
-      "chbk_disorganize_communication",
-      "chbk_disoriented_confused",
-      "chbk_disorderly_disruptive",
-      "chbk_unusual_fright_scared",
-      "chbk_belligerent_uncooperative",
-      "chbk_hopeless_depressed",
-      "chbk_bizarre_unusual_behavior",
-      "chbk_suicide_threat_attempt",
-      "chbk_mania",
-      "chbk_out_of_touch_reality",
-      "chbk_halluc_delusion",
-      "chbk_excited_delirium",
-    ] %>
-    <%= render "chart", title: "Previous Actions Taken", fields: [
-      "chbk_verbalization",
-      "chbk_dispo_chronic",
-      "chbk_dispo_treatment_referral",
-      "chbk_dispo_resource_declined",
-      "chbk_dispo_mobile_crisis_team",
-      "chbk_dispo_grat",
-      "chbk_dispo_shelter",
-      "chbk_dispo_no_action_poss_necc",
-      "chbk_dispo_casemanager_notice",
-      "chbk_dispo_dmhp_refer",
-      "chbk_dispo_crisis_clinic",
-      "chbk_dispo_emergent_ita",
-      "chbk_dsipo_voluntary_commit",
-      "chbk_dispo_arrested",
-    ] %>
-  </div>
+  <%= render "charts", events: @events %>
 </div>
 
 <div class="footer">

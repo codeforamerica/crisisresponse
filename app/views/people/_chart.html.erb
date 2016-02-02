@@ -6,8 +6,8 @@ fields.reverse!
 positive = ['x', 'yes']
 
 series = fields.map do |field|
-  count = @events.count { |e| positive.include?(e.send(field).downcase) }.to_f
-  count / @events.count
+  count = events.count { |e| positive.include?(e.send(field).downcase) }.to_f
+  count / events.count
 end
 
 nonzero = fields.zip(series).select do |field, value|

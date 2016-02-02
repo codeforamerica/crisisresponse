@@ -1,4 +1,5 @@
 $header-height: 4em;
+$highlight: blue;
 
 .left-column {
   @include span-columns(8 of 12);
@@ -7,14 +8,9 @@ $header-height: 4em;
 .right-column {
   @include span-columns(4 of 12);
   @include omega;
-
-  img {
-    max-height: 200px;
-  }
 }
 
 .header {
-  font-weight: bold;
   height: $header-height;
   line-height: $header-height;
 
@@ -31,6 +27,7 @@ $header-height: 4em;
 
   .red {
     color: red;
+    font-weight: bold;
     margin-right: $base-spacing;
   }
 }
@@ -38,34 +35,53 @@ $header-height: 4em;
 h1 {
   @include fill-parent;
   text-align: center;
+  color: $highlight;
+}
+
+h2 {
+  color: $highlight;
+}
+
+section {
+  margin-top: $base-spacing;
+  overflow: hidden;
 }
 
 .basic_info {
   overflow: hidden;
 
+  img {
+    @include span-columns(4 of 8);
+  }
+
   .biometrics {
     @include span-columns(4 of 8);
-    dt {
-      display: block;
-      @include span-columns(1 of 4);
-    }
 
-    dd {
-      margin: 0;
-      @include span-columns(3 of 4);
-      @include omega;
+    .stat {
+      overflow: hidden;
+      border-bottom: 1px solid grey;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .stat__label {
+        padding-left: $base-spacing;
+        display: block;
+        font-weight: bold;
+        @include span-columns(2 of 4);
+      }
+
+      .stat__data {
+        margin: 0;
+        @include span-columns(2 of 4);
+        @include omega;
+        color: $highlight;
+      }
     }
 
     dt:after {
       content: ":"
     }
   }
-}
-
-.response_plan,
-.emergency_contact,
-.interaction_history {
-  @include fill-parent;
-  height: 4em;
-  background-color: black;
 }

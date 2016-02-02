@@ -12,6 +12,7 @@ class ResponsePlan
     :race,
     :sex,
     :type,
+    :veteran,
     :weight,
   )
 end

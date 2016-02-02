@@ -13,6 +13,7 @@ class ResponsePlanBuilder
       sex: data["Gender"],
       type: data["What prompts you to write this plan?"],
       weight: data["Weight"],
+      veteran: data["Veteran?"],
     )
   end
 end
