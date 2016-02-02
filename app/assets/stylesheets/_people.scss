@@ -107,6 +107,24 @@ p {
   }
 }
 
+.personal_info {
+  font-size: 0.8em;
+
+  .address {
+    margin-bottom: $base-spacing;
+  }
+
+  .label {
+    font-weight: bold;
+    vertical-align: top;
+  }
+
+  .data {
+    margin-left: $base-spacing;
+    display: inline-block;
+  }
+}
+
 .interaction_history {
   .date,
   .time{
