@@ -143,6 +143,7 @@ section {
 }
 
 .warning {
+  margin-top: $base-spacing;
   background-color: rgb(251, 235, 237);
   border-radius: $radius;
   padding: $base-spacing;
