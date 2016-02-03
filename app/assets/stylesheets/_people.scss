@@ -33,9 +33,43 @@ body {
   }
 
   h2,
-  h3,
-  .need {
+  h3 {
     margin-left: $base-spacing;
+  }
+
+  $icon-size: $base-spacing;
+
+  .veteran,
+  .license,
+  .need,
+  .address {
+    margin-top: $base-spacing/2;
+    display: block;
+    @include clearfix;
+
+    .label {
+      display: inline-block;
+
+      &:before {
+        content: " ";
+        margin-right: $base-spacing / 2;
+        display: inline-block;
+        vertical-align: middle;
+        width: $icon-size;
+        height: $icon-size;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  .needs {
+    margin-left: $base-spacing;
+    font-size: 0.8em;
+    margin-top: 0;
+
+    .label {
+      font-weight: bold;
+    }
   }
 
   .personal_info {
@@ -43,41 +77,11 @@ body {
     font-size: 0.8em;
     margin-top: 0;
 
-    $icon-size: $base-spacing;
-
-    .veteran,
-    .license,
-    .address {
-      margin-top: $base-spacing/2;
-      display: block;
-      @include clearfix;
-
-      .label {
-        display: inline-block;
-
-        &:before {
-          content: " ";
-          margin-right: $base-spacing / 2;
-          display: inline-block;
-          vertical-align: middle;
-          width: $icon-size;
-          height: $icon-size;
-          background-repeat: no-repeat;
-        }
-      }
-    }
-
     .veteran {
       color: $danger;
       .label:before {
         background-image: image_url("veteran.svg");
       }
-    }
-    .address .label:before {
-      background-image: image_url("address.svg");
-    }
-    .license .label:before {
-      background-image: image_url("license.svg");
     }
 
     .label {
@@ -89,6 +93,19 @@ body {
       display: block;
       margin-left: $icon-size + $base-spacing/2;
     }
+  }
+
+  .address .label:before {
+    background-image: image_url("home.svg");
+  }
+  .license .label:before {
+    background-image: image_url("license.svg");
+  }
+  .housing .label:before {
+    background-image: image_url("home.svg");
+  }
+  .food .label:before {
+    background-image: image_url("food.svg");
   }
 }
 

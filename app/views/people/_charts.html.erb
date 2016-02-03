@@ -34,9 +34,13 @@
 
   <h2>General Needs</h2>
 
-  <% plan.needs.each do |need| %>
-    <div class="need"><%= need %></div>
-  <% end %>
+  <section class="needs">
+    <% plan.needs.each do |need| %>
+      <div class="need <%=need.downcase%>">
+        <span class="label"><%= need %></span>
+      </div>
+    <% end %>
+  </section>
 
   <h2>Personal Information</h2>
 
