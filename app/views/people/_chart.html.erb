@@ -32,7 +32,10 @@ fields = Array(fields)
     axisY: {
       offset: 160,
       labelInterpolationFnc: function(field, index, domain) {
-        var label = field.replace("chbk_", "").replace("dispo_", "").replace(/_/g, " ");
+        var label = field.replace("chbk_", "").replace("dispo_", "");
+        label = label.replace("_dk", "").replace("_yn", "?");
+        label = label.replace(/_/g, " ");
+        label = label.replace(/\b./g, function(m){ return m.toUpperCase(); });
         return label;
       },
     },
