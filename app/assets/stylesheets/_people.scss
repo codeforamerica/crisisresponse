@@ -39,11 +39,37 @@ $heading-font: "Museo Slab";
     font-size: 0.8em;
     margin-top: 0;
 
+    $icon-size: $base-spacing;;
+
     .veteran,
     .license,
     .address {
       margin-top: $base-spacing/2;
-      padding-left: $base-spacing;
+      display: block;
+      @include clearfix;
+
+      .label {
+        display: inline-block;
+
+        &:before {
+          content: " ";
+          display: inline-block;
+          vertical-align: middle;
+          width: $icon-size;
+          height: $icon-size;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+
+    .veteran .label:before {
+      background-image: image_url("veteran.svg");
+    }
+    .address .label:before {
+      background-image: image_url("address.svg");
+    }
+    .license .label:before {
+      background-image: image_url("license.svg");
     }
 
     .label {
@@ -53,6 +79,7 @@ $heading-font: "Museo Slab";
 
     .data {
       display: block;
+      margin-left: $icon-size;
     }
   }
 }
