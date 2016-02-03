@@ -1,4 +1,5 @@
 <div class="ct-chart <%= title.gsub(" ", "").underscore %>"></div>
+<% offset ||= 160 %>
 
 <%
 fields.reverse!
@@ -30,7 +31,7 @@ fields = Array(fields)
   // as you saw in the previous example
   var options = {
     axisY: {
-      offset: 160,
+      offset: <%= offset %>,
       labelInterpolationFnc: function(field, index, domain) {
         var label = field.replace("chbk_", "").replace("dispo_", "");
         label = label.replace("_dk", "").replace("_yn", "?");

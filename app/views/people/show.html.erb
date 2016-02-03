@@ -26,13 +26,16 @@
           <%= render "chart",
             title: "Officer Safety",
             events: @events,
+            offset: 120,
             fields: [
               "weapon_yn_dk",
               "threaten_violence_yn_dk",
             ] %>
         </div>
 
-        <%= @plan.safety_notes %>
+        <div class="half notes">
+          <%= @plan.safety_notes %>
+        </div>
       </div>
 
       <section class="response_plan">
