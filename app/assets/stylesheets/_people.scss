@@ -2,8 +2,10 @@ $header-height: 4em;
 $radius: 6px;
 $heading-font: "Museo Slab";
 
-body {
-  font-family: "Proxima Nova";
+.page-title {
+  font-size: 1.5em;
+  margin-bottom: $base-spacing;
+  margin-top: $small-spacing;
 }
 
 .left-column {
@@ -243,7 +245,7 @@ p {
 .interaction_history {
   .date,
   .time{
-    font-weight: bold;
+    color: lightgray;
   }
 
   .time {
@@ -281,12 +283,16 @@ p {
 }
 
 .contacts {
-  font-size: 0.8em;
-
   .contact {
+    font-size: 0.8em;
     @include span-columns(4 of 8);
+
     &:nth-child(2n) {
       @include omega;
+    }
+
+    .contact-name {
+      font-weight: bold;
     }
 
     .notes {

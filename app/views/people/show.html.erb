@@ -2,7 +2,7 @@
 
 <%= render "header" %>
 
-<h1><%= @plan.type %>: <%= @person.name.titleize %></h1>
+<h1 class="page-title"><%= @plan.type %>: <%= @person.name.titleize %></h1>
 
 <div class="main">
   <div class="left-column">
@@ -64,7 +64,7 @@
 
         <% @plan.contacts.each do |contact| %>
           <div class="contact">
-            <%= contact[:name] %> (<%= contact[:relationship] %>)<br/>
+            <span class="contact-name"><%= contact[:name] %></span> (<%= contact[:relationship] %>)<br/>
             <%= contact[:phone] %><br/>
             <span class="notes"><%= contact[:notes] %></span>
           </div>
