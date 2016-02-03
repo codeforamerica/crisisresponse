@@ -34,13 +34,21 @@
 
   <h2>General Needs</h2>
 
-  <% @plan.needs.each do |need| %>
+  <% plan.needs.each do |need| %>
     <div class="need"><%= need %></div>
   <% end %>
 
   <h2>Personal Information</h2>
 
   <section class="personal_info">
+    <% if plan.veteran %>
+      <div class="veteran">
+        <span class="label">
+          Veteran
+        </span>
+      </div>
+    <% end %>
+
     <div class="address">
       <span class="label">Address</span>
       <span class="data">

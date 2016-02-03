@@ -30,26 +30,29 @@ $heading-font: "Museo Slab";
 
   h2,
   h3,
-  .label,
   .need {
     margin-left: $base-spacing;
   }
 
   .personal_info {
+    margin-left: $base-spacing;
     font-size: 0.8em;
+    margin-top: 0;
 
+    .veteran,
+    .license,
     .address {
-      margin-bottom: $base-spacing;
+      margin-top: $base-spacing/2;
+      padding-left: $base-spacing;
     }
 
     .label {
       font-weight: bold;
-      vertical-align: top;
+      display: block;
     }
 
     .data {
-      margin-left: $base-spacing;
-      display: inline-block;
+      display: block;
     }
   }
 }
