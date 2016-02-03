@@ -117,7 +117,7 @@ $heading-font: "Museo Slab";
   }
 
   .red {
-    color: red;
+    color: $danger;
     font-weight: bold;
     margin-right: $base-spacing;
   }
@@ -141,7 +141,7 @@ section {
 
 .warning {
   margin-top: $base-spacing;
-  background-color: rgb(251, 235, 237);
+  background-color: lighten($danger, 60%);
   border-radius: $radius;
   padding: $base-spacing;
 
