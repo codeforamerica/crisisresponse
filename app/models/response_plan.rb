@@ -16,6 +16,7 @@ class ResponsePlan
     :past_encounters,
     :preparer,
     :race,
+    :safety_notes,
     :sex,
     :street_address,
     :timestamp,

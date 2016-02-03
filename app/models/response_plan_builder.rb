@@ -40,6 +40,7 @@ class ResponsePlanBuilder
       sex: data.fetch("Gender"),
       street_address: data.fetch("Street Address"),
       timestamp: data.fetch("Timestamp").split.first,
+      safety_notes: data.fetch("Weapons / Violence History: Notes"),
       type: data.fetch("What prompts you to write this plan?"),
       veteran: data.fetch("Veteran?"),
       weight: data.fetch("Weight"),

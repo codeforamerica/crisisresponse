@@ -1,5 +1,7 @@
-$header-height: 4em;
 $highlight: blue;
+$danger: red;
+
+$header-height: 4em;
 $radius: 6px;
 $heading-font: "Museo Slab";
 
@@ -89,6 +91,15 @@ $heading-font: "Museo Slab";
   @include omega;
 }
 
+.safety {
+  @include fill-parent;
+  overflow: hidden;
+
+  .half {
+    @include span-columns(4 of 8);
+  }
+}
+
 .header {
   height: $header-height;
   line-height: $header-height;
@@ -129,6 +140,16 @@ h2 {
 section {
   margin-top: $base-spacing;
   overflow: hidden;
+}
+
+.warning {
+  background-color: rgb(251, 235, 237);
+  border-radius: $radius;
+  padding: $base-spacing;
+
+  h2 {
+    color: $danger;
+  }
 }
 
 .basic_info {

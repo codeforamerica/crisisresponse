@@ -19,23 +19,32 @@
       <%= render "biometrics", plan: @plan %>
     </section>
 
-    <%= render "chart",
-      title: "Officer Safety",
-      events: @events,
-      fields: [
-        "weapon_yn_dk",
-        "threaten_violence_yn_dk",
-      ] %>
+    <div class="warning">
+      <h2>Safety Warnings</h2>
+      <div class="safety">
+        <div class="half">
+          <%= render "chart",
+            title: "Officer Safety",
+            events: @events,
+            fields: [
+              "weapon_yn_dk",
+              "threaten_violence_yn_dk",
+            ] %>
+        </div>
 
-    <section class="response_plan">
-      <h2>Response Plan</h2>
+        <%= @plan.safety_notes %>
+      </div>
 
-      <ol>
-        <% @plan.action_plan_steps.each do |step| %>
-          <li><%= step %></li>
-        <% end %>
-      </ol>
-    </section>
+      <section class="response_plan">
+        <h2>Response Plan</h2>
+
+        <ol>
+          <% @plan.action_plan_steps.each do |step| %>
+            <li><%= step %></li>
+          <% end %>
+        </ol>
+      </section>
+    </div>
 
     <section class="interaction_history">
       <h2>Interaction History</h2>
