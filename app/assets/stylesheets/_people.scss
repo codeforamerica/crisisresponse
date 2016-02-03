@@ -10,6 +10,7 @@ body {
   @include span-columns(4 of 12);
   background-color: #eee;
   border-radius: $radius;
+  overflow: hidden;
 
   h1 {
     display: block;
@@ -42,7 +43,7 @@ body {
     font-size: 0.8em;
     margin-top: 0;
 
-    $icon-size: $base-spacing;;
+    $icon-size: $base-spacing;
 
     .veteran,
     .license,
@@ -56,6 +57,7 @@ body {
 
         &:before {
           content: " ";
+          margin-right: $base-spacing / 2;
           display: inline-block;
           vertical-align: middle;
           width: $icon-size;
@@ -85,7 +87,7 @@ body {
 
     .data {
       display: block;
-      margin-left: $icon-size;
+      margin-left: $icon-size + $base-spacing/2;
     }
   }
 }
@@ -271,6 +273,37 @@ p {
 
     .notes {
       color: grey;
+    }
+  }
+}
+
+.question {
+  color: $highlight;
+
+  height: 7em;
+  display: block;
+  overflow: hidden;
+  $icon-size: $base-spacing * 2;
+
+  .icon {
+    background-image: image_url("question.svg");
+    background-repeat: no-repeat;
+    content: " ";
+    height: $icon-size;
+    width: $icon-size;
+    margin-left: $base-spacing;
+  }
+
+  .label {
+    overflow: hidden;
+    display: block;
+    margin-left: $icon-size;
+    width: 15em;
+
+    .contact-info {
+      font-weight: bold;
+      @include fill-parent;
+      @include row;
     }
   }
 }

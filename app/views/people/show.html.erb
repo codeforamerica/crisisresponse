@@ -10,6 +10,17 @@
       <h1><%= @person.last_name.upcase %>, <%= @person.first_name %></h1>
     </div>
     <%= render "charts", events: @events, plan: @plan %>
+
+    <section class="question-contact">
+      <div class="question">
+        <div class="icon">
+        <span class="label">
+          For questions or additional information, please contact
+          <span class="contact-info">CRT Ofc. Coles</span>
+          <span class="contact-info">(222) 333-4567</span>
+        </span>
+      </div>
+    </section>
   </div>
 
   <div class="right-column">
