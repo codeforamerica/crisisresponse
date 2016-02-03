@@ -10,6 +10,15 @@ class PeopleController < ApplicationController
     @people = all_people_with_event_counts
   end
 
+  def latest
+    csv_url = ENV.fetch("GOOGLE_FORM_CSV_URL")
+    uri = URI(csv_url)
+    form_data = Net::HTTP.get(uri)
+    plans_data = CSV.parse(form_data, headers: true)
+    plan = ResponsePlanBuilder.build(plans_data.first)
+    redirect_to person_path(plan.name)
+  end
+
   def show
     @person = Person.new(name: params[:id])
     @events = @person.events_from(events)
