@@ -193,15 +193,14 @@ section {
       .stat__label {
         padding-left: $base-spacing;
         display: block;
-        font-weight: bold;
         @include span-columns(2 of 4);
       }
 
       .stat__data {
         margin: 0;
+        font-weight: bold;
         @include span-columns(2 of 4);
         @include omega;
-        color: $highlight;
       }
     }
 
