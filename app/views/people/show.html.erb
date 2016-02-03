@@ -6,38 +6,26 @@
 
 <div class="main">
   <div class="left-column">
-    <section class="basic_info">
-      <h2><%= @person.last_name.upcase %>, <%= @person.first_name %></h2>
+    <div class="name-box">
+      <h1><%= @person.last_name.upcase %>, <%= @person.first_name %></h1>
+    </div>
+    <%= render "charts", events: @events %>
+  </div>
 
+  <div class="right-column">
+    <section class="basic_info">
       <%= image_tag @plan.image %>
 
       <%= render "biometrics", plan: @plan %>
     </section>
 
-    <section class="personal_info">
-      <h2>Personal Information</h2>
-
-      <div class="address">
-        <span class="label">Address</span>
-        <span class="data">
-          <%= @plan.street_address %><br/>
-          <%= @plan.city_state_zip %>
-        </span>
-      </div>
-
-      <div class="license">
-        <span class="label">License</span>
-        <span class="data">
-          <%= @plan.license_state %> - <%= @plan.license_number %>
-        </span>
-      </div>
-
-      <div class="housing">
-      </div>
-
-      <div class="residents">
-      </div>
-    </section>
+    <%= render "chart",
+      title: "Officer Safety",
+      events: @events,
+      fields: [
+        "weapon_yn_dk",
+        "threaten_violence_yn_dk",
+      ] %>
 
     <section class="response_plan">
       <h2>Response Plan</h2>
@@ -60,10 +48,6 @@
         </div>
       <% end %>
     </section>
-  </div>
-
-  <div class="right-column">
-    <%= render "charts", events: @events %>
   </div>
 </div>
 

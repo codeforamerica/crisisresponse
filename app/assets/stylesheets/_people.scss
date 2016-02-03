@@ -1,21 +1,61 @@
 $header-height: 4em;
 $highlight: blue;
+$radius: 6px;
+$heading-font: "Museo Slab";
 
 .left-column {
-  @include span-columns(8 of 12);
+  @include span-columns(4 of 12);
+  background-color: #eee;
+  border-radius: $radius;
+
+  h1 {
+    display: block;
+    background-color: $highlight;
+    color: #fff;
+    border-radius: $radius $radius 0 0;
+    padding: $base-spacing/2 0;
+    font-family: $heading-font;
+  }
+
+  h2 {
+    margin-top: $base-spacing;
+    margin-bottom: 0;
+  }
+
+  h2,
+  .label {
+    margin-left: $base-spacing;
+  }
+
+  .personal_info {
+    font-size: 0.8em;
+
+    .address {
+      margin-bottom: $base-spacing;
+    }
+
+    .label {
+      font-weight: bold;
+      vertical-align: top;
+    }
+
+    .data {
+      margin-left: $base-spacing;
+      display: inline-block;
+    }
+  }
 }
 
 .right-column {
-  @include span-columns(4 of 12);
+  @include span-columns(8 of 12);
   @include omega;
-  background-color: #eee;
 }
 
 .header {
   height: $header-height;
   line-height: $header-height;
 
-  .right-column {
+  .left-column {
     background-color: #fff;
   }
 
@@ -45,7 +85,7 @@ h1 {
 
 h2 {
   color: $highlight;
-  font-family: "Museo Slab";
+  font-family: $heading-font;
 }
 
 section {
@@ -54,6 +94,7 @@ section {
 }
 
 .basic_info {
+  margin-top: 0;
   overflow: hidden;
 
   img {
@@ -104,24 +145,6 @@ p {
 .response_plan {
   ol {
     font-size: 0.8em;
-  }
-}
-
-.personal_info {
-  font-size: 0.8em;
-
-  .address {
-    margin-bottom: $base-spacing;
-  }
-
-  .label {
-    font-weight: bold;
-    vertical-align: top;
-  }
-
-  .data {
-    margin-left: $base-spacing;
-    display: inline-block;
   }
 }
 
