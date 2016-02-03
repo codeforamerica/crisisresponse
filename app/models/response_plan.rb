@@ -12,6 +12,7 @@ class ResponsePlan
     :license_number,
     :license_state,
     :name,
+    :needs,
     :past_encounters,
     :preparer,
     :race,

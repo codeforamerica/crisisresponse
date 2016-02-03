@@ -9,7 +9,7 @@
     <div class="name-box">
       <h1><%= @person.last_name.upcase %>, <%= @person.first_name %></h1>
     </div>
-    <%= render "charts", events: @events %>
+    <%= render "charts", events: @events, plan: @plan %>
   </div>
 
   <div class="right-column">

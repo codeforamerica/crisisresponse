@@ -20,6 +20,8 @@ class ResponsePlanBuilder
       team: data.fetch("Which team at SPD are you a part of?"),
     }
 
+    needs = (data["General Services / Needs"] || "").split(",").map(&:strip)
+
     ResponsePlan.new(
       action_plan_steps: action_plan_steps,
       city_state_zip: data.fetch("City, State, and Zipcode"),
@@ -31,6 +33,7 @@ class ResponsePlanBuilder
       license_number: data.fetch("License Number"),
       license_state: data.fetch("State of License"),
       name: data.fetch("Full Name"),
+      needs: needs,
       past_encounters: past_encounters,
       preparer: preparer,
       race: data.fetch("Race"),

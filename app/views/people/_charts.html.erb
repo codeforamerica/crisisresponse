@@ -32,6 +32,12 @@
       "chbk_excited_delirium",
     ] %>
 
+  <h2>General Needs</h2>
+
+  <% @plan.needs.each do |need| %>
+    <div class="need"><%= need %></div>
+  <% end %>
+
   <h2>Personal Information</h2>
 
   <section class="personal_info">
