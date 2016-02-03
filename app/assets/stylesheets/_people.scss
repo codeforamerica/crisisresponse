@@ -246,3 +246,18 @@ p {
     @include row;
   }
 }
+
+.contacts {
+  font-size: 0.8em;
+
+  .contact {
+    @include span-columns(4 of 8);
+    &:nth-child(2n) {
+      @include omega;
+    }
+
+    .notes {
+      color: grey;
+    }
+  }
+}

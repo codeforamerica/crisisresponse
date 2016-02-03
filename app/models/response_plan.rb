@@ -4,6 +4,7 @@ class ResponsePlan
   attr_accessor(
     :action_plan_steps,
     :city_state_zip,
+    :contacts,
     :dob,
     :eyes,
     :hair,

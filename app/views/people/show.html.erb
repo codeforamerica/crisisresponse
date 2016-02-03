@@ -44,6 +44,18 @@
           <% end %>
         </ol>
       </section>
+
+      <section class="contacts">
+        <h2>Emergency Contacts</h2>
+
+        <% @plan.contacts.each do |contact| %>
+          <div class="contact">
+            <%= contact[:name] %> (<%= contact[:relationship] %>)<br/>
+            <%= contact[:phone] %><br/>
+            <span class="notes"><%= contact[:notes] %></span>
+          </div>
+        <% end %>
+      </section>
     </div>
 
     <section class="interaction_history">
