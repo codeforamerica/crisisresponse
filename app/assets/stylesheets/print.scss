@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+@import "normalize-rails";
+@import "bourbon";
+@import "base/grid-settings";
+@import "neat";
+@import "base/base";
+@import "refills/flashes";
+
+body {
+  font-size: 8px;
+}
+
+.ct-chart {
+  transform: scale(0.5) translate(-70px, -20px);
+  left: 0;
+  height: 8em;
+}

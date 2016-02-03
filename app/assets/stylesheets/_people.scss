@@ -133,6 +133,11 @@ $heading-font: "Museo Slab";
     background-color: #fff;
   }
 
+  .left-column,
+  .right-column {
+    @include span-columns(6 of 12);
+  }
+
   img {
     max-height: $header-height;
     vertical-align: middle;
