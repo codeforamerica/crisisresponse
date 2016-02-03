@@ -22,7 +22,14 @@ $heading-font: "Museo Slab";
     margin-bottom: 0;
   }
 
+  h3 {
+    font-size: 0.8em;
+    margin-top: $base-spacing / 2;
+    margin-bottom: 0;
+  }
+
   h2,
+  h3,
   .label {
     margin-left: $base-spacing;
   }

@@ -1,5 +1,7 @@
 <div class="charts">
-  <h2>Crisis History</h2>
+  <h2>Behavior/Crisis History</h2>
+
+  <h3>Crisis Nature</h3>
   <%= render "chart",
     title: "Crisis Nature",
     events: events,
@@ -10,7 +12,7 @@
       "chbk_unknown_crisis_nature",
     ] %>
 
-  <h2>Behavioral History</h2>
+  <h3>Behavioral History</h3>
   <%= render "chart",
     title: "Behavioral History",
     events: events,
