@@ -12,7 +12,23 @@ body {
 }
 
 .ct-chart {
-  transform: scale(0.5) translate(-70px, -20px);
+  transform: scale(0.5) translate(-70px, -30px);
   left: 0;
   height: 8em;
+}
+
+.safety {
+  height: 4em;
+}
+
+.ct-grid {
+  display: none;
+}
+
+.ct-label.ct-horizontal {
+  display: none;
+}
+
+.stat__label {
+  padding-left: 0 !important;
 }
