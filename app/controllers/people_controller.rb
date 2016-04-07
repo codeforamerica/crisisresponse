@@ -20,7 +20,8 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @person = Person.new(name: params[:id])
+    first_name, last_name = params[:id].split
+    @person = Person.find_by(first_name: first_name, last_name: last_name)
     @events = @person.events_from(events)
 
     @plan = find_most_recent_plan_for_person(@person)

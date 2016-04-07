@@ -1,8 +1,6 @@
 class Person < ActiveRecord::Base
-  attr_accessor :first_name, :last_name
-
   def name=(value)
-    (@first_name, @last_name) = value.split
+    (self.first_name, self.last_name) = value.split
   end
 
   def name
@@ -18,13 +16,5 @@ class Person < ActiveRecord::Base
 
   def to_param
     name
-  end
-
-  def first_name
-    @first_name.humanize
-  end
-
-  def last_name
-    @last_name.humanize
   end
 end
