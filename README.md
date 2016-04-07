@@ -1,5 +1,7 @@
 # Crisis Response
 
+[![Circle CI](https://circleci.com/gh/codeforamerica/crisisresponse.svg?style=svg&circle-token=3dbea1eed1c1d0e056ef0ceaeb0f54039facd079)](https://circleci.com/gh/codeforamerica/crisisresponse)
+
 An internal tool to help the Seattle Police Department
 respond to the needs of people in crisis.
 
