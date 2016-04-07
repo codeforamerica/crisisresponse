@@ -54,11 +54,6 @@ class PeopleController < ApplicationController
   end
 
   def find_most_recent_plan_for_person(person)
-    csv_url = ENV.fetch("GOOGLE_FORM_CSV_URL")
-    uri = URI(csv_url)
-    form_data = Net::HTTP.get(uri)
-    plans_data = CSV.parse(form_data, headers: true)
-    plans = plans_data.map { |plan_data| ResponsePlanBuilder.build(plan_data) }
-    plans.find { |plan| plan.name.downcase == person.name.downcase }
+    ResponsePlanBuilder.build({})
   end
 end

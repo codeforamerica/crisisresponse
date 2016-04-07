@@ -1,6 +1,4 @@
-class Person
-  include ActiveModel::Model
-
+class Person < ActiveRecord::Base
   attr_accessor :first_name, :last_name
 
   def name=(value)
