@@ -1,5 +1,6 @@
 require "csv"
 require "net/http"
+require "rms_adapter"
 
 class PeopleController < ApplicationController
   def index
@@ -22,7 +23,7 @@ class PeopleController < ApplicationController
   def show
     first_name, last_name = params[:id].split
     @person = Person.find_by(first_name: first_name, last_name: last_name)
-    @events = @person.events_from(events)
+    @events = events_for(@person)
 
     @plan = find_most_recent_plan_for_person(@person)
 
@@ -34,7 +35,7 @@ class PeopleController < ApplicationController
   private
 
   def all_people_with_event_counts
-    names = events.map do |event|
+    names = RMSAdapter.new.events.map do |event|
       [event.crisis_contacted_first_name, event.crisis_contacted_last_name]
     end
 
@@ -46,12 +47,9 @@ class PeopleController < ApplicationController
     end
   end
 
-  def events
-    @events ||= begin
-                  events = CSV.read(Rails.root.join("data.csv"))
-                  _headers = events.shift
-                  events.map! { |event_data| EventBuilder.build(event_data) }
-                end
+  def events_for(person)
+    rms = RMSAdapter.new
+    rms.events_for(person)
   end
 
   def find_most_recent_plan_for_person(person)

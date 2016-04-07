@@ -13,9 +13,7 @@ class ResponsePlanBuilder
       PLACEHOLDER,
     ].compact
 
-    past_encounters = (1..5).map do |n|
-      PLACEHOLDER
-    end.compact
+    past_encounters = [PLACEHOLDER]
 
     preparer = {
       name: PLACEHOLDER,
