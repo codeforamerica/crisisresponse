@@ -13,7 +13,6 @@ class ResponsePlan
     :safety_notes,
     :street_address,
     :timestamp,
-    :type,
     :veteran,
   )
 end

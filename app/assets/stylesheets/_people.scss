@@ -1,4 +1,3 @@
-$header-height: 4em;
 $radius: 6px;
 $heading-font: "Museo Slab";
 
@@ -122,37 +121,6 @@ $heading-font: "Museo Slab";
 
   .half {
     @include span-columns(4 of 8);
-  }
-}
-
-.header {
-  height: $header-height;
-  line-height: $header-height;
-
-  .left-column {
-    background-color: #fff;
-  }
-
-  .left-column,
-  .right-column {
-    @include span-columns(6 of 12);
-  }
-
-  img {
-    max-height: $header-height;
-    vertical-align: middle;
-    margin-right: $base-spacing;
-  }
-
-  .right-column {
-    text-align: right;
-    text-transform: uppercase;
-  }
-
-  .red {
-    color: $danger;
-    font-weight: bold;
-    margin-right: $base-spacing;
   }
 }
 

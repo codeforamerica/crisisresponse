@@ -9,10 +9,13 @@
 
 @import "chartist.min";
 
+@import "header";
 @import "people";
 
 body {
-  font-family: "Proxima Nova";
+  font-family: "Helvetica Neue";
+  font-size: 20px;
+  width: 100%;
 }
 
 .chart-title {
@@ -40,5 +43,6 @@ body {
 }
 
 .content {
-  @include outer-container;
+  @include outer-container($page-width);
+  margin-top: $header-height;
 }

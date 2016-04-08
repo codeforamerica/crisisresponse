@@ -1,0 +1,19 @@
+.header {
+  background-color: $header-background-color;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.24);
+  color: $white-text;
+  font-size: 1rem;
+  height: $header-height;
+  line-height: $header-height;
+  position: fixed;
+  text-transform: uppercase;
+  top: 0;
+  width: 100%;
+
+  .header-content {
+    width: $page-width;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -42,7 +42,6 @@ class ResponsePlanBuilder
       safety_notes: PLACEHOLDER,
       street_address: PLACEHOLDER,
       timestamp: PLACEHOLDER.split.first,
-      type: PLACEHOLDER,
       veteran: PLACEHOLDER,
     )
   end

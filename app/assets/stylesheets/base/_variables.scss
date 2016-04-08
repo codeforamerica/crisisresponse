@@ -9,6 +9,10 @@ $base-font-size: 1em;
 $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
+// Layout sizes
+$header-height: 4em;
+$page-width: 90%;
+
 // Other Sizes
 $base-border-radius: 3px;
 $base-spacing: $base-line-height * 1rem;
@@ -17,7 +21,7 @@ $base-z-index: 0;
 
 // Colors
 $blue: #477dca;
-$dark-gray: #333;
+$dark-gray: #4A4A4A;
 $medium-gray: #999;
 $light-gray: #ddd;
 
@@ -27,6 +31,7 @@ $danger: #A90317;
 // Font Colors
 $base-font-color: $dark-gray;
 $action-color: $blue;
+$white-text: #fff;
 
 // Border
 $base-border-color: $light-gray;
@@ -35,6 +40,7 @@ $base-border: 1px solid $base-border-color;
 // Background Colors
 $base-background-color: #fff;
 $secondary-background-color: tint($base-border-color, 75%);
+$header-background-color: $dark-gray;
 
 // Forms
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);

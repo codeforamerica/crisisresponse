@@ -1,8 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<%= render "header" %>
-
-<h1 class="page-title"><%= @plan.type %>: <%= @person.name.titleize %></h1>
+<%= content_for(:header) { @person.name } %>
 
 <div class="main">
   <div class="left-column">
