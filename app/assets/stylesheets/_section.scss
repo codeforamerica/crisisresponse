@@ -1,0 +1,41 @@
+$icon-size: 2.5rem;
+
+section {
+  background-color: white;
+  border-radius: 2px;
+  margin-bottom: $base-spacing;
+  overflow: hidden;
+
+  .section-header {
+    background-color: $section-header-color;
+    display: flex;
+    padding: $small-spacing;
+    align-items: center;
+  }
+
+  .section-body {
+    padding: $small-spacing $base-spacing;
+  }
+
+  .section-icon {
+    height: $icon-size;
+    width: $icon-size;
+  }
+
+  .section-header-text {
+    color: $white-text;
+    font-weight: normal;
+    line-height: 1;
+    margin-bottom: 0;
+    margin-left: $small-spacing;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+  }
+
+  .section-description {
+    font-size: 0.75rem;
+  }
+}

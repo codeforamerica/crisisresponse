@@ -24,6 +24,7 @@ $blue: #477dca;
 $dark-gray: #4A4A4A;
 $medium-gray: #999;
 $light-gray: #ddd;
+$cyan: #009688;
 
 $highlight: #4A90E2;
 $danger: #A90317;
@@ -41,6 +42,7 @@ $base-border: 1px solid $base-border-color;
 $base-background-color: #fff;
 $secondary-background-color: tint($base-border-color, 75%);
 $header-background-color: $dark-gray;
+$section-header-color: $cyan;
 
 // Forms
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);

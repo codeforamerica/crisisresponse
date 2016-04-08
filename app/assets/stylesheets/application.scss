@@ -10,12 +10,18 @@
 @import "chartist.min";
 
 @import "header";
+@import "section";
 @import "people";
 
 body {
   font-family: "Helvetica Neue";
   font-size: 20px;
   width: 100%;
+  background-color: #f0f0f0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
 }
 
 .chart-title {

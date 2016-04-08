@@ -26,6 +26,29 @@
       <%= render "biometrics", plan: @plan %>
     </section>
 
+    <section class="response_plan">
+      <div class="section-header">
+        <%= image_tag("section-icons/response-plan.svg", class: "section-icon") %>
+        <div class="section-header-text">
+          <h2 class="section-title">Response Plan</h2>
+          <span class="section-description">
+            Steps to take before sending the individual for a medical assessment
+          </span>
+        </div>
+      </div>
+
+      <div class="section-body">
+        <ol>
+          <% @person.response_strategies.each do |strategy| %>
+            <li>
+              <h3><%= strategy.title %></h3>
+              <p><%= strategy.description %></p>
+            </li>
+          <% end %>
+        </ol>
+      </div>
+    </section>
+
     <div class="warning">
       <h2>Safety Warnings</h2>
       <div class="safety">
@@ -44,19 +67,6 @@
           <%= @plan.safety_notes %>
         </div>
       </div>
-
-      <section class="response_plan">
-        <h2>Response Plan</h2>
-
-        <ol>
-          <% @person.response_strategies.each do |strategy| %>
-            <li>
-              <h2><%= strategy.title %></h2>
-              <p><%= strategy.description %></p>
-            </li>
-          <% end %>
-        </ol>
-      </section>
 
       <section class="contacts">
         <h2>Emergency Contacts</h2>

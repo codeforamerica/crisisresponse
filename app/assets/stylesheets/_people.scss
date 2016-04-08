@@ -1,5 +1,5 @@
 $radius: 6px;
-$heading-font: "Museo Slab";
+$heading-font: "Helvetica Neue";
 
 .page-title {
   font-size: 1.5em;
@@ -130,14 +130,10 @@ h1 {
   color: $highlight;
 }
 
-h2 {
-  color: $highlight;
+h1,
+h2,
+h3 {
   font-family: $heading-font;
-}
-
-section {
-  margin-top: $base-spacing;
-  overflow: hidden;
 }
 
 .warning {
