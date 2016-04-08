@@ -1,4 +1,11 @@
 FactoryGirl.define do
+  factory :response_strategy do
+    priority 1
+    title "Contact case worker"
+    description "Case worker is Sam Smith at DESC"
+    person
+  end
+
   factory :person do
     name "John Doe"
     sex "M"

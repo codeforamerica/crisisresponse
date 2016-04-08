@@ -53,8 +53,11 @@
         <h2>Response Plan</h2>
 
         <ol>
-          <% @plan.action_plan_steps.each do |step| %>
-            <li><%= step %></li>
+          <% @person.response_strategies.each do |strategy| %>
+            <li>
+              <h2><%= strategy.title %></h2>
+              <p><%= strategy.description %></p>
+            </li>
           <% end %>
         </ol>
       </section>

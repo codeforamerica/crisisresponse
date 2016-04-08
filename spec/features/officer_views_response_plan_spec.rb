@@ -25,4 +25,15 @@ feature "Officer views a response plan" do
     expect(page).to have_content(person.eye_color)
     expect(page).to have_content(person.date_of_birth)
   end
+
+  scenario "They see the response plan steps" do
+    person = create(:person)
+    step_1 = create(:response_strategy, person: person, title: "Call case manager")
+    step_2 = create(:response_strategy, person: person, title: "Transport to Harborview")
+
+    visit person_path(person)
+
+    expect(page).to have_content(step_1.title)
+    expect(page).to have_content(step_2.title)
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407214453) do
+ActiveRecord::Schema.define(version: 20160408001209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,4 +46,16 @@ ActiveRecord::Schema.define(version: 20160407214453) do
     t.date     "date_of_birth"
   end
 
+  create_table "response_strategies", force: :cascade do |t|
+    t.integer  "priority"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "person_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "response_strategies", ["person_id"], name: "index_response_strategies_on_person_id", using: :btree
+
+  add_foreign_key "response_strategies", "people"
 end

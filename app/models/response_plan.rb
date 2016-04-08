@@ -2,7 +2,6 @@ class ResponsePlan
   include ActiveModel::Model
 
   attr_accessor(
-    :action_plan_steps,
     :city_state_zip,
     :contacts,
     :image,

@@ -5,14 +5,6 @@ class ResponsePlanBuilder
   def self.build(data)
     data = data.to_h
 
-    action_plan_steps = [
-      PLACEHOLDER,
-      PLACEHOLDER,
-      PLACEHOLDER,
-      PLACEHOLDER,
-      PLACEHOLDER,
-    ].compact
-
     past_encounters = [PLACEHOLDER]
 
     preparer = {
@@ -39,7 +31,6 @@ class ResponsePlanBuilder
     needs = (data["General Services / Needs"] || "").split(",").map(&:strip)
 
     ResponsePlan.new(
-      action_plan_steps: action_plan_steps,
       city_state_zip: PLACEHOLDER,
       contacts: contacts,
       image: PLACEHOLDER_IMAGE,
