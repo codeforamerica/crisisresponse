@@ -13,6 +13,11 @@ class Person < ActiveRecord::Base
   }
 
   has_many :response_strategies
+  accepts_nested_attributes_for(
+    :response_strategies,
+    reject_if: :all_blank,
+    allow_destroy: true,
+  )
 
   validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
   validates :race, inclusion: RACE_CODES.keys, allow_nil: true

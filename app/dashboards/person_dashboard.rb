@@ -8,7 +8,7 @@ class PersonDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    response_strategies: Field::HasMany,
+    response_strategies: Field::NestedHasMany.with_options(skip: :person),
     id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
