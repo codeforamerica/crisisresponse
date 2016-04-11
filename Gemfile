@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.0"
 
+gem "administrate", "~> 0.1.5"
 gem "autoprefixer-rails"
 gem "bourbon", "~> 4.2.0"
 gem "chartist-rails"
