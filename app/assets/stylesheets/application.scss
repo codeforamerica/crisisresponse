@@ -22,6 +22,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
+  font-family: $heading-font;
 }
 
 .chart-title {
@@ -50,5 +51,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .content {
   @include outer-container($page-width);
-  margin-top: $header-height;
+  margin-top: $header-height + $base-spacing * 1.5;
+}
+
+.left-column {
+  @include span-columns(4 of 12);
+  background-color: #eee;
+}
+
+.right-column {
+  @include span-columns(8 of 12);
+  @include omega;
 }

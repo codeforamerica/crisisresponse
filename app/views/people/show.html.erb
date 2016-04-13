@@ -2,123 +2,14 @@
 
 <div class="main">
   <div class="left-column">
-    <div class="name-box">
-      <h1><%= @person.last_name.upcase %>, <%= @person.first_name %></h1>
-    </div>
-    <%= render "charts", events: @events, plan: @plan %>
-
-    <section class="question-contact">
-      <div class="question">
-        <div class="icon">
-        <span class="label">
-          For questions or additional information, please contact
-          <span class="contact-info">CRT Ofc. Coles</span>
-          <span class="contact-info">(222) 333-4567</span>
-        </span>
-      </div>
-    </section>
+    <%= render "sections/images" %>
   </div>
 
   <div class="right-column">
-    <section class="basic_info">
-      <%= image_tag @plan.image %>
-
-      <%= render "biometrics", plan: @plan %>
-    </section>
-
-    <section class="response_plan">
-      <div class="section-header">
-        <%= image_tag("section-icons/response-plan.svg", class: "section-icon") %>
-        <div class="section-header-text">
-          <h2 class="section-title">Response Plan</h2>
-          <span class="section-description">
-            Steps to take before sending the individual for a medical assessment
-          </span>
-        </div>
-      </div>
-
-      <div class="section-body">
-        <ol>
-          <% @person.response_strategies.each do |strategy| %>
-            <li>
-              <h3><%= strategy.title %></h3>
-              <p><%= strategy.description %></p>
-            </li>
-          <% end %>
-        </ol>
-      </div>
-    </section>
-
-    <div class="warning">
-      <h2>Safety Warnings</h2>
-      <div class="safety">
-        <div class="half">
-          <%= render "chart",
-            title: "Officer Safety",
-            events: @events,
-            offset: 120,
-            fields: [
-              "weapon_yn_dk",
-              "threaten_violence_yn_dk",
-            ] %>
-        </div>
-
-        <div class="half notes">
-          <%= @plan.safety_notes %>
-        </div>
-      </div>
-
-      <section class="contacts">
-        <h2>Emergency Contacts</h2>
-
-        <% @plan.contacts.each do |contact| %>
-          <div class="contact">
-            <span class="contact-name"><%= contact[:name] %></span> (<%= contact[:relationship] %>)<br/>
-            <%= contact[:phone] %><br/>
-            <span class="notes"><%= contact[:notes] %></span>
-          </div>
-        <% end %>
-      </section>
-    </div>
-
-    <section class="interaction_history">
-      <h2>Interaction History</h2>
-
-      <% @plan.past_encounters.each.with_index do |encounter, index| %>
-        <div class="encounter">
-          <span class="date"><%= @events.reverse[index].reported_on_date %></span>
-          <span class="time"><%= "%04d" % @events[index].reported_on_time %> </span>
-          <p><%= encounter %></p>
-        </div>
-      <% end %>
-    </section>
-  </div>
-</div>
-
-<div class="footer">
-  <div class="third prepared_by">
-    <span class="label">Prepared by</span>
-    <span class="data">
-      <%= @plan.preparer[:name] %><br/>
-      <%= @plan.preparer[:team] %><br/>
-      <%= @plan.preparer[:phone] %>
-    </span>
-  </div>
-  <div class="third approved_by">
-    <span class="label">Approved by</span>
-    <span class="data">
-      Sgt. E. Pisconski
-    </span>
-  </div>
-  <div class="third metadata">
-    <div class="row">
-      <span class="label">GO #</span>
-      <span class="data">2016-00012512</span>
-    </div>
-
-    <div class="row">
-      <span class="label">Date</span>
-      <span class="data"><%= @plan.timestamp %></span>
-    </div>
+    <%= render "sections/officer_safety" %>
+    <%= render "sections/horsepower" %>
+    <%= render "sections/response_plan" %>
+    <%= render "sections/contacts" %>
+    <%= render "sections/incident_history" %>
   </div>
 </div>

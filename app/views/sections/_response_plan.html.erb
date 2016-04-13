@@ -1,0 +1,22 @@
+<section class="response-plan">
+  <div class="section-header">
+    <%= image_tag("section-icons/response-plan.svg", class: "section-icon") %>
+    <div class="section-header-text">
+      <h2 class="section-title">Response Plan</h2>
+      <span class="section-description">
+        Steps to take before sending the individual for a medical assessment
+      </span>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <ol>
+      <% @person.response_strategies.each do |strategy| %>
+        <li>
+          <h3><%= strategy.title %></h3>
+          <p><%= strategy.description %></p>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</section>

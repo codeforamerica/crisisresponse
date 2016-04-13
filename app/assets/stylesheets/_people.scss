@@ -1,175 +1,16 @@
 $radius: 6px;
 $heading-font: "Helvetica Neue";
 
-.page-title {
-  font-size: 1.5em;
-  margin-bottom: $base-spacing;
-  margin-top: $small-spacing;
+section.images img {
+  width: 100%;
+  border: 1px solid $dark-gray;
 }
 
-.left-column {
-  @include span-columns(4 of 12);
-  background-color: #eee;
-  border-radius: $radius;
-  overflow: hidden;
-
-  h1 {
-    display: block;
-    background-color: $highlight;
-    color: #fff;
-    border-radius: $radius $radius 0 0;
-    padding: $base-spacing/2 0;
-    font-family: $heading-font;
-  }
-
-  h2 {
-    margin-top: $base-spacing;
-    margin-bottom: 0;
-  }
-
-  h3 {
-    font-size: 0.8em;
-    margin-top: $base-spacing / 2;
-    margin-bottom: 0;
-  }
-
-  h2,
-  h3 {
-    margin-left: $base-spacing;
-  }
-
-  $icon-size: $base-spacing;
-
-  .veteran,
-  .license,
-  .need,
-  .address {
-    margin-top: $base-spacing/2;
-    display: block;
-    @include clearfix;
-
-    .label {
-      display: inline-block;
-
-      &:before {
-        content: " ";
-        margin-right: $base-spacing / 2;
-        display: inline-block;
-        vertical-align: middle;
-        width: $icon-size;
-        height: $icon-size;
-        background-repeat: no-repeat;
-      }
-    }
-  }
-
-  .needs {
-    margin-left: $base-spacing;
-    font-size: 0.8em;
-    margin-top: 0;
-
-    .label {
-      font-weight: bold;
-    }
-  }
-
-  .personal_info {
-    margin-left: $base-spacing;
-    font-size: 0.8em;
-    margin-top: 0;
-
-    .veteran {
-      color: $danger;
-      .label:before {
-        background-image: image_url("veteran.svg");
-      }
-    }
-
-    .label {
-      font-weight: bold;
-      display: block;
-    }
-
-    .data {
-      display: block;
-      margin-left: $icon-size + $base-spacing/2;
-    }
-  }
-
-  .address .label:before {
-    background-image: image_url("home.svg");
-  }
-  .license .label:before {
-    background-image: image_url("license.svg");
-  }
-  .housing .label:before {
-    background-image: image_url("home.svg");
-  }
-  .food .label:before {
-    background-image: image_url("food.svg");
-  }
-}
-
-.right-column {
-  @include span-columns(8 of 12);
-  @include omega;
-}
-
-.safety {
-  @include fill-parent;
-  overflow: hidden;
-
-  .half {
-    @include span-columns(4 of 8);
-  }
-}
-
-h1 {
-  @include fill-parent;
-  text-align: center;
-  color: $highlight;
-}
-
-h1,
-h2,
-h3 {
-  font-family: $heading-font;
-}
-
-.warning {
-  margin-top: $base-spacing;
-  background-color: lighten($danger, 60%);
-  border-radius: $radius;
-  padding: $base-spacing;
-
-  .ct-series-a .ct-bar {
-    stroke: $danger;
-  }
-
-  h2 {
-    color: $danger;
-  }
-
-  .notes {
-    font-weight: bold;
-    font-size: 0.8em;
-  }
-}
-
-.basic_info {
+.horsepower {
   margin-top: 0;
   overflow: hidden;
 
-  img {
-    @include span-columns(5 of 8);
-    height:14em;
-    width:auto;
-  }
-
   .biometrics {
-    @include span-columns(3 of 8);
-    float: right;
-
     .stat {
       overflow: hidden;
       border-bottom: 1px solid lightgrey;
@@ -203,18 +44,18 @@ h3 {
   }
 }
 
-p {
-  font-size: 0.8em;
-}
-
-.response_plan {
+.response-plan {
   ol {
     font-size: 0.8em;
     padding-left: 1em;
   }
+
+  p {
+    font-size: 0.8em;
+  }
 }
 
-.interaction_history {
+.incident-history {
   .date,
   .time{
     color: lightgray;
@@ -225,39 +66,11 @@ p {
   }
 }
 
-.main {
-  overflow: hidden;
-}
-
-.footer {
-  @include row;
-  @include fill-parent;
-  font-size: 0.8em;
-  margin: $base-spacing 0;
-
-  .third {
-    @include span-columns(4 of 12);
-  }
-
-  .label {
-    vertical-align: top;
-    font-weight: bold;
-  }
-
-  .data {
-    display: inline-block;
-    padding-left: $base-spacing;
-  }
-
-  .row {
-    @include row;
-  }
-}
-
 .contacts {
   .contact {
     font-size: 0.8em;
     @include span-columns(4 of 8);
+
 
     &:nth-child(2n) {
       @include omega;
@@ -269,37 +82,6 @@ p {
 
     .notes {
       color: grey;
-    }
-  }
-}
-
-.question {
-  color: $highlight;
-
-  height: 7em;
-  display: block;
-  overflow: hidden;
-  $icon-size: $base-spacing * 2;
-
-  .icon {
-    background-image: image_url("question.svg");
-    background-repeat: no-repeat;
-    content: " ";
-    height: $icon-size;
-    width: $icon-size;
-    margin-left: $base-spacing;
-  }
-
-  .label {
-    overflow: hidden;
-    display: block;
-    margin-left: $icon-size;
-    width: 15em;
-
-    .contact-info {
-      font-weight: bold;
-      @include fill-parent;
-      @include row;
     }
   }
 }

@@ -1,0 +1,18 @@
+<section class="contacts">
+  <div class="section-header">
+    <%= image_tag("section-icons/response-plan.svg", class: "section-icon") %>
+    <div class="section-header-text">
+      <h2 class="section-title">Emergency Contacts</h2>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <% @plan.contacts.each do |contact| %>
+      <div class="contact">
+        <span class="contact-name"><%= contact[:name] %></span> (<%= contact[:relationship] %>)<br/>
+        <%= contact[:phone] %><br/>
+        <span class="notes"><%= contact[:notes] %></span>
+      </div>
+    <% end %>
+  </div>
+</section>

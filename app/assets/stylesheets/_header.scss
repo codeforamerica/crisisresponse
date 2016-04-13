@@ -1,6 +1,6 @@
 .header {
   background-color: $header-background-color;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.24);
+  box-shadow: $shadow-level-4;
   color: $white-text;
   font-size: 1rem;
   height: $header-height;

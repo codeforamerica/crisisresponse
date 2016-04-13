@@ -7,12 +7,8 @@ class ResponsePlan
     :image,
     :license_number,
     :license_state,
-    :needs,
-    :past_encounters,
     :preparer,
     :safety_notes,
-    :street_address,
     :timestamp,
-    :veteran,
   )
 end
