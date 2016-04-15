@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+
+  box:
+    image: busybox
+    volumes:
+      - /box
+
+  web:
+    build: .
+    command: ./bin/serve
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    volumes:
+      - .:/app
+    volumes_from:
+      - box
