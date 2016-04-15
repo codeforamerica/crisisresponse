@@ -2,7 +2,9 @@ development: &default
   adapter: postgresql
   database: crisisresponse_development
   encoding: utf8
-  host: localhost
+  username: postgres
+  password:
+  host: db
   min_messages: warning
   pool: <%= Integer(ENV.fetch("DB_POOL", 5)) %>
   reaping_frequency: <%= Integer(ENV.fetch("DB_REAPING_FREQUENCY", 10)) %>
