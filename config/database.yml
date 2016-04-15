@@ -1,6 +1,6 @@
 development: &default
   adapter: postgresql
-  database: visual_log_development
+  database: crisisresponse_development
   encoding: utf8
   host: localhost
   min_messages: warning
@@ -10,7 +10,7 @@ development: &default
 
 test:
   <<: *default
-  database: visual_log_test
+  database: crisisresponse_test
 
 production: &deploy
   encoding: utf8

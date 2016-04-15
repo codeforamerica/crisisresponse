@@ -8,7 +8,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 Bundler.require(*Rails.groups)
-module VisualLog
+module CrisisResponse
   class Application < Rails::Application
     config.i18n.enforce_available_locales = true
     config.quiet_assets = true

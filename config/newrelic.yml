@@ -1,5 +1,5 @@
 common: &default_settings
-  app_name: "visual_log"
+  app_name: "crisisresponse"
   audit_log:
     enabled: false
   browser_monitoring:
@@ -30,5 +30,5 @@ production:
   monitor_mode: true
 staging:
   <<: *default_settings
-  app_name: "visual_log (Staging)"
+  app_name: "crisisresponse (Staging)"
   monitor_mode: true
