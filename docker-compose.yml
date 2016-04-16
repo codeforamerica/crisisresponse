@@ -5,12 +5,19 @@ services:
     ports:
       - "5432:5432"
 
+  box:
+    image: busybox
+    volumes:
+      - /box
+
   web:
     build: .
-    command: bin/rails server --port 3000 --binding 0.0.0.0
+    command: ./bin/serve
     ports:
       - "3000:3000"
     links:
       - db
     volumes:
       - .:/app
+    volumes_from:
+      - box
