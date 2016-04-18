@@ -2,6 +2,8 @@ version: '2'
 services:
   db:
     image: postgres:latest
+    volumes:
+      - /usr/lib/postgresql/9.5/bin/
     ports:
       - "5432:5432"
 
@@ -19,5 +21,7 @@ services:
       - db
     volumes:
       - .:/app
+      - ./backup:/backup
     volumes_from:
       - box
+      - db

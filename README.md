@@ -127,6 +127,10 @@ docker-compose build && docker save crisis_web > build/crisis.tar
 
 # After updating the `Gemfile`:
 docker-compose up
-# To run the server
-docker-compose up
+
+# To backup the database
+./bin/backup # (generates a file in ./backup)
+
+# To restore the database
+./bin/restore backup/FILE.psql
 ```

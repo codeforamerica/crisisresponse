@@ -1,0 +1,1 @@
+pg_restore -c -C -F c -v -U postgres /$1

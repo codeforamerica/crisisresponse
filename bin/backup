@@ -1,0 +1,1 @@
+docker run --link crisis_db_1 --rm -v "backup:/backup" postgres pg_dump -F c -v -U postgres -h crisis_db_1 crisisresponse_development -f /backup/foo.psql
