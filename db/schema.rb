@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20160421210227) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "people", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "sex"
@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(version: 20160421210227) do
     t.date     "date_of_birth"
     t.string   "scars_and_marks"
     t.string   "image"
+    t.boolean  "gun",              default: false, null: false
+    t.boolean  "knife",            default: false, null: false
+    t.boolean  "needles",          default: false, null: false
+    t.boolean  "other_weapon",     default: false, null: false
+    t.boolean  "police_assault",   default: false, null: false
+    t.boolean  "spitting",         default: false, null: false
+    t.boolean  "suicide_by_cop",   default: false, null: false
+    t.boolean  "violence",         default: false, null: false
   end
 
   create_table "response_strategies", force: :cascade do |t|

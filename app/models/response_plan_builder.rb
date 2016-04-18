@@ -17,7 +17,6 @@ class ResponsePlanBuilder
       license_number: PLACEHOLDER,
       license_state: PLACEHOLDER,
       preparer: preparer,
-      safety_notes: PLACEHOLDER,
       timestamp: PLACEHOLDER.split.first,
     )
   end

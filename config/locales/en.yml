@@ -11,6 +11,24 @@ en:
       person_search:
         create: Search
 
+  response_plan:
+    safety:
+      gun: Owns a gun
+      knife: Owns a knife
+      needles: Previously possessed needles
+      none: No history of violence
+      other_weapon: Has previously carried a weapon
+      police_assault: Has assaulted police
+      spitting: History of spitting
+      suicide_by_cop: Has threatened suicide by cop
+      violence: History of violence
+
+  search:
+    results:
+      none: No results found
+    form:
+      label: Search by name, DOB, or physical description
+
   time:
     formats:
       default:
@@ -22,9 +40,3 @@ en:
 
   titles:
     application: Visual log
-
-  search:
-    results:
-      none: No results found
-    form:
-      label: Search by name, DOB, or physical description
