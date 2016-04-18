@@ -3,6 +3,7 @@ class Person < ActiveRecord::Base
 
   has_many :contacts
   has_many :response_strategies
+  has_many :safety_warnings
 
   RACE_CODES = {
     "AFRICAN AMERICAN/BLACK" => "B",
@@ -16,7 +17,6 @@ class Person < ActiveRecord::Base
     "Male" => "M",
     "Female" => "F",
   }.freeze
-
 
   validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
   validates :race, inclusion: RACE_CODES.keys, allow_nil: true

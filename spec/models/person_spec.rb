@@ -19,6 +19,10 @@ RSpec.describe Person, type: :model do
     it { should_not allow_value("White").for(:race) }
   end
 
+  describe "associations" do
+    it { should have_many :safety_warnings }
+  end
+
   describe "#shorthand_description" do
     it "starts with a letter representing race" do
       expect(shorthand_for(race: "AFRICAN AMERICAN/BLACK")).to start_with("B")
@@ -47,6 +51,14 @@ RSpec.describe Person, type: :model do
 
     def shorthand_for(person_attrs)
       build(:person, person_attrs).shorthand_description
+    end
+  end
+
+  describe "#safety_warnings" do
+    it "returns an empty array if there are no safety warnings" do
+      person = build(:person)
+
+      expect(person.safety_warnings).to be_empty
     end
   end
 end

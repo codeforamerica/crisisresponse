@@ -29,4 +29,9 @@ FactoryGirl.define do
     eye_color "blue"
     date_of_birth { 25.years.ago }
   end
+
+  factory :safety_warning do
+    description "History of violence"
+    person
+  end
 end

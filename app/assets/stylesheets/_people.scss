@@ -20,9 +20,13 @@ section.images img {
   border: 1px solid $dark-gray;
 }
 
-.officer-safety {
+.safety-warnings {
   @include media($medium-screen-up) {
     @include span-columns(4 of 8);
+  }
+
+  li {
+    margin-bottom: $small-spacing;
   }
 }
 

@@ -7,7 +7,6 @@ class ResponsePlan
     :license_number,
     :license_state,
     :preparer,
-    :safety_notes,
     :timestamp,
   )
 end

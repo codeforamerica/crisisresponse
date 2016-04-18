@@ -1,0 +1,20 @@
+<section class="safety-warnings">
+  <div class="section-header">
+    <%= image_tag("section-icons/response-plan.svg", class: "section-icon") %>
+    <div class="section-header-text">
+      <h2 class="section-title">Officer Safety</h2>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <% if @person.safety_warnings.any? %>
+      <ul>
+        <% @person.safety_warnings.each do |warning| %>
+          <li><%= warning.description %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <%= t("response_plan.safety.none") %>
+    <% end %>
+  </div>
+</section>
