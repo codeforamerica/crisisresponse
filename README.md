@@ -103,22 +103,24 @@ programming in style.
 * [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
 * [Style](http://github.com/thoughtbot/guides/blob/master/style)
 
-
-
-
-## Docker commands
+## Managing Application Lifecycle
 
 ```bash
 # start by cloning the repository
 git clone git@github.com:codeforamerica/crisisresponse.git
 
-# For the first run:
+# To set up:
 docker-compose build
+docker-compose run web rake db:create db:migrate
+
+# To run the server
+docker-compose up
+
 # After updating the `Dockerfile`:
 docker-compose build
+
 # When packaging up code for the production environment:
 docker-compose build && docker save crisis_web > build/crisis.tar
-
 
 # After updating the `Gemfile`:
 docker-compose up
