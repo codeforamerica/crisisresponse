@@ -7,6 +7,22 @@
   </div>
 
   <div class="section-body">
-    <%= render "biometrics", plan: @plan %>
+    <span class="shorthand-description">
+      <%= @person.shorthand_description %>
+    </span>
+
+    <span class="hair-color">
+      <%= image_tag("physical/hair.svg") %>
+      <%= @person.hair_color.to_s.humanize %>
+    </span>
+
+    <span class="eye-color">
+      <%= image_tag("physical/eye.svg") %>
+      <%= @person.eye_color.to_s.humanize %>
+    </span>
+
+    <span class="scars-marks">
+      <%= @person.scars_and_marks.to_s.humanize %>
+    </span>
   </div>
 </section>

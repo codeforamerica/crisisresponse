@@ -5,25 +5,33 @@ feature "Officer views a response plan" do
     person = create(
       :person,
       name: "John Doe",
-      sex: "M",
-      race: "W",
-      height_in_inches: 66,
-      weight_in_pounds: 160,
-      hair_color: "black",
-      eye_color: "blue",
       date_of_birth: Date.new(1980),
     )
 
     visit person_path(person)
 
     expect(page).to have_content(person.name)
-    expect(page).to have_content(person.sex)
-    expect(page).to have_content(person.race)
-    expect(page).to have_content(person.height_in_inches)
-    expect(page).to have_content(person.weight_in_pounds)
-    expect(page).to have_content(person.hair_color)
-    expect(page).to have_content(person.eye_color)
     expect(page).to have_content(person.date_of_birth)
+  end
+
+  scenario "They see the person's physical characteristics" do
+    person = create(
+      :person,
+      eye_color: "Green",
+      hair_color: "Brown",
+      height_in_inches: 70,
+      race: "WHITE",
+      scars_and_marks: "Skull tattoo on neck",
+      sex: "Male",
+      weight_in_pounds: 180,
+    )
+
+    visit person_path(person)
+
+    expect(page).to have_content("WM – 5'10\" – 180 lb")
+    expect(page).to have_css(".physical .eye-color", text: "Green")
+    expect(page).to have_css(".physical .hair-color", text: "Brown")
+    expect(page).to have_content("Skull tattoo on neck")
   end
 
   scenario "They see the response plan steps" do

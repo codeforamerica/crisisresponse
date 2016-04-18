@@ -24,46 +24,6 @@ section.images img {
   @include span-columns(4 of 8);
 }
 
-.physical {
-  @include span-columns(4 of 8);
-  @include omega;
-  margin-top: 0;
-  overflow: hidden;
-
-  .biometrics {
-    .stat {
-      overflow: hidden;
-      border-bottom: 1px solid lightgrey;
-      padding: 0.25em 0;
-
-      &:first-child {
-        padding-top: 0;
-      }
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      .stat__label {
-        padding-left: $base-spacing;
-        display: block;
-        @include span-columns(2 of 4);
-      }
-
-      .stat__data {
-        margin: 0;
-        font-weight: bold;
-        @include span-columns(2 of 4);
-        @include omega;
-      }
-    }
-
-    dt:after {
-      content: ":"
-    }
-  }
-}
-
 .response-plan {
   @include span-columns(8 of 8);
   ol {

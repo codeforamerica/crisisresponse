@@ -1,0 +1,25 @@
+.physical {
+  @include span-columns(4 of 8);
+  @include omega;
+
+  .section-body span {
+    display: block;
+  }
+
+  .shorthand-description {
+    @include heavy-font;
+  }
+
+  .section-body img {
+    width: $base-spacing;
+    margin-right: $small-spacing;
+  }
+
+  .hair-color img {
+    transform: translateY(0.5rem);
+  }
+
+  .eye-color img {
+    transform: translateY(0.2rem);
+  }
+}

@@ -8,8 +8,8 @@ FactoryGirl.define do
 
   factory :person do
     name "John Doe"
-    sex "M"
-    race "W"
+    sex "Male"
+    race "AFRICAN AMERICAN/BLACK"
     height_in_inches 66
     weight_in_pounds 160
     hair_color "black"

@@ -14,6 +14,8 @@
 @import "section";
 @import "people";
 
+@import "response_plan/*";
+
 body {
   font-family: $base-font-family;
   font-size: 20px;
