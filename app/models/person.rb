@@ -13,6 +13,7 @@ class Person < ActiveRecord::Base
   }
 
   has_many :response_strategies
+
   accepts_nested_attributes_for(
     :response_strategies,
     reject_if: :all_blank,
@@ -21,6 +22,8 @@ class Person < ActiveRecord::Base
 
   validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
   validates :race, inclusion: RACE_CODES.keys, allow_nil: true
+
+  mount_uploader :image, ImageUploader
 
   def name=(value)
     (self.first_name, self.last_name) = value.split
