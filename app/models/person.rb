@@ -9,13 +9,6 @@ class Person < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def events_from(events)
-    events.select! do |event|
-      event.crisis_contacted_first_name.downcase == first_name.downcase &&
-        event.crisis_contacted_last_name.downcase == last_name.downcase
-    end
-  end
-
   def to_param
     name
   end
