@@ -15,15 +15,15 @@
 @import "people";
 
 body {
-  font-family: "Helvetica Neue";
+  font-family: $base-font-family;
   font-size: 20px;
   width: 100%;
   background-color: #f0f0f0;
 }
 
 h1, h2, h3, h4, h5, h6 {
+  @include heavy-font;
   margin: 0;
-  font-family: $heading-font;
 }
 
 .chart-title {

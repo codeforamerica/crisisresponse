@@ -1,5 +1,19 @@
 $radius: 6px;
-$heading-font: "Helvetica Neue";
+
+.header-name,
+.header-dob {
+  line-height: $header-height / 3;
+  display: block;
+}
+
+.header-name {
+  margin-top: $header-height / 6;
+}
+
+.header-label {
+  @include light-font;
+  color: rgba(255, 255, 255, 0.75);
+}
 
 section.images img {
   width: 100%;

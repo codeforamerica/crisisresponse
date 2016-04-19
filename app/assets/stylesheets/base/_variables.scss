@@ -1,6 +1,17 @@
 // Typography
-$base-font-family: $helvetica;
+$base-font-family: "Open Sans";
+$light-font-family: $base-font-family;
 $heading-font-family: $base-font-family;
+
+@mixin light-font {
+  font-family: $light-font-family;
+  font-weight: 100;
+}
+
+@mixin heavy-font {
+  font-family: $heading-font-family;
+  font-weight: 600;
+}
 
 // Font Sizes
 $base-font-size: 1em;
@@ -9,15 +20,15 @@ $base-font-size: 1em;
 $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
-// Layout sizes
-$header-height: 4rem;
-$page-width: 90%;
-
 // Other Sizes
 $base-border-radius: 3px;
 $base-spacing: $base-line-height * 1rem;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
+
+// Layout sizes
+$header-height: 3 * $base-spacing;
+$page-width: 90%;
 
 // Colors
 $blue: #0096a6;

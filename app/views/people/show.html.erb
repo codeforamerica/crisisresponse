@@ -1,4 +1,7 @@
-<%= content_for(:header) { @person.name } %>
+<%= content_for(:header) do %>
+  <span class="header-name"><%= @person.name %></span>
+  <span class="header-dob"><span class="header-label">DOB:</span> <%= @person.date_of_birth %></span>
+<% end %>
 
 <div class="main">
   <div class="left-column">
