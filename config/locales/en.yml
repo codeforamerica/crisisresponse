@@ -6,6 +6,11 @@ en:
       with_weekday:
         "%a %m/%d/%y"
 
+  helpers:
+    submit:
+      person_search:
+        create: Search
+
   time:
     formats:
       default:
@@ -17,3 +22,9 @@ en:
 
   titles:
     application: Visual log
+
+  search:
+    results:
+      none: No results found
+    form:
+      label: Search by name, DOB, or physical description

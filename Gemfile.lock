@@ -87,6 +87,7 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
     chartist-rails (0.9.5)
+    chronic (0.10.2)
     cocoon (1.2.9)
     coderay (1.1.0)
     coffee-rails (4.1.1)
@@ -161,6 +162,10 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     normalize-rails (3.0.3)
     pg (0.18.4)
+    pg_search (1.0.5)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -294,6 +299,7 @@ DEPENDENCIES
   capybara-webkit
   carrierwave
   chartist-rails
+  chronic
   coffee-rails (~> 4.1.0)
   database_cleaner
   delayed_job_active_record
@@ -308,6 +314,7 @@ DEPENDENCIES
   newrelic_rpm (>= 3.9.8)
   normalize-rails (~> 3.0.0)
   pg
+  pg_search
   pry-byebug
   pry-rails
   puma

@@ -1,27 +1,36 @@
 class Person < ActiveRecord::Base
+  include PgSearch
+
+  has_many :response_strategies
+
   RACE_CODES = {
     "AFRICAN AMERICAN/BLACK" => "B",
     "AMERICAN INDIAN/ALASKAN NATIVE" => "I",
     "ASIAN (ALL)/PACIFIC ISLANDER" => "A",
     "UNKNOWN" => "U",
     "WHITE" => "W",
-  }
+  }.freeze
 
   SEX_CODES = {
     "Male" => "M",
     "Female" => "F",
-  }
+  }.freeze
 
-  has_many :response_strategies
+
+  validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
+  validates :race, inclusion: RACE_CODES.keys, allow_nil: true
+
+  pg_search_scope(
+    :search,
+    against: [:first_name, :last_name],
+    using: [:tsearch, :dmetaphone, :trigram],
+  )
 
   accepts_nested_attributes_for(
     :response_strategies,
     reject_if: :all_blank,
     allow_destroy: true,
   )
-
-  validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
-  validates :race, inclusion: RACE_CODES.keys, allow_nil: true
 
   mount_uploader :image, ImageUploader
 

@@ -4,11 +4,8 @@ require "rms_adapter"
 
 class PeopleController < ApplicationController
   def index
-    if params[:name]
-      redirect_to person_path(params[:name])
-    end
-
-    @people = all_people_with_event_counts
+    @search = PersonSearch.new(search_params)
+    @people = @search.close_matches
   end
 
   def show
@@ -25,19 +22,6 @@ class PeopleController < ApplicationController
 
   private
 
-  def all_people_with_event_counts
-    names = RMSAdapter.new.events.map do |event|
-      [event.crisis_contacted_first_name, event.crisis_contacted_last_name]
-    end
-
-    name_counts = names.group_by { |x| x }.transform_values { |v| v.count }
-    name_counts = name_counts.sort_by { |name, count| -count }.to_h
-
-    name_counts.transform_keys! do |name|
-      Person.new(first_name: name.first, last_name: name.last)
-    end
-  end
-
   def events_for(person)
     rms = RMSAdapter.new
     rms.events_for(person)
@@ -45,5 +29,13 @@ class PeopleController < ApplicationController
 
   def find_most_recent_plan_for_person(person)
     ResponsePlanBuilder.build({})
+  end
+
+  def search_params
+    if params[:person_search].present?
+      params.require(:person_search).permit(:name, :date_of_birth)
+    else
+      {}
+    end
   end
 end

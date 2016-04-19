@@ -1,33 +1,44 @@
-<form class="search">
-  <label for="name">Search by Name</label>
-  <input
-    type="text"
-    name="name"
-    placeholder="Search"
-    aria-label="Search"
-  />
-  <span class="search__hint">
-    Press enter to search
-  </span>
-</form>
+<%= content_for(:header) do %>
+  Response Plan App
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <td>First Name</td>
-      <td>Last Name</td>
-      <td>Events</td>
-      <td>Actions</td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @people.each do |person, event_count| %>
+<%= form_for(@search, url: people_path, method: :get, html: { class: "search" }) do |f| %>
+  <h1>Search for a Response Plan</h1>
+
+  <div class="fields">
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: "e.g. Doe, John A" %>
+
+    <%= f.label :date_of_birth, "DOB" %>
+    <%= f.text_field :date_of_birth, placeholder: "e.g. 05-08-1970" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<% if @people.any? %>
+  <table>
+    <thead>
       <tr>
-        <td><%= person.first_name.humanize %></td>
-        <td><%= person.last_name.humanize %></td>
-        <td><%= event_count %></td>
-        <td><%= link_to("Show data", "/people/#{person.name.downcase}") %></td>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>DOB</td>
+        <td>Actions</td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @people.each do |person, event_count| %>
+        <tr>
+          <td><%= person.first_name.humanize %></td>
+          <td><%= person.last_name.humanize %></td>
+          <td><%= person.date_of_birth %></td>
+          <td><%= link_to("Show data", "/people/#{person.name.downcase}") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%= t("search.results.none") %>
+<% end %>
