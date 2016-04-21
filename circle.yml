@@ -3,4 +3,4 @@ database:
     - bin/setup
 test:
   override:
-    - bin/rake
+    - bin/rake db:drop db:create db:migrate && bin/rake
