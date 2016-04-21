@@ -47,25 +47,3 @@ section.images img {
     margin-left: $base-spacing;
   }
 }
-
-.contacts {
-  @include span-columns(8 of 8);
-
-  .contact {
-    font-size: 0.8em;
-    @include span-columns(4 of 8);
-
-
-    &:nth-child(2n) {
-      @include omega;
-    }
-
-    .contact-name {
-      font-weight: bold;
-    }
-
-    .notes {
-      color: grey;
-    }
-  }
-}

@@ -11,24 +11,8 @@ class ResponsePlanBuilder
       team: PLACEHOLDER,
     }
 
-    contacts = [
-      {
-        name: PLACEHOLDER,
-        relationship: PLACEHOLDER,
-        phone: PLACEHOLDER,
-        notes: PLACEHOLDER,
-      },
-      {
-        name: PLACEHOLDER,
-        relationship: PLACEHOLDER,
-        phone: PLACEHOLDER,
-        notes: PLACEHOLDER,
-      },
-    ]
-
     ResponsePlan.new(
       city_state_zip: PLACEHOLDER,
-      contacts: contacts,
       image: PLACEHOLDER_IMAGE,
       license_number: PLACEHOLDER,
       license_state: PLACEHOLDER,

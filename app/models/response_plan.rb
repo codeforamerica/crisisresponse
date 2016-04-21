@@ -3,7 +3,6 @@ class ResponsePlan
 
   attr_accessor(
     :city_state_zip,
-    :contacts,
     :image,
     :license_number,
     :license_state,

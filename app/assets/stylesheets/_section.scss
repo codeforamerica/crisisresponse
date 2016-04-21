@@ -1,6 +1,7 @@
 $icon-size: 2.5rem;
 
 section {
+  @include fill-parent;
   background-color: white;
   border-radius: 2px;
   margin-bottom: $base-spacing;

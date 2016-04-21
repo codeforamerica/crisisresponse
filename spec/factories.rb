@@ -1,4 +1,12 @@
 FactoryGirl.define do
+  factory :contact do
+    person nil
+    name "MyString"
+    relationship "MyString"
+    cell "MyString"
+    notes "MyString"
+  end
+
   factory :response_strategy do
     priority 1
     title "Contact case worker"

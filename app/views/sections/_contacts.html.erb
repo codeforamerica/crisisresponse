@@ -7,11 +7,16 @@
   </div>
 
   <div class="section-body">
-    <% @plan.contacts.each do |contact| %>
+    <% @person.contacts.each do |contact| %>
       <div class="contact">
-        <span class="contact-name"><%= contact[:name] %></span> (<%= contact[:relationship] %>)<br/>
-        <%= contact[:phone] %><br/>
-        <span class="notes"><%= contact[:notes] %></span>
+        <div class="contact-name"><%= contact.name %></div>
+        <div class="contact-relationship">Relationship: <%= contact.relationship %></div>
+        <div class="contact-cell">Cell: <%= tel_to contact.cell %></div>
+
+        <div class="contact-notes">
+          <div class="contact-notes-label">Notes</div>
+          <%= contact.notes %>
+        </div>
       </div>
     <% end %>
   </div>

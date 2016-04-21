@@ -44,4 +44,20 @@ feature "Officer views a response plan" do
     expect(page).to have_content(step_1.title)
     expect(page).to have_content(step_2.title)
   end
+
+  scenario "They see emergency contacts" do
+    person = create(:person)
+    contact = create(
+      :contact,
+      person: person,
+      name: "Jane Doe",
+      relationship: "Case Worker",
+      cell: "222-333-4444",
+      notes: "Only available from 9am - 5pm",
+    )
+
+    visit person_path(person)
+
+    expect(page).to have_content(contact.name)
+  end
 end

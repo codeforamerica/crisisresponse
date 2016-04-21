@@ -1,0 +1,25 @@
+.contact {
+  @include span-columns(4 of 8);
+  font-size: 0.8rem;
+
+  &:nth-child(2n) {
+    @include omega;
+  }
+}
+
+.contact-name {
+  @include heavy-font;
+  margin-bottom: $small-spacing;
+}
+
+.contact-notes {
+  @include light-font;
+  margin-top: $small-spacing;
+  opacity: 50%;
+  color: lighten($base-font-color, 25%);
+
+  &-label {
+    font-weight: 400;
+    color: $base-font-color;
+  }
+}

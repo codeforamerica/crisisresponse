@@ -1,6 +1,7 @@
 class Person < ActiveRecord::Base
   include PgSearch
 
+  has_many :contacts
   has_many :response_strategies
 
   RACE_CODES = {

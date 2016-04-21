@@ -11,12 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419221546) do
+ActiveRecord::Schema.define(version: 20160421210227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
   enable_extension "fuzzystrmatch"
+
+  create_table "contacts", force: :cascade do |t|
+    t.integer  "person_id"
+    t.string   "name"
+    t.string   "relationship"
+    t.string   "cell"
+    t.string   "notes"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "contacts", ["person_id"], name: "index_contacts_on_person_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -61,5 +73,6 @@ ActiveRecord::Schema.define(version: 20160419221546) do
 
   add_index "response_strategies", ["person_id"], name: "index_response_strategies_on_person_id", using: :btree
 
+  add_foreign_key "contacts", "people"
   add_foreign_key "response_strategies", "people"
 end
