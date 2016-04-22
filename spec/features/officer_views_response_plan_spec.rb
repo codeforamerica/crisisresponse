@@ -59,6 +59,9 @@ feature "Officer views a response plan" do
     visit person_path(person)
 
     expect(page).to have_content(contact.name)
+    expect(page).to have_content(contact.relationship)
+    expect(page).to have_content(contact.cell)
+    expect(page).to have_content(contact.notes)
   end
 
   context "when there are no safety warnings" do
@@ -68,7 +71,6 @@ feature "Officer views a response plan" do
       visit person_path(person)
 
       expect(page).to have_content(t("response_plan.safety.none"))
-      expect(page).not_to have_content(t("response_plan.safety.needles"))
     end
   end
 
@@ -76,19 +78,14 @@ feature "Officer views a response plan" do
     scenario "they see the safety warnings" do
       person = create(
         :person,
-        gun: true,
-        knife: true,
-        needles: true,
-        other_weapon: true,
-        police_assault: true,
-        spitting: true,
-        suicide_by_cop: true,
-        violence: true,
+        gun_warning: "gun warning",
+        knife_warning: "knife warning",
       )
 
       visit person_path(person)
 
-      expect(page).to have_content(t("response_plan.safety.needles"))
+      expect(page).to have_content("gun warning")
+      expect(page).to have_content("knife warning")
     end
   end
 end

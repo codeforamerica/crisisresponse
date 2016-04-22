@@ -58,9 +58,14 @@ RSpec.describe Person, type: :model do
     end
 
     it "returns a list of warnings for the person has" do
-      person = build(:person, needles: true, gun: true)
+      person = build(
+        :person,
+        needle_warning: "Have previously had needles",
+        gun_warning: "Owns a pistol",
+      )
 
-      expect(person.safety_warnings).to match_array([:needles, :gun])
+      expect(person.safety_warnings).
+        to match_array([:needle_warning, :gun_warning])
     end
   end
 end

@@ -4,14 +4,14 @@ class Person < ActiveRecord::Base
   has_many :contacts
 
   SAFETY_CRITERIA = [
-    :gun,
-    :knife,
-    :needles,
-    :other_weapon,
-    :police_assault,
-    :spitting,
-    :suicide_by_cop,
-    :violence,
+    :gun_warning,
+    :knife_warning,
+    :needle_warning,
+    :other_weapon_warning,
+    :police_assault_warning,
+    :spit_warning,
+    :suicide_by_cop_warning,
+    :violence_warning,
   ]
 
   has_many :response_strategies

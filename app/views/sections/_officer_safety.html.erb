@@ -11,7 +11,7 @@
       <%= t("response_plan.safety.none") %>
     <% else %>
       <% @person.safety_warnings.each do |warning| %>
-        <%= t("response_plan.safety.#{warning}") %>
+        <%= @person.send(warning) %>
       <% end %>
     <% end %>
   </div>

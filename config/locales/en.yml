@@ -13,15 +13,7 @@ en:
 
   response_plan:
     safety:
-      gun: Owns a gun
-      knife: Owns a knife
-      needles: Previously possessed needles
-      none: No history of violence
-      other_weapon: Has previously carried a weapon
-      police_assault: Has assaulted police
-      spitting: History of spitting
-      suicide_by_cop: Has threatened suicide by cop
-      violence: History of violence
+      none: No safety warnings
 
   search:
     results:

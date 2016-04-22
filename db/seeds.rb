@@ -5,3 +5,46 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+person = Person.create(
+  name: "John Doe",
+  sex: "Male",
+  race: "AFRICAN AMERICAN/BLACK",
+  height_in_inches: 70,
+  weight_in_pounds: 180,
+  hair_color: "Black",
+  eye_color: "Brown",
+  date_of_birth: Date.new(1980, 01, 02),
+  scars_and_marks: "Skull tattoo on neck",
+  gun_warning: "John owns a gun",
+)
+
+ResponseStrategy.create(
+  person: person,
+  title: "Call case manager",
+  description: "The case manager usually can calm John down over the phone",
+  priority: 1,
+)
+
+ResponseStrategy.create(
+  person: person,
+  title: "Send to DESC",
+  description: "John knows the staff at DESC, and they may be able to help",
+  priority: 2,
+)
+
+Contact.create(
+  person: person,
+  name: "Jane Doe",
+  relationship: "Sister",
+  cell: "222-333-4444",
+  notes: "Lives in Bellevue",
+)
+
+Contact.create(
+  person: person,
+  name: "Mark Johnson",
+  relationship: "Case worker",
+  cell: "333-444-5555",
+  notes: "Available from 9am - 5pm",
+)
