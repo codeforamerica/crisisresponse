@@ -10,9 +10,11 @@
     <% if @person.safety_warnings.none? %>
       <%= t("response_plan.safety.none") %>
     <% else %>
-      <% @person.safety_warnings.each do |warning| %>
-        <%= @person.send(warning) %>
-      <% end %>
+      <ul>
+        <% @person.safety_warnings.each do |warning| %>
+          <li><%= @person.send(warning) %></li>
+        <% end %>
+      </ul>
     <% end %>
   </div>
 </section>

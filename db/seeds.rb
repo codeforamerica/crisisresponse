@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+ResponseStrategy.destroy_all
+Contact.destroy_all
+Person.destroy_all
+
 person = Person.create(
   name: "John Doe",
   sex: "Male",
@@ -16,7 +20,8 @@ person = Person.create(
   eye_color: "Brown",
   date_of_birth: Date.new(1980, 01, 02),
   scars_and_marks: "Skull tattoo on neck",
-  gun_warning: "John owns a gun",
+  gun_warning: "owns a gun",
+  needle_warning: "has previously possessed needles",
 )
 
 ResponseStrategy.create(
