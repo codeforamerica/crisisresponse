@@ -49,4 +49,23 @@ RSpec.describe Person, type: :model do
       build(:person, person_attrs).shorthand_description
     end
   end
+
+  describe "#safety_warnings" do
+    it "returns an empty array if there are no safety warnings" do
+      person = build(:person)
+
+      expect(person.safety_warnings).to be_empty
+    end
+
+    it "returns a list of warnings for the person has" do
+      person = build(
+        :person,
+        needle_warning: "Have previously had needles",
+        gun_warning: "Owns a pistol",
+      )
+
+      expect(person.safety_warnings).
+        to match_array([:needle_warning, :gun_warning])
+    end
+  end
 end

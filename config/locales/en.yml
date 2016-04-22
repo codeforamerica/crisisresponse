@@ -11,6 +11,16 @@ en:
       person_search:
         create: Search
 
+  response_plan:
+    safety:
+      none: No safety warnings
+
+  search:
+    results:
+      none: No results found
+    form:
+      label: Search by name, DOB, or physical description
+
   time:
     formats:
       default:
@@ -22,9 +32,3 @@ en:
 
   titles:
     application: Visual log
-
-  search:
-    results:
-      none: No results found
-    form:
-      label: Search by name, DOB, or physical description

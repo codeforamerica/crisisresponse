@@ -2,6 +2,18 @@ class Person < ActiveRecord::Base
   include PgSearch
 
   has_many :contacts
+
+  SAFETY_CRITERIA = [
+    :gun_warning,
+    :knife_warning,
+    :needle_warning,
+    :other_weapon_warning,
+    :police_assault_warning,
+    :spit_warning,
+    :suicide_by_cop_warning,
+    :violence_warning,
+  ]
+
   has_many :response_strategies
 
   RACE_CODES = {
@@ -49,6 +61,10 @@ class Person < ActiveRecord::Base
       height_in_feet_and_inches,
       "#{weight_in_pounds} lb"
     ].join(" – ")
+  end
+
+  def safety_warnings
+    SAFETY_CRITERIA.select { |criteria| self.send(criteria) }
   end
 
   def to_param

@@ -7,6 +7,14 @@
   </div>
 
   <div class="section-body">
-      <%= @plan.safety_notes %>
+    <% if @person.safety_warnings.none? %>
+      <%= t("response_plan.safety.none") %>
+    <% else %>
+      <ul>
+        <% @person.safety_warnings.each do |warning| %>
+          <li><%= @person.send(warning) %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </section>
