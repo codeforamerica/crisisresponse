@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421210227) do
+ActiveRecord::Schema.define(version: 20160422003255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20160421210227) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "people", force: :cascade do |t|
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "sex"
@@ -60,14 +60,14 @@ ActiveRecord::Schema.define(version: 20160421210227) do
     t.date     "date_of_birth"
     t.string   "scars_and_marks"
     t.string   "image"
-    t.boolean  "gun",              default: false, null: false
-    t.boolean  "knife",            default: false, null: false
-    t.boolean  "needles",          default: false, null: false
-    t.boolean  "other_weapon",     default: false, null: false
-    t.boolean  "police_assault",   default: false, null: false
-    t.boolean  "spitting",         default: false, null: false
-    t.boolean  "suicide_by_cop",   default: false, null: false
-    t.boolean  "violence",         default: false, null: false
+    t.string   "gun_warning"
+    t.string   "knife_warning"
+    t.string   "needle_warning"
+    t.string   "other_weapon_warning"
+    t.string   "police_assault_warning"
+    t.string   "spit_warning"
+    t.string   "suicide_by_cop_warning"
+    t.string   "violence_warning"
   end
 
   create_table "response_strategies", force: :cascade do |t|
