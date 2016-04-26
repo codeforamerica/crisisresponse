@@ -13,8 +13,6 @@ services:
   web:
     build: .
     command: ./bin/serve
-    environment:
-      DISABLE_SPRING: 1
     ports:
       - "3000:3000"
     links:

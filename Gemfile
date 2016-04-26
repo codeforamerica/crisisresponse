@@ -33,8 +33,6 @@ gem "uglifier"
 group :development do
   gem "quiet_assets"
   gem "refills"
-  gem "spring"
-  gem "spring-commands-rspec"
   gem "web-console"
 end
 
