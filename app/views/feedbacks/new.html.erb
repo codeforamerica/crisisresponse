@@ -1,0 +1,14 @@
+<%= content_for(:header) do %>
+  Leave Feedback
+<% end %>
+
+<div class="feedback-primer">
+  This form lets you send feedback to the Code for America team.<br/>
+  We welcome problem reports, feature ideas and general comments.
+</div>
+
+<%= simple_form_for @feedback do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.submit "Submit Feedback" %>
+<% end %>

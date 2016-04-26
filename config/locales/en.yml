@@ -6,6 +6,10 @@ en:
       with_weekday:
         "%a %m/%d/%y"
 
+  feedbacks:
+    create:
+      success: Thanks for your feedback! If the Code for America team has follow-up questions, they may reach out to you.
+
   helpers:
     submit:
       person_search:
@@ -28,3 +32,18 @@ en:
       none: No results found
     form:
       label: Search by name, DOB, or physical description
+
+  simple_form:
+    labels:
+      feedback:
+        name: 'Your name'
+        description: 'Feedback'
+    placeholders:
+      feedback:
+        name: First Last
+        description: |
+          A brief description of the issue or feedback. If there was a problem, please include:
+
+          - What happened
+          - What you were doing in the app when the issue occurred
+          - What page you were on

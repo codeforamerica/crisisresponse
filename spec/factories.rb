@@ -7,6 +7,11 @@ FactoryGirl.define do
     notes "MyString"
   end
 
+  factory :feedback do
+    name "MyString"
+    description "MyText"
+  end
+
   factory :response_strategy do
     priority 1
     title "Contact case worker"

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
 
   resources :people, only: [:index, :show]
+  resources :feedbacks, only: [:new, :create]
 end
