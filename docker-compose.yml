@@ -13,6 +13,8 @@ services:
   web:
     build: .
     command: ./bin/serve
+    environment:
+      DB_HOST: db
     ports:
       - "3000:3000"
     links:

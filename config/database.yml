@@ -4,7 +4,7 @@ development: &default
   encoding: utf8
   username: postgres
   password:
-  host: db
+  host: <%= ENV.fetch("DB_HOST") %>
   min_messages: warning
   pool: <%= Integer(ENV.fetch("DB_POOL", 5)) %>
   reaping_frequency: <%= Integer(ENV.fetch("DB_REAPING_FREQUENCY", 10)) %>

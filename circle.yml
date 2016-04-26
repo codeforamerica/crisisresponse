@@ -1,3 +1,6 @@
+machine:
+  environment:
+    DB_HOST: localhost
 database:
   override:
     - bin/setup
