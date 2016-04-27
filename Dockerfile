@@ -2,10 +2,14 @@ FROM ruby:latest
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
 
+# Set up tools needed for a bare-minimum debugging dev environment
+RUN apt-get install -y vim
+
 # for nokogiri
 RUN apt-get install -y libxml2-dev libxslt1-dev
 
-RUN apt-get install -y vim
+# Javascript runtime
+RUN apt-get install -y nodejs
 
 ENV PHANTOM_PACKAGE phantomjs-2.1.1-linux-x86_64
 ADD https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_PACKAGE.tar.bz2 .

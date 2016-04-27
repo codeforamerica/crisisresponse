@@ -2,7 +2,7 @@ development: &default
   adapter: postgresql
   database: crisisresponse_development
   encoding: utf8
-  username: postgres
+  username: <%= ENV.fetch("DB_USER", "postgres") %>
   password:
   host: <%= ENV.fetch("DB_HOST") %>
   min_messages: warning
