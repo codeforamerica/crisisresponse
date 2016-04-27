@@ -10,6 +10,7 @@
   text-transform: uppercase;
   top: 0;
   width: 100%;
+  z-index: 1;
 
   &:hover {
     color: $white-text;
