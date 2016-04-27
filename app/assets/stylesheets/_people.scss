@@ -21,7 +21,9 @@ section.images img {
 }
 
 .officer-safety {
-  @include span-columns(4 of 8);
+  @include media($medium-screen-up) {
+    @include span-columns(4 of 8);
+  }
 }
 
 .response-plan {

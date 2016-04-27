@@ -6,7 +6,9 @@
   }
 
   .fields {
-    @include span-columns(8 of 12);
+    @include media($medium-screen-up) {
+      @include span-columns(8 of 12);
+    }
   }
 
   label {
@@ -20,7 +22,9 @@
   }
 
   .actions {
-    @include span-columns(4 of 12);
+    @include media($medium-screen-up) {
+      @include span-columns(4 of 12);
+    }
   }
 
   input[type="submit"] {

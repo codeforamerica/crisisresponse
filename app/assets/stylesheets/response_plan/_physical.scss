@@ -1,6 +1,8 @@
 .physical {
-  @include span-columns(4 of 8);
-  @include omega;
+  @include media($medium-screen-up) {
+    @include span-columns(4 of 8);
+    @include omega;
+  }
 
   .section-body span {
     display: block;

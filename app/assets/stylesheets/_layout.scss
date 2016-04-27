@@ -1,9 +1,14 @@
 .left-column {
-  @include span-columns(4 of 12);
+  @include media($large-screen-up) {
+    @include span-columns(4 of 12);
+  }
 }
 
 .right-column {
-  @include span-columns(8 of 12);
+  @include media($large-screen-up) {
+    @include span-columns(8 of 12);
+  }
+
   @include omega;
   overflow: hidden;
 }
