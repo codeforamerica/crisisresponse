@@ -2,7 +2,7 @@ en:
   date:
     formats:
       default:
-        "%m/%d/%Y"
+        "%m-%d-%Y"
       with_weekday:
         "%a %m/%d/%y"
 

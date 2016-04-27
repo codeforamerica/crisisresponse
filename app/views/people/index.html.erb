@@ -18,27 +18,21 @@
   </div>
 <% end %>
 
-<% if @people.any? %>
-  <table>
-    <thead>
-      <tr>
-        <td>First Name</td>
-        <td>Last Name</td>
-        <td>DOB</td>
-        <td>Actions</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% @people.each do |person, event_count| %>
-        <tr>
-          <td><%= person.first_name.humanize %></td>
-          <td><%= person.last_name.humanize %></td>
-          <td><%= person.date_of_birth %></td>
-          <td><%= link_to("Show data", "/people/#{person.name.downcase}") %></td>
-        </tr>
+
+<h2>Results</h2>
+
+<div class="search-results">
+  <% if @people.any? %>
+    <% @people.each do |person| %>
+      <%= link_to person_path(person), class: "search-result" do %>
+        <%= image_tag person.image_url %>
+        <div class="search-result-labels">
+          <span class="search-result-name"><%= person.display_name %></span>
+          <span class="search-result-dob"><%= l person.date_of_birth %></span>
+        </div>
       <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <%= t("search.results.none") %>
-<% end %>
+    <% end %>
+  <% else %>
+    <%= t("search.results.none") %>
+  <% end %>
+</div>

@@ -23,6 +23,14 @@ RSpec.describe Person, type: :model do
     it { should have_many :safety_warnings }
   end
 
+  describe "#display_name" do
+    it "displays last name, first name" do
+      person = build(:person, first_name: "John", last_name: "Doe")
+
+      expect(person.display_name).to eq("Doe, John")
+    end
+  end
+
   describe "#shorthand_description" do
     it "starts with a letter representing race" do
       expect(shorthand_for(race: "AFRICAN AMERICAN/BLACK")).to start_with("B")

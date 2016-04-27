@@ -1,5 +1,6 @@
 .search {
   overflow: hidden;
+  margin-bottom: $base-spacing;
 
   h1 {
     margin-bottom: $base-spacing;
@@ -31,5 +32,78 @@
     @include span-columns(3 of 4);
     @include shift(1);
     padding: $base-spacing;
+  }
+}
+
+.search-results {
+  margin-top: $base-spacing;
+}
+
+.search-result {
+  @include span-columns(4 of 4);
+
+  img {
+    max-width: 40%;
+
+    @include media($medium-screen-up) {
+      max-width: none;
+    }
+  }
+
+  .search-result-labels {
+    width: 50%;
+    float: right;
+
+    @include media($medium-screen-up) {
+      width: auto;
+      float: none;
+    }
+  }
+
+  @include media($medium-screen-up) {
+    @include span-columns(4 of 8);
+
+    &:nth-child(2n) {
+      @include omega;
+    }
+  }
+
+  @include media($large-screen-up) {
+    @include span-columns(3 of 12);
+
+    &:nth-child(4n) {
+      @include omega;
+    }
+  }
+
+  margin-bottom: $base-spacing;
+
+  img {
+    border: $dark-border;
+    height: 6em;
+    margin: 0;
+
+    @include media($medium-screen-up) {
+      display: block;
+      height: 8em;
+      margin-bottom: $small-spacing;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .search-result-name,
+  .search-result-dob {
+    color: $base-font-color;
+    display: block;
+
+    @include media($medium-screen-up) {
+      text-align: center;
+    }
+  }
+
+  .search-result-name {
+    @include heavy-font;
+    text-transform: uppercase;
   }
 }

@@ -35,6 +35,10 @@ class Person < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  def display_name
+    "#{last_name}, #{first_name}"
+  end
+
   def name=(value)
     (self.first_name, self.last_name) = value.split
   end
