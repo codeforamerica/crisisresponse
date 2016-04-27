@@ -2,9 +2,6 @@ FROM ruby:latest
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
 
-# Set up tools needed for a bare-minimum debugging dev environment
-RUN apt-get install -y vim
-
 # for nokogiri
 RUN apt-get install -y libxml2-dev libxslt1-dev
 
