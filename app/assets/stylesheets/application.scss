@@ -19,9 +19,20 @@
 
 @import "response_plan/*";
 
+html, body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+html {
+  height: 100%;
+}
+
 body {
   font-family: $base-font-family;
   font-size: 20px;
+  min-height: 100%;
   width: 100%;
   background-color: #f0f0f0;
 }
@@ -57,6 +68,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .content {
   @include outer-container($page-width);
-  margin-top: $header-height + $base-spacing * 1.5;
+  padding-top: $header-height + $base-spacing * 1.5;
+  padding-bottom: 4rem;
 }
-
