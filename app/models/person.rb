@@ -63,10 +63,6 @@ class Person < ActiveRecord::Base
     ].compact.join(" – ")
   end
 
-  def to_param
-    name
-  end
-
   private
 
   def height_in_feet_and_inches

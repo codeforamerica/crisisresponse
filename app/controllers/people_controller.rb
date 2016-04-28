@@ -9,15 +9,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    first_name, last_name = params[:id].titleize.split
-    @person = Person.find_by(first_name: first_name, last_name: last_name)
-    @events = events_for(@person)
-
-    @plan = find_most_recent_plan_for_person(@person)
-
-    if @events.none?
-      redirect_to :people, alert: "Could not find any records for #{@person.name}"
-    end
+    @person = Person.find(params[:id])
   end
 
   private
@@ -25,10 +17,6 @@ class PeopleController < ApplicationController
   def events_for(person)
     rms = RMSAdapter.new
     rms.events_for(person)
-  end
-
-  def find_most_recent_plan_for_person(person)
-    ResponsePlanBuilder.build({})
   end
 
   def search_params
