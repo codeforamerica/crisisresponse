@@ -66,6 +66,10 @@
     &:nth-child(4n) {
       @include omega;
     }
+
+    &:nth-child(4n+1) {
+      clear: left;
+    }
   }
 
   @include media($large-screen-up) {
@@ -78,6 +82,7 @@
     border: $dark-border;
     height: 6em;
     margin: 0;
+    max-width: 100%;
 
     @include media($medium-screen-up) {
       display: block;
