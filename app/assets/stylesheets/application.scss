@@ -7,8 +7,6 @@
 @import "base/base";
 @import "refills/flashes";
 
-@import "chartist.min";
-
 @import "layout";
 @import "header";
 @import "footer";
@@ -40,30 +38,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
   @include heavy-font;
   margin: 0;
-}
-
-.chart-title {
-  margin-bottom: 0;
-  margin-top: $base-spacing;
-  padding-left: $base-spacing;
-}
-
-.ct-label.ct-horizontal {
-  transform: translateX(-12px);
-}
-
-.ct-label {
-  color: $dark-gray;
-}
-
-.no-data {
-  display: block;
-  padding-left: 3*$base-spacing;
-  margin-top: $base-spacing;
-}
-
-.ct-series-a .ct-bar {
-  stroke: $highlight;
 }
 
 .content {
