@@ -55,7 +55,12 @@ RSpec.describe Person, type: :model do
       expect(shorthand_for(weight_in_pounds: 180)).to include("180 lb")
     end
 
-    it "gracefully handles missing information"
+    it "gracefully handles missing information" do
+      expect(shorthand_for(height_in_inches: nil).chars.count("–")).to eq(1)
+      expect(shorthand_for(weight_in_pounds: nil).chars.count("–")).to eq(1)
+      expect(shorthand_for(height_in_inches: nil, weight_in_pounds: nil)).
+        not_to include("–")
+    end
 
     def shorthand_for(person_attrs)
       build(:person, person_attrs).shorthand_description

@@ -61,19 +61,15 @@
   }
 
   @include media($medium-screen-up) {
-    @include span-columns(4 of 8);
+    @include span-columns(2 of 8);
 
-    &:nth-child(2n) {
+    &:nth-child(4n) {
       @include omega;
     }
   }
 
   @include media($large-screen-up) {
     @include span-columns(3 of 12);
-
-    &:nth-child(4n) {
-      @include omega;
-    }
   }
 
   margin-bottom: $base-spacing;
