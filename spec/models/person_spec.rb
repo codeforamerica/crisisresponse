@@ -20,7 +20,9 @@ RSpec.describe Person, type: :model do
   end
 
   describe "associations" do
-    it { should have_many :safety_warnings }
+    it { should have_many(:safety_warnings).dependent(:destroy) }
+    it { should have_many(:contacts).dependent(:destroy) }
+    it { should have_many(:response_strategies).dependent(:destroy) }
   end
 
   describe "#display_name" do

@@ -1,9 +1,9 @@
 class Person < ActiveRecord::Base
   include PgSearch
 
-  has_many :contacts
-  has_many :response_strategies, -> { order(:priority) }
-  has_many :safety_warnings
+  has_many :contacts, dependent: :destroy
+  has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
+  has_many :safety_warnings, dependent: :destroy
 
   RACE_CODES = {
     "AFRICAN AMERICAN/BLACK" => "B",
