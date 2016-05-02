@@ -64,6 +64,24 @@ feature "Officer views a response plan" do
     expect(page).to have_content(contact.notes)
   end
 
+  scenario "They see the preparing officer" do
+    officer = create(:officer, name: "Jacques Clouseau")
+    person = create(:person, author: officer)
+
+    visit person_path(person)
+
+    expect(page).to have_content("Prepared By Jacques Clouseau")
+  end
+
+  scenario "They see the approving officer" do
+    officer = create(:officer, name: "Jacques Clouseau")
+    person = create(:person, approver: officer)
+
+    visit person_path(person)
+
+    expect(page).to have_content("Approved By Jacques Clouseau")
+  end
+
   context "when there are no safety warnings" do
     scenario "they see 'No history of violence'" do
       person = create(:person)

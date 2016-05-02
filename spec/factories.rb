@@ -12,14 +12,16 @@ FactoryGirl.define do
     description "MyText"
   end
 
-  factory :response_strategy do
-    priority 1
-    title "Contact case worker"
-    description "Case worker is Sam Smith at DESC"
-    person
+  factory :officer, aliases: [:author, :approver] do
+    title "Officer"
+    name "Johnson"
+    unit "Crisis Response Unit"
+    phone "222-333-4444"
   end
 
   factory :person do
+    author
+    approver
     name "John Doe"
     sex "Male"
     race "AFRICAN AMERICAN/BLACK"
@@ -28,6 +30,13 @@ FactoryGirl.define do
     hair_color "black"
     eye_color "blue"
     date_of_birth { 25.years.ago }
+  end
+
+  factory :response_strategy do
+    priority 1
+    title "Contact case worker"
+    description "Case worker is Sam Smith at DESC"
+    person
   end
 
   factory :safety_warning do

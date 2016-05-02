@@ -1,0 +1,23 @@
+.about {
+  font-size: 0.8rem;
+
+  @include media($medium-screen-up) {
+    @include span-columns(4 of 8);
+  }
+
+  .about-author {
+    margin-bottom: $base-spacing;
+    overflow: hidden;
+  }
+
+  .author-label,
+  .approver-label {
+    @include heavy-font;
+    @include span-columns(1.5 of 4);
+  }
+
+  .author-info,
+  .approver-info {
+    @include span-columns(2.5 of 4);
+  }
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427043932) do
+ActiveRecord::Schema.define(version: 20160502173849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 20160427043932) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "officers", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "unit",       null: false
+    t.string   "title"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -67,7 +76,13 @@ ActiveRecord::Schema.define(version: 20160427043932) do
     t.date     "date_of_birth"
     t.string   "scars_and_marks"
     t.string   "image"
+    t.integer  "author_id",        null: false
+    t.integer  "approver_id"
+    t.datetime "approved_at"
   end
+
+  add_index "people", ["approver_id"], name: "index_people_on_approver_id", using: :btree
+  add_index "people", ["author_id"], name: "index_people_on_author_id", using: :btree
 
   create_table "response_strategies", force: :cascade do |t|
     t.integer  "priority"

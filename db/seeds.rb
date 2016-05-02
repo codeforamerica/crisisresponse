@@ -4,8 +4,23 @@
 # (or created alongside the db with db:setup).
 
 Person.destroy_all
+Officer.destroy_all
 
-person = Person.create(
+author = Officer.create!(
+  name: "Dan Nelson",
+  title: "Sgt",
+  unit: "Crisis Response Unit",
+  phone: "222-333-4444",
+)
+
+approver = Officer.create!(
+  name: "Eric Pisconski",
+  title: "Sgt",
+  unit: "Crisis Response Unit",
+  phone: "222-333-4455",
+)
+
+person = Person.create!(
   name: "John Doe",
   image: File.open(Rails.root + "spec/fixtures/image.jpg"),
   sex: "Male",
@@ -16,23 +31,25 @@ person = Person.create(
   eye_color: "Brown",
   date_of_birth: Date.new(1980, 01, 02),
   scars_and_marks: "Skull tattoo on neck",
+  author: author,
+  approver: approver,
 )
 
-ResponseStrategy.create(
+ResponseStrategy.create!(
   person: person,
   title: "Call case manager",
   description: "The case manager usually can calm John down over the phone",
   priority: 1,
 )
 
-ResponseStrategy.create(
+ResponseStrategy.create!(
   person: person,
   title: "Send to DESC",
   description: "John knows the staff at DESC, and they may be able to help",
   priority: 2,
 )
 
-Contact.create(
+Contact.create!(
   person: person,
   name: "Jane Doe",
   relationship: "Sister",
@@ -40,7 +57,7 @@ Contact.create(
   notes: "Lives in Bellevue",
 )
 
-Contact.create(
+Contact.create!(
   person: person,
   name: "Mark Johnson",
   relationship: "Case worker",
@@ -48,12 +65,12 @@ Contact.create(
   notes: "Available from 9am - 5pm",
 )
 
-SafetyWarning.create(
+SafetyWarning.create!(
   person: person,
   description: "owns a gun",
 )
 
-SafetyWarning.create(
+SafetyWarning.create!(
   person: person,
   description: "has previously possessed needles",
 )

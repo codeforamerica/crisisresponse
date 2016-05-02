@@ -1,0 +1,26 @@
+<section class="about">
+  <div class="section-header">
+    <%= image_tag("section-icons/response-plan.svg", class: "section-icon") %>
+    <div class="section-header-text">
+      <h2 class="section-title">About the Plan</h2>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <div class="about-author">
+      <div class="author-label">Prepared By</div>
+      <div class="author-info">
+        <div><%= @person.author.name %></div>
+        <div><%= @person.author.unit %></div>
+        <div><%= @person.author.phone %></div>
+      </div>
+    </div>
+
+    <div class="about-approver">
+      <div class="approver-label">Approved By</div>
+      <div class="approver-info">
+        <div><%= @person.approver.name %></div>
+      </div>
+    </div>
+  </div>
+</section>

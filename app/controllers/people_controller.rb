@@ -10,6 +10,7 @@ class PeopleController < ApplicationController
 
   def show
     @person = Person.find(params[:id])
+    ensure_person_is_approved(@person)
   end
 
   private
@@ -24,6 +25,12 @@ class PeopleController < ApplicationController
       params.require(:person_search).permit(:name, :date_of_birth)
     else
       {}
+    end
+  end
+
+  def ensure_person_is_approved(person)
+    unless person.approved?
+      raise ActiveRecord::RecordNotFound
     end
   end
 end
