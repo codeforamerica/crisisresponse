@@ -5,7 +5,7 @@ feature "image upload" do
     person = create(:person)
 
     visit edit_admin_person_path(person)
-    attach_file("Image", Rails.root + "spec/fixtures/image.jpg")
+    attach_file("Image", Rails.root + "spec/fixtures/image.png")
     click_on "Update Person"
 
     person.reload
