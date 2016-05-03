@@ -45,6 +45,15 @@ feature "Officer views a response plan" do
     expect(page).to have_content(step_2.title)
   end
 
+  scenario "They see background information" do
+    background_text = "This is the person's background info"
+    person = create(:person, background_info: background_text)
+
+    visit person_path(person)
+
+    expect(page).to have_content(background_text)
+  end
+
   scenario "They see emergency contacts" do
     person = create(:person)
     contact = create(
