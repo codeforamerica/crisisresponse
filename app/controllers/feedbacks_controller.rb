@@ -5,7 +5,7 @@ class FeedbacksController < ApplicationController
 
   def create
     Feedback.create(feedback_params)
-    redirect_to people_path, notice: t("feedbacks.create.success")
+    redirect_to response_plans_path, notice: t("feedbacks.create.success")
   end
 
   private

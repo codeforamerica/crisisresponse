@@ -2,9 +2,9 @@ require "rails_helper"
 
 feature "Feedback" do
   scenario "Officer leaves feedback" do
-    person = create(:person)
+    response_plan = create(:response_plan)
 
-    visit person_path(person)
+    visit response_plan_path(response_plan)
     click_on "Leave Feedback"
     fill_in :feedback_name, with: "Sandlin Grayson"
     fill_in :feedback_description, with: "foobar"

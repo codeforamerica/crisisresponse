@@ -3,7 +3,7 @@
 # The data can then be loaded with the rake db:seed
 # (or created alongside the db with db:setup).
 
-Person.destroy_all
+ResponsePlan.destroy_all
 Officer.destroy_all
 
 author = Officer.create!(
@@ -20,7 +20,7 @@ approver = Officer.create!(
   phone: "222-333-4455",
 )
 
-person = Person.create!(
+response_plan = ResponsePlan.create!(
   name: "John Doe",
   sex: "Male",
   race: "AFRICAN AMERICAN/BLACK",
@@ -35,21 +35,21 @@ person = Person.create!(
 )
 
 ResponseStrategy.create!(
-  person: person,
+  response_plan: response_plan,
   title: "Call case manager",
   description: "The case manager usually can calm John down over the phone",
   priority: 1,
 )
 
 ResponseStrategy.create!(
-  person: person,
+  response_plan: response_plan,
   title: "Send to DESC",
   description: "John knows the staff at DESC, and they may be able to help",
   priority: 2,
 )
 
 Contact.create!(
-  person: person,
+  response_plan: response_plan,
   name: "Jane Doe",
   relationship: "Sister",
   cell: "222-333-4444",
@@ -57,7 +57,7 @@ Contact.create!(
 )
 
 Contact.create!(
-  person: person,
+  response_plan: response_plan,
   name: "Mark Johnson",
   relationship: "Case worker",
   cell: "333-444-5555",
@@ -65,11 +65,11 @@ Contact.create!(
 )
 
 SafetyWarning.create!(
-  person: person,
+  response_plan: response_plan,
   description: "owns a gun",
 )
 
 SafetyWarning.create!(
-  person: person,
+  response_plan: response_plan,
   description: "has previously possessed needles",
 )

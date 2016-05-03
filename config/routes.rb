@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :people
+    resources :response_plans
     resources :response_strategies
 
-    root to: "people#index"
+    root to: "response_plans#index"
   end
 
-  resources :people, only: [:index, :show]
+  resources :response_plans, only: [:index, :show]
   resources :feedbacks, only: [:new, :create]
 
-  root to: "people#index"
+  root to: "response_plans#index"
 end

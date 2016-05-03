@@ -19,16 +19,16 @@ ActiveRecord::Schema.define(version: 20160503173959) do
   enable_extension "fuzzystrmatch"
 
   create_table "contacts", force: :cascade do |t|
-    t.integer  "person_id"
+    t.integer  "response_plan_id"
     t.string   "name"
     t.string   "relationship"
     t.string   "cell"
     t.string   "notes"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  add_index "contacts", ["person_id"], name: "index_contacts_on_person_id", using: :btree
+  add_index "contacts", ["response_plan_id"], name: "index_contacts_on_response_plan_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20160503173959) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "people", force: :cascade do |t|
+  create_table "response_plans", force: :cascade do |t|
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "first_name"
@@ -82,30 +82,30 @@ ActiveRecord::Schema.define(version: 20160503173959) do
     t.text     "background_info"
   end
 
-  add_index "people", ["approver_id"], name: "index_people_on_approver_id", using: :btree
-  add_index "people", ["author_id"], name: "index_people_on_author_id", using: :btree
+  add_index "response_plans", ["approver_id"], name: "index_response_plans_on_approver_id", using: :btree
+  add_index "response_plans", ["author_id"], name: "index_response_plans_on_author_id", using: :btree
 
   create_table "response_strategies", force: :cascade do |t|
     t.integer  "priority"
     t.string   "title"
     t.text     "description"
-    t.integer  "person_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "response_plan_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  add_index "response_strategies", ["person_id"], name: "index_response_strategies_on_person_id", using: :btree
+  add_index "response_strategies", ["response_plan_id"], name: "index_response_strategies_on_response_plan_id", using: :btree
 
   create_table "safety_warnings", force: :cascade do |t|
-    t.string   "description", null: false
-    t.integer  "person_id",   null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "description",      null: false
+    t.integer  "response_plan_id", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  add_index "safety_warnings", ["person_id"], name: "index_safety_warnings_on_person_id", using: :btree
+  add_index "safety_warnings", ["response_plan_id"], name: "index_safety_warnings_on_response_plan_id", using: :btree
 
-  add_foreign_key "contacts", "people"
-  add_foreign_key "response_strategies", "people"
-  add_foreign_key "safety_warnings", "people"
+  add_foreign_key "contacts", "response_plans"
+  add_foreign_key "response_strategies", "response_plans"
+  add_foreign_key "safety_warnings", "response_plans"
 end

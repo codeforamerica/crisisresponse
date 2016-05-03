@@ -4,7 +4,7 @@ class CreateResponseStrategies < ActiveRecord::Migration
       t.integer :priority
       t.string :title
       t.text :description
-      t.references :person, index: true, foreign_key: true
+      t.references :response_plan, index: true, foreign_key: true
 
       t.timestamps null: false
     end

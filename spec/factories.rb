@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :contact do
-    person nil
+    response_plan nil
     name "MyString"
     relationship "MyString"
     cell "MyString"
@@ -19,7 +19,7 @@ FactoryGirl.define do
     phone "222-333-4444"
   end
 
-  factory :person do
+  factory :response_plan do
     author
     approver
     name "John Doe"
@@ -36,11 +36,11 @@ FactoryGirl.define do
     priority 1
     title "Contact case worker"
     description "Case worker is Sam Smith at DESC"
-    person
+    response_plan
   end
 
   factory :safety_warning do
     description "History of violence"
-    person
+    response_plan
   end
 end

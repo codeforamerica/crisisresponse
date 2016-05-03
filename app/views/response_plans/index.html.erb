@@ -2,7 +2,7 @@
   Response Plan App
 <% end %>
 
-<%= form_for(@search, url: people_path, method: :get, html: { class: "search" }) do |f| %>
+<%= form_for(@search, url: response_plans_path, method: :get, html: { class: "search" }) do |f| %>
   <h1>Search for a Response Plan</h1>
 
   <div class="fields">
@@ -22,13 +22,13 @@
 <h2>Results</h2>
 
 <div class="search-results">
-  <% if @people.any? %>
-    <% @people.each do |person| %>
-      <%= link_to person_path(person), class: "search-result" do %>
-        <%= image_tag person.image_url %>
+  <% if @response_plans.any? %>
+    <% @response_plans.each do |response_plan| %>
+      <%= link_to response_plan_path(response_plan), class: "search-result" do %>
+        <%= image_tag response_plan.image_url %>
         <div class="search-result-labels">
-          <span class="search-result-name"><%= person.display_name %></span>
-          <span class="search-result-dob"><%= l person.date_of_birth %></span>
+          <span class="search-result-name"><%= response_plan.display_name %></span>
+          <span class="search-result-dob"><%= l response_plan.date_of_birth %></span>
         </div>
       <% end %>
     <% end %>

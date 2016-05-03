@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class PersonDashboard < Administrate::BaseDashboard
+class ResponsePlanDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,7 +8,7 @@ class PersonDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    response_strategies: Field::NestedHasMany.with_options(skip: :person),
+    response_strategies: Field::NestedHasMany.with_options(skip: :response_plan),
     id: Field::Number,
     created_at: Field::DateTime,
     image: Field::Image,
@@ -73,10 +73,9 @@ class PersonDashboard < Administrate::BaseDashboard
     :date_of_birth,
   ]
 
-  # Overwrite this method to customize how people are displayed
+  # Overwrite this method to customize how response_plans are displayed
   # across all pages of the admin dashboard.
-  #
-  def display_resource(person)
-    person.name
+  def display_resource(response_plan)
+    response_plan.name
   end
 end

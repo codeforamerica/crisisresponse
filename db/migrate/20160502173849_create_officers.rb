@@ -1,5 +1,5 @@
 class Officer < ActiveRecord::Base; end
-class Person < ActiveRecord::Base; end
+class ResponsePlan < ActiveRecord::Base; end
 
 class CreateOfficers < ActiveRecord::Migration
   def up
@@ -17,25 +17,25 @@ class CreateOfficers < ActiveRecord::Migration
       unit: "TEMPORARY - REPLACE ME",
     )
 
-    add_column :people, :author_id, :integer
-    add_column :people, :approver_id, :integer
-    add_column :people, :approved_at, :datetime
+    add_column :response_plans, :author_id, :integer
+    add_column :response_plans, :approver_id, :integer
+    add_column :response_plans, :approved_at, :datetime
 
-    add_index :people, :approver_id
-    add_index :people, :author_id
+    add_index :response_plans, :approver_id
+    add_index :response_plans, :author_id
 
-    Person.update_all(author_id: officer.id)
+    ResponsePlan.update_all(author_id: officer.id)
 
-    change_column_null :people, :author_id, false
+    change_column_null :response_plans, :author_id, false
   end
 
   def down
-    remove_index :people, :approver_id
-    remove_index :people, :author_id
+    remove_index :response_plans, :approver_id
+    remove_index :response_plans, :author_id
 
-    remove_column :people, :author_id
-    remove_column :people, :approver_id
-    remove_column :people, :approved_at
+    remove_column :response_plans, :author_id
+    remove_column :response_plans, :approver_id
+    remove_column :response_plans, :approved_at
 
     drop_table :officers
   end

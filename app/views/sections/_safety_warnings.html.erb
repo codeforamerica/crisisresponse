@@ -7,9 +7,9 @@
   </div>
 
   <div class="section-body">
-    <% if @person.safety_warnings.any? %>
+    <% if @response_plan.safety_warnings.any? %>
       <ul>
-        <% @person.safety_warnings.each do |warning| %>
+        <% @response_plan.safety_warnings.each do |warning| %>
           <li><%= warning.description %></li>
         <% end %>
       </ul>

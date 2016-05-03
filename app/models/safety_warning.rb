@@ -1,6 +1,6 @@
 class SafetyWarning < ActiveRecord::Base
-  belongs_to :person
+  belongs_to :response_plan
 
   validates :description, presence: true
-  validates :person, presence: true
+  validates :response_plan, presence: true
 end

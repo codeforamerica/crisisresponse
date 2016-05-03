@@ -1,20 +1,20 @@
-class PersonSearch
+class ResponsePlanSearch
   include ActiveModel::Model
 
   attr_accessor :name, :date_of_birth
 
   def close_matches
-    people = Person
+    response_plans = ResponsePlan
 
     if name.present?
-      people = people.search(name)
+      response_plans = response_plans.search(name)
     end
 
     if date_of_birth.present?
-      people = people.where(date_of_birth: date_of_birth_range)
+      response_plans = response_plans.where(date_of_birth: date_of_birth_range)
     end
 
-    people.all
+    response_plans.all
   end
 
   private

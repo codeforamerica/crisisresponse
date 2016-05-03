@@ -2,21 +2,21 @@ require "rails_helper"
 
 feature "Officer views a response plan" do
   scenario "They see the person's basic information" do
-    person = create(
-      :person,
+    response_plan = create(
+      :response_plan,
       name: "John Doe",
       date_of_birth: Date.new(1980),
     )
 
-    visit person_path(person)
+    visit response_plan_path(response_plan)
 
-    expect(page).to have_content(person.name)
-    expect(page).to have_content(person.date_of_birth)
+    expect(page).to have_content(response_plan.name)
+    expect(page).to have_content(response_plan.date_of_birth)
   end
 
   scenario "They see the person's physical characteristics" do
-    person = create(
-      :person,
+    response_plan = create(
+      :response_plan,
       eye_color: "Green",
       hair_color: "Brown",
       height_in_inches: 70,
@@ -26,7 +26,7 @@ feature "Officer views a response plan" do
       weight_in_pounds: 180,
     )
 
-    visit person_path(person)
+    visit response_plan_path(response_plan)
 
     expect(page).to have_content("WM – 5'10\" – 180 lb")
     expect(page).to have_css(".physical .eye-color", text: "Green")
@@ -35,11 +35,11 @@ feature "Officer views a response plan" do
   end
 
   scenario "They see the response plan steps" do
-    person = create(:person)
-    step_1 = create(:response_strategy, person: person, title: "Call case manager")
-    step_2 = create(:response_strategy, person: person, title: "Transport to Harborview")
+    response_plan = create(:response_plan)
+    step_1 = create(:response_strategy, response_plan: response_plan, title: "Call case manager")
+    step_2 = create(:response_strategy, response_plan: response_plan, title: "Transport to Harborview")
 
-    visit person_path(person)
+    visit response_plan_path(response_plan)
 
     expect(page).to have_content(step_1.title)
     expect(page).to have_content(step_2.title)
@@ -47,25 +47,25 @@ feature "Officer views a response plan" do
 
   scenario "They see background information" do
     background_text = "This is the person's background info"
-    person = create(:person, background_info: background_text)
+    response_plan = create(:response_plan, background_info: background_text)
 
-    visit person_path(person)
+    visit response_plan_path(response_plan)
 
     expect(page).to have_content(background_text)
   end
 
   scenario "They see emergency contacts" do
-    person = create(:person)
+    response_plan = create(:response_plan)
     contact = create(
       :contact,
-      person: person,
+      response_plan: response_plan,
       name: "Jane Doe",
       relationship: "Case Worker",
       cell: "222-333-4444",
       notes: "Only available from 9am - 5pm",
     )
 
-    visit person_path(person)
+    visit response_plan_path(response_plan)
 
     expect(page).to have_content(contact.name)
     expect(page).to have_content(contact.relationship)
@@ -75,27 +75,27 @@ feature "Officer views a response plan" do
 
   scenario "They see the preparing officer" do
     officer = create(:officer, name: "Jacques Clouseau")
-    person = create(:person, author: officer)
+    response_plan = create(:response_plan, author: officer)
 
-    visit person_path(person)
+    visit response_plan_path(response_plan)
 
     expect(page).to have_content("Prepared By Jacques Clouseau")
   end
 
   scenario "They see the approving officer" do
     officer = create(:officer, name: "Jacques Clouseau")
-    person = create(:person, approver: officer)
+    response_plan = create(:response_plan, approver: officer)
 
-    visit person_path(person)
+    visit response_plan_path(response_plan)
 
     expect(page).to have_content("Approved By Jacques Clouseau")
   end
 
   context "when there are no safety warnings" do
     scenario "they see 'No history of violence'" do
-      person = create(:person)
+      response_plan = create(:response_plan)
 
-      visit person_path(person)
+      visit response_plan_path(response_plan)
 
       expect(page).to have_content(t("response_plan.safety.none"))
     end
@@ -103,14 +103,14 @@ feature "Officer views a response plan" do
 
   context "when there are safety warnings" do
     scenario "they see the safety warnings" do
-      person = create(:person)
+      response_plan = create(:response_plan)
       warning = create(
         :safety_warning,
-        person: person,
+        response_plan: response_plan,
         description: "Owns a gun",
       )
 
-      visit person_path(person)
+      visit response_plan_path(response_plan)
 
       expect(page).to have_content("Owns a gun")
     end

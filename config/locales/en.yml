@@ -12,7 +12,7 @@ en:
 
   helpers:
     submit:
-      person_search:
+      response_plan_search:
         create: Search
 
   response_plan:
