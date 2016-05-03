@@ -22,7 +22,6 @@ approver = Officer.create!(
 
 person = Person.create!(
   name: "John Doe",
-  image: File.open(Rails.root + "spec/fixtures/image.jpg"),
   sex: "Male",
   race: "AFRICAN AMERICAN/BLACK",
   height_in_inches: 70,
