@@ -22,4 +22,10 @@
     margin: auto;
     width: $page-width;
   }
+
+  .header-icon {
+    height: $header-height / 2;
+    width: $header-height / 2;
+    margin-top: $header-height / 4;
+  }
 }
