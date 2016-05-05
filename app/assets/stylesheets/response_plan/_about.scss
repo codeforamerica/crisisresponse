@@ -1,6 +1,4 @@
 .about {
-  font-size: 0.8rem;
-
   @include media($medium-screen-up) {
     @include span-columns(4 of 8);
   }

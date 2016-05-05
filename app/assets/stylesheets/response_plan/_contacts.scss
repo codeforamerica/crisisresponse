@@ -1,6 +1,5 @@
 .contact {
   @include span-columns(4 of 8);
-  font-size: 0.8rem;
   margin-bottom: $base-spacing;
 
   &:nth-child(2n) {

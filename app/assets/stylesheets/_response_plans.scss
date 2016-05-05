@@ -32,13 +32,18 @@ section.images img {
 
 .response-plan {
   @include span-columns(8 of 8);
+
+  h3 {
+    font-size: 1.2em;
+  }
+
   ol {
-    font-size: 0.8em;
     padding-left: 1em;
   }
 
   p {
-    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.54);
+    margin-bottom: $base-spacing;
   }
 }
 
