@@ -21,7 +21,8 @@ approver = Officer.create!(
 )
 
 response_plan = ResponsePlan.create!(
-  name: "John Doe",
+  first_name: "John",
+  last_name: "Doe",
   sex: "Male",
   race: "AFRICAN AMERICAN/BLACK",
   height_in_inches: 70,
@@ -30,8 +31,8 @@ response_plan = ResponsePlan.create!(
   eye_color: "Brown",
   date_of_birth: Date.new(1980, 01, 02),
   scars_and_marks: "Skull tattoo on neck",
-  author: author,
-  approver: approver,
+  author_id: author.id,
+  approver_id: approver.id,
 )
 
 ResponseStrategy.create!(
