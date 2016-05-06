@@ -11,11 +11,27 @@
   .author-label,
   .approver-label {
     @include heavy-font;
-    @include span-columns(1.5 of 4);
   }
 
   .author-info,
   .approver-info {
-    @include span-columns(2.5 of 4);
+    @include light-font;
+    margin-left: $small-spacing;
+  }
+}
+
+.right-column .about {
+  display: block;
+
+  @include media($medium-screen-up) {
+    display: none;
+  }
+}
+
+.left-column .about {
+  display: none;
+
+  @include media($medium-screen-up) {
+    display: block;
   }
 }

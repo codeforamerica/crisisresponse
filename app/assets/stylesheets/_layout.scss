@@ -5,10 +5,11 @@
 }
 
 .right-column {
+  @include omega;
+  overflow: hidden;
+
   @include media($large-screen-up) {
     @include span-columns(8 of 12);
   }
 
-  @include omega;
-  overflow: hidden;
 }

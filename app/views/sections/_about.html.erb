@@ -2,7 +2,7 @@
   <div class="section-header">
     <%= image_tag("section-icons/response-plan.svg", class: "section-icon") %>
     <div class="section-header-text">
-      <h2 class="section-title">About the Plan</h2>
+      <h2 class="section-title">About Plan</h2>
     </div>
   </div>
 
@@ -12,7 +12,7 @@
       <div class="author-info">
         <div><%= @response_plan.author.name %></div>
         <div><%= @response_plan.author.unit %></div>
-        <div><%= @response_plan.author.phone %></div>
+        <div><%= tel_to @response_plan.author.phone %></div>
       </div>
     </div>
 
