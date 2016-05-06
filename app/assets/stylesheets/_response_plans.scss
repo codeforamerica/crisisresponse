@@ -1,30 +1,6 @@
 $radius: 6px;
 
-.header-name,
-.header-dob {
-  line-height: $header-height / 3;
-  display: block;
-}
-
-.header-name {
-  margin-top: $header-height / 6;
-}
-
-.header-label {
-  @include light-font;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-section.images img {
-  width: 100%;
-  border: $dark-border
-}
-
 .safety-warnings {
-  @include media($medium-screen-up) {
-    @include span-columns(4 of 8);
-  }
-
   li {
     margin-bottom: $small-spacing;
   }
@@ -33,28 +9,19 @@ section.images img {
 .response-plan {
   @include span-columns(8 of 8);
 
-  h3 {
-    font-size: 1.2em;
-  }
-
   ol {
     padding-left: 1em;
   }
 
+  li {
+    font-size: 1.2em;
+    font-weight: 700;
+  }
+
   p {
+    font-size:22px;
+    font-weight:400;
     color: rgba(0, 0, 0, 0.54);
     margin-bottom: $base-spacing;
-  }
-}
-
-.incident-history {
-  @include span-columns(8 of 8);
-  .date,
-  .time{
-    color: lightgray;
-  }
-
-  .time {
-    margin-left: $base-spacing;
   }
 }

@@ -1,22 +1,20 @@
 <%= content_for(:header) do %>
   <span class="header-name"><%= @response_plan.name %></span>
   <span class="header-dob">
-    <span class="header-label">DOB:</span>
     <%= @response_plan.date_of_birth %>
   </span>
 <% end %>
 
 <div class="main">
   <div class="left-column">
-    <%= render "sections/images" %>
+    <%= render "sections/profile" %>
+    <%= render "sections/about" %>
   </div>
 
   <div class="right-column">
     <%= render "sections/safety_warnings" %>
-    <%= render "sections/physical" %>
     <%= render "sections/response_plan" %>
     <%= render "sections/background_info" %>
     <%= render "sections/contacts" %>
-    <%= render "sections/about" %>
   </div>
 </div>

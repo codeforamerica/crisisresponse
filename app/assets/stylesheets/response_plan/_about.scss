@@ -1,6 +1,6 @@
 .about {
-  @include media($medium-screen-up) {
-    @include span-columns(4 of 8);
+  .section-header {
+    background-color: $medium-gray;
   }
 
   .about-author {

@@ -1,11 +1,11 @@
 .physical {
-  @include media($medium-screen-up) {
-    @include span-columns(4 of 8);
-    @include omega;
+  span {
+    display: block;
   }
 
-  .section-body span {
-    display: block;
+  img {
+    width: $base-spacing;
+    margin-right: $small-spacing;
   }
 
   .shorthand-description {

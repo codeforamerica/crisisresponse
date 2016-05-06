@@ -1,0 +1,37 @@
+<section class="profile">
+  <div class="section-body">
+    <div class="images">
+      <%= image_tag @response_plan.image_url %>
+      <span class="image-text">Image 1 of 1</span>
+    </div>
+
+    <hr/>
+
+    <div class="name-box">
+      <h3>DOE, John</h3>
+      <span class="dob">DOB: 01-02-1980</span>
+    </div>
+
+    <hr/>
+
+    <div class="physical">
+      <span class="shorthand-description">
+        <%= @response_plan.shorthand_description %>
+      </span>
+
+      <span class="hair-color">
+        <%= image_tag("physical/hair.svg") %>
+        <%= @response_plan.hair_color.to_s.humanize %>
+      </span>
+
+      <span class="eye-color">
+        <%= image_tag("physical/eye.svg") %>
+        <%= @response_plan.eye_color.to_s.humanize %>
+      </span>
+
+      <span class="scars-marks">
+        <%= @response_plan.scars_and_marks.to_s.humanize %>
+      </span>
+    </div>
+  </div>
+</section>
