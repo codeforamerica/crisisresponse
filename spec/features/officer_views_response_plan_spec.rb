@@ -10,8 +10,8 @@ feature "Officer views a response plan" do
 
     visit response_plan_path(response_plan)
 
-    expect(page).to have_content(response_plan.name)
-    expect(page).to have_content(response_plan.date_of_birth)
+    expect(page).to have_content("DOE, John")
+    expect(page).to have_content(l(response_plan.date_of_birth))
   end
 
   scenario "They see the person's physical characteristics" do

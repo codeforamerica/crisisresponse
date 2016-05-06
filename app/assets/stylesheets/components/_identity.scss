@@ -1,0 +1,18 @@
+.identity {
+  margin-bottom: $base-spacing;
+}
+
+.identity-name,
+.identity-dob {
+  display: block;
+  font-weight: 100;
+}
+
+.identity-name {
+  @include heavy-font;
+  font-size: 1.2em;
+}
+
+.identity-dob {
+  @include light-font;
+}

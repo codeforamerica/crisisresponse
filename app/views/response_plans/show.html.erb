@@ -1,8 +1,5 @@
 <%= content_for(:header) do %>
-  <span class="header-name"><%= @response_plan.name %></span>
-  <span class="header-dob">
-    <%= @response_plan.date_of_birth %>
-  </span>
+  <%= render "identity", response_plan: @response_plan %>
 <% end %>
 
 <div class="main">

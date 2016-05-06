@@ -7,7 +7,6 @@
   height: $header-height;
   line-height: $header-height;
   position: fixed;
-  text-transform: uppercase;
   top: 0;
   width: 100%;
   z-index: 1;
@@ -27,5 +26,14 @@
     height: $header-height / 2;
     width: $header-height / 2;
     margin-top: $header-height / 4;
+  }
+
+  .identity-name,
+  .identity-dob {
+    line-height: $header-height / 3;
+  }
+
+  .identity-name {
+    margin-top: $header-height / 6;
   }
 }

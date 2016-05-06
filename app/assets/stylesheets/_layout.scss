@@ -7,7 +7,6 @@
 .right-column {
   @include media($large-screen-up) {
     @include span-columns(8 of 12);
-    @include omega;
   }
 
   @include omega;
