@@ -8,20 +8,40 @@ $radius: 6px;
 
 .response-plan {
   @include span-columns(8 of 8);
+  counter-reset: response-strategy-counter;
 
-  ol {
-    padding-left: 1em;
-  }
+  .response-strategy {
+    $bullet-size: 3rem;
 
-  li {
-    font-size: 1.2em;
-    font-weight: 700;
-  }
+    margin-top: $base-spacing;
+    margin-left: $bullet-size;
+    display: inline-block;
+    position: relative;
 
-  p {
-    font-size:22px;
-    font-weight:400;
-    color: rgba(0, 0, 0, 0.54);
-    margin-bottom: $base-spacing;
+    &:before {
+      background-image: url("/assets/circle.svg");
+      background-repeat: no-repeat;
+      background-size: 2em 2em;
+      color: white;
+      content: counter(response-strategy-counter);
+      counter-increment: response-strategy-counter;
+      font-size: 1rem;
+      height: 2em;
+      left: - $bullet-size;
+      line-height: 2em;
+      position: absolute;
+      text-align: center;
+      width: 2em;
+    }
+
+    h3 {
+      @include heavy-font;
+      font-size: 1.2em;
+    }
+
+    p {
+      color: rgba(0, 0, 0, 0.54);
+      margin-bottom: $base-spacing;
+    }
   }
 }

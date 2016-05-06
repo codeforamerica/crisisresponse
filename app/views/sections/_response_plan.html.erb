@@ -10,13 +10,11 @@
   </div>
 
   <div class="section-body">
-    <ol>
-      <% @response_plan.response_strategies.each do |strategy| %>
-        <li>
-          <h3><%= strategy.title %></h3>
-          <p><%= strategy.description %></p>
-        </li>
-      <% end %>
-    </ol>
+    <% @response_plan.response_strategies.each do |strategy| %>
+      <div class="response-strategy">
+        <h3><%= strategy.title %></h3>
+        <p><%= strategy.description %></p>
+      </div>
+    <% end %>
   </div>
 </section>
