@@ -33,6 +33,7 @@ response_plan = ResponsePlan.create!(
   scars_and_marks: "Skull tattoo on neck",
   author_id: author.id,
   approver_id: approver.id,
+  approved_at: Time.current,
 )
 
 ResponseStrategy.create!(
