@@ -2,7 +2,7 @@ $icon-size: 2.5rem;
 
 section {
   @include fill-parent;
-  background-color: white;
+  background-color: $section-body-background;
   border-radius: 2px;
   margin-bottom: $base-spacing;
   overflow: hidden;
@@ -26,7 +26,7 @@ section {
   }
 
   .section-header-text {
-    color: $white-text;
+    color: $section-header-font-color;
     font-weight: normal;
     line-height: 1;
     margin-bottom: 0;

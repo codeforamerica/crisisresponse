@@ -1,5 +1,5 @@
 fieldset {
-  background-color: $secondary-background-color;
+  background-color: $fieldset-background-color;
   border: $base-border;
   margin: 0 0 $small-spacing;
   padding: $base-spacing;
@@ -28,7 +28,7 @@ label {
 
 #{$all-text-inputs},
 select[multiple=multiple] {
-  background-color: $base-background-color;
+  background-color: $field-background-color;
   border: $base-border;
   border-radius: $base-border-radius;
   box-shadow: $form-box-shadow;
@@ -41,7 +41,7 @@ select[multiple=multiple] {
   width: 100%;
 
   &:hover {
-    border-color: shade($base-border-color, 20%);
+    border-color: $field-hover-border-color;
   }
 
   &:focus {
@@ -51,7 +51,7 @@ select[multiple=multiple] {
   }
 
   &:disabled {
-    background-color: shade($base-background-color, 5%);
+    background-color: $disabled-field-background-color;
     cursor: not-allowed;
 
     &:hover {

@@ -20,10 +20,10 @@ $radius: 6px;
     position: relative;
 
     &:before {
-      background-image: url("/assets/circle.svg");
+      background-image: $bullet-background;
       background-repeat: no-repeat;
       background-size: 2em 2em;
-      color: white;
+      color: $section-body-background;
       content: counter(response-strategy-counter);
       counter-increment: response-strategy-counter;
       font-size: 1rem;
@@ -41,7 +41,7 @@ $radius: 6px;
     }
 
     p {
-      color: rgba(0, 0, 0, 0.54);
+      color: $response-plan-body-color;
       margin-bottom: $base-spacing;
     }
   }

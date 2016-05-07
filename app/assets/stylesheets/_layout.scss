@@ -1,3 +1,32 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: $base-font-family;
+  font-size: 22px;
+  min-height: 100%;
+  width: 100%;
+  background-color: $body-background-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @include heavy-font;
+  margin: 0;
+}
+
+.content {
+  @include outer-container($page-width);
+  padding-top: $header-height + $base-spacing * 1.5;
+  padding-bottom: 4rem;
+}
+
 .left-column {
   @include media($large-screen-up) {
     @include span-columns(4 of 12);
@@ -11,5 +40,4 @@
   @include media($large-screen-up) {
     @include span-columns(8 of 12);
   }
-
 }

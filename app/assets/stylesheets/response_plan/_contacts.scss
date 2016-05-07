@@ -16,10 +16,10 @@
   @include light-font;
   margin-top: $small-spacing;
   opacity: 50%;
-  color: lighten($base-font-color, 25%);
+  color: $contact-notes-color;
+}
 
-  &-label {
-    font-weight: 400;
-    color: $base-font-color;
-  }
+.contact-notes-label {
+  font-weight: 400;
+  color: $base-font-color;
 }

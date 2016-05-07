@@ -30,38 +30,12 @@ $base-z-index: 0;
 $header-height: 3 * $base-spacing;
 $page-width: 90%;
 
-// Colors
-$blue: #0096a6;
-$red: #D23A0A;
-
-$dark-gray: #4A4A4A;
-$medium-gray: #9b9b9b;
-$light-gray: #ddd;
-
-$highlight: #4A90E2;
-
-// Font Colors
-$base-font-color: $dark-gray;
-$action-color: $blue;
-$white-text: #fff;
-
-// Border
-$base-border-color: $light-gray;
-$base-border: 1px solid $base-border-color;
-$dark-border: 1px solid $dark-gray;
-
 // Shadows
 $shadow-level-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 $shadow-level-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 $shadow-level-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 $shadow-level-4: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 $shadow-level-5: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-
-// Background Colors
-$base-background-color: #fff;
-$secondary-background-color: tint($base-border-color, 75%);
-$header-background-color: $dark-gray;
-$section-header-color: $blue;
 
 // Forms
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);

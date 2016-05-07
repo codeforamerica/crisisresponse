@@ -17,12 +17,12 @@
       </span>
 
       <span class="hair-color">
-        <%= image_tag("physical/hair.svg") %>
+        <%= image_tag("physical/hair-#{theme}.svg") %>
         <%= @response_plan.hair_color.to_s.humanize %>
       </span>
 
       <span class="eye-color">
-        <%= image_tag("physical/eye.svg") %>
+        <%= image_tag("physical/eye-#{theme}.svg") %>
         <%= @response_plan.eye_color.to_s.humanize %>
       </span>
 

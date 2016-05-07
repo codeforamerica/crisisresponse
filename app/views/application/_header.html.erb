@@ -1,7 +1,20 @@
-<%= link_to response_plans_path, class: "header" do %>
+<div class="header">
   <div class="header-content">
-    <span class="header-title"><%= content_for(:header) %></span>
+    <div class="header-title">
+      <%= content_for(:header) %>
+    </div>
 
-    <%= image_tag "search.svg", class: "header-icon" %>
+    <div class="header-actions">
+      <%= link_to(
+        "Night/Day",
+        preferences_path(theme: :toggle),
+        method: :post,
+        class: "change-theme",
+      ) %>
+
+      <%= link_to response_plans_path, class: "button" do %>
+        <%= image_tag "search.svg", class: "header-icon" %>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

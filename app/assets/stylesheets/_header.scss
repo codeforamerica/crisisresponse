@@ -2,7 +2,7 @@
   @include heavy-font;
   background-color: $header-background-color;
   box-shadow: $shadow-level-4;
-  color: $white-text;
+  color: $header-font-color;
   font-size: 1rem;
   height: $header-height;
   line-height: $header-height;
@@ -12,7 +12,7 @@
   z-index: 1;
 
   &:hover {
-    color: $white-text;
+    color: $header-font-color;
   }
 
   .header-content {
@@ -35,5 +35,20 @@
 
   .identity-name {
     margin-top: $header-height / 6;
+  }
+
+  .header-actions {
+    text-align: right;
+    position: relative;
+  }
+
+  .change-theme {
+    background-color: $change-theme-button-background-color;
+    border-radius: 3px;
+    color: $change-theme-button-color;
+    margin-right: 1.5em;
+    padding: $small-spacing;
+    vertical-align: top;
+    border: 1px solid $change-theme-button-color;
   }
 }

@@ -1,0 +1,48 @@
+// Colors
+$blue: #0096a6;
+$red: #D23A0A;
+$dark-gray: #4A4A4A;
+$medium-gray: #9b9b9b;
+$light-gray: #ddd;
+$white: #ffffff;
+$off-white: #f0f0f0;
+
+// Background Colors
+$base-background-color: $white;
+$body-background-color: $off-white;
+
+// Header & Footer
+$header-font-color: $white;
+$header-background-color: $dark-gray;
+$change-theme-button-background-color: $header-background-color;
+$change-theme-button-color: $header-font-color;
+
+// Sections
+$section-header-font-color: $white;
+$section-header-color: $blue;
+$secondary-section-header-background: $medium-gray;
+$safety-section-header-background: $red;
+$section-body-background: $white;
+
+// Actions
+$action-color: $blue;
+$button-font-color: $white;
+$link-active-color: shade($action-color, 25%);
+
+// Font Colors
+$base-font-color: $dark-gray;
+$response-plan-body-color: rgba(0, 0, 0, 0.54);
+$contact-notes-color: lighten($base-font-color, 25%);
+$bullet-background: url("/assets/circle.svg");
+
+// Borders
+$base-border-color: $light-gray;
+$base-border: 1px solid $base-border-color;
+$dark-border: 1px solid $dark-gray;
+$field-hover-border-color: shade($base-border-color, 20%);
+$table-header-border-color: shade($base-border-color, 25%);
+
+// Forms
+$disabled-field-background-color: shade($base-background-color, 5%);
+$fieldset-background-color: tint($base-border-color, 75%);
+$field-background-color: $white;
