@@ -1,9 +1,9 @@
 .contact {
-  @include span-columns(4 of 8);
-  margin-bottom: $base-spacing;
+  margin-bottom: $base-spacing * 2;
 
-  &:nth-child(2n) {
-    @include omega;
+  @include media($medium-screen-up) {
+    @include span-columns(4 of 8);
+    &:nth-child(2n) { @include omega; }
   }
 }
 
