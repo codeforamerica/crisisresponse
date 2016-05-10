@@ -19,9 +19,9 @@
 <% end %>
 
 
-<h2>Results</h2>
-
 <div class="search-results">
+  <h2>Results</h2>
+
   <% if @response_plans.any? %>
     <% @response_plans.each do |response_plan| %>
       <%= link_to response_plan_path(response_plan), class: "search-result" do %>

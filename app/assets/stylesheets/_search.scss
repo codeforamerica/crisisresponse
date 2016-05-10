@@ -4,6 +4,7 @@
 
   h1 {
     margin-bottom: $base-spacing;
+    font-size: 1.6em;
   }
 
   .fields {
@@ -15,6 +16,7 @@
   label {
     @include span-columns(2 of 8);
     text-align: right;
+    font-weight: 400;
   }
 
   input {
@@ -37,7 +39,13 @@
 
 .search-results {
   margin-top: $base-spacing;
+
+  h2 {
+    font-size: 1.6em;
+    margin-bottom: $base-spacing;
+  }
 }
+
 
 .search-result {
   @include span-columns(4 of 4);
@@ -63,11 +71,11 @@
   @include media($medium-screen-up) {
     @include span-columns(2 of 8);
 
-    &:nth-child(4n) {
+    &:nth-of-type(4n) {
       @include omega;
     }
 
-    &:nth-child(4n+1) {
+    &:nth-of-type(4n+1) {
       clear: left;
     }
   }
@@ -104,7 +112,7 @@
   }
 
   .search-result-name {
-    @include heavy-font;
+    font-weight: 600;
     text-transform: uppercase;
   }
 }
