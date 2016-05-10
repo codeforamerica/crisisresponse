@@ -1,10 +1,16 @@
+require "email_service"
+
 class FeedbacksController < ApplicationController
   def new
-     @feedback = Feedback.new
+    @feedback = Feedback.new
   end
 
   def create
-    Feedback.create(feedback_params)
+    feedback = Feedback.create(feedback_params)
+
+    message = FeedbackMailer.officer_feedback(feedback)
+    EmailService.send(message)
+
     redirect_to response_plans_path, notice: t("feedbacks.create.success")
   end
 

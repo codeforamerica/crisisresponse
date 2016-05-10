@@ -1,0 +1,38 @@
+#!/bin/bash
+#################################################
+# send_email
+# Toby Baden
+#
+# Simple utility to send email with 1 subject line and 2 line of body.
+# usage:
+# send_email "recipient1,recipient2" from_address "subject" "body"
+
+toaddr=$1
+fromaddr=$2
+subject=$3
+body=$4
+
+exec 3<>/dev/tcp/smtp2/25
+read -t 1 a <&3;echo $a
+echo -e "HELO test\r" >&3
+read -t 1 a <&3;echo $a
+echo -e "MAIL FROM:${fromaddr}\r" >&3
+read -t 1 a <&3;echo $a
+
+ema=$(echo $toaddr | tr "," "\n")
+for x in $ema
+do
+   echo -e "RCPT TO:$x\r" >&3
+   read -t 1 a <&3;echo $a
+done
+
+echo -e "DATA\r" >&3
+read -t 1 a <&3;echo $a
+echo -e "Subject: ${subject}\r" >&3
+echo -e "Content-type: text/html" >&3
+echo -e "\r" >&3
+echo -e "${body}\r" >&3
+echo -e ".\r" >&3
+read -t 1 a <&3;echo $a
+echo -e "QUIT\r" >&3
+read -t 1 a <&3
