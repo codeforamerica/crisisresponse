@@ -8,19 +8,31 @@ feature "Search", :js do
 
     visit response_plans_path
 
-    fill_form_and_submit(:response_plan_search, name: "John")
+    search_for(name: "John")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, name: "Doe")
+    search_for(name: "Doe")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, name: "John Doe")
+    search_for(name: "John Doe")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, name: "Doe John")
+    search_for(name: "Doe John")
+    expect(page).to have_content(response_plan.display_name.upcase)
+    expect(page).to have_content(l(dob))
+  end
+
+  pending "Officer searches by part of a person's name" do
+    name = "Christopher Nolan"
+    dob = Date.new(1980, 01, 02)
+    response_plan = create(:response_plan, name: name, date_of_birth: dob)
+
+    visit response_plans_path
+
+    search_for(name: "Chris")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
   end
@@ -32,19 +44,19 @@ feature "Search", :js do
 
     visit response_plans_path
 
-    fill_form_and_submit(:response_plan_search, "DOB" => "1/2/80")
+    search_for("DOB" => "1/2/80")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, "DOB" => "1-2-1980")
+    search_for("DOB" => "1-2-1980")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, "DOB" => "1-2-80")
+    search_for("DOB" => "1-2-80")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, "DOB" => "1980-1-2")
+    search_for("DOB" => "1980-1-2")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
   end
@@ -56,7 +68,7 @@ feature "Search", :js do
 
     visit response_plans_path
 
-    fill_form_and_submit(:response_plan_search, name: "Doe John", "DOB" => "1/2/80")
+    search_for(name: "Doe John", "DOB" => "1/2/80")
 
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
@@ -68,7 +80,7 @@ feature "Search", :js do
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
 
     visit response_plans_path
-    fill_form_and_submit(:response_plan_search, name: "Mary")
+    search_for(name: "Mary")
 
     expect(page).to have_content(t("search.results.none"))
     expect(page).not_to have_content(response_plan.display_name.upcase)
@@ -82,7 +94,7 @@ feature "Search", :js do
 
     visit response_plans_path
 
-    fill_form_and_submit(:response_plan_search, "DOB" => "2/3/86")
+    search_for("DOB" => "2/3/86")
     expect(page).to have_content(t("search.results.none"))
     expect(page).not_to have_content(response_plan.display_name.upcase)
     expect(page).not_to have_content(l(dob))
@@ -95,19 +107,19 @@ feature "Search", :js do
 
     visit response_plans_path
 
-    fill_form_and_submit(:response_plan_search, name: "Jon")
+    search_for(name: "Jon")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, name: "Doh")
+    search_for(name: "Doh")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, name: "Jon Doh")
+    search_for(name: "Jon Doh")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, name: "Doh Jon")
+    search_for(name: "Doh Jon")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
   end
@@ -119,15 +131,15 @@ feature "Search", :js do
 
     visit response_plans_path
 
-    fill_form_and_submit(:response_plan_search, "DOB" => "1/2/81")
+    search_for("DOB" => "1/2/81")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, "DOB" => "1/2/79")
+    search_for("DOB" => "1/2/79")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
 
-    fill_form_and_submit(:response_plan_search, "DOB" => "1/2/80")
+    search_for("DOB" => "1/2/80")
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
   end
@@ -139,7 +151,7 @@ feature "Search", :js do
 
     visit response_plans_path
 
-    fill_form_and_submit(:response_plan_search, name: "Jon Doh", "DOB" => "1/2/81")
+    search_for(name: "Jon Doh", "DOB" => "1/2/81")
 
     expect(page).to have_content(response_plan.display_name.upcase)
     expect(page).to have_content(l(dob))
@@ -152,7 +164,7 @@ feature "Search", :js do
 
     visit response_plans_path
 
-    fill_form_and_submit(:response_plan_search, name: "Jon Doh", "DOB" => "1/2/85")
+    search_for(name: "Jon Doh", "DOB" => "1/2/85")
 
     expect(page).to have_content(t("search.results.none"))
     expect(page).not_to have_content(response_plan.display_name.upcase)
@@ -166,10 +178,16 @@ feature "Search", :js do
 
     visit response_plans_path
 
-    fill_form_and_submit(:response_plan_search, name: "Mary", "DOB" => "1/2/80")
+    search_for(name: "Mary", "DOB" => "1/2/80")
 
     expect(page).to have_content(t("search.results.none"))
     expect(page).not_to have_content(response_plan.display_name.upcase)
     expect(page).not_to have_content(l(dob))
+  end
+
+  def search_for(params)
+    within(".search") do
+      fill_form_and_submit(:response_plan_search, params)
+    end
   end
 end
