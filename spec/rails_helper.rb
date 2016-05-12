@@ -11,6 +11,14 @@ Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |file| require file }
 module Features
   # Extend this module in spec/support/features/*.rb
   include Formulaic::Dsl
+
+  def inject_session(hash)
+    Warden.on_next_request do |proxy|
+      hash.each do |key, value|
+        proxy.raw_session[key] = value
+      end
+    end
+  end
 end
 
 RSpec.configure do |config|

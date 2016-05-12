@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :officers
   namespace :admin do
     resources :response_plans
     resources :response_strategies

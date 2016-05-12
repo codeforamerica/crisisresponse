@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :theme
+
+  def after_sign_out_path_for(*_args)
+    new_officer_session_path
+  end
 end

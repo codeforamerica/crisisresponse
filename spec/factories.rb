@@ -17,6 +17,8 @@ FactoryGirl.define do
     name "Johnson"
     unit "Crisis Response Unit"
     phone "222-333-4444"
+    sequence(:email) { |n| "officer#{n}@seattle.gov" }
+    password "password"
   end
 
   factory :response_plan do
