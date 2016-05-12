@@ -2,6 +2,7 @@ require "rails_helper"
 
 feature "Officer views a response plan" do
   scenario "They see the person's basic information" do
+    sign_in_officer
     response_plan = create(
       :response_plan,
       name: "John Doe",
@@ -15,6 +16,7 @@ feature "Officer views a response plan" do
   end
 
   scenario "They see the person's physical characteristics" do
+    sign_in_officer
     response_plan = create(
       :response_plan,
       eye_color: "Green",
@@ -35,6 +37,7 @@ feature "Officer views a response plan" do
   end
 
   scenario "They see the response plan steps" do
+    sign_in_officer
     response_plan = create(:response_plan)
     step_1 = create(:response_strategy, response_plan: response_plan, title: "Call case manager")
     step_2 = create(:response_strategy, response_plan: response_plan, title: "Transport to Harborview")
@@ -46,6 +49,7 @@ feature "Officer views a response plan" do
   end
 
   scenario "They see background information" do
+    sign_in_officer
     background_text = "This is the person's background info"
     response_plan = create(:response_plan, background_info: background_text)
 
@@ -55,6 +59,7 @@ feature "Officer views a response plan" do
   end
 
   scenario "They see emergency contacts" do
+    sign_in_officer
     response_plan = create(:response_plan)
     contact = create(
       :contact,
@@ -74,6 +79,7 @@ feature "Officer views a response plan" do
   end
 
   scenario "They see the preparing officer" do
+    sign_in_officer
     officer = create(:officer, name: "Jacques Clouseau")
     response_plan = create(:response_plan, author: officer)
 
@@ -83,6 +89,7 @@ feature "Officer views a response plan" do
   end
 
   scenario "They see the approving officer" do
+    sign_in_officer
     officer = create(:officer, name: "Jacques Clouseau")
     response_plan = create(:response_plan, approver: officer)
 
@@ -93,6 +100,7 @@ feature "Officer views a response plan" do
 
   context "when there are no safety warnings" do
     pending "they see 'No history of violence'" do
+      sign_in_officer
       response_plan = create(:response_plan)
 
       visit response_plan_path(response_plan)
@@ -103,6 +111,7 @@ feature "Officer views a response plan" do
 
   context "when there are safety warnings" do
     pending "they see the safety warnings" do
+      sign_in_officer
       response_plan = create(:response_plan)
       warning = create(
         :safety_warning,

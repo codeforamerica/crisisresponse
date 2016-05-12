@@ -2,6 +2,7 @@ require "rails_helper"
 
 feature "Search", :js do
   scenario "Officer searches by a person's name" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
@@ -38,6 +39,7 @@ feature "Search", :js do
   end
 
   scenario "Officer searches by a person's DOB" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
@@ -62,6 +64,7 @@ feature "Search", :js do
   end
 
   scenario "Officer searches by a person's name and DOB" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
@@ -75,6 +78,7 @@ feature "Search", :js do
   end
 
   scenario "Officer searches by a name with no match" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
@@ -88,6 +92,7 @@ feature "Search", :js do
   end
 
   scenario "Officer searches by a DOB with no match" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
@@ -101,6 +106,7 @@ feature "Search", :js do
   end
 
   scenario "Officer searches by a name that's slightly off" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
@@ -125,6 +131,7 @@ feature "Search", :js do
   end
 
   scenario "Officer searches by a DOB that's slightly off" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
@@ -145,6 +152,7 @@ feature "Search", :js do
   end
 
   scenario "Officer searches by a name and DOB that are slightly off" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
@@ -158,6 +166,7 @@ feature "Search", :js do
   end
 
   scenario "Officer searches by a name that matches, and DOB that doesn't" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)
@@ -172,6 +181,7 @@ feature "Search", :js do
   end
 
   scenario "Officer searches by a DOB that matches, and name that doesn't" do
+    sign_in_officer
     name = "John Doe"
     dob = Date.new(1980, 01, 02)
     response_plan = create(:response_plan, name: name, date_of_birth: dob)

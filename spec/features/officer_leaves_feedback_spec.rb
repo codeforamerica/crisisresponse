@@ -4,6 +4,7 @@ require "email_service"
 feature "Feedback" do
   scenario "Officer leaves feedback" do
     allow(EmailService).to receive(:send)
+    sign_in_officer
     response_plan = create(:response_plan)
 
     visit response_plan_path(response_plan)

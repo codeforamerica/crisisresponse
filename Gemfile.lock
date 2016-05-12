@@ -129,6 +129,7 @@ GEM
     neat (1.7.2)
       bourbon (>= 4.0)
       sass (>= 3.3)
+    net-ldap (0.11)
     newrelic_rpm (3.14.2.312)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -162,6 +163,9 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.3.2)
+    rack_session_access (0.1.1)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (4.2.6)
       actionmailer (= 4.2.6)
       actionpack (= 4.2.6)
@@ -282,6 +286,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   neat (~> 1.7.0)
+  net-ldap
   newrelic_rpm (>= 3.9.8)
   normalize-rails (~> 3.0.0)
   pg
@@ -293,6 +298,7 @@ DEPENDENCIES
   quiet_assets
   rack-canonical-host
   rack-timeout
+  rack_session_access
   rails (~> 4.2.0)
   recipient_interceptor
   refills

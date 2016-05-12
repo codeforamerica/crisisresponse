@@ -25,6 +25,16 @@ en:
     form:
       label: Search by name, DOB, or physical description
 
+  authentication:
+    unauthenticated: Please sign in to continue.
+    sign_in:
+      link: Sign in
+      success: Signed in as %{name}
+      failure: Your username or password was incorrect. Please try again.
+    sign_out:
+      link: Sign out
+      success: Successfully signed out.
+
   time:
     formats:
       default:

@@ -1,16 +1,16 @@
 require "rails_helper"
 
-feature "Night mode", :js do
-  scenario "Officer views the app in day mode" do
-    visit response_plans_path
+feature "Night mode" do
+  scenario "Officer views the app in day mode", :js do
+    visit new_authentication_path
 
     header_color = get_header_background_color
 
     expect(header_color).to eq("rgb(74, 74, 74)")
   end
 
-  scenario "Officer switches to night mode" do
-    visit response_plans_path
+  scenario "Officer switches to night mode", :js do
+    visit new_authentication_path
     click_on "Night/Day"
 
     header_color = get_header_background_color
@@ -19,6 +19,7 @@ feature "Night mode", :js do
   end
 
   scenario "Officer stays on the page they were viewing" do
+    sign_in_officer
     plan = create(:response_plan)
     path = response_plan_path(plan)
 

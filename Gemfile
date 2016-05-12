@@ -12,6 +12,7 @@ gem "flutie"
 gem "high_voltage"
 gem "jquery-rails"
 gem "neat", "~> 1.7.0"
+gem "net-ldap"
 gem "newrelic_rpm", ">= 3.9.8"
 gem "normalize-rails", "~> 3.0.0"
 gem "pg"
@@ -43,10 +44,11 @@ group :development, :test do
 end
 
 group :test do
-  gem "poltergeist"
   gem "database_cleaner"
   gem "formulaic"
   gem "launchy"
+  gem "poltergeist"
+  gem "rack_session_access"
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "timecop"
