@@ -3,6 +3,8 @@ require "net/http"
 require "rms_adapter"
 
 class ResponsePlansController < ApplicationController
+  before_action :authenticate_officer!
+
   def index
     @search = ResponsePlanSearch.new(search_params)
     @response_plans = @search.close_matches
