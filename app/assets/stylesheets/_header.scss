@@ -42,13 +42,16 @@
     position: relative;
   }
 
+  a {
+    margin-right: 1.5em;
+    vertical-align: top;
+    color: $change-theme-button-color;
+  }
+
   .change-theme {
     background-color: $change-theme-button-background-color;
     border-radius: 3px;
-    color: $change-theme-button-color;
-    margin-right: 1.5em;
     padding: $small-spacing;
-    vertical-align: top;
     border: 1px solid $change-theme-button-color;
   }
 }

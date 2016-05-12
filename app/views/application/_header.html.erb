@@ -5,6 +5,8 @@
     </div>
 
     <div class="header-actions">
+      <%= link_to("Sign Out", destroy_officer_session_path, method: :delete) %>
+
       <%= link_to(
         "Night/Day",
         preferences_path(theme: :toggle),
