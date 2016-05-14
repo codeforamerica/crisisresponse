@@ -44,6 +44,7 @@ class CsvImporter
       eye_color: csv_row["Eye"],
       scars_and_marks: csv_row["Scars, Marks, and Tatoos"],
       image: parse_image(csv_row),
+      background_info: csv_row["Background Info"],
     }
   end
 
@@ -64,7 +65,7 @@ class CsvImporter
 
   def parse_image(csv_row)
     image_dir = Rails.root + "#{File.dirname(csv_path)}/images"
-    image_path = "#{image_dir}/#{csv_row["Last Name"].downcase}_#{csv_row["First Name"].downcase}/*"
+    image_path = "#{image_dir}/#{csv_row["Last Name"].downcase}_#{csv_row["First Name"].downcase}/*".gsub(" ", "_")
     images = Dir.glob(image_path)
 
     if images.any?
@@ -73,7 +74,7 @@ class CsvImporter
   end
 
   def parse_response_strategies(csv_row)
-    [
+    strategies = [
       {
         priority: 1,
         title: csv_row["Step 1: Title"],
@@ -99,7 +100,12 @@ class CsvImporter
         title: csv_row["Step 5: Title"],
         description: csv_row["Step 5: Details"],
       },
-    ].reject { |strategy| strategy[:title].nil? && strategy[:description].nil?  }
+    ]
+
+    strategies.reject do |strategy|
+      strategy[:title].to_s.blank? &&
+        strategy[:description].to_s.blank?
+    end
   end
 
   def parse_contacts(csv_row)

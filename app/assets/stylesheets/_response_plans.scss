@@ -13,7 +13,6 @@ $radius: 6px;
   .response-strategy {
     $bullet-size: 3rem;
 
-    @include fill-parent;
     margin-top: $base-spacing;
     margin-left: $bullet-size;
     display: inline-block;
