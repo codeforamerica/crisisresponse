@@ -7,6 +7,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+* Track analytics through Keen.io
 * Officers can sign in with their existing SPD username and password
-
-No changes yet

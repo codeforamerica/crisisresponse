@@ -25,6 +25,7 @@ gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "title"
 gem "uglifier"
+gem "rails-assets-keen-js", source: "https://rails-assets.org"
 
 group :development do
   gem "quiet_assets"
