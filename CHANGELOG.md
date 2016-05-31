@@ -9,3 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * Track analytics through Keen.io
 * Officers can sign in with their existing SPD username and password
+
+### Fixed
+
+* Text entered into search or feedback fields is now visible in night mode
