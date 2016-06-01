@@ -7,14 +7,11 @@
   </div>
 
   <div class="section-body">
-    <% if @response_plan.safety_warnings.any? %>
-      <ul>
-        <% @response_plan.safety_warnings.each do |warning| %>
-          <li><%= warning.description %></li>
-        <% end %>
-      </ul>
-    <% else %>
-      <%= t("response_plan.safety.none") %>
-    <% end %>
+    <p>Officer safety information is still under development.</p>
+
+    <p>
+    For information about <%= @response_plan.first_name %>,
+    please see the <strong>Response Plan</strong> section below.
+    </p>
   </div>
 </section>

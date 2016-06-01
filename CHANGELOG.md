@@ -5,6 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+* A placeholder section for officer safety notes,
+  until the actual notes get built into the app.
+
 ## [0.0.2] - 2016-06-02
 
 ### Fixed
