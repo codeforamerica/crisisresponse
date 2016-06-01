@@ -37,9 +37,15 @@
     margin-top: $header-height / 6;
   }
 
+  .header-title {
+    display: inline-block;
+  }
+
   .header-actions {
     text-align: right;
     position: relative;
+    display: inline-block;
+    float: right;
   }
 
   a {

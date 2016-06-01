@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+* The site now displays properly on Internet Explorer 9
+
 ## 0.0.1 - 2016-05-30
 
 ### Added
