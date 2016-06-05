@@ -1,9 +1,9 @@
 task :import, [:filename] => [:environment] do |t, args|
   require "csv_importer"
-  file = args[:filename]
+  data_dir = args[:filename]
 
-  puts "Importing: #{file}"
+  puts "Importing: #{data_dir}"
 
   ResponsePlan.destroy_all
-  CsvImporter.new(file).create_records
+  CsvImporter.new(data_dir).create_records
 end

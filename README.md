@@ -103,6 +103,30 @@ programming in style.
 * [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
 * [Style](http://github.com/thoughtbot/guides/blob/master/style)
 
+## Importing Data
+
+There is a `data.sample` folder in the root of the repository
+that is a template for the data structure that the project knows how to import.
+A folder that mirrors the structure of the `data.sample` folder
+can be imported by running:
+
+```bash
+bundle exec rake import[DATA_PATH]
+```
+
+...where `DATA_PATH` is the file path to the data folder that is being imported.
+
+The `data.sample` folder contains sample response plans
+that are used to seed the application.
+Running `rake db:seed` is equivalent to running `rake import[data.sample]`.
+
+As exhibited in the `data.sample` folder,
+each data folder should contain a file called `response_plans.csv`,
+which defines the information for the response plans in the app.
+Each response plan defined in `response_plans.csv`
+can have a corresponding folder in the `images` subdirectory,
+which contains images for the response plan.
+
 ## Managing Application Lifecycle
 
 ```bash
