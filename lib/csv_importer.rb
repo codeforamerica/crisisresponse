@@ -1,11 +1,19 @@
 require "csv"
 
 class CsvImporter
-  def initialize(csv_path)
-    @csv_path = csv_path
+  def initialize(data_dir)
+    @data_dir = data_dir
   end
 
-  attr_reader :csv_path
+  attr_reader :data_dir
+
+  def csv_path
+    Rails.root.join(data_dir, "response_plans.csv")
+  end
+
+  def image_dir
+    Rails.root.join(data_dir, "images")
+  end
 
   def create_records
     data.map do |csv_row|
@@ -65,7 +73,6 @@ class CsvImporter
   end
 
   def parse_image(csv_row)
-    image_dir = Rails.root + "#{File.dirname(csv_path)}/images"
     image_path = "#{image_dir}/#{csv_row["Last Name"].downcase}_#{csv_row["First Name"].downcase}/*".gsub(" ", "_")
     images = Dir.glob(image_path)
 
