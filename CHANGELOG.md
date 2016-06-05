@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   until the actual notes get built into the app.
 * Subject aliases in the left sidebar.
 
+## Fixed
+
+* On small screens, links in the header are hidden behind a drop-down menu.
+
 ### Changed
 
 * Display CRT contact info instead of the preparing officer's contact info.

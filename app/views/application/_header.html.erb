@@ -5,23 +5,29 @@
     </div>
 
     <div class="header-actions">
-      <% if officer_signed_in? %>
+      <div class="menu-collapsible menu-collapsed">
         <%= link_to(
-          t("authentication.sign_out.link"),
-          authentication_path,
-          method: :delete,
+          "Night/Day",
+          preferences_path(theme: :toggle),
+          method: :post,
+          class: "change-theme",
         ) %>
-      <% end %>
 
-      <%= link_to(
-        "Night/Day",
-        preferences_path(theme: :toggle),
-        method: :post,
-        class: "change-theme",
-      ) %>
+        <% if officer_signed_in? %>
+          <%= link_to(
+            t("authentication.sign_out.link"),
+            authentication_path,
+            method: :delete,
+          ) %>
+        <% end %>
+      </div>
 
       <%= link_to response_plans_path, class: "button" do %>
-        <%= image_tag "search.svg", class: "header-icon" %>
+        <%= image_tag "search.svg", class: "search-icon" %>
+      <% end %>
+
+      <%= link_to "#" do %>
+        <%= image_tag "menu.svg", class: "menu-icon", id: "js-toggle-menu" %>
       <% end %>
     </div>
   </div>
