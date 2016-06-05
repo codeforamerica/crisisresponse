@@ -3,18 +3,22 @@
     background-color: $secondary-section-header-background;
   }
 
-  .about-author {
+  .about-author,
+  .about-questions,
+  .about-approver {
     margin-bottom: $base-spacing;
     overflow: hidden;
   }
 
   .author-label,
-  .approver-label {
+  .approver-label,
+  .questions-label {
     @include heavy-font;
   }
 
   .author-info,
-  .approver-info {
+  .approver-info,
+  .questions-info {
     @include light-font;
     margin-left: $small-spacing;
   }

@@ -11,12 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519212806) do
+ActiveRecord::Schema.define(version: 20160605182652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
   enable_extension "fuzzystrmatch"
+
+  create_table "aliases", force: :cascade do |t|
+    t.integer  "response_plan_id"
+    t.string   "name",             null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "aliases", ["response_plan_id"], name: "index_aliases_on_response_plan_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "response_plan_id"
@@ -108,6 +117,7 @@ ActiveRecord::Schema.define(version: 20160519212806) do
 
   add_index "safety_warnings", ["response_plan_id"], name: "index_safety_warnings_on_response_plan_id", using: :btree
 
+  add_foreign_key "aliases", "response_plans"
   add_foreign_key "contacts", "response_plans"
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "safety_warnings", "response_plans"

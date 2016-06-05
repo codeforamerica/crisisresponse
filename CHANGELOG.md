@@ -9,6 +9,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * A placeholder section for officer safety notes,
   until the actual notes get built into the app.
+* Subject aliases in the left sidebar.
+
+### Changed
+
+* Display CRT contact info instead of the preparing officer's contact info.
+* Section headers have been reworded to more accurately reflect the information.
 
 ## [0.0.2] - 2016-06-02
 

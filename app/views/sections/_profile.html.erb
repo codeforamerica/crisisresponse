@@ -11,6 +11,20 @@
 
     <hr/>
 
+    <% if @response_plan.aliases.any? %>
+      <div class="aliases">
+        <h3>AKA</h3>
+
+        <ul>
+          <% @response_plan.aliases.each do |aka| %>
+            <li><%= aka %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <hr/>
+    <% end %>
+
     <div class="physical">
       <span class="shorthand-description">
         <%= @response_plan.shorthand_description %>

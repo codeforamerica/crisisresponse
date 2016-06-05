@@ -4,6 +4,7 @@ class ResponsePlan < ActiveRecord::Base
   has_many :contacts, dependent: :destroy
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
   has_many :safety_warnings, dependent: :destroy
+  has_many :aliases, dependent: :destroy
 
   belongs_to :author, class_name: "Officer"
   belongs_to :approver, class_name: "Officer"
@@ -40,6 +41,18 @@ class ResponsePlan < ActiveRecord::Base
   )
 
   mount_uploader :image, ImageUploader
+
+  def aliases=(list_of_aliases)
+    alias_objects = list_of_aliases.map do |aka|
+      Alias.find_or_initialize_by(name: aka, response_plan: self)
+    end
+
+    super(alias_objects)
+  end
+
+  def aliases
+    super.pluck(:name)
+  end
 
   def approved?
     approved_at.present? && approver.present?

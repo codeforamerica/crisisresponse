@@ -7,12 +7,18 @@
   </div>
 
   <div class="section-body">
+    <div class="about-questions">
+      <div class="questions-label">For questions, contact</div>
+      <div class="questions-info">
+        <div>Crisis Response Team</div>
+        <div><%= tel_to "206-615-0226" %></div>
+      </div>
+    </div>
+
     <div class="about-author">
       <div class="author-label">Prepared By</div>
       <div class="author-info">
         <div><%= @response_plan.author.name %></div>
-        <div><%= @response_plan.author.unit %></div>
-        <div><%= tel_to @response_plan.author.phone %></div>
       </div>
     </div>
 
