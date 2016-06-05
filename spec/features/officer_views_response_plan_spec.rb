@@ -36,6 +36,20 @@ feature "Officer views a response plan" do
     expect(page).to have_content("Skull tattoo on neck")
   end
 
+  scenario "They see the person's aliases" do
+    sign_in_officer
+    aliases = ["Mark Smith", "Joe Andrews"]
+    response_plan = create(
+      :response_plan,
+      name: "John Doe",
+      aliases: aliases,
+    )
+
+    visit response_plan_path(response_plan)
+
+    aliases.each { |aka| expect(page).to have_content(aka) }
+  end
+
   scenario "They see the response plan steps" do
     sign_in_officer
     response_plan = create(:response_plan)

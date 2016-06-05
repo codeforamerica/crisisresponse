@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :alias do
+    name "John Doe"
+    response_plan
+  end
+
   factory :contact do
     response_plan nil
     name "MyString"
@@ -20,6 +25,7 @@ FactoryGirl.define do
   end
 
   factory :response_plan do
+    aliases []
     author
     approver
     name "John Doe"

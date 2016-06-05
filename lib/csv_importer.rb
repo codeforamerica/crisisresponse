@@ -35,6 +35,7 @@ class CsvImporter
     {
       first_name: csv_row["First Name"],
       last_name: csv_row["Last Name"],
+      aliases: csv_row["Aliases"].to_s.split(",").map(&:strip),
       date_of_birth: Chronic.parse(csv_row["DOB"]),
       race: parse_race(csv_row["Race"]),
       sex: csv_row["Gender"].titlecase,
