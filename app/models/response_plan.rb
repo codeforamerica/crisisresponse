@@ -1,6 +1,9 @@
 class ResponsePlan < ActiveRecord::Base
   include PgSearch
 
+  include Analytics
+  before_create :generate_analytics_token
+
   has_many :contacts, dependent: :destroy
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
   has_many :safety_warnings, dependent: :destroy
