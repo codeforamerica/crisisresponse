@@ -1,4 +1,7 @@
 class Officer < ActiveRecord::Base
+  include Analytics
+  before_create :generate_analytics_token
+
   has_many :authored_response_plans,
     class_name: "ResponsePlan",
     foreign_key: :author_id,

@@ -1,6 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
+require "shared/analytics_token"
 
 RSpec.describe ResponsePlan, type: :model do
+  it_should_behave_like "it has an analytics token"
+
   describe "validations" do
     it { should allow_value("Female").for(:sex) }
     it { should allow_value("Male").for(:sex) }
