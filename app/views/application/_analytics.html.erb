@@ -9,10 +9,10 @@ var client = new Keen({
 client.addEvent("Page Views", {
   controller: "<%= params[:controller] %>",
   action: "<%= params[:action] %>",
-  officer_id: "<%= session[:officer_id] %>",
-  id: "<%= params[:id] %>",
-  environment: "<%= ENV.fetch('KEEN_ENV', 'development') %>",
+  officer_token: "<%= current_officer.try(:analytics_token) %>",
+  response_plan_token: "<%= @response_plan.try(:analytics_token) %>",
   referrer: document.referrer,
+  browser: bowser,
   keen: {
     timestamp: new Date().toISOString()
   }
