@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def officer_signed_in?
-    session[:officer_id].present?
+    current_officer.present?
   end
 
   def theme
