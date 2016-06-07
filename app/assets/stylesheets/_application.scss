@@ -9,14 +9,15 @@
 @import "base/base";
 @import "refills/flashes";
 
-@import "layout";
-@import "header";
+@import "feedbacks";
 @import "footer";
+@import "header";
+@import "layout";
+@import "response_plans";
 @import "search";
 @import "section";
 @import "sign_in";
-@import "response_plans";
-@import "feedbacks";
+@import "static";
 
 @import "response_plan/*";
 @import "components/*";

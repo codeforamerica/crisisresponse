@@ -7,6 +7,16 @@
     <div class="header-actions">
       <div class="menu-collapsible menu-collapsed">
         <%= link_to(
+          "About",
+          page_path("about"),
+        ) %>
+
+        <%= link_to(
+          "Change Log",
+          page_path("about"),
+        ) %>
+
+        <%= link_to(
           "Night/Day",
           preferences_path(theme: :toggle),
           method: :post,

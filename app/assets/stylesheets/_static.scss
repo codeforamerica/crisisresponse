@@ -1,0 +1,39 @@
+.high_voltage-pages .content {
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin-bottom: $base-spacing;
+    margin-top: 2 * $base-spacing;
+  }
+
+  h1,
+  h2 {
+    font-size: 1.6em;
+  }
+
+  @include media($medium-screen-up) {
+    width: 50%;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol,
+  ul {
+    padding-left: $base-spacing;
+  }
+
+  li {
+    margin-bottom: $small-spacing;
+  }
+
+  .about-page-contact {
+    margin-bottom: $base-spacing;
+  }
+
+  .red {
+    color: $red;
+  }
+}

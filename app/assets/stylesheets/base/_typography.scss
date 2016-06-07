@@ -47,3 +47,8 @@ picture {
   margin: 0;
   max-width: 100%;
 }
+
+.secondary-text {
+  @include light-font;
+  color: $secondary-text-color;
+}
