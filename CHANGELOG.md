@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+Notes: All officers will need to log out and back in
+so their accounts can properly track analytics.
+
 ### Added
 
 * A placeholder section for officer safety notes,
