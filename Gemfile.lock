@@ -188,6 +188,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.1.2)
+    rdiscount (2.2.0.1)
     recipient_interceptor (0.1.2)
       mail
     refills (0.1.0)
@@ -297,6 +298,7 @@ DEPENDENCIES
   rack_session_access
   rails (~> 4.2.0)
   rails-assets-bowser!
+  rdiscount
   recipient_interceptor
   refills
   rspec-rails (~> 3.4.0)

@@ -13,6 +13,8 @@ so their accounts can properly track analytics.
 * A placeholder section for officer safety notes,
   until the actual notes get built into the app.
 * Subject aliases in the left sidebar.
+* Background information & notes for field testers at "/pages/about".
+* Notes about changes to the app at "/pages/changelog".
 
 ## Fixed
 

@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path("../boot", __FILE__)
 require "rails"
 require "active_model/railtie"
 require "active_job/railtie"
@@ -7,6 +7,10 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+
+require_relative "../lib/markdown_handler"
+ActionView::Template.register_template_handler :md, MarkdownHandler
+
 Bundler.require(*Rails.groups)
 module CrisisResponse
   class Application < Rails::Application

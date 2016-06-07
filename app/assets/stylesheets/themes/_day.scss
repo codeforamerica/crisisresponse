@@ -14,6 +14,7 @@ $body-background-color: $off-white;
 // Header & Footer
 $header-font-color: $white;
 $header-background-color: $dark-gray;
+$menu-background-color: $medium-gray;
 $change-theme-button-background-color: $header-background-color;
 $change-theme-button-color: $header-font-color;
 
@@ -31,7 +32,7 @@ $link-active-color: shade($action-color, 25%);
 
 // Font Colors
 $base-font-color: $dark-gray;
-$response-plan-body-color: rgba(0, 0, 0, 0.54);
+$secondary-text-color: rgba(0, 0, 0, 0.54);
 $contact-notes-color: lighten($base-font-color, 25%);
 $bullet-background: url("/assets/circle.svg");
 
