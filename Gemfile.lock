@@ -1,6 +1,5 @@
 GEM
   remote: https://rubygems.org/
-  remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.6)
       actionpack (= 4.2.6)
@@ -171,7 +170,6 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.6)
       sprockets-rails
-    rails-assets-keen-js (3.4.1)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -294,7 +292,6 @@ DEPENDENCIES
   rack-timeout
   rack_session_access
   rails (~> 4.2.0)
-  rails-assets-keen-js!
   recipient_interceptor
   refills
   rspec-rails (~> 3.4.0)
