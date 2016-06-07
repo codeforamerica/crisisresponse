@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :theme, :officer_signed_in?
+  helper_method :theme, :officer_signed_in?, :current_officer
 
   def authenticate_officer!
     unless officer_signed_in?
@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
         alert: t("authentication.unauthenticated"),
       )
     end
+  end
+
+  def current_officer
+    Officer.find_by(id: session[:officer_id])
   end
 
   def officer_signed_in?
