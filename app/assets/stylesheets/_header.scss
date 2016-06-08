@@ -47,10 +47,19 @@
 
   .identity-name {
     margin-top: $header-height / 6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .header-title {
     display: inline-block;
+    width: 60%;
+  }
+
+  .header-title,
+  .header-actions {
+    height: $header-height;
   }
 
   .header-actions {
@@ -58,6 +67,7 @@
     position: relative;
     display: inline-block;
     float: right;
+    width: 40%;
   }
 
   .menu-collapsed {
