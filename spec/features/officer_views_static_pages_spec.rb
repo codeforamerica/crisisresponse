@@ -12,6 +12,6 @@ feature "Static pages" do
     visit response_plans_path
     click_on "Change Log"
 
-    expect(page).to have_content("Change Log")
+    expect(page).to have_content("0.0.1")
   end
 end

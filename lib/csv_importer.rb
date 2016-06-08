@@ -36,7 +36,8 @@ class CsvImporter
   end
 
   def data
-    CSV.parse(File.read(csv_path), headers: true)
+    data = File.read(csv_path).gsub(" ", " ")
+    CSV.parse(data, headers: true)
   end
 
   def parse_response_plan(csv_row)
@@ -153,7 +154,7 @@ class CsvImporter
   end
 
   def filter(array_of_hashes)
-    array_of_hashes.select { |hash| hash.values.compact.any?  }
+    array_of_hashes.select { |hash| hash.values.compact.any?(&:present?)  }
   end
 
   def parse_author_attrs(csv_row)

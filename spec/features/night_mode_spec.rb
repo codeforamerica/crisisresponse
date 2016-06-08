@@ -11,7 +11,7 @@ feature "Night mode" do
 
   scenario "Officer switches to night mode", :js do
     visit new_authentication_path
-    click_on "Night/Day"
+    click_on "Light/Dark"
 
     header_color = get_header_background_color
 
@@ -24,7 +24,7 @@ feature "Night mode" do
     path = response_plan_path(plan)
 
     visit path
-    click_on "Night/Day"
+    click_on "Light/Dark"
 
     expect(current_path).to eq(path)
   end
