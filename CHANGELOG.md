@@ -1,22 +1,22 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
+All notable changes to this project will be documented here.
 
-## [Unreleased]
+## [0.1.0] - 2016-06-08
 
-Notes: All officers will need to log out and back in
-so their accounts can properly track analytics.
+### Note
+
+* Due to a change in user accounts, all officers will need to log in again.
 
 ### Added
 
 * A placeholder section for officer safety notes,
   until the actual notes get built into the app.
 * Subject aliases in the left sidebar.
-* Background information & notes for field testers at "/pages/about".
-* Notes about changes to the app at "/pages/changelog".
+* Background information & notes for field testers at `/pages/about`.
+* Notes about changes to the app at `/pages/changelog`.
 
-## Fixed
+### Fixed
 
 * On small screens, links in the header are hidden behind a drop-down menu.
 
@@ -42,5 +42,6 @@ so their accounts can properly track analytics.
 
 * Text entered into search or feedback fields is now visible in night mode
 
-[Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/codeforamerica/crisisresponse/compare/v0.0.2...v0.1.0
 [0.0.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.0.1...v0.0.2
