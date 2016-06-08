@@ -1,21 +1,33 @@
 <% unless Rails.env.test? %>
   <script src="https://d26b395fwzu5fz.cloudfront.net/3.4.1/keen.min.js" type="text/javascript"></script>
   <script type="text/javascript">
-var client = new Keen({
+
+var keenClient = new Keen({
   projectId: "<%= ENV.fetch('KEEN_PROJECT_ID') %>",
   writeKey: "<%= ENV.fetch('KEEN_WRITE_KEY') %>",
 });
 
-client.addEvent("Page Views", {
-  controller: "<%= params[:controller] %>",
-  action: "<%= params[:action] %>",
+var pageLoadDate = new Date();
+var pageLoadTime = pageLoadDate.getTime();
+
+var pageData = {
+  params: <%= params.to_json.html_safe %>,
+  page_controller_path: "<%= [params[:controller], params[:action]].join('.') %>",
   officer_token: "<%= current_officer.try(:analytics_token) %>",
   response_plan_token: "<%= @response_plan.try(:analytics_token) %>",
   referrer: document.referrer,
   browser: bowser,
   keen: {
-    timestamp: new Date().toISOString()
+    timestamp: pageLoadDate.toISOString()
   }
-});
+};
+
+keenClient.addEvent("Page Load", pageData);
+
+window.onbeforeunload = function (event) {
+  pageData.timeSpentInMilliseconds = new Date().getTime() - pageLoadTime;
+  keenClient.addEvent("Page Unload", pageData);
+}
+
   </script>
 <% end %>
