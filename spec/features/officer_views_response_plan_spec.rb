@@ -15,6 +15,27 @@ feature "Officer views a response plan" do
     expect(page).to have_content(l(response_plan.date_of_birth))
   end
 
+  scenario "They see the person's pictures", :js do
+    sign_in_officer
+    images = [
+      Image.new(source: File.open(Rails.root + "spec/fixtures/image.jpg")),
+      Image.new(source: File.open(Rails.root + "spec/fixtures/secondary_image.jpg")),
+    ]
+    plan = create(:response_plan, images: images)
+
+    visit response_plan_path(plan)
+    expect(page).to have_focused_image(plan.images.first)
+
+    find(".image-scroll-arrow[data-direction='next']").click
+    expect(page).to have_focused_image(plan.images.last)
+  end
+
+  scenario "when user has no pictures they cannot scroll images"
+
+  def have_focused_image(image)
+    have_css("img.focused-image[src='#{image.source_url}']")
+  end
+
   scenario "They see the person's physical characteristics" do
     sign_in_officer
     response_plan = create(

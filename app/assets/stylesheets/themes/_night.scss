@@ -42,6 +42,7 @@ $bullet-background: url("/assets/circle-white.svg");
 $base-border-color: $light-gray;
 $base-border: 1px solid $base-border-color;
 $dark-border: 1px solid $dark-gray;
+$selected-border: 3px solid $blue;
 $field-hover-border-color: shade($base-border-color, 20%);
 $table-header-border-color: shade($base-border-color, 25%);
 

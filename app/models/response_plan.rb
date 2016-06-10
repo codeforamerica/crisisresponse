@@ -4,10 +4,11 @@ class ResponsePlan < ActiveRecord::Base
   include Analytics
   before_create :generate_analytics_token
 
+  has_many :aliases, dependent: :destroy
   has_many :contacts, dependent: :destroy
+  has_many :images, dependent: :destroy
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
   has_many :safety_warnings, dependent: :destroy
-  has_many :aliases, dependent: :destroy
 
   belongs_to :author, class_name: "Officer"
   belongs_to :approver, class_name: "Officer"
@@ -42,8 +43,6 @@ class ResponsePlan < ActiveRecord::Base
     reject_if: :all_blank,
     allow_destroy: true,
   )
-
-  mount_uploader :image, ImageUploader
 
   def aliases=(list_of_aliases)
     alias_objects = list_of_aliases.map do |aka|
@@ -81,6 +80,14 @@ class ResponsePlan < ActiveRecord::Base
 
   def hair_color
     super || "Unknown"
+  end
+
+  def profile_image_url
+    if images.any?
+      images.first.source_url
+    else
+      "/assets/default_image.png"
+    end
   end
 
   def name=(value)

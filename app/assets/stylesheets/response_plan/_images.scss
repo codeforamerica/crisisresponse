@@ -1,0 +1,47 @@
+.images {
+  .focused-image {
+    width: 100%;
+    display: block;
+  }
+
+  .image-scroller {
+    text-align: center;
+  }
+
+  .image-text {
+    display: inline-block;
+    font-size: 0.8em;
+    color: $secondary-text-color;
+  }
+
+  .image-scroll-arrow {
+    display: inline-block;
+    height: 2em;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &[data-direction='prev'] {
+      float: left;
+    }
+
+    &[data-direction='next'] {
+      float: right;
+    }
+  }
+
+  .image-thumbnails {
+    margin-top: $small-spacing;
+    text-align: center;
+  }
+
+  .image-thumbnail {
+    border: $dark-border;
+    height: 3em;
+
+    &-focused {
+      border: $selected-border;
+    }
+  }
+}

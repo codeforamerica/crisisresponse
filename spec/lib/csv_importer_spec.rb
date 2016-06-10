@@ -35,4 +35,13 @@ describe CsvImporter do
       expect(plan.sex).to eq("Female")
     end
   end
+
+  it "imports multiple images" do
+    importer = CsvImporter.new("data.sample")
+
+    importer.create_records
+
+    plan = ResponsePlan.find_by(first_name: "Martha", last_name: "Tannen")
+    expect(plan.images.count).to eq(2)
+  end
 end

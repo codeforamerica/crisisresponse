@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606153404) do
+ActiveRecord::Schema.define(version: 20160609195916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,15 @@ ActiveRecord::Schema.define(version: 20160606153404) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "images", force: :cascade do |t|
+    t.string   "source",           null: false
+    t.integer  "response_plan_id", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "images", ["response_plan_id"], name: "index_images_on_response_plan_id", using: :btree
+
   create_table "officers", force: :cascade do |t|
     t.string   "name",            null: false
     t.string   "unit"
@@ -88,7 +97,6 @@ ActiveRecord::Schema.define(version: 20160606153404) do
     t.string   "eye_color"
     t.date     "date_of_birth"
     t.string   "scars_and_marks"
-    t.string   "image"
     t.integer  "author_id",        null: false
     t.integer  "approver_id"
     t.datetime "approved_at"
@@ -121,6 +129,7 @@ ActiveRecord::Schema.define(version: 20160606153404) do
 
   add_foreign_key "aliases", "response_plans"
   add_foreign_key "contacts", "response_plans"
+  add_foreign_key "images", "response_plans"
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "safety_warnings", "response_plans"
 end
