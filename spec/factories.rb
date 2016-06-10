@@ -17,6 +17,11 @@ FactoryGirl.define do
     description "MyText"
   end
 
+  factory :image do
+    source { File.open(Rails.root + "spec/fixtures/image.jpg") }
+    response_plan
+  end
+
   factory :officer, aliases: [:author, :approver] do
     title "Officer"
     name "Johnson"

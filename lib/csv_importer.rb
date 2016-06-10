@@ -20,6 +20,7 @@ class CsvImporter
       response_plan_attrs = parse_response_plan(csv_row)
       response_strategy_attrs = filter(parse_response_strategies(csv_row))
       contact_attrs = filter(parse_contacts(csv_row))
+      image_attrs = parse_images(csv_row)
       identifying_attrs = response_plan_attrs.slice(:first_name, :last_name)
 
       response_plan = ResponsePlan.find_or_initialize_by(identifying_attrs)
@@ -30,6 +31,7 @@ class CsvImporter
 
       response_plan.response_strategies = response_strategy_attrs.map {|attrs| ResponseStrategy.create!(attrs.merge(response_plan: response_plan)) }
       response_plan.contacts = contact_attrs.map {|attrs| Contact.create!(attrs.merge(response_plan: response_plan)) }
+      response_plan.images = image_attrs.map { |attrs| Image.create!(attrs.merge(response_plan: response_plan)) }
 
       response_plan
     end
@@ -53,7 +55,6 @@ class CsvImporter
       hair_color: csv_row["Hair"],
       eye_color: csv_row["Eye"],
       scars_and_marks: csv_row["Scars, Marks, and Tatoos"],
-      image: parse_image(csv_row),
       background_info: csv_row["Background Info"],
     }
   end
@@ -73,12 +74,17 @@ class CsvImporter
     nil
   end
 
-  def parse_image(csv_row)
-    image_path = "#{image_dir}/#{csv_row["Last Name"].downcase}_#{csv_row["First Name"].downcase}/*".gsub(" ", "_")
+  def parse_images(csv_row)
+    name = [
+      csv_row["Last Name"].downcase,
+      csv_row["First Name"].downcase,
+    ].join("_")
+
+    image_path = "#{image_dir}/#{name}/*".gsub(" ", "_")
     images = Dir.glob(image_path)
 
-    if images.any?
-      File.open(images.first)
+    images.map do |image|
+      { source: File.open(image) }
     end
   end
 

@@ -25,7 +25,7 @@
   <% if @response_plans.any? %>
     <% @response_plans.each do |response_plan| %>
       <%= link_to response_plan_path(response_plan), class: "search-result" do %>
-        <%= image_tag response_plan.image_url %>
+        <%= image_tag response_plan.profile_image_url %>
         <div class="search-result-labels">
           <span class="search-result-name"><%= response_plan.display_name %></span>
           <span class="search-result-dob"><%= l response_plan.date_of_birth %></span>
