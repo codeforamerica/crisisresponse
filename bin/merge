@@ -12,7 +12,7 @@ git rebase -i origin/master &&\
 echo 'git push -f' &&\
 git push --force-with-lease &&\
 echo 'bundle exec rake' &&\
-docker-compose run web bundle exec rspec spec &&\
+bundle exec rspec spec &&\
 echo 'git checkout master' &&\
 git checkout master &&\
 echo 'git pull' &&\
