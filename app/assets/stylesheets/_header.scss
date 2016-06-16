@@ -30,16 +30,6 @@
     width: $header-height / 2;
   }
 
-  @include media($medium-screen-up) {
-    .menu-icon {
-      display: none;
-    }
-
-    .search-icon {
-      margin-left: 0;
-    }
-  }
-
   .identity-name,
   .identity-dob {
     line-height: $header-height / 3;
@@ -68,53 +58,5 @@
     display: inline-block;
     float: right;
     width: 40%;
-  }
-
-  .menu-collapsed {
-    display: none;
-
-    @include media($medium-screen-up) {
-      display: block;
-    }
-  }
-
-  .menu-collapsible {
-    background-color: $menu-background-color;
-    float: left;
-    left: 0;
-    margin-top: $header-height;
-    position: fixed;
-    width: 100%;
-
-    a {
-      border-top: $base-border;
-      color: $header-font-color;
-      display: block;
-      padding-right: 1.5em;
-    }
-
-    @include media($medium-screen-up) {
-      left: auto;
-      margin-top: 0;
-      position: relative;
-      width: auto;
-      background-color: inherit;
-
-      a {
-        border-top: none;
-        display: inline-block;
-        line-height: 1;
-        margin-right: $base-spacing;
-        padding-right: none;
-      }
-
-      .change-theme {
-        background-color: $change-theme-button-background-color;
-        border-radius: 3px;
-        border: 1px solid $change-theme-button-color;
-        color: $change-theme-button-color;
-        padding: $small-spacing;
-      }
-    }
   }
 }

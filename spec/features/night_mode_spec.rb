@@ -11,10 +11,11 @@ feature "Night mode" do
 
   scenario "Officer switches to night mode", :js do
     visit new_authentication_path
+
+    find(".menu-icon").click
     click_on "Light/Dark"
 
     header_color = get_header_background_color
-
     expect(header_color).to eq("rgb(33, 33, 33)")
   end
 

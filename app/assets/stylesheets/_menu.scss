@@ -1,0 +1,45 @@
+$menu-link-height: 3em;
+
+.content {
+  transition: transform $base-duration $base-timing;
+}
+
+@mixin menu-width($width) {
+  .menu {
+    width: $width;
+    transform: translateX($width);
+  }
+
+  .menu-active .content {
+    transform: translateX(-$width);
+  }
+}
+
+.menu {
+  background-color: $menu-background-color;
+  height: 100%;
+  margin-top: $header-height;
+  position: fixed;
+  right: 0;
+  transition: transform $base-duration $base-timing;
+
+  a {
+    border-bottom: $base-border;
+    color: $header-font-color;
+    display: block;
+    height: $menu-link-height;
+    line-height: $menu-link-height;
+    padding: 0 $base-spacing;
+  }
+}
+
+.menu-active .menu {
+  transform: translateX(0);
+  box-shadow: $shadow-level-5;
+}
+
+@include menu-width(75vw);
+
+@include media($medium-screen-up) {
+  @include menu-width(25vw);
+}
