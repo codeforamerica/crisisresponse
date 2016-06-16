@@ -17,19 +17,19 @@ class CsvImporter
 
   def create_records
     data.map do |csv_row|
-      response_plan_attributes = parse_response_plan(csv_row)
+      response_plan_attrs = parse_response_plan(csv_row)
       response_strategy_attrs = filter(parse_response_strategies(csv_row))
       contact_attrs = filter(parse_contacts(csv_row))
-      safety_warning_attrs = filter(parse_safety_warnings(csv_row))
+      identifying_attrs = response_plan_attrs.slice(:first_name, :last_name)
 
-      response_plan = ResponsePlan.new(response_plan_attributes)
+      response_plan = ResponsePlan.find_or_initialize_by(identifying_attrs)
+      response_plan.update_attributes(response_plan_attrs)
       response_plan.author = Officer.find_or_create_by!(parse_author_attrs(csv_row))
       response_plan.approver = Officer.find_or_create_by!(parse_approver_attrs(csv_row))
       response_plan.save!
 
       response_plan.response_strategies = response_strategy_attrs.map {|attrs| ResponseStrategy.create!(attrs.merge(response_plan: response_plan)) }
       response_plan.contacts = contact_attrs.map {|attrs| Contact.create!(attrs.merge(response_plan: response_plan)) }
-      response_plan.safety_warnings = safety_warning_attrs.map {|attrs| SafetyWarning.create!(attrs.merge(response_plan: response_plan)) }
 
       response_plan
     end
@@ -138,19 +138,6 @@ class CsvImporter
         notes: csv_row["Notes - 3"],
       },
     ]
-  end
-
-  def parse_safety_warnings(csv_row)
-    [
-      csv_row["Gun (notes)"],
-      csv_row["Knife (notes)"],
-      csv_row["Other Weapon (notes)"],
-      csv_row["Needles (notes)"],
-      csv_row["General Violence (notes)"],
-      csv_row["Assault on police (notes)"],
-      csv_row["Spitting (notes)"],
-      csv_row["Suidice by cop (notes)"],
-    ].compact.map { |w| { description: w } }
   end
 
   def filter(array_of_hashes)
