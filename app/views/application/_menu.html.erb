@@ -1,0 +1,19 @@
+<div class="menu">
+  <%= link_to("About", page_path("about")) %>
+  <%= link_to("Change Log", page_path("changelog")) %>
+
+  <%= link_to(
+    "Light/Dark",
+    preferences_path(theme: :toggle),
+    method: :post,
+    class: "change-theme",
+  ) %>
+
+  <% if officer_signed_in? %>
+    <%= link_to(
+      t("authentication.sign_out.link"),
+      authentication_path,
+      method: :delete,
+    ) %>
+  <% end %>
+</div>
