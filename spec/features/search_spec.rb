@@ -28,6 +28,15 @@ feature "Search" do
     expect(page).not_to have_content(l(dob))
   end
 
+  scenario "Officer searches for a malformed date" do
+    sign_in_officer
+
+    visit response_plans_path
+
+    search_for("DOB" => "foobar")
+    expect(page).to have_content("... not recognized as a valid date.")
+  end
+
   def search_for(params)
     within(".search") do
       fill_form_and_submit(:response_plan_search, params)

@@ -2,15 +2,17 @@
   Response Plan App
 <% end %>
 
-<%= form_for(@search, url: response_plans_path, method: :get, html: { class: "search" }) do |f| %>
+<%= simple_form_for(
+  @search,
+  url: response_plans_path,
+  method: :get,
+  html: { class: "search" },
+) do |f| %>
   <h1>Search for a Response Plan</h1>
 
   <div class="fields">
-    <%= f.label :name %>
-    <%= f.text_field :name, placeholder: "e.g. Doe, John A" %>
-
-    <%= f.label :date_of_birth, "DOB" %>
-    <%= f.text_field :date_of_birth, placeholder: "e.g. 05-08-1970" %>
+    <%= f.input :name, placeholder: "e.g. Doe, John A" %>
+    <%= f.input :date_of_birth, label: "DOB", placeholder: "e.g. 05-08-1970" %>
   </div>
 
   <div class="actions">

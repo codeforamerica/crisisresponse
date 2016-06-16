@@ -7,12 +7,6 @@
     font-size: 1.6em;
   }
 
-  .fields {
-    @include media($medium-screen-up) {
-      @include span-columns(8 of 12);
-    }
-  }
-
   label {
     @include span-columns(2 of 8);
     text-align: right;
@@ -24,16 +18,33 @@
     @include omega;
   }
 
-  .actions {
-    @include media($medium-screen-up) {
-      @include span-columns(4 of 12);
-    }
+  .field_with_errors input {
+    margin-bottom: 0;
+  }
+
+  .error {
+    @include omega;
+    @include shift(2);
+    @include span-columns(6 of 8);
+    background-color: $red;
+    color: $white;
+    padding: 0 $small-spacing;
   }
 
   input[type="submit"] {
     @include span-columns(3 of 4);
     @include shift(1);
     padding: $base-spacing;
+  }
+
+  @include media($medium-screen-up) {
+    .actions {
+      @include span-columns(4 of 12);
+    }
+
+    .fields {
+      @include span-columns(8 of 12);
+    }
   }
 }
 
