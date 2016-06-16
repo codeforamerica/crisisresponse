@@ -1,5 +1,6 @@
 class ResponsePlanSearch
   include ActiveModel::Model
+  validate :proper_date_format
 
   attr_accessor :name, :date_of_birth
 
@@ -10,7 +11,7 @@ class ResponsePlanSearch
       response_plans = response_plans.search(name)
     end
 
-    if date_of_birth.present?
+    if parsed_date_of_birth.present?
       response_plans = response_plans.where(date_of_birth: date_of_birth_range)
     end
 
@@ -19,11 +20,17 @@ class ResponsePlanSearch
 
   private
 
+  def proper_date_format
+    if date_of_birth.present? && parsed_date_of_birth.nil?
+      errors.add(:date_of_birth, "... not recognized as a valid date.")
+    end
+  end
+
   def date_of_birth_range
     (parsed_date_of_birth - 1.year)..(parsed_date_of_birth + 1.year)
   end
 
   def parsed_date_of_birth
-    Chronic.parse(date_of_birth)
+    @parsed_date_of_birth ||= Chronic.parse(date_of_birth)
   end
 end

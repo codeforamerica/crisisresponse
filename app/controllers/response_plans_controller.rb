@@ -7,6 +7,7 @@ class ResponsePlansController < ApplicationController
 
   def index
     @search = ResponsePlanSearch.new(search_params)
+    @search.validate
     @response_plans = @search.close_matches
   end
 
