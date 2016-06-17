@@ -20,10 +20,10 @@ en:
       none: No safety warnings
 
   search:
-    results:
-      none: No results found
     form:
       label: Search by name, DOB, or physical description
+    results:
+      none: No results found
 
   authentication:
     unauthenticated: Please sign in to continue.

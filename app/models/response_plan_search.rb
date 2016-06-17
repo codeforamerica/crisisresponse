@@ -21,9 +21,13 @@ class ResponsePlanSearch
   private
 
   def proper_date_format
-    if date_of_birth.present? && parsed_date_of_birth.nil?
-      errors.add(:date_of_birth, "... not recognized as a valid date.")
+    if invalid_date?
+      errors.add(:date_of_birth, "Ignored invalid date. Try 'MM/DD/YY'")
     end
+  end
+
+  def invalid_date?
+    date_of_birth.present? && parsed_date_of_birth.nil?
   end
 
   def date_of_birth_range
