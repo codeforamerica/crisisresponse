@@ -7,7 +7,8 @@ describe ResponsePlanSearch do
 
       search.validate
 
-      expect(search.errors[:date_of_birth]).to include("... not recognized as a valid date.")
+      expect(search.errors[:date_of_birth]).
+        to include("Ignored invalid date. Try 'MM/DD/YY'")
     end
   end
 

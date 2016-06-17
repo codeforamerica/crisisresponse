@@ -34,7 +34,7 @@ feature "Search" do
     visit response_plans_path
 
     search_for("DOB" => "foobar")
-    expect(page).to have_content("... not recognized as a valid date.")
+    expect(page).to have_content("Ignored invalid date. Try 'MM/DD/YY'")
   end
 
   def search_for(params)

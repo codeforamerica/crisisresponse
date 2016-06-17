@@ -20,6 +20,7 @@
 
   .field_with_errors input {
     margin-bottom: 0;
+    border-radius: $base-border-radius $base-border-radius 0 0;
   }
 
   .error {
@@ -27,7 +28,9 @@
     @include shift(2);
     @include span-columns(6 of 8);
     background-color: $red;
+    border-radius: 0 0 $base-border-radius $base-border-radius;
     color: $white;
+    margin-bottom: $base-spacing;
     padding: 0 $small-spacing;
   }
 
