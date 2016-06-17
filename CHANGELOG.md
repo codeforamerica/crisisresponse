@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented here.
 
+## [0.1.1] - 2016-06-17
+
+## Added
+
+* Response plans now support multiple images.
+  If a plan has more than one image,
+  the app will show controls for clicking through them.
+* Searching by DOB now recognizes several different date formats, including:
+  - `mm/dd/yyyy`
+  - `mm/dd/yy`
+  - `mm-dd-yyyy`
+  - `mm-dd-yy`
+  - `mmddyyyy`
+  - `mmddyy`
+  - `yyyy-mm-dd`
+
+## Fixed
+
+* A bug caused the application to crash
+  when an unrecognized date was entered into the "DOB" search field.
+  Now, we show a helpful error message.
+
+## Changed
+
+* To stop things from getting to crowded in the top navigation bar,
+  we've moved several links from the navigation bar to the menu.
+  Click on the menu icon ( ![menu] )
+  to see the links.
+
+
+[menu]: https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_menu_black_24px.svg
+
 ## [0.1.0] - 2016-06-08
 
 ### Note
@@ -43,5 +75,6 @@ All notable changes to this project will be documented here.
 * Text entered into search or feedback fields is now visible in night mode
 
 [Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...HEAD
+[0.1.1]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/codeforamerica/crisisresponse/compare/v0.0.2...v0.1.0
 [0.0.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.0.1...v0.0.2
