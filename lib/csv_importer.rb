@@ -47,7 +47,7 @@ class CsvImporter
       first_name: csv_row["First Name"],
       last_name: csv_row["Last Name"],
       aliases: csv_row["Aliases"].to_s.split(",").map(&:strip),
-      date_of_birth: Chronic.parse(csv_row["DOB"]),
+      date_of_birth: Date.strptime(csv_row["DOB"], "%m-%d-%Y"),
       race: parse_race(csv_row["Race"]),
       sex: csv_row["Gender"].titlecase,
       height_in_inches: parse_height(csv_row["Height"]),

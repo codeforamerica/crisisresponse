@@ -2,6 +2,16 @@ class ResponsePlanSearch
   include ActiveModel::Model
   validate :proper_date_format
 
+  ACCEPTED_DATE_FORMATS = [
+    "%m/%d/%Y",
+    "%m/%d/%y",
+    "%m-%d-%Y",
+    "%m-%d-%y",
+    "%m%d%Y",
+    "%m%d%y",
+    "%Y-%m-%d",
+  ].freeze
+
   attr_accessor :name, :date_of_birth
 
   def close_matches
@@ -35,6 +45,10 @@ class ResponsePlanSearch
   end
 
   def parsed_date_of_birth
-    @parsed_date_of_birth ||= Chronic.parse(date_of_birth)
+    @parsed_date_of_birth ||= ACCEPTED_DATE_FORMATS.map do |format|
+      attempted_parse = Date.strptime(date_of_birth, format) rescue nil
+      feasible = (120.years.ago.to_date..Date.today).cover?(attempted_parse)
+      feasible ? attempted_parse : nil
+    end.compact.first
   end
 end
