@@ -117,25 +117,34 @@ describe ResponsePlanSearch do
     end
 
     describe "searching by date of birth" do
-      it "does not return records whose dob does not match" do
-        dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, date_of_birth: dob)
-
-        plans = ResponsePlanSearch.new(date_of_birth: "2/3/86").close_matches
-
-        expect(plans).to eq([])
-      end
-
       it "parses dates in 'mm/dd/yy'" do
-        dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, date_of_birth: dob)
+        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
+        _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
 
         plans = ResponsePlanSearch.new(date_of_birth: "1/2/80").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(plans).to eq([match])
       end
 
-      pending "parses dates in 'mmddyyyy'" do
+      it "parses dates in 'mm/dd/yyyy'" do
+        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
+        _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
+
+        plans = ResponsePlanSearch.new(date_of_birth: "1/2/1980").close_matches
+
+        expect(plans).to eq([match])
+      end
+
+      it "parses dates in 'mmddyy'" do
+        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
+        _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
+
+        plans = ResponsePlanSearch.new(date_of_birth: "010280").close_matches
+
+        expect(plans).to eq([match])
+      end
+
+      it "parses dates in 'mmddyyyy'" do
         match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
         _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
 
@@ -144,8 +153,9 @@ describe ResponsePlanSearch do
         expect(plans).to eq([match])
       end
 
-      it "ignores dates in an unrecognized format" do
+      pending "ignores dates in an unrecognized format" do
         plan = create(:response_plan)
+        _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
 
         plans = ResponsePlanSearch.new(date_of_birth: "foo").close_matches
 
@@ -153,57 +163,54 @@ describe ResponsePlanSearch do
       end
 
       it "parses dates in 'mm-dd-yyyy'" do
-        dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, date_of_birth: dob)
+        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
+        _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
 
         plans = ResponsePlanSearch.new(date_of_birth: "1-2-1980").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(plans).to eq([match])
       end
 
       it "parses dates in 'mm-dd-yy'" do
-        dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, date_of_birth: dob)
+        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
+        _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
 
         plans = ResponsePlanSearch.new(date_of_birth: "1-2-80").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(plans).to eq([match])
       end
 
       it "parses dates in 'yyyy-mm-dd'" do
-        dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, date_of_birth: dob)
+        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
+        _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
 
         plans = ResponsePlanSearch.new(date_of_birth: "1980-1-2").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(plans).to eq([match])
       end
 
       it "returns records whose DOBs are a year earlier" do
-        dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, date_of_birth: dob)
+        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
 
         plans = ResponsePlanSearch.new(date_of_birth: "1/2/81").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(plans).to eq([match])
       end
 
       it "returns records whose DOBs are a year later" do
-        dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, date_of_birth: dob)
+        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
 
         plans = ResponsePlanSearch.new(date_of_birth: "1/2/79").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(plans).to eq([match])
       end
 
       it "returns records whose DOBs are within a year" do
-        dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, date_of_birth: dob)
+        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
 
         plans = ResponsePlanSearch.new(date_of_birth: "5/2/80").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(plans).to eq([match])
       end
     end
 

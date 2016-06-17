@@ -66,7 +66,6 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    chronic (0.10.2)
     cliver (0.3.2)
     coderay (1.1.0)
     concurrent-ruby (1.0.1)
@@ -272,7 +271,6 @@ DEPENDENCIES
   bullet
   bundler-audit
   carrierwave
-  chronic
   database_cleaner
   delayed_job_active_record
   dotenv-rails
@@ -312,5 +310,8 @@ DEPENDENCIES
   web-console
   webmock
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.12.5
