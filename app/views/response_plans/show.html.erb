@@ -3,6 +3,12 @@
 <% end %>
 
 <div class="main">
+  <% unless @response_plan.approved? %>
+    <div class="needs-approval">
+      <%= t("response_plans.needs_approval") %>
+    </div>
+  <% end %>
+
   <div class="left-column">
     <%= render "sections/images" %>
     <%= render "sections/profile" %>

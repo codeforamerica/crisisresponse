@@ -15,9 +15,14 @@ en:
       response_plan_search:
         create: Search
 
-  response_plan:
+  response_plans:
     safety:
       none: No safety warnings
+    create:
+      success: Created a response plan for %{name}
+    update:
+      success: "Updated %{name}'s response plan"
+    needs_approval: This response plan will not be visible to patrol officers until it is approved.
 
   search:
     form:
@@ -34,6 +39,8 @@ en:
     sign_out:
       link: Sign out
       success: Successfully signed out.
+    unauthorized:
+      new_response_plan: You are not allowed to create new response plans.
 
   time:
     formats:

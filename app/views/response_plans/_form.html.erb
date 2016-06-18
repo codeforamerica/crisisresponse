@@ -1,0 +1,28 @@
+<%= simple_form_for(@response_plan) do |f| %>
+  <div class="response_plan_form">
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :date_of_birth, label: "DOB", as: :string %>
+
+    <%= render "nested_form", f: f, relationship: :aliases, html_classes: [] %>
+
+    <%= f.input :race, collection: ResponsePlan::RACE_CODES.keys %>
+    <%= f.input :sex, collection: ResponsePlan::SEX_CODES.keys %>
+    <%= f.input :weight_in_pounds, label: "Weight" %>
+    <%= f.input :height_in_inches, label: "Height" %>
+    <%= f.input :eye_color %>
+    <%= f.input :hair_color %>
+    <%= f.input :scars_and_marks %>
+    <%= f.input :background_info %>
+    <%= f.input :location_name %>
+    <%= f.input :location_address %>
+
+    <%= render "nested_form", f: f, relationship: :contacts, html_classes: ["multi-field"] %>
+    <%= render "nested_form", f: f, relationship: :images, html_classes: [] %>
+    <%= render "nested_form", f: f, relationship: :response_strategies, html_classes: ["multi-field"] %>
+
+    <%= f.input :private_notes %>
+
+    <%= f.button :submit %>
+  </div>
+<% end %>

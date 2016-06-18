@@ -1,0 +1,63 @@
+.response_plan_form {
+  label {
+    @include span-columns(2 of 12);
+  }
+
+  textarea {
+    height: 10em;
+  }
+
+  & > .input {
+    @include fill-parent;
+    overflow: hidden;
+
+    input,
+    select,
+    textarea {
+      @include span-columns(6 of 12);
+    }
+  }
+
+  .nested-form {
+    @include fill-parent;
+    overflow: hidden;
+  }
+
+  .nested-field-container {
+    @include span-columns(8 of 12);
+    margin-bottom: $base-spacing;
+
+    .input {
+      @include span-columns(6 of 8);
+      margin-bottom: 0;
+    }
+
+    .remove_fields {
+      vertical-align: sub;
+    }
+  }
+
+  .nested-fields {
+    overflow: hidden;
+  }
+
+  .multi-field .nested-fields {
+    border-top: $base-border;
+    padding-top: $small-spacing;
+
+    &:not(:first-child) {
+      margin-top: $small-spacing;
+    }
+  }
+
+  .image-fields img {
+    @include span-columns(4 of 6);
+    margin-bottom: $small-spacing;
+  }
+
+  input[type="submit"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

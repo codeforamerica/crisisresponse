@@ -41,6 +41,7 @@ FactoryGirl.define do
     hair_color "black"
     eye_color "blue"
     date_of_birth { 25.years.ago }
+    updated_at { 1.second.ago }
   end
 
   factory :response_strategy do

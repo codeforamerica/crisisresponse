@@ -85,7 +85,22 @@ input[type="file"] {
 }
 
 select {
+  border: $base-border;
+}
+
+.field_with_errors input {
+  margin-bottom: 0;
+  border-radius: $base-border-radius $base-border-radius 0 0;
+}
+
+.error {
+  @include fill-parent;
+  background-color: $red;
+  border-radius: 0 0 $base-border-radius $base-border-radius;
+  color: $white;
   margin-bottom: $base-spacing;
-  max-width: 100%;
-  width: auto;
+  padding: 0 $small-spacing;
+}
+.input {
+  margin-bottom: $base-spacing;
 }

@@ -4,6 +4,7 @@ $red: #d23a0a;
 $dark-gray: #4a4a4a;
 $medium-gray: #9b9b9b;
 $light-gray: #ddd;
+$yellow: #e8c925;
 $white: #ffffff;
 $off-white: #f0f0f0;
 
@@ -61,3 +62,7 @@ $disabled-field-background-color: shade($base-background-color, 5%);
 $fieldset-background-color: tint($base-border-color, 75%);
 $field-background-color: $white;
 $field-text-color: $dark-gray;
+
+// Flashes & Notices
+$needs-approval-background-color: $yellow;
+$needs_approval-text-color: $base-font-color;

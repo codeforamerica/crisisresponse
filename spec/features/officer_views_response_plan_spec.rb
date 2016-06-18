@@ -1,6 +1,8 @@
 require "rails_helper"
 
 feature "Officer views a response plan" do
+  include Permissions
+
   scenario "They see the person's basic information" do
     sign_in_officer
     response_plan = create(
@@ -66,7 +68,7 @@ feature "Officer views a response plan" do
     response_plan = create(
       :response_plan,
       name: "John Doe",
-      aliases: aliases,
+      alias_list: aliases,
     )
 
     visit response_plan_path(response_plan)
@@ -123,17 +125,41 @@ feature "Officer views a response plan" do
 
     visit response_plan_path(response_plan)
 
-    expect(page).to have_content("Prepared By Jacques Clouseau")
+    expect(page).to have_content("Prepared by Jacques Clouseau")
   end
 
-  scenario "They see the approving officer" do
-    sign_in_officer
-    officer = create(:officer, name: "Jacques Clouseau")
-    response_plan = create(:response_plan, approver: officer)
+  context "when the response plan has been approved" do
+    scenario "they don't see a note that it needs approval" do
+      sign_in_officer
+      response_plan = create(:response_plan)
 
-    visit response_plan_path(response_plan)
+      visit response_plan_path(response_plan)
 
-    expect(page).to have_content("Approved By Jacques Clouseau")
+      expect(page).not_to have_content(t("response_plans.needs_approval"))
+    end
+
+    scenario "They see the approving officer" do
+      sign_in_officer
+      officer = create(:officer, name: "Jacques Clouseau")
+      response_plan = create(:response_plan, approver: officer)
+
+      visit response_plan_path(response_plan)
+
+      expect(page).to have_content("Approved by Jacques Clouseau")
+    end
+  end
+
+  context "when the response plan needs approval" do
+    scenario "an admin sees a note that it needs approval" do
+      admin = create(:officer, username: "admin")
+      stub_admin_permissions(admin)
+      sign_in_officer(admin)
+      response_plan = create(:response_plan, approver: nil)
+
+      visit response_plan_path(response_plan)
+
+      expect(page).to have_content(t("response_plans.needs_approval"))
+    end
   end
 
   context "when there are no safety warnings" do
@@ -143,7 +169,7 @@ feature "Officer views a response plan" do
 
       visit response_plan_path(response_plan)
 
-      expect(page).to have_content(t("response_plan.safety.none"))
+      expect(page).to have_content(t("response_plans.safety.none"))
     end
   end
 
