@@ -67,6 +67,7 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
     cliver (0.3.2)
+    cocoon (1.2.9)
     coderay (1.1.0)
     concurrent-ruby (1.0.1)
     crack (0.4.3)
@@ -271,6 +272,7 @@ DEPENDENCIES
   bullet
   bundler-audit
   carrierwave
+  cocoon
   database_cleaner
   delayed_job_active_record
   dotenv-rails

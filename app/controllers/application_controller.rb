@@ -14,6 +14,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authorize_admin
+    unless officer_signed_in? && current_officer.admin?
+      redirect_to(
+        response_plans_path,
+        alert: t("authentication.unauthorized.new_response_plan"),
+      )
+    end
+  end
+
   def current_officer
     Officer.find_by(id: session[:officer_id])
   end

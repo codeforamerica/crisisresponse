@@ -1,0 +1,11 @@
+<div class="nested-fields">
+  <% if f.object.persisted? %>
+    <div class="input">
+      <%= image_tag f.object.source %>
+    </div>
+  <% else %>
+    <%= f.input :source, label: false %>
+  <% end %>
+
+  <%= link_to_remove_association "remove image", f %>
+</div>

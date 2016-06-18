@@ -13,10 +13,12 @@
     <div class="about-label date-label">Prepared on</div>
     <div class="created-date"><%= l @response_plan.updated_at.to_date %></div>
 
-    <div class="about-label approver-label">Approved by</div>
-    <div class="approver-name">
-      <div><%= @response_plan.approver.name %></div>
-    </div>
+    <% if @response_plan.approver.present? %>
+      <div class="about-label approver-label">Approved by</div>
+      <div class="approver-name">
+        <div><%= @response_plan.approver.name %></div>
+      </div>
+    <% end %>
   </div>
 
   <%= render "section_dialer", phone: ENV.fetch("ADMINISTRATOR_CONTACT_PHONE") %>

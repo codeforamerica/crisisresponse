@@ -1,0 +1,17 @@
+<div class="nested-form <%= relationship.to_s %> <%= html_classes.join(" ") %>">
+  <label><%= relationship.to_s.titleize %></label>
+
+  <div class="nested-field-container <%= relationship.to_s.singularize %>-fields">
+    <%= f.simple_fields_for relationship do |nested_form| %>
+      <%= render "#{relationship.to_s.singularize}_fields", f: nested_form %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association(
+        "add #{relationship.to_s.singularize.humanize.downcase}",
+        f,
+        relationship,
+      ) %>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,15 @@ $bullet-size: 3rem;
   }
 }
 
+.needs-approval {
+  @include fill-parent;
+  background-color: $needs-approval-background-color;
+  color: $needs-approval-text-color;
+  margin-bottom: $base-spacing;
+  padding: $small-spacing;
+  text-align: center;
+}
+
 .response-plan {
   @include span-columns(8 of 8);
   counter-reset: response-strategy-counter;

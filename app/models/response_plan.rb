@@ -10,6 +10,27 @@ class ResponsePlan < ActiveRecord::Base
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
   has_many :safety_warnings, dependent: :destroy
 
+  accepts_nested_attributes_for(
+    :aliases,
+    reject_if: :all_blank,
+    allow_destroy: true,
+  )
+  accepts_nested_attributes_for(
+    :contacts,
+    reject_if: :all_blank,
+    allow_destroy: true,
+  )
+  accepts_nested_attributes_for(
+    :images,
+    reject_if: :all_blank,
+    allow_destroy: true,
+  )
+  accepts_nested_attributes_for(
+    :response_strategies,
+    reject_if: :all_blank,
+    allow_destroy: true,
+  )
+
   belongs_to :author, class_name: "Officer"
   belongs_to :approver, class_name: "Officer"
 
@@ -28,6 +49,9 @@ class ResponsePlan < ActiveRecord::Base
 
   validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
   validates :race, inclusion: RACE_CODES.keys, allow_nil: true
+  validates :date_of_birth, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validate :approver_is_not_author
   validate :approved_at_is_present_if_approver_exists
   validate :approver_is_present_if_approved_at_exists
@@ -44,20 +68,22 @@ class ResponsePlan < ActiveRecord::Base
     allow_destroy: true,
   )
 
-  def aliases=(list_of_aliases)
+  def alias_list=(list_of_aliases)
     alias_objects = list_of_aliases.map do |aka|
       Alias.find_or_initialize_by(name: aka, response_plan: self)
     end
 
-    super(alias_objects)
+    self.aliases = alias_objects
   end
 
-  def aliases
-    super.pluck(:name)
+  def alias_list
+    aliases.pluck(:name)
   end
 
   def approved?
-    approved_at.present? && approver.present?
+    approved_at.present? &&
+      approver.present? &&
+      approved_at > updated_at
   end
 
   def approver=(value)

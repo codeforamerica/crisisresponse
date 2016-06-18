@@ -58,11 +58,11 @@ RSpec.describe ResponsePlan, type: :model do
     it { should belong_to(:approver) }
   end
 
-  describe "#aliases=" do
+  describe "#alias_list=" do
     it "destroys the associated alias object when it gets overwritten" do
-      plan = create(:response_plan, aliases: ["foo"])
+      plan = create(:response_plan, alias_list: ["foo"])
 
-      plan.aliases = ["bar"]
+      plan.alias_list = ["bar"]
       plan.save
 
       expect(Alias.find_by(name: "foo")).to be_nil
@@ -99,6 +99,18 @@ RSpec.describe ResponsePlan, type: :model do
         :response_plan,
         approved_at: Time.current,
         approver: nil,
+      )
+
+      expect(response_plan).not_to be_approved
+    end
+
+    it "returns false if the plan has been edited since it was approved" do
+      officer = build(:officer)
+      response_plan = build_stubbed(
+        :response_plan,
+        approved_at: 1.day.ago,
+        approver: officer,
+        updated_at: Time.current,
       )
 
       expect(response_plan).not_to be_approved

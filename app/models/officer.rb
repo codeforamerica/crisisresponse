@@ -11,4 +11,8 @@ class Officer < ActiveRecord::Base
     class_name: "ResponsePlan",
     foreign_key: :approver_id,
     dependent: :destroy
+
+  def admin?
+    ENV.fetch("ADMIN_USERNAMES").to_s.split(",").include?(username)
+  end
 end

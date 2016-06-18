@@ -27,6 +27,7 @@
   <% if @response_plans.any? %>
     <% @response_plans.each do |response_plan| %>
       <%= link_to response_plan_path(response_plan), class: "search-result" do %>
+        <span class="needs-approval-banner">Needs Approval</span>
         <%= image_tag response_plan.profile_image_url %>
         <div class="search-result-labels">
           <span class="search-result-name"><%= response_plan.display_name %></span>
