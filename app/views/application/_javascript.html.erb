@@ -4,6 +4,8 @@
 
 <%= render "analytics" %>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV.fetch("GOOGLE_MAPS_API_KEY") %>&callback=initMap" async defer></script>
+
 <% if Rails.env.test? %>
   <%= javascript_tag do %>
     $.fx.off = true;

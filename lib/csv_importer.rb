@@ -56,7 +56,15 @@ class CsvImporter
       eye_color: csv_row["Eye"],
       scars_and_marks: csv_row["Scars, Marks, and Tatoos"],
       background_info: csv_row["Background Info"],
+      location_name: csv_row["Current residence (title)"],
+      location_address: parse_address(csv_row),
     }
+  end
+
+  def parse_address(csv_row)
+    %w[street city state zip].map do |address_component|
+      csv_row["Current residence (#{address_component})"]
+    end.compact.join(", ")
   end
 
   def parse_race(race)
