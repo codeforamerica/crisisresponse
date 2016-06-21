@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160609195916) do
+ActiveRecord::Schema.define(version: 20160621064417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 20160609195916) do
     t.datetime "approved_at"
     t.text     "background_info"
     t.string   "analytics_token"
+    t.string   "location_name"
+    t.string   "location_address"
   end
 
   add_index "response_plans", ["approver_id"], name: "index_response_plans_on_approver_id", using: :btree

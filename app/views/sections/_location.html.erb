@@ -1,0 +1,26 @@
+<% if @response_plan.location_address.present? %>
+  <section
+    class="location"
+    data-address="<%= @response_plan.location_address %>"
+    >
+    <div class="section-body">
+      <span class="location-meta">Address</span>
+
+      <span class="location-name">
+        <%= @response_plan.location_name %>
+      </span>
+
+      <span class="location-address">
+        <span class="location-address-line-one"></span>
+        <span class="location-address-line-two"></span>
+      </span>
+
+      <div class="map-controls">
+        <span class="zoom zoom-out"></span>
+        <span class="zoom zoom-in"></span>
+      </div>
+    </div>
+
+    <div class="location-map"></div>
+  </section>
+<% end %>

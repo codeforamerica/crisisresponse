@@ -1,0 +1,40 @@
+$zoom-control-height: 1.5em;
+
+.location-map {
+  height: 12em;
+}
+
+.location-meta,
+.location-name,
+.location-address {
+  display: block;
+}
+
+.location-name {
+  font-size: 1.6em;
+}
+
+.location-address-line-one,
+.location-address-line-two {
+  display: block;
+}
+
+.map-controls {
+  text-align: right;
+  margin-top: $small-spacing;
+}
+
+.zoom {
+  height: $zoom-control-height;
+  width: $zoom-control-height;
+  background-size: contain;
+  display: inline-block;
+}
+
+.zoom-in {
+  background-image: image_url("zoom_in.svg");
+}
+
+.zoom-out {
+  background-image: image_url("zoom_out.svg");
+}
