@@ -8,6 +8,7 @@
   <div class="section-body">
     <div class="contact-name"><%= contact.name %></div>
     <div class="contact-relationship"><%= contact.relationship %></div>
+    <div class="contact-organization"><%= contact.organization %></div>
 
     <% if contact.notes.present? %>
       <div class="contact-notes">
@@ -19,6 +20,6 @@
 
   <%= tel_to(contact.cell, class: "section-body contact-cell") do %>
       <%= contact.cell %>
-      <%= image_tag("/assets/phone.svg") %>
+      <%= image_tag("/assets/phone-#{theme}.svg") %>
   <% end %>
 </section>

@@ -4,6 +4,11 @@ $zoom-control-height: 1.5em;
   height: 12em;
 }
 
+.location-meta {
+  color: $secondary-text-color;
+  margin-bottom: $small-spacing;
+}
+
 .location-meta,
 .location-name,
 .location-address {
@@ -32,9 +37,9 @@ $zoom-control-height: 1.5em;
 }
 
 .zoom-in {
-  background-image: image_url("zoom_in.svg");
+  background-image: $zoom_in_image;
 }
 
 .zoom-out {
-  background-image: image_url("zoom_out.svg");
+  background-image: $zoom_out_image;
 }

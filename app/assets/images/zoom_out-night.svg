@@ -1,0 +1,11 @@
+<svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+    <title>
+        Zoom Out
+    </title>
+    <g transform="translate(2 -9)" fill="none" fill-rule="evenodd">
+        <text font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="37" font-weight="bold" fill-opacity=".54" fill="#fff">
+            <tspan x="7.471" y="36">-</tspan>
+        </text>
+        <ellipse stroke-opacity=".54" stroke="#fff" stroke-width="3" cx="15" cy="26" rx="15" ry="15"/>
+    </g>
+</svg>

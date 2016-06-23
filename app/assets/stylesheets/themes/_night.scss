@@ -1,5 +1,5 @@
 // Colors
-$blue: #0026ff;
+$blue: #50e2e3;
 $red: #f44336;
 $dark-gray: #424242;
 $medium-gray: #9b9b9b;
@@ -22,7 +22,7 @@ $change-theme-button-color: $header-background-color;
 
 // Sections
 $section-header-font-color: $white;
-$section-header-color: $blue;
+$section-header-color: #0026ff;
 $secondary-section-header-background: $off-black;
 $safety-section-header-background: $red;
 $section-body-background: $black;
@@ -36,7 +36,11 @@ $link-active-color: shade($action-color, 25%);
 $base-font-color: $white;
 $secondary-text-color: rgba(256, 256, 256, 0.80);
 $contact-notes-color: darken($base-font-color, 25%);
+
+// Icons
 $bullet-background: url("/assets/circle-white.svg");
+$zoom_in_image: url("zoom_in-night.svg");
+$zoom_out_image: url("zoom_out-night.svg");
 
 // Borders
 $base-border-color: $light-gray;

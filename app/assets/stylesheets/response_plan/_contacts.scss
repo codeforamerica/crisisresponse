@@ -9,7 +9,8 @@
   @include heavy-font;
 }
 
-.contact-relationship {
+.contact-relationship,
+.contact-organization {
   @include light-font;
   color: $secondary-text-color;
 }
