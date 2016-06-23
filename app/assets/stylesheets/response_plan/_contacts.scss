@@ -1,15 +1,17 @@
 .contact {
-  margin-bottom: $base-spacing * 2;
-
-  @include media($medium-screen-up) {
-    @include span-columns(4 of 8);
-    &:nth-child(2n) { @include omega; }
+  .section-header {
+    background-color: $section-body-background;
+    color: $base-font-color;
   }
 }
 
 .contact-name {
   @include heavy-font;
-  margin-bottom: $small-spacing;
+}
+
+.contact-relationship {
+  @include light-font;
+  color: $secondary-text-color;
 }
 
 .contact-notes {
@@ -22,4 +24,14 @@
 .contact-notes-label {
   font-weight: 400;
   color: $base-font-color;
+}
+
+.contact-cell {
+  border-top: $base-border;
+  text-align: right;
+
+  img {
+    vertical-align: text-bottom;
+    height: 1.3em;
+  }
 }

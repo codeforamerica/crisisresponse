@@ -10,12 +10,14 @@ section {
 
   .section-header {
     background-color: $section-header-color;
+    color: $section-header-font-color;
     display: flex;
     padding: $small-spacing;
     align-items: center;
   }
 
   .section-body {
+    display: block;
     padding: $small-spacing $base-spacing;
     overflow: hidden;
   }
@@ -26,7 +28,6 @@ section {
   }
 
   .section-header-text {
-    color: $section-header-font-color;
     font-weight: normal;
     line-height: 1;
     margin-bottom: 0;
