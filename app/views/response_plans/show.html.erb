@@ -6,15 +6,19 @@
   <div class="left-column">
     <%= render "sections/images" %>
     <%= render "sections/profile" %>
-    <%= render "sections/about" %>
     <%= render "sections/location" %>
+
+    <% @response_plan.contacts.each do |contact| %>
+      <%= render "sections/contact", contact: contact %>
+    <% end %>
+
+    <%= render "sections/about" %>
   </div>
 
   <div class="right-column">
     <%= render "sections/safety_warnings" %>
     <%= render "sections/response_plan" %>
     <%= render "sections/background_info" %>
-    <%= render "sections/contacts" %>
     <%= render "sections/about" %>
   </div>
 </div>

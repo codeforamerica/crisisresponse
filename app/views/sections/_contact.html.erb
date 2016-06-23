@@ -1,0 +1,24 @@
+<section class="contact">
+  <div class="section-header">
+    <div class="section-header-text">
+      <h2 class="section-title">Contact</h2>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <div class="contact-name"><%= contact.name %></div>
+    <div class="contact-relationship"><%= contact.relationship %></div>
+
+    <% if contact.notes.present? %>
+      <div class="contact-notes">
+        <div class="contact-notes-label">Notes</div>
+        <%= contact.notes %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= tel_to(contact.cell, class: "section-body contact-cell") do %>
+      <%= contact.cell %>
+      <%= image_tag("/assets/phone.svg") %>
+  <% end %>
+</section>

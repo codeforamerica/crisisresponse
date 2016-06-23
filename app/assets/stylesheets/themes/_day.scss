@@ -33,7 +33,7 @@ $link-active-color: shade($action-color, 25%);
 // Font Colors
 $base-font-color: $dark-gray;
 $secondary-text-color: rgba(0, 0, 0, 0.54);
-$contact-notes-color: lighten($base-font-color, 25%);
+$contact-notes-color: $secondary-text-color;
 $bullet-background: url("/assets/circle.svg");
 
 // Borders
