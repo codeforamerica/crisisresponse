@@ -3,7 +3,7 @@ $(function() {
 
   $(".image-scroll-arrow").on("click", function(event) {
     var focusedIndex = $("." + focusedImageClass).index();
-    var direction = event.target.dataset.direction;
+    var direction = event.target.getAttribute("data-direction");
     var numImages = $(".image-thumbnail").size();
 
     if(direction == "next")
@@ -30,7 +30,7 @@ $(function() {
     $("." + focusedImageClass).removeClass(focusedImageClass)
 
     var image = $(".image-thumbnail")[index];
-    image.classList.add(focusedImageClass);
+    image.className += " " + focusedImageClass;
 
     $(".focused-image").attr("src", $(image).attr("src"));
   }
