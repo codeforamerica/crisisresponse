@@ -2,9 +2,21 @@
 
 All notable changes to this project will be documented here.
 
+## [0.1.2] - 2016-06-30
+
+### Added
+
+* If an individual has a known address,
+  display it on a map in the left column of the response plan.
+
+### Changed
+
+* Display an individual's emergency contacts more clearly,
+  with a larger button for starting a phone call.
+
 ## [0.1.1] - 2016-06-17
 
-## Added
+### Added
 
 * Response plans now support multiple images.
   If a plan has more than one image,
@@ -18,13 +30,13 @@ All notable changes to this project will be documented here.
   - `mmddyy`
   - `yyyy-mm-dd`
 
-## Fixed
+### Fixed
 
 * A bug caused the application to crash
   when an unrecognized date was entered into the "DOB" search field.
   Now, we show a helpful error message.
 
-## Changed
+### Changed
 
 * To stop things from getting to crowded in the top navigation bar,
   we've moved several links from the navigation bar to the menu.
@@ -75,6 +87,7 @@ All notable changes to this project will be documented here.
 * Text entered into search or feedback fields is now visible in night mode
 
 [Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...HEAD
+[0.1.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...v0.1.2
 [0.1.1]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/codeforamerica/crisisresponse/compare/v0.0.2...v0.1.0
 [0.0.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.0.1...v0.0.2
