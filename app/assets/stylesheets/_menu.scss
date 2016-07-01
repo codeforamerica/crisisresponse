@@ -6,12 +6,11 @@ $menu-link-height: 3em;
     transform: translateX($width);
   }
 
+  .menu-active .footer,
+  .menu-active .header,
   .menu-active .main-content {
     transform: translateX(-$width);
-  }
-
-  .menu-active .header {
-    -ms-transform: translateX(-$width);
+    transition: transform $base-duration $base-timing;
   }
 }
 
@@ -21,6 +20,7 @@ $menu-link-height: 3em;
   position: fixed;
   right: 0;
   transition: transform $base-duration $base-timing;
+  z-index: 2;
 
   a {
     border-bottom: $base-border;
@@ -41,4 +41,37 @@ $menu-link-height: 3em;
 
 @include media($medium-screen-up) {
   @include menu-width(25vw);
+}
+
+.change-theme {
+  $padding-factor: 0.2;
+  $padding: $padding-factor * 1em;
+  $toggle-height: 1em + (2 * $padding);
+
+  height: $header-height;
+  line-height: $header-height;
+  text-align: center;
+
+  &-toggle {
+    background-color: $toggle-background-color;
+    border-radius: $toggle-height / 2;
+    color: $toggle-unselected-text-color;
+    display: inline;
+    height: $toggle-height;
+    overflow: hidden;
+    padding: $padding / 2;
+
+    .theme {
+      height: 1em;
+      padding: 0 0.3em;
+    }
+
+    .selected {
+      background-color: $toggle-selected-background-color;
+      border-radius: 0.6em;
+      color: $toggle-selected-text-color;
+      display: inline;
+      overflow: hidden;
+    }
+  }
 }
