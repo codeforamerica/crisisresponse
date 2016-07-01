@@ -1,4 +1,10 @@
 .profile {
+  .scars-marks-label {
+    @include heavy-font;
+    display: inline;
+    margin-right: $small-spacing;
+  }
+
   .aliases ul {
     list-style-type: disc;
     padding-left: $base-spacing;
