@@ -19,12 +19,14 @@
   <%= render "javascript" %>
 </head>
 <body class="<%= body_class %>">
-  <%= render "header" %>
-  <%= render "menu" %>
-  <%= render "flashes" -%>
-  <div class="content">
-    <%= yield %>
+  <div class="main-content">
+    <%= render "header" %>
+    <%= render "flashes" -%>
+    <div class="content">
+      <%= yield %>
+    </div>
+    <%= render "footer" %>
   </div>
-  <%= render "footer" %>
+  <%= render "menu" %>
 </body>
 </html>

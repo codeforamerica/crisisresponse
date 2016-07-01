@@ -1,7 +1,12 @@
 $menu-link-height: 3em;
 
-.content {
+.main-content {
   transition: transform $base-duration $base-timing;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 @mixin menu-width($width) {
@@ -10,15 +15,18 @@ $menu-link-height: 3em;
     transform: translateX($width);
   }
 
-  .menu-active .content {
+  .menu-active .main-content {
     transform: translateX(-$width);
+  }
+
+  .menu-active .header {
+    -ms-transform: translateX(-$width);
   }
 }
 
 .menu {
   background-color: $menu-background-color;
   height: 100%;
-  margin-top: $header-height;
   position: fixed;
   right: 0;
   transition: transform $base-duration $base-timing;
