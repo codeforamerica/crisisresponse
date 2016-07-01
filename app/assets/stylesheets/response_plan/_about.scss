@@ -1,22 +1,22 @@
 .about {
-  .about-author,
-  .about-questions,
-  .about-approver {
-    margin-bottom: $base-spacing;
+  .about-label {
+    @include light-font;
+    color: $secondary-text-color;
+    margin-top: $small-spacing;
     overflow: hidden;
   }
 
-  .author-label,
-  .approver-label,
-  .questions-label {
-    @include heavy-font;
+  .approver-name,
+  .author-name,
+  .author-unit,
+  .created-date {
+    margin-left: $base-spacing;
   }
 
-  .author-info,
-  .approver-info,
-  .questions-info {
-    @include light-font;
-    margin-left: $small-spacing;
+  .author-name,
+  .created-date {
+    @include heavy-font;
+    font-size: 1.2em;
   }
 }
 
