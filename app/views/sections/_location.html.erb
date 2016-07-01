@@ -3,9 +3,13 @@
     class="location"
     data-address="<%= @response_plan.location_address %>"
     >
-    <div class="section-body">
-      <span class="location-meta">Address</span>
+    <div class="section-header section-header-muted">
+      <div class="section-header-text">
+        <span class="section-title">Address</span>
+      </div>
+    </div>
 
+    <div class="section-body">
       <span class="location-name">
         <%= @response_plan.location_name %>
       </span>

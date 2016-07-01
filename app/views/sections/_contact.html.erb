@@ -1,7 +1,7 @@
 <section class="contact">
-  <div class="section-header">
+  <div class="section-header section-header-muted">
     <div class="section-header-text">
-      <h2 class="section-title">Contact</h2>
+      <span class="section-title">Contact</span>
     </div>
   </div>
 
@@ -19,7 +19,7 @@
   </div>
 
   <%= tel_to(contact.cell, class: "section-body contact-cell") do %>
-      <%= contact.cell %>
-      <%= image_tag("/assets/phone-#{theme}.svg") %>
+    <%= contact.cell %>
+    <%= image_tag("/assets/phone-#{theme}.svg") %>
   <% end %>
 </section>
