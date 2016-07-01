@@ -1,5 +1,6 @@
 // Colors
 $blue: #50e2e3;
+$dark-blue: #0026ff;
 $red: #f44336;
 $dark-gray: #424242;
 $medium-gray: #9b9b9b;
@@ -20,9 +21,15 @@ $menu-background-color: $header-background-color;
 $change-theme-button-background-color: $header-font-color;
 $change-theme-button-color: $header-background-color;
 
+// Toggle
+$toggle-selected-background-color: $dark-blue;
+$toggle-selected-text-color: $white;
+$toggle-unselected-text-color: $white;
+$toggle-background-color: $black;
+
 // Sections
 $section-header-font-color: $white;
-$section-header-color: #0026ff;
+$section-header-color: $dark-blue;
 $secondary-section-header-background: $off-black;
 $safety-section-header-background: $red;
 $section-body-background: $black;

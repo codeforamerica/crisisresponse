@@ -12,6 +12,10 @@ $(function() {
     stylesheet.attr("href", stylesheet.data("alternate"));
     stylesheet.data("alternate", originalLink);
 
+    var inactive_theme = $(".change-theme-toggle .theme:not(.selected)");
+    $(".change-theme-toggle .theme").removeClass("selected");
+    inactive_theme.addClass("selected");
+
     return false;
   });
 });
