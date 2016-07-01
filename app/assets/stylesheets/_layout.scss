@@ -21,9 +21,26 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+.main-content {
+  transition: transform $base-duration $base-timing;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  overflow: scroll;
+  bottom: 0;
+
+  &:before {
+    content: "";
+    display: block;
+    height: $header-height;
+    position: relative;
+  }
+}
+
 .content {
   @include outer-container($page-width);
-  padding-top: $header-height + $base-spacing * 1.5;
+  padding-top: $base-spacing * 1.5;
   padding-bottom: 4rem;
 }
 

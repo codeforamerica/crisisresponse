@@ -1,14 +1,5 @@
 $menu-link-height: 3em;
 
-.main-content {
-  transition: transform $base-duration $base-timing;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
 @mixin menu-width($width) {
   .menu {
     width: $width;

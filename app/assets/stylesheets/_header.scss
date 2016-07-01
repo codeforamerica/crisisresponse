@@ -19,6 +19,10 @@
     display: flex;
     justify-content: space-between;
     margin: auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -$page-width / 2;
     width: $page-width;
   }
 
