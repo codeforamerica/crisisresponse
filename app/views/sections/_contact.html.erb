@@ -18,8 +18,5 @@
     <% end %>
   </div>
 
-  <%= tel_to(contact.cell, class: "section-body contact-cell") do %>
-    <%= contact.cell %>
-    <%= image_tag("/assets/phone-#{theme}.svg") %>
-  <% end %>
+  <%= render "section_dialer", phone: contact.cell %>
 </section>
