@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented here.
 
+## [0.1.3] - 2016-07-01
+
+### Added
+
+* On small screens, we show a small preview of the response plan steps,
+  instead of the entire text (which often takes up a lot of space).
+  Users can click "Read More" to see the entire text.
+* Label a person's scars, marks, and tattoos with "SMT".
+* Contacts can now have an "organization" that they're associated with.
+
+### Changed
+
+* Replace the magnifying glass icon in the header bar with a "home" icon.
+  The icon still navigates to the main search screen,
+  but it is hopefully more intuitive.
+* Switching from light to dark mode is quicker and more clear,
+  with a "toggle" switch to tell you what mode you're currently in.
+* Slightly changed the look, and arrangement of the side menu bar.
+* The "About the Plan" section got a makeover,
+  which makes it easier to see when the plan was created,
+  and to call the CRT from your phone.
+
+### Fixed
+
+* There was a bug in Internet Explorer that prevented users
+  from switching between images on a response plan.
+  Switching images should now work on all devices.
+* The app now displays with the correct sans-serif font on MDTs.
+* When the app presents a message to the user,
+  such as when they successfully sign in,
+  it conflicted with the position of the menu bar.
+  They now play nicely together.
+* The map's "zoom in" and "zoom out" buttons now appear correctly in night mode.
+
 ## [0.1.2] - 2016-06-30
 
 ### Added
@@ -87,7 +121,8 @@ All notable changes to this project will be documented here.
 * Text entered into search or feedback fields is now visible in night mode
 
 [Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...HEAD
-[0.1.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...v0.1.2
+[0.1.3]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.2...v0.1.3
+[0.1.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/codeforamerica/crisisresponse/compare/v0.0.2...v0.1.0
 [0.0.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.0.1...v0.0.2
