@@ -3,9 +3,15 @@
 <% end %>
 
 <div class="main">
+
   <% unless @response_plan.approved? %>
     <div class="needs-approval">
-      <%= t("response_plans.needs_approval") %>
+      <%= t("response_plans.approval.required") %>
+      <%= link_to(
+        t("response_plans.approval.action"),
+        approve_response_plan_path(@response_plan),
+        method: :patch
+      ) %>
     </div>
   <% end %>
 

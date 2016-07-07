@@ -18,7 +18,7 @@ feature "Response Plan Form" do
       click_on "Create Response plan"
 
       expect(page).to have_content(t("response_plans.create.success", name: "John Doe"))
-      expect(page).to have_content(t("response_plans.needs_approval"))
+      expect(page).to have_content(t("response_plans.approval.required"))
       expect(page).to have_content("John")
       expect(page).to have_content("Doe")
       expect(page).to have_content(l(Date.new(1980, 1, 2)))
@@ -48,7 +48,7 @@ feature "Response Plan Form" do
 
       expect(page).
         to have_content(t("response_plans.create.success", name: "John Doe"))
-      expect(page).to have_content(t("response_plans.needs_approval"))
+      expect(page).to have_content(t("response_plans.approval.required"))
       expect(page).to have_content("John")
       expect(page).to have_content("Doe")
       expect(page).to have_content(l(Date.new(1980, 1, 2)))
@@ -84,7 +84,12 @@ feature "Response Plan Form" do
 
   context "Editing an existing response plan" do
     scenario "updated plan needs re-approval" do
-      plan = create(:response_plan, first_name: "Jane", last_name: "Doe")
+      plan = create(
+        :response_plan,
+        first_name: "Jane",
+        last_name: "Doe",
+        approved_at: 1.day.ago,
+      )
       officer = create(:officer, username: "foo")
       stub_admin_permissions(officer)
       sign_in_officer(officer)
@@ -93,7 +98,7 @@ feature "Response Plan Form" do
       fill_in "First name", with: "Mary"
       click_on "Update Response plan"
 
-      expect(page).to have_content(t("response_plans.needs_approval"))
+      expect(page).to have_content(t("response_plans.approval.required"))
       expect(page).
         to have_content(t("response_plans.update.success", name: "Mary Doe"))
       expect(page).to have_content("Mary")
