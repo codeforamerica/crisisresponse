@@ -22,7 +22,11 @@ en:
       success: Created a response plan for %{name}
     update:
       success: "Updated %{name}'s response plan"
-    needs_approval: This response plan will not be visible to patrol officers until it is approved.
+    approval:
+      required: This response plan will not be visible to patrol officers until it is approved.
+      action: Approve
+      success: "Approved %{name}'s response plan. It is now visible to patrol officers"
+      failure: You cannot approve response plans that you wrote.
 
   search:
     form:

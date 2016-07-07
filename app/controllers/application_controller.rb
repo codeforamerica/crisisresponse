@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_officer
-    Officer.find_by(id: session[:officer_id])
+    @current_officer ||= Officer.find_by(id: session[:officer_id])
   end
 
   def officer_signed_in?

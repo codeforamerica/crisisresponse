@@ -135,7 +135,7 @@ feature "Officer views a response plan" do
 
       visit response_plan_path(response_plan)
 
-      expect(page).not_to have_content(t("response_plans.needs_approval"))
+      expect(page).not_to have_content(t("response_plans.approval.required"))
     end
 
     scenario "They see the approving officer" do
@@ -158,7 +158,33 @@ feature "Officer views a response plan" do
 
       visit response_plan_path(response_plan)
 
-      expect(page).to have_content(t("response_plans.needs_approval"))
+      expect(page).to have_content(t("response_plans.approval.required"))
+    end
+
+    scenario "an admin approves it" do
+      admin = create(:officer, username: "admin")
+      stub_admin_permissions(admin)
+      sign_in_officer(admin)
+      response_plan = create(:response_plan, approver: nil)
+
+      visit response_plan_path(response_plan)
+      click_on t("response_plans.approval.action")
+
+      expect(response_plan.reload).to be_approved
+      expect(page).to have_content(t("response_plans.approval.success", name: response_plan.name))
+    end
+
+    scenario "the author cannot approve it" do
+      admin = create(:officer, username: "admin")
+      stub_admin_permissions(admin)
+      sign_in_officer(admin)
+      response_plan = create(:response_plan, approver: nil, author: admin)
+
+      visit response_plan_path(response_plan)
+      click_on t("response_plans.approval.action")
+
+      expect(response_plan.reload).not_to be_approved
+      expect(page).to have_content(t("response_plans.approval.failure"))
     end
   end
 

@@ -61,6 +61,23 @@ class ResponsePlansController < ApplicationController
     end
   end
 
+  def approve
+    plan = ResponsePlan.find(params[:id])
+    plan.approver = current_officer
+
+    if plan.save
+      redirect_to(
+        response_plan_path(plan),
+        notice: t("response_plans.approval.success", name: plan.name),
+      )
+    else
+      redirect_to(
+        response_plan_path(plan),
+        alert: t("response_plans.approval.failure"),
+      )
+    end
+  end
+
   private
 
   def search_params

@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   resources :feedbacks, only: [:new, :create]
   resources :preferences, only: :create
-  resources :response_plans, except: [:destroy]
+
+  resources :response_plans, except: [:destroy] do
+    member do
+      patch :approve
+    end
+  end
 
   root to: "response_plans#index"
 end
