@@ -6,13 +6,6 @@
     overflow: hidden;
   }
 
-  .approver-name,
-  .author-name,
-  .author-unit,
-  .created-date {
-    margin-left: $base-spacing;
-  }
-
   .author-name,
   .created-date {
     @include heavy-font;
