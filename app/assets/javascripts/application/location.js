@@ -6,9 +6,11 @@ function initAutocomplete() {
   var element = document.getElementById("response_plan_location_address");
   $(element).on("keypress", ignoreEnterKey)
 
-  var autocomplete = new google.maps.places.Autocomplete(element, {
-    types: ["geocode"],
-  });
+  if(element) {
+    var autocomplete = new google.maps.places.Autocomplete(element, {
+      types: ["geocode"],
+    });
+  }
 }
 
 function initMap() {

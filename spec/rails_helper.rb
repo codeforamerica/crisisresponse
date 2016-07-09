@@ -15,5 +15,11 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 end
 
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, {
+    url_blacklist: ['https://fonts.googleapis.com'],
+  })
+end
+
 Capybara.javascript_driver = :poltergeist
 ActiveRecord::Migration.maintain_test_schema!
