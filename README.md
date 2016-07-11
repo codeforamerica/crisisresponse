@@ -143,11 +143,12 @@ docker-compose up
 # After updating the `Dockerfile`:
 docker-compose build
 
-# When packaging up code for the production environment:
-docker-compose build && docker save crisis_web > build/crisis.tar
+# Push a new docker image to Docker Hub:
+docker-compose build && docker push codeforamerica/crisisresponse
 
 # After updating the `Gemfile`:
 docker-compose up
+
 # To run the server
 docker-compose up
 ```
