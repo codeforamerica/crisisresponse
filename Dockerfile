@@ -21,5 +21,3 @@ WORKDIR $APP_DIR
 ADD Gemfile* $APP_DIR/
 ENV BUNDLE_PATH /box/bundle
 RUN bundle install
-
-ADD . $APP_DIR

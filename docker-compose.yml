@@ -12,6 +12,7 @@ services:
 
   web:
     build: .
+    image: codeforamerica/crisisresponse
     command: ./bin/serve
     environment:
       DB_HOST: db
