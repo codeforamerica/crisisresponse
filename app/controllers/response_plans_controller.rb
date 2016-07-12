@@ -117,6 +117,7 @@ class ResponsePlansController < ApplicationController
       contacts_attributes: [
         :name,
         :relationship,
+        :organization,
         :cell,
         :notes,
         :_destroy,
