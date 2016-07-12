@@ -30,7 +30,7 @@ $section-header-font-color: $white;
 $section-header-color: $blue;
 $secondary-section-header-background: $medium-gray;
 $safety-section-header-background: $red;
-$section-body-background: $white;
+$card-background: $white;
 
 // Actions
 $action-color: $blue;
@@ -62,6 +62,10 @@ $disabled-field-background-color: shade($base-background-color, 5%);
 $fieldset-background-color: tint($base-border-color, 75%);
 $field-background-color: $white;
 $field-text-color: $dark-gray;
+
+// Filters
+$filter-background-color: $light-gray;
+$filter-text-color: $dark-gray;
 
 // Flashes & Notices
 $needs-approval-background-color: $yellow;

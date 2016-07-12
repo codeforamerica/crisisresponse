@@ -1,0 +1,70 @@
+<%= simple_form_for(
+  @search,
+  url: response_plans_path,
+  method: :get,
+  html: { class: "search" },
+) do |f| %>
+  <h1>Search for a Response Plan</h1>
+
+  <div class="fields">
+    <div class="basic-search-fields">
+      <%= f.input :name, placeholder: "e.g. Doe, John A" %>
+      <%= f.input :date_of_birth, label: "DOB", placeholder: "e.g. 05-08-1970" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+
+      <%= link_to(
+        t("search.physicals.show"),
+        "#",
+        class: "toggle toggle-physicals-search",
+        data: {
+          "toggle-text" => t("search.physicals.hide"),
+          "toggle-target" => ".physicals-search-fields",
+        }) %>
+    </div>
+
+    <div class="physicals-search-fields collapsed">
+      <%= f.input :age %>
+      <%= f.input :sex, as: :check_boxes, collection: ResponsePlan::SEX_CODES.keys %>
+      <%= f.input :race, as: :check_boxes, collection: ResponsePlan::RACE_CODES.keys %>
+      <%= f.input :height %>
+      <%= f.input :weight %>
+
+      <div class="hair-color-field collapsed">
+        <%= f.input(
+          :hair_color,
+          as: :check_boxes,
+          collection: ResponsePlan::HAIR_COLORS,
+        ) %>
+        <%= link_to(
+          t("search.options.show"),
+          "#",
+          class: "toggle toggle-hair-options",
+          data: {
+            "toggle-text" => t("search.options.hide"),
+            "toggle-target" => ".hair-color-field",
+        }) %>
+      </div>
+
+      <div class="eye-color-field collapsed">
+        <%= f.input(
+          :eye_color,
+          as: :check_boxes,
+          collection: ResponsePlan::EYE_COLORS,
+        ) %>
+        <%= link_to(
+          t("search.options.show"),
+          "#",
+          class: "toggle toggle-eye-options",
+          data: {
+            "toggle-text" => t("search.options.hide"),
+            "toggle-target" => ".eye-color-field",
+        }) %>
+      </div>
+
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

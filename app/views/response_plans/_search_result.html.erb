@@ -1,0 +1,7 @@
+<%= link_to response_plan, class: "search-result" do %>
+  <%= image_tag response_plan.profile_image_url %>
+  <div class="search-result-info">
+    <%= render "identity", response_plan: response_plan %>
+    <div class="description"><%= response_plan.shorthand_description %></div>
+  </div>
+<% end %>

@@ -1,127 +1,139 @@
 .search {
-  overflow: hidden;
-  margin-bottom: $base-spacing;
+  @include card;
+  padding: $small-spacing $base-spacing;
+  box-shadow: $shadow-level-1;
 
   h1 {
     margin-bottom: $base-spacing;
-    font-size: 1.6em;
   }
 
   label {
-    @include span-columns(2 of 8);
-    text-align: right;
-    font-weight: 400;
+    @include light-font;
   }
 
-  input {
-    @include span-columns(6 of 8);
-    @include omega;
+  .physicals-search-fields.collapsed {
+    display: none;
   }
 
-  input[type="submit"] {
-    @include span-columns(3 of 4);
-    @include shift(1);
-    padding: $base-spacing;
-  }
-
-  @include media($medium-screen-up) {
-    .actions {
-      @include span-columns(4 of 12);
-    }
-
-    .fields {
-      @include span-columns(8 of 12);
+  .hair-color-field.collapsed,
+  .eye-color-field.collapsed {
+    .checkbox:nth-child(n + 5) {
+      display: none;
     }
   }
 
-  .error {
-    @include omega;
-    @include shift(2);
-    @include span-columns(6 of 8);
+  .toggle-physicals-search,
+  .toggle-hair-options,
+  .toggle-eye-options {
+    display: block;
+    font-size: 0.8em;
   }
-}
 
-.search-results {
-  margin-top: $base-spacing;
-
-  h2 {
-    font-size: 1.6em;
-    margin-bottom: $base-spacing;
-  }
-}
-
-
-.search-result {
-  @include span-columns(4 of 4);
-  position: relative;
-
-  .needs-approval-banner {
-    @include fill-parent;
-    position: absolute;
-    background-color: $needs-approval-background-color;
-    color: $needs-approval-text-color;
-    margin-bottom: $base-spacing;
-    padding: $small-spacing;
+  .toggle-physicals-search {
+    margin-top: $base-spacing;
     text-align: center;
   }
 
-  .search-result-labels {
-    width: 55%;
-    float: right;
-    overflow: hidden;
+  .toggle-hair-options,
+  .toggle-eye-options {
+    margin-top: -1.5rem;
+    margin-bottom: 1.5rem;
+  }
 
-    @include media($medium-screen-up) {
-      width: auto;
-      float: none;
-    }
+  .actions input[type='submit'] {
+    @include fill-parent;
+  }
+
+  input[type="checkbox"] {
+    display:none;
+  }
+
+  input[type="checkbox"] + label {
+    border: $base-border;
+    box-shadow: $shadow-level-1;
+    margin-bottom: $small-spacing;
+    margin-right: $base-spacing;
+    padding: $small-spacing;
+    text-transform: capitalize;
+  }
+
+  input[type="checkbox"]:checked + label {
+    background-color: $action-color;
+    color: $button-font-color;
   }
 
   @include media($medium-screen-up) {
-    @include span-columns(2 of 8);
+    .input {
+      overflow: hidden;
+    }
 
-    &:nth-of-type(4n) {
+    .input > label {
+      text-align: right;
+    }
+
+    .basic-search-fields {
+      @include span-columns(8 of 12);
+
+      label {
+        @include span-columns(2 of 8);
+      }
+
+      input {
+        @include span-columns(6 of 8);
+      }
+
+      .input {
+        margin-bottom: 0;
+      }
+    }
+
+    .actions {
+      @include span-columns(4 of 12);
       @include omega;
     }
 
-    &:nth-of-type(4n+1) {
-      clear: left;
+    .physicals-search-fields {
+      @include fill-parent;
+      clear: both;
+      padding-top: $base-spacing;
+
+      .collection_input_set {
+        @include span-columns(10 of 12);
+      }
+
+      .input > label {
+        @include span-columns(2 of 12);
+      }
+
+      input[type='text'] {
+        @include span-columns(2 of 12);
+      }
+
+      input[type="submit"] {
+        @include span-columns(4 of 12);
+        @include shift(4);
+      }
     }
-  }
 
-  @include media($large-screen-up) {
-    @include span-columns(3 of 12);
-  }
+    .search_eye_color,
+    .search_hair_color {
+      overflow: visible;
 
-  margin-bottom: $base-spacing;
-
-  img {
-    border: $dark-border;
-    height: 6em;
-    margin: 0;
-    max-width: 40%;
-
-    @include media($medium-screen-up) {
-      display: block;
-      height: 8em;
-      margin-bottom: $small-spacing;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: none;
+      .collection_input_set {
+        max-width: 60%;
+        width: auto;
+      }
     }
-  }
 
-  .search-result-name,
-  .search-result-dob {
-    color: $base-font-color;
-    display: block;
-
-    @include media($medium-screen-up) {
-      text-align: center;
+    .toggle-hair-options,
+    .toggle-eye-options {
+      display: inline-block;
     }
-  }
 
-  .search-result-name {
-    font-weight: 600;
-    text-transform: uppercase;
+    .hair-color-field,
+    .eye-color-field {
+      overflow: hidden;
+      margin-bottom: $base-spacing;
+    }
   }
 }

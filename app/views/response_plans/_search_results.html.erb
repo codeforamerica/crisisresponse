@@ -1,0 +1,36 @@
+<section>
+  <div class="search-results">
+    <div class="section-body">
+      <h1>Matches</h1>
+
+      <div class="filters">
+        <h2>Active Filters</h2>
+
+        <% @search.active_filters.each do |filter| %>
+          <span class="filter">
+            <span class="filter-attribute"><%= filter.to_s.humanize %></span>
+            <span class="filter-value">
+              <% if filter == :date_of_birth %>
+                <%= l(@search.send(filter)) %>
+              <% else %>
+                <%= Array(@search.send(filter)).join(", ") %>
+              <% end %>
+            </span>
+          </span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="results">
+      <div class="loose-matches">
+        <% if @search.close_matches.any? %>
+          <% @search.close_matches.each do |plan| %>
+            <%= render "search_result", response_plan: plan %>
+          <% end %>
+        <% else %>
+          <%= t("search.results.none") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

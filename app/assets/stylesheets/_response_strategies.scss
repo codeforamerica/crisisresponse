@@ -8,7 +8,7 @@
     background-image: $bullet-background;
     background-repeat: no-repeat;
     background-size: 2em 2em;
-    color: $section-body-background;
+    color: $card-background;
     content: counter(response-strategy-counter);
     counter-increment: response-strategy-counter;
     font-size: 1rem;
@@ -55,7 +55,7 @@
     text-overflow: ellipsis;
 
     &:after {
-      background-image: linear-gradient($transparent, $section-body-background);
+      background-image: linear-gradient($transparent, $card-background);
       bottom: 0;
       content: "";
       display: block;

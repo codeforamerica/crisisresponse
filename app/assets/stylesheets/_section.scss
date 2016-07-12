@@ -2,11 +2,7 @@ $icon-size: 2.5rem;
 
 section {
   @include fill-parent;
-  background-color: $section-body-background;
-  border-radius: 2px;
-  margin-bottom: $base-spacing;
-  overflow: hidden;
-  box-shadow: $shadow-level-2;
+  @include card;
 
   .section-header {
     background-color: $section-header-color;
@@ -40,7 +36,7 @@ section {
   }
 
   .section-header-muted {
-    background-color: $section-body-background;
+    background-color: $card-background;
     color: $secondary-text-color;
     padding-bottom: 0;
     @include light-font;

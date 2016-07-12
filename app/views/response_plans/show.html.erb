@@ -17,7 +17,7 @@
 
   <div class="left-column">
     <%= render "sections/images" %>
-    <%= render "sections/profile" %>
+    <%= render "sections/profile", response_plan: @response_plan %>
     <%= render "sections/location" %>
 
     <% @response_plan.contacts.each do |contact| %>
