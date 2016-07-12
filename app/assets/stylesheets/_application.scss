@@ -9,16 +9,21 @@
 @import "base/base";
 @import "refills/flashes";
 
+@import "mixins/*";
+
 @import "feedbacks";
+@import "filters";
 @import "footer";
 @import "header";
 @import "layout";
 @import "location";
 @import "menu";
+@import "recently_viewed";
+@import "response_plan_form";
 @import "response_plans";
 @import "response_strategies";
-@import "response_plan_form";
 @import "search";
+@import "search_results";
 @import "section";
 @import "sign_in";
 @import "static";

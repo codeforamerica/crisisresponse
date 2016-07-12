@@ -1,0 +1,26 @@
+.filters {
+  margin: $base-spacing 0;
+  font-size: 0.8em;
+
+  h2 {
+    margin-bottom: $small-spacing;
+  }
+
+  .filter {
+    background-color: $filter-background-color;
+    border-radius: 3em;
+    display: inline-block;
+    margin-right: $small-spacing;
+    margin-bottom: $small-spacing;
+    padding: $tiny-spacing;
+  }
+
+  .filter-attribute {
+    border-right: 1px solid $filter-text-color;
+    padding: 0 $tiny-spacing;
+  }
+
+  .filter-value {
+    @include heavy-font;
+  }
+}

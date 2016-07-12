@@ -47,6 +47,28 @@ class ResponsePlan < ActiveRecord::Base
     "Female" => "F",
   }.freeze
 
+  EYE_COLORS = [
+    :black,
+    :blue,
+    :brown,
+    :gray,
+    :green,
+    :hazel,
+    :maroon,
+    :multicolored,
+    :pink,
+    :unknown,
+  ].freeze
+
+  HAIR_COLORS = [
+    :bald,
+    :black,
+    :blonde,
+    :brown,
+    :grey,
+    :red,
+  ].freeze
+
   validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
   validates :race, inclusion: RACE_CODES.keys, allow_nil: true
   validates :date_of_birth, presence: true

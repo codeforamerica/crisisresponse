@@ -2,44 +2,10 @@
   Response Plan App
 <% end %>
 
-<%= simple_form_for(
-  @search,
-  url: response_plans_path,
-  method: :get,
-  html: { class: "search" },
-) do |f| %>
-  <h1>Search for a Response Plan</h1>
+<%= render "search_form" %>
 
-  <div class="fields">
-    <%= f.input :name, placeholder: "e.g. Doe, John A" %>
-    <%= f.input :date_of_birth, label: "DOB", placeholder: "e.g. 05-08-1970" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<% if @search.active? %>
+  <%= render "search_results" %>
+<% else %>
+  <%= render "recently_viewed" %>
 <% end %>
-
-
-<div class="search-results">
-  <h2>Results</h2>
-
-  <% if @response_plans.any? %>
-    <% @response_plans.each do |response_plan| %>
-      <%= link_to response_plan_path(response_plan), class: "search-result" do %>
-        <% unless response_plan.approved? %>
-          <span class="needs-approval-banner">Needs Approval</span>
-        <% end %>
-
-        <%= image_tag response_plan.profile_image_url %>
-
-        <div class="search-result-labels">
-          <span class="search-result-name"><%= response_plan.display_name %></span>
-          <span class="search-result-dob"><%= l response_plan.date_of_birth %></span>
-        </div>
-      <% end %>
-    <% end %>
-  <% else %>
-    <%= t("search.results.none") %>
-  <% end %>
-</div>

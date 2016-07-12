@@ -58,7 +58,7 @@ SimpleForm.setup do |config|
   # Defaults to :nested for bootstrap config.
   #   inline: input + label
   #   nested: label > input
-  config.boolean_style = :nested
+  config.boolean_style = :inline
 
   # Default class for buttons
   config.button_class = 'btn'
@@ -83,11 +83,10 @@ SimpleForm.setup do |config|
   # Series of attempts to detect a default value method for collection.
   # config.collection_value_methods = [ :id, :to_s ]
 
-  # You can wrap a collection of radio/check boxes in a pre-defined tag, defaulting to none.
-  # config.collection_wrapper_tag = nil
-
-  # You can define the class to use on all collection wrappers. Defaulting to none.
-  # config.collection_wrapper_class = nil
+  # Wrap a collection of radio/check boxes in a pre-defined tag.
+  config.collection_wrapper_tag = :div
+  # Define the class to use on all collection wrappers.
+  config.collection_wrapper_class = :collection_input_set
 
   # You can wrap each item in a collection of radio/check boxes with a tag,
   # defaulting to :span.

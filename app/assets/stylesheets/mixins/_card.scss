@@ -1,0 +1,7 @@
+@mixin card {
+  background-color: $card-background;
+  border-radius: 2px;
+  box-shadow: $shadow-level-2;
+  margin-bottom: $base-spacing;
+  overflow: hidden;
+}

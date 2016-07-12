@@ -12,7 +12,7 @@ en:
 
   helpers:
     submit:
-      response_plan_search:
+      search:
         create: Search
 
   response_plans:
@@ -27,12 +27,6 @@ en:
       action: Approve
       success: "Approved %{name}'s response plan. It is now visible to patrol officers"
       failure: You cannot approve response plans that you wrote.
-
-  search:
-    form:
-      label: Search by name, DOB, or physical description
-    results:
-      none: No results found
 
   authentication:
     unauthenticated: Please sign in to continue.
@@ -63,6 +57,12 @@ en:
       none: No results found
     form:
       label: Search by name, DOB, or physical description
+    physicals:
+      show: Search by physicals
+      hide: Hide physicals
+    options:
+      show: "More options"
+      hide: "Fewer options"
 
   simple_form:
     labels:

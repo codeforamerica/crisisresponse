@@ -7,7 +7,7 @@ class ResponsePlansController < ApplicationController
   before_action :authorize_admin, except: [:index, :show]
 
   def index
-    @search = ResponsePlanSearch.new(search_params)
+    @search = Search.new(search_params)
     @search.validate
     @response_plans = @search.close_matches
 
@@ -81,8 +81,18 @@ class ResponsePlansController < ApplicationController
   private
 
   def search_params
-    if params[:response_plan_search].present?
-      params.require(:response_plan_search).permit(:name, :date_of_birth)
+    if params[:search].present?
+      params.require(:search).permit(
+        :name,
+        :date_of_birth,
+        :age,
+        :height,
+        :weight,
+        eye_color: [],
+        hair_color: [],
+        race: [],
+        sex: [],
+      )
     else
       {}
     end
