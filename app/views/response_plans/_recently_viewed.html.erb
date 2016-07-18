@@ -10,8 +10,8 @@
       <%= image_tag response_plan.profile_image_url %>
 
       <div class="recently-viewed-plan-labels">
-        <span class="recently-viewed-plan-name"><%= response_plan.display_name %></span>
-        <span class="recently-viewed-plan-dob"><%= l response_plan.date_of_birth %></span>
+        <span class="recently-viewed-plan-name"><%= response_plan.person.display_name %></span>
+        <span class="recently-viewed-plan-dob"><%= l response_plan.person.date_of_birth %></span>
       </div>
     <% end %>
   <% end %>

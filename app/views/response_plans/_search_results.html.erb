@@ -23,8 +23,8 @@
 
     <div class="results">
       <div class="loose-matches">
-        <% if @search.close_matches.any? %>
-          <% @search.close_matches.each do |plan| %>
+        <% if @response_plans.any? %>
+          <% @response_plans.each do |plan| %>
             <%= render "search_result", response_plan: plan %>
           <% end %>
         <% else %>

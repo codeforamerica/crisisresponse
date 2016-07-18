@@ -31,8 +31,8 @@
 
     <div class="physicals-search-fields collapsed">
       <%= f.input :age %>
-      <%= f.input :sex, as: :check_boxes, collection: ResponsePlan::SEX_CODES.keys %>
-      <%= f.input :race, as: :check_boxes, collection: ResponsePlan::RACE_CODES.keys %>
+      <%= f.input :sex, as: :check_boxes, collection: Person::SEX_CODES.keys %>
+      <%= f.input :race, as: :check_boxes, collection: Person::RACE_CODES.keys %>
       <%= f.input :height %>
       <%= f.input :weight %>
 
@@ -40,7 +40,7 @@
         <%= f.input(
           :hair_color,
           as: :check_boxes,
-          collection: ResponsePlan::HAIR_COLORS,
+          collection: Person::HAIR_COLORS,
         ) %>
         <%= link_to(
           t("search.options.show"),
@@ -56,7 +56,7 @@
         <%= f.input(
           :eye_color,
           as: :check_boxes,
-          collection: ResponsePlan::EYE_COLORS,
+          collection: Person::EYE_COLORS,
         ) %>
         <%= link_to(
           t("search.options.show"),

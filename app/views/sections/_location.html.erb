@@ -1,7 +1,7 @@
-<% if @response_plan.location_address.present? %>
+<% if @response_plan.person.location_address.present? %>
   <section
     class="location"
-    data-address="<%= @response_plan.location_address %>"
+    data-address="<%= @response_plan.person.location_address %>"
     >
     <div class="section-header section-header-muted">
       <div class="section-header-text">
@@ -11,7 +11,7 @@
 
     <div class="section-body">
       <span class="location-name">
-        <%= @response_plan.location_name %>
+        <%= @response_plan.person.location_name %>
       </span>
 
       <span class="location-address">

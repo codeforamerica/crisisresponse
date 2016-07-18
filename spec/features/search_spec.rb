@@ -3,23 +3,23 @@ require "rails_helper"
 feature "Search" do
   scenario "Officer searches and finds a record" do
     sign_in_officer
-    name = "John Doe"
     dob = Date.new(1980, 01, 02)
-    response_plan = create(:response_plan, name: name, date_of_birth: dob)
+    person = create(:person, name: "John Doe", date_of_birth: dob)
+    create_plans_for(person)
 
     visit response_plans_path
 
     search_for(name: "John")
     expect(page).to have_content("DOE, John")
     expect(page).to have_content(l(dob))
-    expect(page).to have_content(response_plan.shorthand_description)
+    expect(page).to have_content(person.shorthand_description)
   end
 
   scenario "Officer searches and doesn't find a record" do
     sign_in_officer
-    name = "John Doe"
     dob = Date.new(1980, 01, 02)
-    response_plan = create(:response_plan, name: name, date_of_birth: dob)
+    person = create(:person, name: "John Doe", date_of_birth: dob)
+    create_plans_for(person)
 
     visit response_plans_path
 
@@ -47,11 +47,12 @@ feature "Search" do
 
   feature "Physicals search", :js do
     scenario "Officer searches by age" do
-      match = create(:response_plan, date_of_birth: 20.years.ago)
-      close_match = create(:response_plan, date_of_birth: 25.years.ago)
-      other = create(:response_plan, date_of_birth: 50.years.ago)
-      sign_in_officer
+      match = create(:person, date_of_birth: 20.years.ago)
+      close_match = create(:person, date_of_birth: 25.years.ago)
+      other = create(:person, date_of_birth: 50.years.ago)
+      create_plans_for(match, close_match, other)
 
+      sign_in_officer
       visit response_plans_path
       click_on t("search.physicals.show")
       fill_in "Age", with: 20
@@ -63,10 +64,11 @@ feature "Search" do
     end
 
     scenario "Officer searches by gender" do
-      male = create(:response_plan, sex: "Male")
-      female = create(:response_plan, sex: "Female")
-      sign_in_officer
+      male = create(:person, sex: "Male")
+      female = create(:person, sex: "Female")
+      create_plans_for(male, female)
 
+      sign_in_officer
       visit response_plans_path
       click_on t("search.physicals.show")
       check_option(:sex, female.sex)
@@ -77,11 +79,12 @@ feature "Search" do
     end
 
     scenario "Officer searches by race" do
-      white = create(:response_plan, race: "WHITE")
-      asian = create(:response_plan, race: "ASIAN (ALL)/PACIFIC ISLANDER")
-      other = create(:response_plan, race: "AFRICAN AMERICAN/BLACK")
-      sign_in_officer
+      white = create(:person, race: "WHITE")
+      asian = create(:person, race: "ASIAN (ALL)/PACIFIC ISLANDER")
+      other = create(:person, race: "AFRICAN AMERICAN/BLACK")
+      create_plans_for(white, asian, other)
 
+      sign_in_officer
       visit response_plans_path
       click_on t("search.physicals.show")
       check_option(:race, white.race)
@@ -94,11 +97,12 @@ feature "Search" do
     end
 
     scenario "Officer searches by weight" do
-      match = create(:response_plan, weight_in_pounds: 150)
-      close_match = create(:response_plan, weight_in_pounds: 175)
-      other = create(:response_plan, weight_in_pounds: 300)
-      sign_in_officer
+      match = create(:person, weight_in_pounds: 150)
+      close_match = create(:person, weight_in_pounds: 175)
+      other = create(:person, weight_in_pounds: 300)
+      create_plans_for(match, close_match, other)
 
+      sign_in_officer
       visit response_plans_path
       click_on t("search.physicals.show")
       fill_in "Weight", with: 150
@@ -110,11 +114,12 @@ feature "Search" do
     end
 
     scenario "Officer searches by height" do
-      match = create(:response_plan, height_in_inches: 60)
-      close_match = create(:response_plan, height_in_inches: 63)
-      other = create(:response_plan, height_in_inches: 72)
-      sign_in_officer
+      match = create(:person, height_in_inches: 60)
+      close_match = create(:person, height_in_inches: 63)
+      other = create(:person, height_in_inches: 72)
+      create_plans_for(match, close_match, other)
 
+      sign_in_officer
       visit response_plans_path
       click_on t("search.physicals.show")
       fill_in "Height", with: 60
@@ -126,11 +131,12 @@ feature "Search" do
     end
 
     scenario "Officer searches by hair color" do
-      brown = create(:response_plan, hair_color: "Brown")
-      black = create(:response_plan, hair_color: "Black")
-      other = create(:response_plan, hair_color: "Blonde")
-      sign_in_officer
+      brown = create(:person, hair_color: "Brown")
+      black = create(:person, hair_color: "Black")
+      other = create(:person, hair_color: "Blonde")
+      create_plans_for(brown, black, other)
 
+      sign_in_officer
       visit response_plans_path
       click_on t("search.physicals.show")
       check_option(:hair_color, "Brown")
@@ -143,11 +149,12 @@ feature "Search" do
     end
 
     scenario "Officer searches by eye color" do
-      blue = create(:response_plan, eye_color: :blue, weight_in_pounds: 120)
-      brown = create(:response_plan, eye_color: :brown, weight_in_pounds: 130)
-      other = create(:response_plan, eye_color: :green, weight_in_pounds: 140)
-      sign_in_officer
+      blue = create(:person, eye_color: :blue, weight_in_pounds: 120)
+      brown = create(:person, eye_color: :brown, weight_in_pounds: 130)
+      other = create(:person, eye_color: :green, weight_in_pounds: 140)
+      create_plans_for(blue, brown, other)
 
+      sign_in_officer
       visit response_plans_path
       click_on t("search.physicals.show")
       check_option(:eye_color, "blue")
@@ -167,6 +174,12 @@ feature "Search" do
 
     def run_search
       first(".actions input").trigger("click")
+    end
+  end
+
+  def create_plans_for(*people)
+    people.each do |person|
+      create(:response_plan, person: person)
     end
   end
 end

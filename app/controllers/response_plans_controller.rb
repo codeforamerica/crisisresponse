@@ -9,10 +9,12 @@ class ResponsePlansController < ApplicationController
   def index
     @search = Search.new(search_params)
     @search.validate
-    @response_plans = @search.close_matches
 
-    unless current_officer.admin?
-      @response_plans = @response_plans.select(&:approved?)
+    people = @search.close_matches
+    @response_plans = people.map(&:active_response_plan).compact
+
+    if current_officer.admin?
+      @response_plans = people.map {|p| p.response_plans.order(:approved_at).last }
     end
   end
 
@@ -25,17 +27,19 @@ class ResponsePlansController < ApplicationController
   end
 
   def new
-    @response_plan = ResponsePlan.new
+    @response_plan = ResponsePlan.new(person: Person.new)
   end
 
   def create
-    @response_plan = ResponsePlan.new(response_plan_params)
+    @response_plan = ResponsePlan.new(person: Person.new)
+    @response_plan.assign_attributes(response_plan_params)
     @response_plan.author = current_officer
 
-    if @response_plan.save
+    if @response_plan.valid?
+      @response_plan.person.save && @response_plan.save
       redirect_to(
         response_plan_path(@response_plan),
-        notice: t("response_plans.create.success", name: @response_plan.name),
+        notice: t("response_plans.create.success", name: @response_plan.person.name),
       )
     else
       render :new
@@ -54,7 +58,7 @@ class ResponsePlansController < ApplicationController
     if @response_plan.save
       redirect_to(
         response_plan_path(@response_plan),
-        notice: t("response_plans.update.success", name: @response_plan.name),
+        notice: t("response_plans.update.success", name: @response_plan.person.name),
       )
     else
       render :edit
@@ -68,7 +72,7 @@ class ResponsePlansController < ApplicationController
     if plan.save
       redirect_to(
         response_plan_path(plan),
-        notice: t("response_plans.approval.success", name: plan.name),
+        notice: t("response_plans.approval.success", name: plan.person.name),
       )
     else
       redirect_to(
@@ -100,44 +104,47 @@ class ResponsePlansController < ApplicationController
 
   def response_plan_params
     params.require(:response_plan).permit(
-      :first_name,
-      :last_name,
-      :date_of_birth,
-      :weight_in_pounds,
-      :height_in_inches,
-      :eye_color,
-      :hair_color,
-      :scars_and_marks,
-      :race,
-      :sex,
       :background_info,
-      :location_name,
-      :location_address,
       :private_notes,
-      images_attributes: [
-        :source,
-        :_destroy,
-        :id,
-      ],
       aliases_attributes: [
-        :name,
         :_destroy,
         :id,
+        :name,
       ],
       contacts_attributes: [
-        :name,
-        :relationship,
-        :organization,
+        :_destroy,
         :cell,
+        :id,
+        :name,
         :notes,
+        :organization,
+        :relationship,
+      ],
+      images_attributes: [
         :_destroy,
         :id,
+        :source,
+      ],
+      person_attributes: [
+        :date_of_birth,
+        :eye_color,
+        :first_name,
+        :hair_color,
+        :height_in_inches,
+        :id,
+        :last_name,
+        :location_address,
+        :location_name,
+        :race,
+        :scars_and_marks,
+        :sex,
+        :weight_in_pounds,
       ],
       response_strategies_attributes: [
-        :title,
-        :description,
         :_destroy,
+        :description,
         :id,
+        :title,
       ],
     )
   end

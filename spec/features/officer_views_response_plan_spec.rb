@@ -5,16 +5,17 @@ feature "Officer views a response plan" do
 
   scenario "They see the person's basic information" do
     sign_in_officer
-    response_plan = create(
-      :response_plan,
+    person = create(
+      :person,
       name: "John Doe",
       date_of_birth: Date.new(1980),
     )
+    response_plan = create(:response_plan, person: person)
 
     visit response_plan_path(response_plan)
 
     expect(page).to have_content("DOE, John")
-    expect(page).to have_content(l(response_plan.date_of_birth))
+    expect(page).to have_content(l(person.date_of_birth))
   end
 
   scenario "They see the person's pictures", :js do
@@ -43,8 +44,8 @@ feature "Officer views a response plan" do
 
   scenario "They see the person's physical characteristics" do
     sign_in_officer
-    response_plan = create(
-      :response_plan,
+    person = create(
+      :person,
       eye_color: "Green",
       hair_color: "Brown",
       height_in_inches: 70,
@@ -53,6 +54,7 @@ feature "Officer views a response plan" do
       sex: "Male",
       weight_in_pounds: 180,
     )
+    response_plan = create(:response_plan, person: person)
 
     visit response_plan_path(response_plan)
 
@@ -65,11 +67,8 @@ feature "Officer views a response plan" do
   scenario "They see the person's aliases" do
     sign_in_officer
     aliases = ["Mark Smith", "Joe Andrews"]
-    response_plan = create(
-      :response_plan,
-      name: "John Doe",
-      alias_list: aliases,
-    )
+    person = create(:person, name: "John Doe")
+    response_plan = create(:response_plan, alias_list: aliases, person: person)
 
     visit response_plan_path(response_plan)
 
@@ -171,7 +170,9 @@ feature "Officer views a response plan" do
       click_on t("response_plans.approval.action")
 
       expect(response_plan.reload).to be_approved
-      expect(page).to have_content(t("response_plans.approval.success", name: response_plan.name))
+      expect(page).to have_content(
+        t("response_plans.approval.success", name: response_plan.person.name)
+      )
     end
 
     scenario "the author cannot approve it" do

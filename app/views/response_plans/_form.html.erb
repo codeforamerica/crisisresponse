@@ -1,21 +1,29 @@
 <%= simple_form_for(@response_plan) do |f| %>
   <div class="response_plan_form">
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :date_of_birth, label: "DOB", as: :string %>
+    <%= f.fields_for :person do |person| %>
+      <%= person.input :first_name %>
+      <%= person.input :last_name %>
+      <%= person.input :date_of_birth, label: "DOB", as: :string %>
+    <% end %>
 
     <%= render "nested_form", f: f, relationship: :aliases, html_classes: [] %>
 
-    <%= f.input :race, collection: ResponsePlan::RACE_CODES.keys %>
-    <%= f.input :sex, collection: ResponsePlan::SEX_CODES.keys %>
-    <%= f.input :weight_in_pounds, label: "Weight" %>
-    <%= f.input :height_in_inches, label: "Height" %>
-    <%= f.input :eye_color %>
-    <%= f.input :hair_color %>
-    <%= f.input :scars_and_marks %>
+    <%= f.fields_for :person do |person| %>
+      <%= person.input :race, collection: Person::RACE_CODES.keys %>
+      <%= person.input :sex, collection: Person::SEX_CODES.keys %>
+      <%= person.input :weight_in_pounds, label: "Weight" %>
+      <%= person.input :height_in_inches, label: "Height" %>
+      <%= person.input :eye_color %>
+      <%= person.input :hair_color %>
+      <%= person.input :scars_and_marks %>
+    <% end %>
+
     <%= f.input :background_info %>
-    <%= f.input :location_name %>
-    <%= f.input :location_address %>
+
+    <%= f.fields_for :person do |person| %>
+      <%= person.input :location_name %>
+      <%= person.input :location_address %>
+    <% end %>
 
     <%= render "nested_form", f: f, relationship: :contacts, html_classes: ["multi-field"] %>
     <%= render "nested_form", f: f, relationship: :images, html_classes: [] %>
