@@ -29,10 +29,7 @@ FactoryGirl.define do
     phone "222-333-4444"
   end
 
-  factory :response_plan do
-    aliases []
-    author
-    approver
+  factory :person do
     name "John Doe"
     sex "Male"
     race "AFRICAN AMERICAN/BLACK"
@@ -41,6 +38,13 @@ FactoryGirl.define do
     hair_color "black"
     eye_color "blue"
     date_of_birth { 25.years.ago }
+  end
+
+  factory :response_plan do
+    person
+    aliases []
+    author
+    approver
     updated_at { 1.second.ago }
   end
 

@@ -17,16 +17,22 @@ class CsvImporter
 
   def create_records
     data.map do |csv_row|
+      person_attrs = parse_person(csv_row)
       response_plan_attrs = parse_response_plan(csv_row)
       response_strategy_attrs = filter(parse_response_strategies(csv_row))
       contact_attrs = filter(parse_contacts(csv_row))
       image_attrs = parse_images(csv_row)
-      identifying_attrs = response_plan_attrs.slice(:first_name, :last_name)
+      identifying_attrs = person_attrs.slice(:first_name, :last_name)
 
-      response_plan = ResponsePlan.find_or_initialize_by(identifying_attrs)
+      person = Person.find_or_initialize_by(identifying_attrs)
+      response_plan = ResponsePlan.find_or_initialize_by(person: person)
+
+      person.update_attributes(person_attrs)
       response_plan.update_attributes(response_plan_attrs)
+
       response_plan.author = Officer.find_or_create_by!(parse_author_attrs(csv_row))
       response_plan.approver = Officer.find_or_create_by!(parse_approver_attrs(csv_row))
+
       response_plan.save!
 
       response_plan.response_strategies = response_strategy_attrs.map {|attrs| ResponseStrategy.create!(attrs.merge(response_plan: response_plan)) }
@@ -42,11 +48,10 @@ class CsvImporter
     CSV.parse(data, headers: true)
   end
 
-  def parse_response_plan(csv_row)
+  def parse_person(csv_row)
     {
       first_name: csv_row["First Name"],
       last_name: csv_row["Last Name"],
-      alias_list: csv_row["Aliases"].to_s.split(",").map(&:strip),
       date_of_birth: Date.strptime(csv_row["DOB"], "%m-%d-%Y"),
       race: parse_race(csv_row["Race"]),
       sex: csv_row["Gender"].titlecase,
@@ -55,9 +60,15 @@ class CsvImporter
       hair_color: csv_row["Hair"],
       eye_color: csv_row["Eye"],
       scars_and_marks: csv_row["Scars, Marks, and Tatoos"],
-      background_info: csv_row["Background Info"],
       location_name: csv_row["Current residence (title)"],
       location_address: parse_address(csv_row),
+    }
+  end
+
+  def parse_response_plan(csv_row)
+    {
+      alias_list: csv_row["Aliases"].to_s.split(",").map(&:strip),
+      background_info: csv_row["Background Info"],
     }
   end
 

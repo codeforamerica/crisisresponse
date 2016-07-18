@@ -14,7 +14,7 @@ var pageData = {
   params: <%= params.to_json.html_safe %>,
   page_controller_path: "<%= [params[:controller], params[:action]].join('.') %>",
   officer_token: "<%= current_officer.try(:analytics_token) %>",
-  response_plan_token: "<%= @response_plan.try(:analytics_token) %>",
+  response_plan_token: "<%= @response_plan.try(:person).try(:analytics_token) %>",
   referrer: document.referrer,
   browser: bowser,
   keen: {

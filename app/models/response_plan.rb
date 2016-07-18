@@ -1,14 +1,13 @@
 class ResponsePlan < ActiveRecord::Base
-  include PgSearch
-
-  include Analytics
-  before_create :generate_analytics_token
+  belongs_to :person
 
   has_many :aliases, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :images, dependent: :destroy
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
   has_many :safety_warnings, dependent: :destroy
+
+  accepts_nested_attributes_for(:person)
 
   accepts_nested_attributes_for(
     :aliases,
@@ -34,55 +33,12 @@ class ResponsePlan < ActiveRecord::Base
   belongs_to :author, class_name: "Officer"
   belongs_to :approver, class_name: "Officer"
 
-  RACE_CODES = {
-    "AFRICAN AMERICAN/BLACK" => "B",
-    "AMERICAN INDIAN/ALASKAN NATIVE" => "I",
-    "ASIAN (ALL)/PACIFIC ISLANDER" => "A",
-    "UNKNOWN" => "U",
-    "WHITE" => "W",
-  }.freeze
-
-  SEX_CODES = {
-    "Male" => "M",
-    "Female" => "F",
-  }.freeze
-
-  EYE_COLORS = [
-    :black,
-    :blue,
-    :brown,
-    :gray,
-    :green,
-    :hazel,
-    :maroon,
-    :multicolored,
-    :pink,
-    :unknown,
-  ].freeze
-
-  HAIR_COLORS = [
-    :bald,
-    :black,
-    :blonde,
-    :brown,
-    :grey,
-    :red,
-  ].freeze
-
-  validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
-  validates :race, inclusion: RACE_CODES.keys, allow_nil: true
-  validates :date_of_birth, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
   validate :approver_is_not_author
   validate :approved_at_is_present_if_approver_exists
   validate :approver_is_present_if_approved_at_exists
 
-  pg_search_scope(
-    :search,
-    against: [:first_name, :last_name],
-    using: [:tsearch, :dmetaphone, :trigram],
-  )
+  validates :person, presence: true
+  validate :errors_from_associated_person
 
   accepts_nested_attributes_for(
     :response_strategies,
@@ -118,40 +74,12 @@ class ResponsePlan < ActiveRecord::Base
     end
   end
 
-  def display_name
-    "#{last_name}, #{first_name}"
-  end
-
-  def eye_color
-    super || "Unknown"
-  end
-
-  def hair_color
-    super || "Unknown"
-  end
-
   def profile_image_url
     if images.any?
       images.first.source_url
     else
       "/assets/default_image.png"
     end
-  end
-
-  def name=(value)
-    (self.first_name, self.last_name) = value.split
-  end
-
-  def name
-    "#{first_name} #{last_name}"
-  end
-
-  def shorthand_description
-    [
-      RACE_CODES.fetch(race) + SEX_CODES.fetch(sex),
-      height_in_feet_and_inches,
-      weight_in_pounds ? "#{weight_in_pounds} lb" : nil,
-    ].compact.join(" – ")
   end
 
   private
@@ -180,11 +108,11 @@ class ResponsePlan < ActiveRecord::Base
     end
   end
 
-  def height_in_feet_and_inches
-    if height_in_inches
-      "#{height_in_inches / 12}'#{height_in_inches % 12}\""
-    else
-      nil
+  def errors_from_associated_person
+    person.validate
+
+    person.errors.each do |attr, message|
+      errors.add(attr, message)
     end
   end
 end

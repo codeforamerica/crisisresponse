@@ -84,12 +84,8 @@ feature "Response Plan Form" do
 
   context "Editing an existing response plan" do
     scenario "updated plan needs re-approval" do
-      plan = create(
-        :response_plan,
-        first_name: "Jane",
-        last_name: "Doe",
-        approved_at: 1.day.ago,
-      )
+      person = create(:person, first_name: "Jane", last_name: "Doe")
+      plan = create(:response_plan, person: person, approved_at: 1.day.ago)
       officer = create(:officer, username: "foo")
       stub_admin_permissions(officer)
       sign_in_officer(officer)

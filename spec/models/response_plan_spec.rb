@@ -2,25 +2,7 @@ require "rails_helper"
 require "shared/analytics_token"
 
 RSpec.describe ResponsePlan, type: :model do
-  it_should_behave_like "it has an analytics token"
-
   describe "validations" do
-    it { should allow_value("Female").for(:sex) }
-    it { should allow_value("Male").for(:sex) }
-    it { should allow_value(nil).for(:sex) }
-    it { should_not allow_value("FEMALE").for(:sex) }
-    it { should_not allow_value("M").for(:sex) }
-
-    it { should allow_value("AFRICAN AMERICAN/BLACK").for(:race) }
-    it { should allow_value("AMERICAN INDIAN/ALASKAN NATIVE").for(:race) }
-    it { should allow_value("ASIAN (ALL)/PACIFIC ISLANDER").for(:race) }
-    it { should allow_value("UNKNOWN").for(:race) }
-    it { should allow_value("WHITE").for(:race) }
-    it { should allow_value(nil).for(:race) }
-    it { should_not allow_value("BLACK").for(:race) }
-    it { should_not allow_value("W").for(:race) }
-    it { should_not allow_value("White").for(:race) }
-
     it "does not allow the same officer to both author and approve" do
       officer = build(:officer)
       response_plan = build(:response_plan, author: officer, approver: officer)
@@ -56,6 +38,7 @@ RSpec.describe ResponsePlan, type: :model do
     it { should have_many(:response_strategies).dependent(:destroy) }
     it { should belong_to(:author) }
     it { should belong_to(:approver) }
+    it { should belong_to(:person) }
   end
 
   describe "#alias_list=" do
@@ -143,14 +126,6 @@ RSpec.describe ResponsePlan, type: :model do
     end
   end
 
-  describe "#display_name" do
-    it "displays last name, first name" do
-      response_plan = build(:response_plan, first_name: "John", last_name: "Doe")
-
-      expect(response_plan.display_name).to eq("Doe, John")
-    end
-  end
-
   describe "#profile_image_url" do
     context "when no image is uploaded" do
       it "returns a URL to the default profile image" do
@@ -158,42 +133,6 @@ RSpec.describe ResponsePlan, type: :model do
 
         expect(response_plan.profile_image_url).to eq("/assets/default_image.png")
       end
-    end
-  end
-
-  describe "#shorthand_description" do
-    it "starts with a letter representing race" do
-      expect(shorthand_for(race: "AFRICAN AMERICAN/BLACK")).to start_with("B")
-      expect(shorthand_for(race: "AMERICAN INDIAN/ALASKAN NATIVE")).to start_with("I")
-      expect(shorthand_for(race: "ASIAN (ALL)/PACIFIC ISLANDER")).to start_with("A")
-      expect(shorthand_for(race: "UNKNOWN")).to start_with("U")
-      expect(shorthand_for(race: "WHITE")).to start_with("W")
-    end
-
-    it "has a letter for gender in the second position" do
-      expect(shorthand_for(sex: "Male")[1]).to eq("M")
-      expect(shorthand_for(sex: "Female")[1]).to eq("F")
-    end
-
-    it "uses a character for other gender"
-
-    it "Formats the height in feet and inches" do
-      expect(shorthand_for(height_in_inches: 70)).to include("5'10\"")
-    end
-
-    it "includes the weight in pounds" do
-      expect(shorthand_for(weight_in_pounds: 180)).to include("180 lb")
-    end
-
-    it "gracefully handles missing information" do
-      expect(shorthand_for(height_in_inches: nil).chars.count("–")).to eq(1)
-      expect(shorthand_for(weight_in_pounds: nil).chars.count("–")).to eq(1)
-      expect(shorthand_for(height_in_inches: nil, weight_in_pounds: nil)).
-        not_to include("–")
-    end
-
-    def shorthand_for(response_plan_attrs)
-      build(:response_plan, response_plan_attrs).shorthand_description
     end
   end
 

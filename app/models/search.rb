@@ -39,50 +39,50 @@ class Search
   end
 
   def close_matches
-    response_plans = ResponsePlan
+    people = Person
 
     if name.present?
-      response_plans = response_plans.search(name)
+      people = people.search(name)
     end
 
     if date_of_birth.present?
       date_of_birth_range = range(date_of_birth, 1.year)
-      response_plans = response_plans.where(date_of_birth: date_of_birth_range)
+      people = people.where(date_of_birth: date_of_birth_range)
     end
 
     if age.present?
       expected_dob = (Date.today - age.to_i.years)
       expected_dob_range = range(expected_dob, 5.years)
-      response_plans = response_plans.where(date_of_birth: expected_dob_range)
+      people = people.where(date_of_birth: expected_dob_range)
     end
 
     if height.present?
       height_range = range(height.to_i, 3)
-      response_plans = response_plans.where(height_in_inches: height_range)
+      people = people.where(height_in_inches: height_range)
     end
 
     if weight.present?
       weight_range = range(weight.to_i, 25)
-      response_plans = response_plans.where(weight_in_pounds: weight_range)
+      people = people.where(weight_in_pounds: weight_range)
     end
 
     if eye_color.any?
-      response_plans = response_plans.where(eye_color: eye_color)
+      people = people.where(eye_color: eye_color)
     end
 
     if hair_color.any?
-      response_plans = response_plans.where(hair_color: hair_color)
+      people = people.where(hair_color: hair_color)
     end
 
     if race.any?
-      response_plans = response_plans.where(race: race)
+      people = people.where(race: race)
     end
 
     if sex.any?
-      response_plans = response_plans.where(sex: sex)
+      people = people.where(sex: sex)
     end
 
-    response_plans.all
+    people.all
   end
 
   def partial_matches

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707223238) do
+ActiveRecord::Schema.define(version: 20160715214553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20160707223238) do
 
   add_index "officers", ["username"], name: "index_officers_on_username", unique: true, using: :btree
 
-  create_table "response_plans", force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "first_name"
@@ -98,18 +98,25 @@ ActiveRecord::Schema.define(version: 20160707223238) do
     t.string   "eye_color"
     t.date     "date_of_birth"
     t.string   "scars_and_marks"
-    t.integer  "author_id",        null: false
-    t.integer  "approver_id"
-    t.datetime "approved_at"
-    t.text     "background_info"
     t.string   "analytics_token"
     t.string   "location_name"
     t.string   "location_address"
+  end
+
+  create_table "response_plans", force: :cascade do |t|
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "author_id",       null: false
+    t.integer  "approver_id"
+    t.datetime "approved_at"
+    t.text     "background_info"
     t.text     "private_notes"
+    t.integer  "person_id"
   end
 
   add_index "response_plans", ["approver_id"], name: "index_response_plans_on_approver_id", using: :btree
   add_index "response_plans", ["author_id"], name: "index_response_plans_on_author_id", using: :btree
+  add_index "response_plans", ["person_id"], name: "index_response_plans_on_person_id", using: :btree
 
   create_table "response_strategies", force: :cascade do |t|
     t.integer  "priority"
@@ -134,6 +141,7 @@ ActiveRecord::Schema.define(version: 20160707223238) do
   add_foreign_key "aliases", "response_plans"
   add_foreign_key "contacts", "response_plans"
   add_foreign_key "images", "response_plans"
+  add_foreign_key "response_plans", "people"
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "safety_warnings", "response_plans"
 end

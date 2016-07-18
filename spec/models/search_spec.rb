@@ -51,192 +51,178 @@ describe Search do
   describe "#close_matches" do
     context "with no parameters" do
       it "returns all response plans" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "John Doe")
 
-        plans = Search.new({}).close_matches
+        matches = Search.new({}).close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
     end
 
     describe "searching by name" do
       it "does not return records whose names do not match" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        mismatch = create(:person, name: "John Doe")
 
-        plans = Search.new(name: "Mary").close_matches
+        matches = Search.new(name: "Mary").close_matches
 
-        expect(plans).to eq([])
+        expect(matches).to eq([])
       end
 
       it "returns records that match on first name" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "John Doe")
 
-        plans = Search.new(name: "John").close_matches
+        matches = Search.new(name: "John").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       it "returns records that match on last name" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "John Doe")
 
-        plans = Search.new(name: "Doe").close_matches
+        matches = Search.new(name: "Doe").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       it "returns records that match on the full name" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "John Doe")
 
-        plans = Search.new(name: "John Doe").close_matches
+        matches = Search.new(name: "John Doe").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       it "returns records that match on the reversed name" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "John Doe")
 
-        plans = Search.new(name: "Doe John").close_matches
+        matches = Search.new(name: "Doe John").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       pending "returns records that contain the searched name" do
-        name = "Christopher Nolan"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "Christopher Nolan")
 
-        plans = Search.new(name: "Chris").close_matches
+        matches = Search.new(name: "Chris").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       it "returns records whose first names sound similar" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "John Doe")
 
-        plans = Search.new(name: "Jon").close_matches
+        matches = Search.new(name: "Jon").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       it "returns records whose last names sound similar" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "John Doe")
 
-        plans = Search.new(name: "Doh").close_matches
+        matches = Search.new(name: "Doh").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       it "returns records whose full names sound similar" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "John Doe")
 
-        plans = Search.new(name: "Jon Doh").close_matches
+        matches = Search.new(name: "Jon Doh").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       it "returns records whose reversed full names sound similar" do
-        name = "John Doe"
-        response_plan = create(:response_plan, name: name)
+        person = create(:person, name: "John Doe")
 
-        plans = Search.new(name: "Doh Jon").close_matches
+        matches = Search.new(name: "Doh Jon").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
     end
 
     describe "searching by date of birth" do
       pending "ignores dates in an unrecognized format" do
-        plan = create(:response_plan)
-        _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
+        match = create(:person)
+        mismatch = create(:person, date_of_birth: Date.new(1978, 01, 02))
 
-        plans = Search.new(date_of_birth: "foo").close_matches
+        matches = Search.new(date_of_birth: "foo").close_matches
 
-        expect(plans).to eq([plan])
+        expect(matches).to eq([person])
       end
 
       it "parses dates in 'mm-dd-yyyy'" do
-        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
-        _mismatch = create(:response_plan, date_of_birth: Date.new(1978, 01, 02))
+        match = create(:person, date_of_birth: Date.new(1980, 01, 02))
+        mismatch = create(:person, date_of_birth: Date.new(1978, 01, 02))
 
-        plans = Search.new(date_of_birth: "01-02-1980").close_matches
+        matches = Search.new(date_of_birth: "01-02-1980").close_matches
 
-        expect(plans).to eq([match])
+        expect(matches).to eq([match])
       end
 
       it "returns records whose DOBs are a year earlier" do
-        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
+        match = create(:person, date_of_birth: Date.new(1980, 01, 02))
 
-        plans = Search.new(date_of_birth: "01-02-1981").close_matches
+        matches = Search.new(date_of_birth: "01-02-1981").close_matches
 
-        expect(plans).to eq([match])
+        expect(matches).to eq([match])
       end
 
       it "returns records whose DOBs are a year later" do
-        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
+        match = create(:person, date_of_birth: Date.new(1980, 01, 02))
 
-        plans = Search.new(date_of_birth: "01-02-1979").close_matches
+        matches = Search.new(date_of_birth: "01-02-1979").close_matches
 
-        expect(plans).to eq([match])
+        expect(matches).to eq([match])
       end
 
       it "returns records whose DOBs are within a year" do
-        match = create(:response_plan, date_of_birth: Date.new(1980, 01, 02))
+        match = create(:person, date_of_birth: Date.new(1980, 01, 02))
 
-        plans = Search.new(date_of_birth: "05-02-1980").close_matches
+        matches = Search.new(date_of_birth: "05-02-1980").close_matches
 
-        expect(plans).to eq([match])
+        expect(matches).to eq([match])
       end
     end
 
     describe "searching by name and DOB" do
       it "returns exact matches for name and DOB" do
-        name = "John Doe"
         dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, name: name, date_of_birth: dob)
+        person = create(:person, name: "John Doe", date_of_birth: dob)
 
-        plans = Search.new(name: "Doe John", date_of_birth: "01-02-1980").close_matches
+        matches = Search.new(name: "Doe John", date_of_birth: "01-02-1980").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       it "returns records whose name and DOB are slightly off" do
-        name = "John Doe"
         dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, name: name, date_of_birth: dob)
+        person = create(:person, name: "John Doe", date_of_birth: dob)
 
-        plans = Search.new(name: "Jon Doh", date_of_birth: "01-02-1981").close_matches
+        matches = Search.new(name: "Jon Doh", date_of_birth: "01-02-1981").close_matches
 
-        expect(plans).to eq([response_plan])
+        expect(matches).to eq([person])
       end
 
       it "does not return records whose name matches, and DOB doesn't" do
-        response_plan = create(
-          :response_plan,
+        person = create(
+          :person,
           name: "John Doe",
           date_of_birth: Date.new(1980, 01, 02),
         )
 
-        plans = Search.new(name: "Jon Doh", date_of_birth: "01-02-1985").close_matches
+        matches = Search.new(name: "Jon Doh", date_of_birth: "01-02-1985").close_matches
 
-        expect(plans).to eq([])
+        expect(matches).to eq([])
       end
 
       it "does not return records whose DOB matches, and name doesn't" do
-        name = "John Doe"
         dob = Date.new(1980, 01, 02)
-        response_plan = create(:response_plan, name: name, date_of_birth: dob)
+        mismatch = create(:person, name: "John Doe", date_of_birth: dob)
 
-        plans = Search.new(name: "Mary", date_of_birth: "01-02-1980").close_matches
+        matches = Search.new(name: "Mary", date_of_birth: "01-02-1980").close_matches
 
-        expect(plans).to eq([])
+        expect(matches).to eq([])
       end
     end
   end
