@@ -2,16 +2,6 @@ class Search
   include ActiveModel::Model
   validate :proper_date_format
 
-  ACCEPTED_DATE_FORMATS = [
-    "%m/%d/%Y",
-    "%m/%d/%y",
-    "%m-%d-%Y",
-    "%m-%d-%y",
-    "%m%d%Y",
-    "%m%d%y",
-    "%Y-%m-%d",
-  ].freeze
-
   SEARCHABLE_ATTRS = [
     :age,
     :date_of_birth,
@@ -28,7 +18,10 @@ class Search
 
   def initialize(*args)
     super(*args)
-    parse_date_of_birth
+
+    if @date_of_birth.present?
+      parse_date_of_birth
+    end
   end
 
   def active?
@@ -120,22 +113,16 @@ class Search
 
   def proper_date_format
     if @invalid_date
-      errors.add(:date_of_birth, "Ignored invalid date. Try 'MM/DD/YY'")
+      errors.add(:date_of_birth, "Ignored invalid date. Try 'mm-dd-yyyy'")
     end
   end
 
-  # TODO extract this out into a Date of Birth class to handle parsing
   def parse_date_of_birth
-    if @date_of_birth.present?
-      @date_of_birth = ACCEPTED_DATE_FORMATS.map do |format|
-        attempted_parse = Date.strptime(@date_of_birth, format) rescue nil
-        feasible = (120.years.ago.to_date..Date.today).cover?(attempted_parse)
-        feasible ? attempted_parse : nil
-      end.compact.first
-
-      if @date_of_birth.nil?
-        @invalid_date = true
-      end
-    end
+    attempted_parse = Date.strptime(@date_of_birth, "%m-%d-%Y")
+    feasible = (120.years.ago.to_date..Date.today).cover?(attempted_parse)
+    @date_of_birth = feasible ? attempted_parse : nil
+  rescue ArgumentError
+    @invalid_date = true
+    @date_of_birth = nil
   end
 end

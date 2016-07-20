@@ -173,6 +173,8 @@ GEM
     rails-assets-jquery (3.1.0)
     rails-assets-jquery-ujs (1.2.1)
       rails-assets-jquery (> 1.8)
+    rails-assets-jquery.maskedinput (1.4.1)
+      rails-assets-jquery (>= 1.8.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -297,6 +299,7 @@ DEPENDENCIES
   rails (~> 4.2.0)
   rails-assets-bowser!
   rails-assets-jquery-ujs!
+  rails-assets-jquery.maskedinput!
   rdiscount
   recipient_interceptor
   refills
