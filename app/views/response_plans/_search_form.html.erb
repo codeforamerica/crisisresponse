@@ -8,8 +8,12 @@
 
   <div class="fields">
     <div class="basic-search-fields">
-      <%= f.input :name, placeholder: "e.g. Doe, John A" %>
-      <%= f.input :date_of_birth, label: "DOB", placeholder: "e.g. 05-08-1970" %>
+      <%= f.input :name, placeholder: "Doe, John" %>
+      <%= f.input :date_of_birth,
+        label: "DOB",
+        placeholder: "mm-dd-yyyy",
+        input_html: { value: (l(@search.date_of_birth) rescue nil) }
+      %>
     </div>
 
     <div class="actions">
