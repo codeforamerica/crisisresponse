@@ -118,9 +118,7 @@ class Search
   end
 
   def parse_date_of_birth
-    attempted_parse = Date.strptime(@date_of_birth, "%m-%d-%Y")
-    feasible = (120.years.ago.to_date..Date.today).cover?(attempted_parse)
-    @date_of_birth = feasible ? attempted_parse : nil
+    @date_of_birth = Date.strptime(@date_of_birth, "%m-%d-%Y")
   rescue ArgumentError
     @invalid_date = true
     @date_of_birth = nil
