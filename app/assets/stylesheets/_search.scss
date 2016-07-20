@@ -80,6 +80,12 @@
 
       input {
         @include span-columns(6 of 8);
+        float: none;
+      }
+
+      .error {
+        @include span-columns(6 of 8);
+        float: right;
       }
 
       .input {
