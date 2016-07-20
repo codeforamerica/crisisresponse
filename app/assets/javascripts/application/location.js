@@ -15,7 +15,7 @@ function initMap() {
   initAutocomplete();
 
   var location_card = $(".location");
-  if(location_card.size() == 0) return;
+  if(location_card.length == 0) return;
 
   var address = location_card.data("address");
 

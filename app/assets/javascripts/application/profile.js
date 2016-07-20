@@ -4,7 +4,7 @@ $(function() {
   $(".image-scroll-arrow").on("click", function(event) {
     var focusedIndex = $("." + focusedImageClass).index();
     var direction = event.target.getAttribute("data-direction");
-    var numImages = $(".image-thumbnail").size();
+    var numImages = $(".image-thumbnail").length;
 
     if(direction == "next")
       focusedIndex = changeIndexBy(focusedIndex, 1, numImages);
