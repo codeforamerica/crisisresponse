@@ -25,6 +25,7 @@
       <%= person.input :location_address %>
     <% end %>
 
+    <%= render "nested_form", f: f, relationship: :safety_warnings, html_classes: ["multi-field"] %>
     <%= render "nested_form", f: f, relationship: :contacts, html_classes: ["multi-field"] %>
     <%= render "nested_form", f: f, relationship: :images, html_classes: [] %>
     <%= render "nested_form", f: f, relationship: :response_strategies, html_classes: ["multi-field"] %>

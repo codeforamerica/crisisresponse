@@ -15,6 +15,7 @@ $menu-link-height: 3em;
 }
 
 .menu {
+  margin-top: -$header-height;
   background-color: $menu-background-color;
   height: 100%;
   position: fixed;

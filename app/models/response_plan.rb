@@ -29,6 +29,11 @@ class ResponsePlan < ActiveRecord::Base
     reject_if: :all_blank,
     allow_destroy: true,
   )
+  accepts_nested_attributes_for(
+    :safety_warnings,
+    reject_if: :all_blank,
+    allow_destroy: true,
+  )
 
   belongs_to :author, class_name: "Officer"
   belongs_to :approver, class_name: "Officer"
@@ -80,6 +85,16 @@ class ResponsePlan < ActiveRecord::Base
     else
       "/assets/default_image.png"
     end
+  end
+
+  def safety_warnings_by_category
+    SafetyWarning::CATEGORIES.map do |category|
+      warnings = safety_warnings.where(category: category)
+
+      if warnings.any?
+        [category, warnings]
+      end
+    end.compact.to_h
   end
 
   private

@@ -56,7 +56,16 @@ FactoryGirl.define do
   end
 
   factory :safety_warning do
+    category { SafetyWarning::CATEGORIES.sample }
     description "History of violence"
     response_plan
+
+    physical_or_threat do
+      if SafetyWarning::ASSAULTIVE_CATEGORIES.include? category
+        [:physical, :threat].sample
+      else
+        nil
+      end
+    end
   end
 end

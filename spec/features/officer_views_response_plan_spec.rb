@@ -190,7 +190,7 @@ feature "Officer views a response plan" do
   end
 
   context "when there are no safety warnings" do
-    pending "they see 'No history of violence'" do
+    scenario "they see a note saying there are no concerns" do
       sign_in_officer
       response_plan = create(:response_plan)
 
@@ -201,7 +201,7 @@ feature "Officer views a response plan" do
   end
 
   context "when there are safety warnings" do
-    pending "they see the safety warnings" do
+    scenario "they see the safety warnings" do
       sign_in_officer
       response_plan = create(:response_plan)
       warning = create(

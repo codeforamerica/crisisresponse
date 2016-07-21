@@ -143,4 +143,20 @@ RSpec.describe ResponsePlan, type: :model do
       expect(response_plan.safety_warnings).to be_empty
     end
   end
+
+  describe "#safety_warnings_by_category" do
+    it "returns a hash of safety warnings sorted by category" do
+      plan = create(:response_plan)
+      one = create(:safety_warning, response_plan: plan, category: :assaultive_law, physical_or_threat: :threat, description: "1")
+      two = create(:safety_warning, response_plan: plan, category: :assaultive_public, physical_or_threat: :threat, description: "2")
+      three = create(:safety_warning, response_plan: plan, category: :assaultive_law, physical_or_threat: :threat, description: "3")
+
+      warnings = plan.safety_warnings_by_category
+
+      expect(warnings).to eq(
+        "assaultive_law" => [one, three],
+        "assaultive_public" => [two],
+      )
+    end
+  end
 end

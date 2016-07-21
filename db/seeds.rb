@@ -3,13 +3,15 @@
 # The data can then be loaded with `rake db:seed`
 # (or created alongside the db with db:setup).
 
-Officer.destroy_all
-Contact.destroy_all
-SafetyWarning.destroy_all
 Alias.destroy_all
+Contact.destroy_all
 Image.destroy_all
 ResponseStrategy.destroy_all
+SafetyWarning.destroy_all
+
 ResponsePlan.destroy_all
+
+Officer.destroy_all
 Person.destroy_all
 
 officer = Officer.create!(
@@ -231,6 +233,28 @@ Image.create!(
 )
 Image.create!(
   source: File.open("#{image_dir}/tannen_martha/2.jpg"),
+  response_plan: martha.response_plans.last,
+)
+
+SafetyWarning.create!(
+  category: :assaultive_law,
+  description: "RMS caution entry for being assaultive to and threatening law enforcement",
+  physical_or_threat: :physical,
+  response_plan: biff.response_plans.last,
+)
+SafetyWarning.create!(
+  category: :weapon,
+  description: "Tannen is most often armed with some sort of sharp instrument (knife, box knife, antler).",
+  response_plan: biff.response_plans.last,
+)
+SafetyWarning.create!(
+  category: :weapon,
+  description: "Sometimes has 9mm pistol on his person",
+  response_plan: biff.response_plans.last,
+)
+SafetyWarning.create!(
+  category: :chemical,
+  description: "Needles have been found on Martha.",
   response_plan: martha.response_plans.last,
 )
 
