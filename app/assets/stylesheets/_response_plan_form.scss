@@ -1,5 +1,5 @@
 .response_plan_form {
-  label {
+  & > * > label {
     @include span-columns(2 of 12);
   }
 
@@ -39,6 +39,46 @@
 
   .nested-fields {
     overflow: hidden;
+
+    .collection_input_set {
+      margin-bottom: $small-spacing;
+
+      .radio {
+        @include fill-parent;
+        display: block;
+        overflow: hidden;
+      }
+
+      label.radio_buttons {
+        @include fill-parent;
+      }
+
+      input[type="radio"] {
+        @include span-columns(1 of 8);
+        height: $base-spacing;
+      }
+
+      .category-label {
+        @include span-columns(7 of 8);
+        float: none;
+        overflow: hidden;
+        margin-bottom: $small-spacing;
+      }
+
+      .category-title,
+      .category-subtitle {
+        @include fill-parent;
+        display: block;
+      }
+
+      .category-subtitle {
+        @include light-font;
+      }
+
+      .category-example {
+        font-style: italic;
+      }
+    }
   }
 
   .multi-field .nested-fields {
@@ -59,5 +99,16 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .response_plan_safety_warnings_physical_or_threat label {
+    text-transform: capitalize;
+  }
+
+  .safety_warning-fields {
+    .input,
+    .remove_fields {
+      @include fill-parent;
+    }
   }
 }

@@ -7,11 +7,30 @@
   </div>
 
   <div class="section-body">
-    <p>Officer safety information is still under development.</p>
+    <% if @response_plan.safety_warnings.any? %>
+      <% @response_plan.safety_warnings_by_category.each do |category, concerns| %>
+        <div class="warning_category warning_category-<%= category %>">
+          <div class="safety-warning-icons">
+            <%= image_tag("safety_icons/#{category}-#{theme}.svg") %>
 
-    <p>
-    For information about <%= @response_plan.person.first_name %>,
-    please see the <strong>Response Plan</strong> section below.
-    </p>
+            <% if concerns.any?(&:physical?) %>
+              <span class="physical-threat-icon">P</span>
+            <% end %>
+
+            <% if concerns.any?(&:threat?) %>
+              <span class="physical-threat-icon">T</span>
+            <% end %>
+          </div>
+
+          <ul>
+            <% concerns.each do |concern| %>
+              <li><%= concern.description %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% else %>
+      <%= t("response_plans.safety.none") %>
+    <% end %>
   </div>
 </section>

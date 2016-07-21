@@ -1,3 +1,22 @@
-.safety-warnings .section-header {
-  background-color: $safety-section-header-background;
+.safety-warnings {
+  .safety-warning-icons {
+    @include span-columns(1 of 8);
+    text-align: center;
+
+    img {
+      @include fill-parent;
+    }
+
+    .physical-threat-icon {
+      display: inline-block;
+      padding: 0 $small-spacing;
+      background-color: $action-color;
+      color: $card-background;
+    }
+  }
+
+  ul {
+    @include span-columns(3 of 8);
+    list-style: inside;
+  }
 }

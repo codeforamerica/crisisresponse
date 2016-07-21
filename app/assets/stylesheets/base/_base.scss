@@ -11,3 +11,7 @@
 @import "lists";
 @import "tables";
 @import "typography";
+
+.hidden {
+  display: none !important;
+}

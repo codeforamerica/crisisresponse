@@ -146,6 +146,13 @@ class ResponsePlansController < ApplicationController
         :id,
         :title,
       ],
+      safety_warnings_attributes: [
+        :_destroy,
+        :category,
+        :description,
+        :id,
+        :physical_or_threat,
+      ],
     )
   end
 
