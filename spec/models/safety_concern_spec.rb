@@ -6,7 +6,6 @@ RSpec.describe SafetyConcern, type: :model do
          in_array(SafetyConcern::CATEGORIES) }
     it { should validate_presence_of :category }
     it { should validate_presence_of :description }
-    it { should validate_presence_of :response_plan }
 
     it "must be marked threat or physical if it's p1 or p2" do
       threat = build(:safety_concern, category: :assaultive_law, physical_or_threat: :threat)

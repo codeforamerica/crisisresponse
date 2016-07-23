@@ -5,7 +5,7 @@ FactoryGirl.define do
   end
 
   factory :contact do
-    response_plan nil
+    response_plan
     name "MyString"
     relationship "MyString"
     cell "MyString"

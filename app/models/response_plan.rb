@@ -34,6 +34,11 @@ class ResponsePlan < ActiveRecord::Base
     reject_if: :all_blank,
     allow_destroy: true,
   )
+  accepts_nested_attributes_for(
+    :response_strategies,
+    reject_if: :all_blank,
+    allow_destroy: true,
+  )
 
   belongs_to :author, class_name: "Officer"
   belongs_to :approver, class_name: "Officer"
@@ -44,12 +49,6 @@ class ResponsePlan < ActiveRecord::Base
 
   validates :person, presence: true
   validate :errors_from_associated_person
-
-  accepts_nested_attributes_for(
-    :response_strategies,
-    reject_if: :all_blank,
-    allow_destroy: true,
-  )
 
   def alias_list=(list_of_aliases)
     alias_objects = list_of_aliases.map do |aka|

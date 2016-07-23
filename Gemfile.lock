@@ -74,6 +74,8 @@ GEM
       safe_yaml (~> 1.0.0)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
+    deep_cloneable (2.2.1)
+      activerecord (>= 3.1.0, < 5.2.0)
     delayed_job (4.1.1)
       activesupport (>= 3.0, < 5.0)
     delayed_job_active_record (4.1.0)
@@ -275,6 +277,7 @@ DEPENDENCIES
   carrierwave
   cocoon
   database_cleaner
+  deep_cloneable
   delayed_job_active_record
   dotenv-rails
   factory_girl_rails

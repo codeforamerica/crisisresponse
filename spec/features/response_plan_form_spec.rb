@@ -92,12 +92,11 @@ feature "Response Plan Form" do
 
       visit edit_response_plan_path(plan)
       fill_in "First name", with: "Mary"
-      click_on "Update Response plan"
+      click_on "Create Response plan"
 
       expect(page).to have_content(t("response_plans.approval.required"))
-      expect(page).
-        to have_content(t("response_plans.update.success", name: "Mary Doe"))
-      expect(page).to have_content("Mary")
+      # expect(page).
+      #   to have_content(t("response_plans.update.success", name: "Mary Doe"))
     end
   end
 
@@ -107,15 +106,18 @@ feature "Response Plan Form" do
       sign_in_officer(admin_officer)
       stub_admin_permissions(admin_officer)
       plan = create(:response_plan)
+      person = plan.person
 
       visit edit_response_plan_path(plan)
       click_on "add response strategy"
       first("input[name*='[title]']").set("Response strategy 1")
       first("textarea[name*='[description]']").set("Response strategy description 1")
-      click_on "Update Response plan"
+      click_on "Create Response plan"
 
+      person.reload
+      new_plan = person.response_plans.last
       expect(page).to have_content("Response strategy 1")
-      expect(plan.reload.response_strategies.first.description).
+      expect(new_plan.response_strategies.first.description).
         to eq("Response strategy description 1")
     end
 
@@ -128,7 +130,7 @@ feature "Response Plan Form" do
       visit edit_response_plan_path(plan)
       click_on "remove alias"
       expect(first(".alias-field input")).to be_nil
-      click_on "Update Response plan"
+      click_on "Create Response plan"
 
       expect(page).not_to have_content("Foo")
     end
@@ -143,7 +145,7 @@ feature "Response Plan Form" do
 
       visit edit_response_plan_path(plan)
       click_on "remove step"
-      click_on "Update Response plan"
+      click_on "Create Response plan"
 
       expect(page).not_to have_content(title)
     end
@@ -159,7 +161,7 @@ feature "Response Plan Form" do
 
       visit edit_response_plan_path(plan)
       first("input[name*='[title]']").set(new_title)
-      click_on "Update Response plan"
+      click_on "Create Response plan"
 
       expect(page).not_to have_content(original_title)
       expect(page).to have_content(new_title)
