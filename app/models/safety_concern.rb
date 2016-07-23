@@ -13,7 +13,6 @@ class SafetyConcern < ActiveRecord::Base
 
   validates :category, presence: true, inclusion: { in: CATEGORIES }
   validates :description, presence: true
-  validates :response_plan, presence: true
 
   validate :physical_or_threat_if_in_those_categories
   validate :not_physical_or_threat_if_not_in_those_categories

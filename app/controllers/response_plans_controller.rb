@@ -31,9 +31,11 @@ class ResponsePlansController < ApplicationController
   end
 
   def create
-    @response_plan = ResponsePlan.new(person: Person.new)
+    id = response_plan_params[:person_attributes][:id]
+    person = id ? Person.find(id) : nil
+
+    @response_plan = ResponsePlan.new(person: person, author: current_officer)
     @response_plan.assign_attributes(response_plan_params)
-    @response_plan.author = current_officer
 
     if @response_plan.valid?
       @response_plan.person.save && @response_plan.save
@@ -47,7 +49,18 @@ class ResponsePlansController < ApplicationController
   end
 
   def edit
-    @response_plan = ResponsePlan.find(params[:id])
+    original = ResponsePlan.find(params[:id])
+
+    clone = original.deep_clone(
+      include: [
+        :aliases,
+        :contacts,
+        :response_strategies,
+        :safety_concerns,
+      ]
+    )
+
+    @response_plan = clone
   end
 
   def update
