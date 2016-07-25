@@ -1,0 +1,7 @@
+docker run \
+  --interactive \
+  --link crisis_db_1 \
+  --volume $PWD/:/tmp/ \
+  --net=crisis_default \
+  postgres:latest \
+  bash -c 'exec pg_dump -h db -p 5432 -U postgres -v -d crisisresponse_development > /tmp/dump.sql'
