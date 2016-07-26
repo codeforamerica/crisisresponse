@@ -101,11 +101,11 @@
     margin-right: auto;
   }
 
-  .response_plan_safety_warnings_physical_or_threat label {
+  .response_plan_safety_concerns_physical_or_threat label {
     text-transform: capitalize;
   }
 
-  .safety_warning-fields {
+  .safety_concern-fields {
     .input,
     .remove_fields {
       @include fill-parent;

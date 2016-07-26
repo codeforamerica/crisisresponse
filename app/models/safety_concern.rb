@@ -1,4 +1,4 @@
-class SafetyWarning < ActiveRecord::Base
+class SafetyConcern < ActiveRecord::Base
   ASSAULTIVE_CATEGORIES = %w[
     assaultive_law
     assaultive_public

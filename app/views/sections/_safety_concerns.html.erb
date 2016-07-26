@@ -1,16 +1,16 @@
-<section class="safety-warnings">
+<section class="safety-concerns">
   <div class="section-header">
-    <%= image_tag("section-icons/safety_warnings.svg", class: "section-icon") %>
+    <%= image_tag("section-icons/safety_concerns.svg", class: "section-icon") %>
     <div class="section-header-text">
       <span class="section-title">Officer Safety</span>
     </div>
   </div>
 
   <div class="section-body">
-    <% if @response_plan.safety_warnings.any? %>
-      <% @response_plan.safety_warnings_by_category.each do |category, concerns| %>
-        <div class="warning_category warning_category-<%= category %>">
-          <div class="safety-warning-icons">
+    <% if @response_plan.safety_concerns.any? %>
+      <% @response_plan.safety_concerns_by_category.each do |category, concerns| %>
+        <div class="concern_category concern_category-<%= category %>">
+          <div class="safety-concern-icons">
             <%= image_tag("safety_icons/#{category}-#{theme}.svg") %>
 
             <% if concerns.any?(&:physical?) %>

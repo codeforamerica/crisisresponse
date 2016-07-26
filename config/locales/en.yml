@@ -52,7 +52,7 @@ en:
   titles:
     application: Crisis Response
 
-  safety_warnings:
+  safety_concerns:
     categories:
       assaultive_law:
         title: "P1: Law Enforcement"
