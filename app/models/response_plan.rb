@@ -5,7 +5,7 @@ class ResponsePlan < ActiveRecord::Base
   has_many :contacts, dependent: :destroy
   has_many :images, dependent: :destroy
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
-  has_many :safety_warnings, dependent: :destroy
+  has_many :safety_concerns, dependent: :destroy
 
   accepts_nested_attributes_for(:person)
 
@@ -30,7 +30,7 @@ class ResponsePlan < ActiveRecord::Base
     allow_destroy: true,
   )
   accepts_nested_attributes_for(
-    :safety_warnings,
+    :safety_concerns,
     reject_if: :all_blank,
     allow_destroy: true,
   )
@@ -87,12 +87,12 @@ class ResponsePlan < ActiveRecord::Base
     end
   end
 
-  def safety_warnings_by_category
-    SafetyWarning::CATEGORIES.map do |category|
-      warnings = safety_warnings.where(category: category)
+  def safety_concerns_by_category
+    SafetyConcern::CATEGORIES.map do |category|
+      concerns = safety_concerns.where(category: category)
 
-      if warnings.any?
-        [category, warnings]
+      if concerns.any?
+        [category, concerns]
       end
     end.compact.to_h
   end

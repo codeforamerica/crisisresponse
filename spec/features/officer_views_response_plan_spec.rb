@@ -189,7 +189,7 @@ feature "Officer views a response plan" do
     end
   end
 
-  context "when there are no safety warnings" do
+  context "when there are no safety concerns" do
     scenario "they see a note saying there are no concerns" do
       sign_in_officer
       response_plan = create(:response_plan)
@@ -200,12 +200,12 @@ feature "Officer views a response plan" do
     end
   end
 
-  context "when there are safety warnings" do
-    scenario "they see the safety warnings" do
+  context "when there are safety concerns" do
+    scenario "they see the safety concerns" do
       sign_in_officer
       response_plan = create(:response_plan)
-      warning = create(
-        :safety_warning,
+      concern = create(
+        :safety_concern,
         response_plan: response_plan,
         description: "Owns a gun",
       )

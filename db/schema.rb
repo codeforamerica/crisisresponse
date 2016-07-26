@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721002550) do
+ActiveRecord::Schema.define(version: 20160726033619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 20160721002550) do
 
   add_index "response_strategies", ["response_plan_id"], name: "index_response_strategies_on_response_plan_id", using: :btree
 
-  create_table "safety_warnings", force: :cascade do |t|
+  create_table "safety_concerns", force: :cascade do |t|
     t.string   "description",        null: false
     t.integer  "response_plan_id",   null: false
     t.datetime "created_at",         null: false
@@ -138,12 +138,12 @@ ActiveRecord::Schema.define(version: 20160721002550) do
     t.string   "physical_or_threat"
   end
 
-  add_index "safety_warnings", ["response_plan_id"], name: "index_safety_warnings_on_response_plan_id", using: :btree
+  add_index "safety_concerns", ["response_plan_id"], name: "index_safety_concerns_on_response_plan_id", using: :btree
 
   add_foreign_key "aliases", "response_plans"
   add_foreign_key "contacts", "response_plans"
   add_foreign_key "images", "response_plans"
   add_foreign_key "response_plans", "people"
   add_foreign_key "response_strategies", "response_plans"
-  add_foreign_key "safety_warnings", "response_plans"
+  add_foreign_key "safety_concerns", "response_plans"
 end
