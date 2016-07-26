@@ -3,7 +3,6 @@ class ResponsePlan < ActiveRecord::Base
 
   has_many :aliases, dependent: :destroy
   has_many :contacts, dependent: :destroy
-  has_many :images, dependent: :destroy
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
   has_many :safety_concerns, dependent: :destroy
 
@@ -16,11 +15,6 @@ class ResponsePlan < ActiveRecord::Base
   )
   accepts_nested_attributes_for(
     :contacts,
-    reject_if: :all_blank,
-    allow_destroy: true,
-  )
-  accepts_nested_attributes_for(
-    :images,
     reject_if: :all_blank,
     allow_destroy: true,
   )
@@ -75,14 +69,6 @@ class ResponsePlan < ActiveRecord::Base
       self.approved_at = Time.current
     else
       self.approved_at = nil
-    end
-  end
-
-  def profile_image_url
-    if images.any?
-      images.first.source_url
-    else
-      "/assets/default_image.png"
     end
   end
 

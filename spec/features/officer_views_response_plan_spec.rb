@@ -24,16 +24,17 @@ feature "Officer views a response plan" do
       Image.new(source: File.open(Rails.root + "spec/fixtures/image.jpg")),
       Image.new(source: File.open(Rails.root + "spec/fixtures/secondary_image.jpg")),
     ]
-    plan = create(:response_plan, images: images)
+    person = create(:person, images: images)
+    plan = create(:response_plan, person: person)
 
     visit response_plan_path(plan)
-    expect(page).to have_focused_image(plan.images.first)
+    expect(page).to have_focused_image(person.images.first)
 
     find(".image-scroll-arrow[data-direction='next']").click
     skip "
     This must be tested with Javascript.
     The Poltergeist driver can not handle finding the image on the page."
-    expect(page).to have_focused_image(plan.images.last)
+    expect(page).to have_focused_image(person.images.last)
   end
 
   scenario "when user has no pictures they cannot scroll images"

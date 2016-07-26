@@ -217,24 +217,14 @@ ResponseStrategy.create!(
   response_plan: martha.response_plans.last,
 )
 
-image_dir = Rails.root.join("db", "seeds", "images")
+def image(path)
+  File.open(Rails.root.join("db", "seeds", "images", path))
+end
 
-Image.create!(
-  source: File.open("#{image_dir}/tannen_biff/1.png"),
-  response_plan: biff.response_plans.last,
-)
-Image.create!(
-  source: File.open("#{image_dir}/tannen_gregory/1.png"),
-  response_plan: gregory.response_plans.last,
-)
-Image.create!(
-  source: File.open("#{image_dir}/tannen_martha/1.png"),
-  response_plan: martha.response_plans.last,
-)
-Image.create!(
-  source: File.open("#{image_dir}/tannen_martha/2.jpg"),
-  response_plan: martha.response_plans.last,
-)
+Image.create!(source: image("tannen_biff/1.png"), person: biff)
+Image.create!(source: image("tannen_gregory/1.png"), person: gregory)
+Image.create!(source: image("tannen_martha/1.png"), person: martha)
+Image.create!(source: image("tannen_martha/2.jpg"), person: martha)
 
 SafetyConcern.create!(
   category: :assaultive_law,
