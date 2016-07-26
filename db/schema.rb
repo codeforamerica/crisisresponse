@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726033619) do
+ActiveRecord::Schema.define(version: 20160726054237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,13 +64,13 @@ ActiveRecord::Schema.define(version: 20160726033619) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string   "source",           null: false
-    t.integer  "response_plan_id", null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "source",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "person_id",  null: false
   end
 
-  add_index "images", ["response_plan_id"], name: "index_images_on_response_plan_id", using: :btree
+  add_index "images", ["person_id"], name: "index_images_on_person_id", using: :btree
 
   create_table "officers", force: :cascade do |t|
     t.string   "name",            null: false
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20160726033619) do
 
   add_foreign_key "aliases", "response_plans"
   add_foreign_key "contacts", "response_plans"
-  add_foreign_key "images", "response_plans"
+  add_foreign_key "images", "people"
   add_foreign_key "response_plans", "people"
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "safety_concerns", "response_plans"

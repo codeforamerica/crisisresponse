@@ -40,6 +40,7 @@ class Person < ActiveRecord::Base
   ].freeze
 
   has_many :response_plans
+  has_many :images, dependent: :destroy
 
   validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
   validates :race, inclusion: RACE_CODES.keys, allow_nil: true
@@ -51,6 +52,12 @@ class Person < ActiveRecord::Base
     :search,
     against: [:first_name, :last_name],
     using: [:tsearch, :dmetaphone, :trigram],
+  )
+
+  accepts_nested_attributes_for(
+    :images,
+    reject_if: :all_blank,
+    allow_destroy: true,
   )
 
   def active_response_plan
@@ -75,6 +82,14 @@ class Person < ActiveRecord::Base
 
   def name=(value)
     (self.first_name, self.last_name) = value.split
+  end
+
+  def profile_image_url
+    if images.any?
+      images.first.source_url
+    else
+      "/assets/default_image.png"
+    end
   end
 
   def response_plan

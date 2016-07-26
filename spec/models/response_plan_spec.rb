@@ -126,16 +126,6 @@ RSpec.describe ResponsePlan, type: :model do
     end
   end
 
-  describe "#profile_image_url" do
-    context "when no image is uploaded" do
-      it "returns a URL to the default profile image" do
-        response_plan = ResponsePlan.new
-
-        expect(response_plan.profile_image_url).to eq("/assets/default_image.png")
-      end
-    end
-  end
-
   describe "#safety_concerns" do
     it "returns an empty array if there are no safety concerns" do
       response_plan = build(:response_plan)

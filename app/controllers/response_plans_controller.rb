@@ -51,7 +51,7 @@ class ResponsePlansController < ApplicationController
   def edit
     original = ResponsePlan.find(params[:id])
 
-    clone = original.deep_clone(
+    @response_plan = original.deep_clone(
       include: [
         :aliases,
         :contacts,
@@ -59,8 +59,6 @@ class ResponsePlansController < ApplicationController
         :safety_concerns,
       ]
     )
-
-    @response_plan = clone
   end
 
   def update

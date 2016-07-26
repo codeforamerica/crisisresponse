@@ -47,6 +47,16 @@ RSpec.describe Person, type: :model do
     end
   end
 
+  describe "#profile_image_url" do
+    context "when no image is uploaded" do
+      it "returns a URL to the default profile image" do
+        person = Person.new
+
+        expect(person.profile_image_url).to eq("/assets/default_image.png")
+      end
+    end
+  end
+
   describe "#shorthand_description" do
     it "starts with a letter representing race" do
       expect(shorthand_for(race: "AFRICAN AMERICAN/BLACK")).to start_with("B")

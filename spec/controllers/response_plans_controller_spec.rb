@@ -118,18 +118,6 @@ RSpec.describe ResponsePlansController, type: :controller do
       expect(clone).not_to be_persisted
     end
 
-    pending "copies over images" do
-      officer = create(:officer, username: "admin")
-      stub_admin_permissions(officer)
-      original = create(:image)
-
-      get :edit, { id: original.response_plan.id }, { officer_id: officer.id }
-
-      clone = assigns(:response_plan).images.first
-      expect(clone.source).to eq(original.source)
-      expect(clone).not_to be_persisted
-    end
-
     it "copies over safety concerns" do
       officer = create(:officer, username: "admin")
       stub_admin_permissions(officer)
