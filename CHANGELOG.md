@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented here.
 
+## Unreleased
+
+### Added
+
+* Response plans now include officer safety concerns.
+
+### Fixed
+
+* When a response plan is updated,
+  officers can still see the original version
+  while the new version is waiting for approval.
+
+## [0.1.4] - 2016-07-27
+
+### Added
+
+* Add search fields for physical characteristics.
+* Create a form for officers on the Crisis Response Team
+  to create new response plans.
+* Add a mechanism for the Crisis Response Team Sergeant
+  to approve new response plans.
+
+### Changed
+
+* Automatically fill dashes for the Date of Birth field.
+  This restricts the number of ways you can enter a date of birth,
+  but helps you avoid needing to enter dashes by hand.
+  The new accepted date format is `mm-dd-yyyy`.
+* Small interface improvements for the "About the Plan" section.
+
 ## [0.1.3] - 2016-07-01
 
 ### Added
@@ -120,7 +150,8 @@ All notable changes to this project will be documented here.
 
 * Text entered into search or feedback fields is now visible in night mode
 
-[Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.0...v0.1.1
