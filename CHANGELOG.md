@@ -2,17 +2,23 @@
 
 All notable changes to this project will be documented here.
 
-## Unreleased
+## [0.1.5] - 2016-07-28
 
 ### Added
 
-* Response plans now include officer safety concerns.
+* Response plans now support officer safety concerns.
+  The information is still not included in the app –
+  we are working with the Crisis Response Team over the next week
+  to prepare content for the safety concerns section.
 
 ### Fixed
 
 * When a response plan is updated,
   officers can still see the original version
   while the new version is waiting for approval.
+* Fixed a small interface bug for the section icons in Internet Explorer.
+* Fixed a small interface bug where the side menu
+  appeared slightly down the page, instead of at the top.
 
 ## [0.1.4] - 2016-07-27
 
@@ -150,7 +156,8 @@ All notable changes to this project will be documented here.
 
 * Text entered into search or feedback fields is now visible in night mode
 
-[Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.3...v0.1.5
 [0.1.4]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.1...v0.1.2
