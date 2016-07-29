@@ -69,7 +69,8 @@ feature "Officer views a response plan" do
     sign_in_officer
     aliases = ["Mark Smith", "Joe Andrews"]
     person = create(:person, name: "John Doe")
-    response_plan = create(:response_plan, alias_list: aliases, person: person)
+    response_plan = create(:response_plan, person: person)
+    aliases.each { |aka| create(:alias, name: aka, person: person) }
 
     visit response_plan_path(response_plan)
 

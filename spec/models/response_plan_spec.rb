@@ -33,24 +33,11 @@ RSpec.describe ResponsePlan, type: :model do
 
   describe "associations" do
     it { should have_many(:safety_concerns).dependent(:destroy) }
-    it { should have_many(:aliases).dependent(:destroy) }
     it { should have_many(:contacts).dependent(:destroy) }
     it { should have_many(:response_strategies).dependent(:destroy) }
     it { should belong_to(:author) }
     it { should belong_to(:approver) }
     it { should belong_to(:person) }
-  end
-
-  describe "#alias_list=" do
-    it "destroys the associated alias object when it gets overwritten" do
-      plan = create(:response_plan, alias_list: ["foo"])
-
-      plan.alias_list = ["bar"]
-      plan.save
-
-      expect(Alias.find_by(name: "foo")).to be_nil
-      expect(Alias.find_by(name: "bar")).to be_persisted
-    end
   end
 
   describe "#approved?" do

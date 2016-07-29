@@ -4,12 +4,12 @@
 
     <hr/>
 
-    <% if response_plan.aliases.any? %>
+    <% if response_plan.person.aliases.any? %>
       <div class="aliases">
         <h3>AKA</h3>
 
         <ul>
-          <% response_plan.aliases.each do |aka| %>
+          <% response_plan.person.aliases.each do |aka| %>
             <li><%= aka.name %></li>
           <% end %>
         </ul>

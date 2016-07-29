@@ -53,7 +53,6 @@ class ResponsePlansController < ApplicationController
 
     @response_plan = original.deep_clone(
       include: [
-        :aliases,
         :contacts,
         :response_strategies,
         :safety_concerns,
@@ -117,11 +116,6 @@ class ResponsePlansController < ApplicationController
     params.require(:response_plan).permit(
       :background_info,
       :private_notes,
-      aliases_attributes: [
-        :_destroy,
-        :id,
-        :name,
-      ],
       contacts_attributes: [
         :_destroy,
         :cell,
@@ -130,11 +124,6 @@ class ResponsePlansController < ApplicationController
         :notes,
         :organization,
         :relationship,
-      ],
-      images_attributes: [
-        :_destroy,
-        :id,
-        :source,
       ],
       person_attributes: [
         :date_of_birth,
@@ -150,6 +139,16 @@ class ResponsePlansController < ApplicationController
         :scars_and_marks,
         :sex,
         :weight_in_pounds,
+        aliases_attributes: [
+          :_destroy,
+          :id,
+          :name,
+        ],
+        images_attributes: [
+          :_destroy,
+          :id,
+          :source,
+        ],
       ],
       response_strategies_attributes: [
         :_destroy,

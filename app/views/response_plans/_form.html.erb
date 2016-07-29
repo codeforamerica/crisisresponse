@@ -4,11 +4,8 @@
       <%= person.input :first_name %>
       <%= person.input :last_name %>
       <%= person.input :date_of_birth, label: "DOB", as: :string %>
-    <% end %>
+      <%= render "nested_form", f: person, relationship: :aliases, html_classes: [] %>
 
-    <%= render "nested_form", f: f, relationship: :aliases, html_classes: [] %>
-
-    <%= f.fields_for :person do |person| %>
       <%= person.input :race, collection: Person::RACE_CODES.keys %>
       <%= person.input :sex, collection: Person::SEX_CODES.keys %>
       <%= person.input :weight_in_pounds, label: "Weight" %>
