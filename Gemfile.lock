@@ -209,6 +209,7 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    ruby-oci8 (2.2.2)
     safe_yaml (1.0.4)
     sass (3.4.22)
     sass-rails (5.0.6)
@@ -303,6 +304,7 @@ DEPENDENCIES
   recipient_interceptor
   refills
   rspec-rails (~> 3.4.0)
+  ruby-oci8
   sass-rails (~> 5.0)
   shoulda-matchers
   simple_form
