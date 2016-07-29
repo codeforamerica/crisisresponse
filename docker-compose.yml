@@ -5,11 +5,6 @@ services:
     ports:
       - "5432:5432"
 
-  box:
-    image: busybox
-    volumes:
-      - /box
-
   web:
     build: .
     image: codeforamerica/crisisresponse
@@ -23,5 +18,3 @@ services:
       - db
     volumes:
       - .:/app
-    volumes_from:
-      - box

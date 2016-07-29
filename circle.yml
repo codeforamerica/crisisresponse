@@ -1,6 +1,15 @@
 machine:
   environment:
-    DB_HOST: localhost
+    LD_LIBRARY_PATH: $HOME/$CIRCLE_PROJECT_REPONAME/dependencies/instantclient_11_2
+dependencies:
+  pre:
+    - sudo apt-get install -y libaio1
+    -
+      cd dependencies &&
+      unzip instantclient-basic-linux.x64-11.2.0.3.0.zip &&
+      unzip instantclient-sdk-linux.x64-11.2.0.3.0.zip &&
+      cd instantclient_11_2 &&
+      ln -s libclntsh.so.11.1 libclntsh.so
 database:
   override:
     - bin/setup

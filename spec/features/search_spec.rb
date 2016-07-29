@@ -54,7 +54,7 @@ feature "Search" do
 
       sign_in_officer
       visit people_path
-      click_on t("search.physicals.show")
+      open_physicals_search
       fill_in "Age", with: 20
       run_search
 
@@ -70,7 +70,7 @@ feature "Search" do
 
       sign_in_officer
       visit people_path
-      click_on t("search.physicals.show")
+      open_physicals_search
       check_option(:sex, female.sex)
       run_search
 
@@ -86,7 +86,7 @@ feature "Search" do
 
       sign_in_officer
       visit people_path
-      click_on t("search.physicals.show")
+      open_physicals_search
       check_option(:race, white.race)
       check_option(:race, asian.race)
       run_search
@@ -104,7 +104,7 @@ feature "Search" do
 
       sign_in_officer
       visit people_path
-      click_on t("search.physicals.show")
+      open_physicals_search
       fill_in "Weight", with: 150
       run_search
 
@@ -121,7 +121,7 @@ feature "Search" do
 
       sign_in_officer
       visit people_path
-      click_on t("search.physicals.show")
+      open_physicals_search
       fill_in :search_height_feet, with: 5
       fill_in :search_height_inches, with: 3
       run_search
@@ -139,7 +139,7 @@ feature "Search" do
 
       sign_in_officer
       visit people_path
-      click_on t("search.physicals.show")
+      open_physicals_search
       check_option(:hair_color, "Brown")
       check_option(:hair_color, "Black")
       run_search
@@ -157,7 +157,7 @@ feature "Search" do
 
       sign_in_officer
       visit people_path
-      click_on t("search.physicals.show")
+      open_physicals_search
       check_option(:eye_color, "blue")
       check_option(:eye_color, "brown")
       run_search
@@ -175,6 +175,10 @@ feature "Search" do
 
     def run_search
       first(".actions input").trigger("click")
+    end
+
+    def open_physicals_search
+      find("a", text: t("search.physicals.show")).trigger("click")
     end
   end
 
