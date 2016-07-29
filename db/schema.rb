@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729212644) do
+ActiveRecord::Schema.define(version: 20160729212645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,6 +210,15 @@ ActiveRecord::Schema.define(version: 20160729212644) do
 
   add_index "safety_concerns", ["response_plan_id"], name: "index_safety_concerns_on_response_plan_id", using: :btree
 
+  create_table "triggers", force: :cascade do |t|
+    t.string   "description",      null: false
+    t.integer  "response_plan_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "triggers", ["response_plan_id"], name: "index_triggers_on_response_plan_id", using: :btree
+
   add_foreign_key "aliases", "people"
   add_foreign_key "contacts", "response_plans"
   add_foreign_key "deescalation_techniques", "response_plans"
@@ -218,4 +227,5 @@ ActiveRecord::Schema.define(version: 20160729212644) do
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "rms_crisis_incidents", "rms_people"
   add_foreign_key "safety_concerns", "response_plans"
+  add_foreign_key "triggers", "response_plans"
 end

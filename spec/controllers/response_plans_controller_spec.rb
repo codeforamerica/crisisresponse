@@ -131,5 +131,17 @@ RSpec.describe ResponsePlansController, type: :controller do
       expect(clone.physical_or_threat).to eq(original.physical_or_threat)
       expect(clone).not_to be_persisted
     end
+
+    it "copies over triggers" do
+      officer = create(:officer, username: "admin")
+      stub_admin_permissions(officer)
+      original = create(:trigger, description: "bar")
+
+      get :edit, { id: original.response_plan.id }, { officer_id: officer.id }
+
+      clone = assigns(:response_plan).triggers.first
+      expect(clone.description).to eq(original.description)
+      expect(clone).not_to be_persisted
+    end
   end
 end

@@ -1,0 +1,22 @@
+  .triggers {
+    .section-header {
+      .section-title {
+        @include heavy-font;
+      }
+
+      color: $trigger-section-header-color;
+      margin-bottom: $small-spacing;
+    }
+
+    ul {
+      list-style: inside;
+    }
+
+    li {
+      margin-bottom: $tiny-spacing;
+    }
+
+    @include media($medium-screen-up) {
+      @include span-columns(5 of 8);
+    }
+  }
