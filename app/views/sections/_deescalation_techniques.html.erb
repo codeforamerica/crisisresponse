@@ -1,0 +1,18 @@
+<% if @response_plan.deescalation_techniques.any? %>
+  <section class="deescalation-techniques">
+
+    <div class="section-header section-header-muted">
+      <div class="section-header-text">
+        <span class="section-title">De-escalation Techniques</span>
+      </div>
+    </div>
+
+    <div class="section-body">
+      <ul>
+        <% @response_plan.deescalation_techniques.each do |technique| %>
+          <li><%= technique.description %></li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>

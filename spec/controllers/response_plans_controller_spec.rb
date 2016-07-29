@@ -92,6 +92,18 @@ RSpec.describe ResponsePlansController, type: :controller do
       expect(clone).not_to be_persisted
     end
 
+    it "copies over deescalation_techniques" do
+      officer = create(:officer, username: "admin")
+      stub_admin_permissions(officer)
+      original = create(:deescalation_technique, description: "bar")
+
+      get :edit, { id: original.response_plan.id }, { officer_id: officer.id }
+
+      clone = assigns(:response_plan).deescalation_techniques.first
+      expect(clone.description).to eq(original.description)
+      expect(clone).not_to be_persisted
+    end
+
     it "copies over response_strategies" do
       officer = create(:officer, username: "admin")
       stub_admin_permissions(officer)

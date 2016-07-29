@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729023514) do
+ActiveRecord::Schema.define(version: 20160729212644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20160729023514) do
   end
 
   add_index "contacts", ["response_plan_id"], name: "index_contacts_on_response_plan_id", using: :btree
+
+  create_table "deescalation_techniques", force: :cascade do |t|
+    t.string   "description",      null: false
+    t.integer  "response_plan_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "deescalation_techniques", ["response_plan_id"], name: "index_deescalation_techniques_on_response_plan_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -203,6 +212,7 @@ ActiveRecord::Schema.define(version: 20160729023514) do
 
   add_foreign_key "aliases", "people"
   add_foreign_key "contacts", "response_plans"
+  add_foreign_key "deescalation_techniques", "response_plans"
   add_foreign_key "images", "people"
   add_foreign_key "response_plans", "people"
   add_foreign_key "response_strategies", "response_plans"

@@ -54,6 +54,7 @@ class ResponsePlansController < ApplicationController
     @response_plan = original.deep_clone(
       include: [
         :contacts,
+        :deescalation_techniques,
         :response_strategies,
         :safety_concerns,
       ]
@@ -124,6 +125,11 @@ class ResponsePlansController < ApplicationController
         :notes,
         :organization,
         :relationship,
+      ],
+      deescalation_techniques_attributes: [
+        :_destroy,
+        :id,
+        :description,
       ],
       person_attributes: [
         :date_of_birth,
