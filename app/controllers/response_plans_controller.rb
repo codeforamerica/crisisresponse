@@ -57,6 +57,7 @@ class ResponsePlansController < ApplicationController
         :deescalation_techniques,
         :response_strategies,
         :safety_concerns,
+        :triggers,
       ]
     )
   end
@@ -168,6 +169,11 @@ class ResponsePlansController < ApplicationController
         :description,
         :id,
         :physical_or_threat,
+      ],
+      triggers_attributes: [
+        :_destroy,
+        :id,
+        :description,
       ],
     )
   end

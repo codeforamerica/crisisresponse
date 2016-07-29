@@ -89,6 +89,19 @@ feature "Officer views a response plan" do
     expect(page).to have_content(step_2.description)
   end
 
+  scenario "They see triggers" do
+    sign_in_officer
+    response_plan = create(:response_plan)
+    step_1 = create(:trigger, response_plan: response_plan, description: "Ask about their dog")
+    step_2 = create(:trigger, response_plan: response_plan, description: "Talk about the weather")
+
+    visit response_plan_path(response_plan)
+
+    expect(page).to have_content(step_1.description)
+    expect(page).to have_content(step_2.description)
+  end
+
+
   scenario "They see the response plan steps" do
     sign_in_officer
     response_plan = create(:response_plan)

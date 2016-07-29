@@ -90,4 +90,9 @@ FactoryGirl.define do
       end
     end
   end
+
+  factory :trigger do
+    description "MyString"
+    response_plan
+  end
 end
