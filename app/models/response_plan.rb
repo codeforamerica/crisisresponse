@@ -4,11 +4,17 @@ class ResponsePlan < ActiveRecord::Base
   has_many :contacts, dependent: :destroy
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
   has_many :safety_concerns, dependent: :destroy
+  has_many :deescalation_techniques, dependent: :destroy
 
   accepts_nested_attributes_for(:person)
 
   accepts_nested_attributes_for(
     :contacts,
+    reject_if: :all_blank,
+    allow_destroy: true,
+  )
+  accepts_nested_attributes_for(
+    :deescalation_techniques,
     reject_if: :all_blank,
     allow_destroy: true,
   )

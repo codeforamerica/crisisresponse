@@ -24,6 +24,7 @@
     <% end %>
 
     <%= render "nested_form", f: f, relationship: :safety_concerns, html_classes: ["multi-field"] %>
+    <%= render "nested_form", f: f, relationship: :deescalation_techniques, html_classes: [] %>
     <%= render "nested_form", f: f, relationship: :contacts, html_classes: ["multi-field"] %>
     <%= render "nested_form", f: f, relationship: :response_strategies, html_classes: ["multi-field"] %>
 

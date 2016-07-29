@@ -12,6 +12,11 @@ FactoryGirl.define do
     notes "MyString"
   end
 
+  factory :deescalation_technique do
+    description "MyString"
+    response_plan
+  end
+
   factory :feedback do
     name "MyString"
     description "MyText"
