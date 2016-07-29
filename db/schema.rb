@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729011351) do
+ActiveRecord::Schema.define(version: 20160729023514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,67 @@ ActiveRecord::Schema.define(version: 20160729011351) do
 
   add_index "response_strategies", ["response_plan_id"], name: "index_response_strategies_on_response_plan_id", using: :btree
 
+  create_table "rms_crisis_incidents", force: :cascade do |t|
+    t.integer  "rms_person_id",             null: false
+    t.datetime "reported_at"
+    t.string   "go_number"
+    t.boolean  "weapon"
+    t.boolean  "threaten_violence"
+    t.boolean  "biologically_induced"
+    t.boolean  "medically_induced"
+    t.boolean  "chemically_induced"
+    t.boolean  "unknown_crisis_nature"
+    t.boolean  "neglect_self_care"
+    t.boolean  "disorganize_communication"
+    t.boolean  "disoriented_confused"
+    t.boolean  "disorderly_disruptive"
+    t.boolean  "unusual_fright_scared"
+    t.boolean  "belligerent_uncooperative"
+    t.boolean  "hopeless_depressed"
+    t.boolean  "bizarre_unusual_behavior"
+    t.boolean  "suicide_threat_attempt"
+    t.boolean  "mania"
+    t.boolean  "out_of_touch_reality"
+    t.boolean  "halluc_delusion"
+    t.boolean  "excited_delirium"
+    t.boolean  "chronic"
+    t.boolean  "treatment_referral"
+    t.boolean  "resource_declined"
+    t.boolean  "mobile_crisis_team"
+    t.boolean  "grat"
+    t.boolean  "shelter"
+    t.boolean  "no_action_poss_necc"
+    t.boolean  "casemanager_notice"
+    t.boolean  "dmhp_refer"
+    t.boolean  "crisis_clinic"
+    t.boolean  "emergent_ita"
+    t.boolean  "voluntary_commit"
+    t.boolean  "arrested"
+    t.boolean  "verbalization"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "rms_crisis_incidents", ["rms_person_id"], name: "index_rms_crisis_incidents_on_rms_person_id", using: :btree
+
+  create_table "rms_people", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "sex"
+    t.string   "race"
+    t.integer  "height_in_inches"
+    t.integer  "weight_in_pounds"
+    t.string   "hair_color"
+    t.string   "eye_color"
+    t.date     "date_of_birth"
+    t.string   "scars_and_marks"
+    t.string   "location_name"
+    t.string   "location_address"
+    t.string   "pin",              null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "safety_concerns", force: :cascade do |t|
     t.string   "description",        null: false
     t.integer  "response_plan_id",   null: false
@@ -145,5 +206,6 @@ ActiveRecord::Schema.define(version: 20160729011351) do
   add_foreign_key "images", "people"
   add_foreign_key "response_plans", "people"
   add_foreign_key "response_strategies", "response_plans"
+  add_foreign_key "rms_crisis_incidents", "rms_people"
   add_foreign_key "safety_concerns", "response_plans"
 end
