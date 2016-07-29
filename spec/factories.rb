@@ -54,6 +54,24 @@ FactoryGirl.define do
     response_plan
   end
 
+  factory :rms_person, :class => 'Rms::Person' do
+    name "John Doe"
+    sex "Male"
+    race "AFRICAN AMERICAN/BLACK"
+    height_in_inches 66
+    weight_in_pounds 160
+    hair_color "black"
+    eye_color "blue"
+    date_of_birth { 25.years.ago }
+    pin "0123456789abcdef"
+  end
+
+  factory :rms_crisis_incident, :class => 'Rms::CrisisIncident' do
+    rms_person
+    reported_at { 1.week.ago }
+    go_number "2016001234"
+  end
+
   factory :safety_concern do
     category { SafetyConcern::CATEGORIES.sample }
     description "History of violence"
