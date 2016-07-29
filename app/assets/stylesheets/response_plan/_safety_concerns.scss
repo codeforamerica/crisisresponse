@@ -1,4 +1,8 @@
 .safety-concerns {
+  .section-header {
+    background-color: $safety-section-header-background;
+  }
+
   .safety-concern-icons {
     @include span-columns(1 of 8);
     text-align: center;

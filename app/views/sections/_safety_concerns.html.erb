@@ -30,7 +30,12 @@
         </div>
       <% end %>
     <% else %>
-      <%= t("response_plans.safety.none") %>
+      <p>Officer safety information is still under development.</p>
+
+      <p>
+      For information about <%= @response_plan.person.first_name %>,
+      please see the <strong>Response Plan</strong> section below.
+      </p>
     <% end %>
   </div>
 </section>
