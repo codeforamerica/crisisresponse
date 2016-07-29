@@ -19,7 +19,7 @@ officer = Officer.create!(
   unit: "Crisis Response Team",
   title: nil,
   phone: "206-123-4567",
-  username: nil,
+  username: "doe",
 )
 
 sergeant = Officer.create!(

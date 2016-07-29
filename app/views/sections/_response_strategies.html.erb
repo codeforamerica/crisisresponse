@@ -10,7 +10,7 @@
     <% @response_plan.response_strategies.each do |strategy| %>
       <div class="response-strategy mobile-collapsed">
         <h3><%= strategy.title %></h3>
-        <p><%= strategy.description %></p>
+        <p><%= simple_format strategy.description %></p>
         <a href="#" class="expand" data-text-swap="Hide">Read More</a>
       </div>
     <% end %>
