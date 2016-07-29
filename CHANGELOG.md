@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented here.
 
+## [0.1.6] - 2016-07-29
+
+### Added
+
+* Add de-escalation techniques to response plans.
+  This feature is now supported by the app,
+  but the content is not yet included.
+* Display paragraph breaks in background information and response plan steps
+  to help with legibility.
+
+### Fixed
+
+* Safety warnings, when populated in the app,
+  will now display better on mobile devices.
+* Make safety warnings section header grey while it is not implemented.
+
 ## [0.1.5] - 2016-07-28
 
 ### Added
