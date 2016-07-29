@@ -6,6 +6,8 @@ RSpec.describe Person, type: :model do
 
   describe "associations" do
     it { should have_many(:response_plans) }
+    it { should have_many(:aliases).dependent(:destroy) }
+    it { should have_many(:images).dependent(:destroy) }
   end
 
   describe "validations" do

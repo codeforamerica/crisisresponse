@@ -1,8 +1,8 @@
 class Alias < ActiveRecord::Base
-  belongs_to :response_plan
+  belongs_to :person
 
-  validates :response_plan, presence: true
+  validates :person, presence: true
   validates :name,
     presence: true,
-    uniqueness: { scope: :response_plan_id }
+    uniqueness: { scope: :person_id }
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726054237) do
+ActiveRecord::Schema.define(version: 20160729011351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,13 +19,13 @@ ActiveRecord::Schema.define(version: 20160726054237) do
   enable_extension "fuzzystrmatch"
 
   create_table "aliases", force: :cascade do |t|
-    t.integer  "response_plan_id"
-    t.string   "name",             null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "person_id",  null: false
   end
 
-  add_index "aliases", ["response_plan_id"], name: "index_aliases_on_response_plan_id", using: :btree
+  add_index "aliases", ["person_id"], name: "index_aliases_on_person_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "response_plan_id"
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 20160726054237) do
 
   add_index "safety_concerns", ["response_plan_id"], name: "index_safety_concerns_on_response_plan_id", using: :btree
 
-  add_foreign_key "aliases", "response_plans"
+  add_foreign_key "aliases", "people"
   add_foreign_key "contacts", "response_plans"
   add_foreign_key "images", "people"
   add_foreign_key "response_plans", "people"

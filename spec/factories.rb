@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :alias do
     name "John Doe"
-    response_plan
+    person
   end
 
   factory :contact do
@@ -42,7 +42,6 @@ FactoryGirl.define do
 
   factory :response_plan do
     person
-    aliases []
     author
     approver
     updated_at { 1.second.ago }

@@ -39,8 +39,9 @@ class Person < ActiveRecord::Base
     :red,
   ].freeze
 
-  has_many :response_plans
+  has_many :aliases, dependent: :destroy
   has_many :images, dependent: :destroy
+  has_many :response_plans
 
   validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
   validates :race, inclusion: RACE_CODES.keys, allow_nil: true
@@ -54,6 +55,11 @@ class Person < ActiveRecord::Base
     using: [:tsearch, :dmetaphone, :trigram],
   )
 
+  accepts_nested_attributes_for(
+    :aliases,
+    reject_if: :all_blank,
+    allow_destroy: true,
+  )
   accepts_nested_attributes_for(
     :images,
     reject_if: :all_blank,

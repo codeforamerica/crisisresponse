@@ -92,18 +92,6 @@ RSpec.describe ResponsePlansController, type: :controller do
       expect(clone).not_to be_persisted
     end
 
-    it "copies over aliases" do
-      officer = create(:officer, username: "admin")
-      stub_admin_permissions(officer)
-      original = create(:alias, name: "Bob")
-
-      get :edit, { id: original.response_plan.id }, { officer_id: officer.id }
-
-      clone = assigns(:response_plan).aliases.first
-      expect(clone.name).to eq(original.name)
-      expect(clone).not_to be_persisted
-    end
-
     it "copies over response_strategies" do
       officer = create(:officer, username: "admin")
       stub_admin_permissions(officer)

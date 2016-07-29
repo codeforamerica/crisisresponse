@@ -1,18 +1,12 @@
 class ResponsePlan < ActiveRecord::Base
   belongs_to :person
 
-  has_many :aliases, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
   has_many :safety_concerns, dependent: :destroy
 
   accepts_nested_attributes_for(:person)
 
-  accepts_nested_attributes_for(
-    :aliases,
-    reject_if: :all_blank,
-    allow_destroy: true,
-  )
   accepts_nested_attributes_for(
     :contacts,
     reject_if: :all_blank,
@@ -43,18 +37,6 @@ class ResponsePlan < ActiveRecord::Base
 
   validates :person, presence: true
   validate :errors_from_associated_person
-
-  def alias_list=(list_of_aliases)
-    alias_objects = list_of_aliases.map do |aka|
-      Alias.find_or_initialize_by(name: aka, response_plan: self)
-    end
-
-    self.aliases = alias_objects
-  end
-
-  def alias_list
-    aliases.pluck(:name)
-  end
 
   def approved?
     approved_at.present? &&

@@ -125,7 +125,8 @@ feature "Response Plan Form" do
       admin_officer = create(:officer, username: "admin")
       sign_in_officer(admin_officer)
       stub_admin_permissions(admin_officer)
-      plan = create(:response_plan, alias_list: ["Foo"])
+      plan = create(:response_plan)
+      create(:alias, name: "Foo", person: plan.person)
 
       visit edit_response_plan_path(plan)
       click_on "remove alias"
