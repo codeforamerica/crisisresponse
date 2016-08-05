@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729212645) do
+ActiveRecord::Schema.define(version: 20160805135401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,16 @@ ActiveRecord::Schema.define(version: 20160729212645) do
   end
 
   add_index "officers", ["username"], name: "index_officers_on_username", unique: true, using: :btree
+
+  create_table "page_views", force: :cascade do |t|
+    t.integer  "officer_id"
+    t.integer  "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "page_views", ["officer_id"], name: "index_page_views_on_officer_id", using: :btree
+  add_index "page_views", ["person_id"], name: "index_page_views_on_person_id", using: :btree
 
   create_table "people", force: :cascade do |t|
     t.datetime "created_at",       null: false
@@ -223,6 +233,8 @@ ActiveRecord::Schema.define(version: 20160729212645) do
   add_foreign_key "contacts", "response_plans"
   add_foreign_key "deescalation_techniques", "response_plans"
   add_foreign_key "images", "people"
+  add_foreign_key "page_views", "officers"
+  add_foreign_key "page_views", "people"
   add_foreign_key "response_plans", "people"
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "rms_crisis_incidents", "rms_people"

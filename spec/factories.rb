@@ -34,6 +34,11 @@ FactoryGirl.define do
     phone "222-333-4444"
   end
 
+  factory :page_view do
+    officer
+    person
+  end
+
   factory :person do
     name "John Doe"
     sex "Male"

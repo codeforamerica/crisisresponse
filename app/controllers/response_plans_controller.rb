@@ -24,6 +24,8 @@ class ResponsePlansController < ApplicationController
     unless current_officer.admin?
       ensure_response_plan_is_approved(@response_plan)
     end
+
+    record_page_view(@response_plan)
   end
 
   def new
@@ -182,5 +184,9 @@ class ResponsePlansController < ApplicationController
     unless response_plan.approved?
       raise ActiveRecord::RecordNotFound
     end
+  end
+
+  def record_page_view(response_plan)
+    PageView.create(officer: current_officer, person: response_plan.person)
   end
 end

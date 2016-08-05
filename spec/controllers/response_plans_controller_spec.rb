@@ -16,7 +16,7 @@ RSpec.describe ResponsePlansController, type: :controller do
 
   describe "GET #index" do
     context "as a non-admin" do
-      scenario "they do not see response plans that have not been approved" do
+      it "does not show response plans that have not been approved" do
         officer = create(:officer)
         approved = create(:response_plan)
         _unapproved = create(:response_plan, approver: nil)
@@ -28,7 +28,7 @@ RSpec.describe ResponsePlansController, type: :controller do
     end
 
     context "as an admin" do
-      scenario "they see response plans that have not been approved" do
+      it "shows response plans that have not been approved" do
         officer = create(:officer, username: "admin")
         stub_admin_permissions(officer)
         approved = create(:response_plan)
@@ -43,12 +43,26 @@ RSpec.describe ResponsePlansController, type: :controller do
 
   describe "GET #show" do
     context "when the plan has not been approved" do
-      scenario "they do not see the response plan" do
+      it "does not show the response plan, and does not record a pageview" do
         officer = create(:officer)
-        _response_plan = create(:response_plan, approver: nil)
+        plan = create(:response_plan, approver: nil)
 
-        expect { get :show, { id: 20 }, { officer_id: officer.id } }.
+        expect { get :show, { id: plan.id }, { officer_id: officer.id } }.
           to raise_error(ActiveRecord::RecordNotFound)
+        expect(PageView.count).to eq(0)
+      end
+    end
+
+    context "when the response plan has been approved" do
+      it "records a PageView" do
+        officer = create(:officer)
+        plan = create(:response_plan)
+
+        expect { get :show, { id: plan.id }, { officer_id: officer.id } }.
+          to change(PageView, :count)
+        page_view = PageView.last
+        expect(page_view.officer).to eq(officer)
+        expect(page_view.person).to eq(plan.person)
       end
     end
   end
