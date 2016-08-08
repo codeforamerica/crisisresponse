@@ -24,8 +24,8 @@
     <div class="results">
       <div class="loose-matches">
         <% if @response_plans.any? %>
-          <% @response_plans.each do |plan| %>
-            <%= render "search_result", response_plan: plan %>
+          <% @response_plans.each do |person, plan| %>
+            <%= render "search_result", person: person %>
           <% end %>
         <% else %>
           <%= t("search.results.none") %>

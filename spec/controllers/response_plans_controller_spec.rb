@@ -3,66 +3,14 @@ require "support/permissions"
 
 RSpec.describe ResponsePlansController, type: :controller do
   include Permissions
+  render_views
 
   describe "authentication" do
     context "when the officer ID in the session isn't in the system" do
       it "logs the user out and redirects them to sign in" do
-        get :index, {}, { officer_id: 1 }
+        get :edit, { id: 1 }, { officer_id: 1 }
 
         expect(response).to redirect_to(new_authentication_path)
-      end
-    end
-  end
-
-  describe "GET #index" do
-    context "as a non-admin" do
-      it "does not show response plans that have not been approved" do
-        officer = create(:officer)
-        approved = create(:response_plan)
-        _unapproved = create(:response_plan, approver: nil)
-
-        get :index, {}, { officer_id: officer.id }
-
-        expect(assigns(:response_plans)).to eq([approved])
-      end
-    end
-
-    context "as an admin" do
-      it "shows response plans that have not been approved" do
-        officer = create(:officer, username: "admin")
-        stub_admin_permissions(officer)
-        approved = create(:response_plan)
-        unapproved = create(:response_plan, approver: nil)
-
-        get :index, {}, { officer_id: officer.id }
-
-        expect(assigns(:response_plans)).to match_array([approved, unapproved])
-      end
-    end
-  end
-
-  describe "GET #show" do
-    context "when the plan has not been approved" do
-      it "does not show the response plan, and does not record a pageview" do
-        officer = create(:officer)
-        plan = create(:response_plan, approver: nil)
-
-        expect { get :show, { id: plan.id }, { officer_id: officer.id } }.
-          to raise_error(ActiveRecord::RecordNotFound)
-        expect(PageView.count).to eq(0)
-      end
-    end
-
-    context "when the response plan has been approved" do
-      it "records a PageView" do
-        officer = create(:officer)
-        plan = create(:response_plan)
-
-        expect { get :show, { id: plan.id }, { officer_id: officer.id } }.
-          to change(PageView, :count)
-        page_view = PageView.last
-        expect(page_view.officer).to eq(officer)
-        expect(page_view.person).to eq(plan.person)
       end
     end
   end

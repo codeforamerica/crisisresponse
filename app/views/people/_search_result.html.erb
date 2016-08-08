@@ -1,0 +1,7 @@
+<%= link_to person, class: "search-result" do %>
+  <%= image_tag person.profile_image_url %>
+  <div class="search-result-info">
+    <%= render "identity", person: person %>
+    <div class="description"><%= person.shorthand_description %></div>
+  </div>
+<% end %>

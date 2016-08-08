@@ -7,7 +7,7 @@ feature "Feedback" do
     sign_in_officer
     response_plan = create(:response_plan)
 
-    visit response_plan_path(response_plan)
+    visit person_path(response_plan.person)
     click_on "Leave Feedback"
     fill_in :feedback_name, with: "Sandlin Grayson"
     fill_in :feedback_description, with: "foobar"

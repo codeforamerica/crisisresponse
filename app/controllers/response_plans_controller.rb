@@ -6,28 +6,6 @@ class ResponsePlansController < ApplicationController
   before_action :authenticate_officer!
   before_action :authorize_admin, except: [:index, :show]
 
-  def index
-    @search = Search.new(search_params)
-    @search.validate
-
-    people = @search.close_matches
-    @response_plans = people.map(&:active_response_plan).compact
-
-    if current_officer.admin?
-      @response_plans = people.map {|p| p.response_plans.order(:approved_at).last }
-    end
-  end
-
-  def show
-    @response_plan = ResponsePlan.find(params[:id])
-
-    unless current_officer.admin?
-      ensure_response_plan_is_approved(@response_plan)
-    end
-
-    record_page_view(@response_plan)
-  end
-
   def new
     @response_plan = ResponsePlan.new(person: Person.new)
   end
@@ -42,7 +20,7 @@ class ResponsePlansController < ApplicationController
     if @response_plan.valid?
       @response_plan.person.save && @response_plan.save
       redirect_to(
-        response_plan_path(@response_plan),
+        person_path(@response_plan.person),
         notice: t("response_plans.create.success", name: @response_plan.person.name),
       )
     else
@@ -71,7 +49,7 @@ class ResponsePlansController < ApplicationController
 
     if @response_plan.save
       redirect_to(
-        response_plan_path(@response_plan),
+        person_path(@response_plan.person),
         notice: t("response_plans.update.success", name: @response_plan.person.name),
       )
     else
@@ -85,36 +63,18 @@ class ResponsePlansController < ApplicationController
 
     if plan.save
       redirect_to(
-        response_plan_path(plan),
+        person_path(plan.person),
         notice: t("response_plans.approval.success", name: plan.person.name),
       )
     else
       redirect_to(
-        response_plan_path(plan),
+        person_path(plan.person),
         alert: t("response_plans.approval.failure"),
       )
     end
   end
 
   private
-
-  def search_params
-    if params[:search].present?
-      params.require(:search).permit(
-        :name,
-        :date_of_birth,
-        :age,
-        :height,
-        :weight,
-        eye_color: [],
-        hair_color: [],
-        race: [],
-        sex: [],
-      )
-    else
-      {}
-    end
-  end
 
   def response_plan_params
     params.require(:response_plan).permit(
@@ -178,15 +138,5 @@ class ResponsePlansController < ApplicationController
         :description,
       ],
     )
-  end
-
-  def ensure_response_plan_is_approved(response_plan)
-    unless response_plan.approved?
-      raise ActiveRecord::RecordNotFound
-    end
-  end
-
-  def record_page_view(response_plan)
-    PageView.create(officer: current_officer, person: response_plan.person)
   end
 end

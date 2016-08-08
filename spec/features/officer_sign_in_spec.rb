@@ -2,9 +2,9 @@ require "rails_helper"
 
 feature "Officer sign-in" do
   scenario "unauthenticated officer is redirected to sign in" do
-    plan = create(:response_plan)
+    person = create(:person)
 
-    visit response_plan_path(plan)
+    visit person_path(person)
 
     expect(page).to have_content t("authentication.unauthenticated")
     expect(page).not_to have_content(t("authentication.sign_out.link"))
@@ -22,7 +22,7 @@ feature "Officer sign-in" do
 
     expect(page).
       to have_content(t("authentication.sign_in.success", name: officer_name))
-    expect(current_path).to eq(response_plans_path)
+    expect(current_path).to eq(people_path)
   end
 
   scenario "user fails to sign in" do
@@ -38,10 +38,9 @@ feature "Officer sign-in" do
   end
 
   scenario "authenticated user signs out" do
-    plan = create(:response_plan)
-    sign_in_officer(plan.author)
+    sign_in_officer
 
-    visit response_plan_path(plan)
+    visit people_path
     click_on t("authentication.sign_out.link")
 
     expect(page).to have_content t("authentication.sign_out.success")

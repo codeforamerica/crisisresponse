@@ -1,15 +1,15 @@
 <section class="profile">
   <div class="section-body">
-    <%= render "identity", person: response_plan.person %>
+    <%= render "identity", person: person %>
 
     <hr/>
 
-    <% if response_plan.person.aliases.any? %>
+    <% if person.aliases.any? %>
       <div class="aliases">
         <h3>AKA</h3>
 
         <ul>
-          <% response_plan.person.aliases.each do |aka| %>
+          <% person.aliases.each do |aka| %>
             <li><%= aka.name %></li>
           <% end %>
         </ul>
@@ -20,22 +20,22 @@
 
     <div class="physical">
       <span class="shorthand-description">
-        <%= response_plan.person.shorthand_description %>
+        <%= person.shorthand_description %>
       </span>
 
       <span class="hair-color">
         <%= image_tag("physical/hair-#{theme}.svg") %>
-        <%= response_plan.person.hair_color.to_s.humanize %>
+        <%= person.hair_color.to_s.humanize %>
       </span>
 
       <span class="eye-color">
         <%= image_tag("physical/eye-#{theme}.svg") %>
-        <%= response_plan.person.eye_color.to_s.humanize %>
+        <%= person.eye_color.to_s.humanize %>
       </span>
 
       <span class="scars-marks">
         <span class="scars-marks-label">SMT</span>
-        <%= response_plan.person.scars_and_marks.to_s.humanize %>
+        <%= person.scars_and_marks.to_s.humanize %>
       </span>
     </div>
   </div>

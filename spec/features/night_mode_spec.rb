@@ -26,8 +26,8 @@ feature "Night mode" do
 
   scenario "Officer stays on the page they were viewing" do
     sign_in_officer
-    plan = create(:response_plan)
-    path = response_plan_path(plan)
+    person = create(:person)
+    path = person_path(person)
 
     visit path
     find(".menu-icon").click

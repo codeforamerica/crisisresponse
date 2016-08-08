@@ -10,9 +10,8 @@ feature "Officer views a response plan" do
       name: "John Doe",
       date_of_birth: Date.new(1980),
     )
-    response_plan = create(:response_plan, person: person)
 
-    visit response_plan_path(response_plan)
+    visit person_path(person)
 
     expect(page).to have_content("DOE, John")
     expect(page).to have_content(l(person.date_of_birth))
@@ -25,9 +24,8 @@ feature "Officer views a response plan" do
       Image.new(source: File.open(Rails.root + "spec/fixtures/secondary_image.jpg")),
     ]
     person = create(:person, images: images)
-    plan = create(:response_plan, person: person)
 
-    visit response_plan_path(plan)
+    visit person_path(person)
     expect(page).to have_focused_image(person.images.first)
 
     find(".image-scroll-arrow[data-direction='next']").click
@@ -55,9 +53,8 @@ feature "Officer views a response plan" do
       sex: "Male",
       weight_in_pounds: 180,
     )
-    response_plan = create(:response_plan, person: person)
 
-    visit response_plan_path(response_plan)
+    visit person_path(person)
 
     expect(page).to have_content("WM – 5'10\" – 180 lb")
     expect(page).to have_css(".physical .eye-color", text: "Green")
@@ -69,10 +66,9 @@ feature "Officer views a response plan" do
     sign_in_officer
     aliases = ["Mark Smith", "Joe Andrews"]
     person = create(:person, name: "John Doe")
-    response_plan = create(:response_plan, person: person)
     aliases.each { |aka| create(:alias, name: aka, person: person) }
 
-    visit response_plan_path(response_plan)
+    visit person_path(person)
 
     aliases.each { |aka| expect(page).to have_content(aka) }
   end
@@ -83,7 +79,7 @@ feature "Officer views a response plan" do
     step_1 = create(:deescalation_technique, response_plan: response_plan, description: "Ask about their dog")
     step_2 = create(:deescalation_technique, response_plan: response_plan, description: "Talk about the weather")
 
-    visit response_plan_path(response_plan)
+    visit person_path(response_plan.person)
 
     expect(page).to have_content(step_1.description)
     expect(page).to have_content(step_2.description)
@@ -95,12 +91,11 @@ feature "Officer views a response plan" do
     step_1 = create(:trigger, response_plan: response_plan, description: "Ask about their dog")
     step_2 = create(:trigger, response_plan: response_plan, description: "Talk about the weather")
 
-    visit response_plan_path(response_plan)
+    visit person_path(response_plan.person)
 
     expect(page).to have_content(step_1.description)
     expect(page).to have_content(step_2.description)
   end
-
 
   scenario "They see the response plan steps" do
     sign_in_officer
@@ -108,7 +103,7 @@ feature "Officer views a response plan" do
     step_1 = create(:response_strategy, response_plan: response_plan, title: "Call case manager")
     step_2 = create(:response_strategy, response_plan: response_plan, title: "Transport to Harborview")
 
-    visit response_plan_path(response_plan)
+    visit person_path(response_plan.person)
 
     expect(page).to have_content(step_1.title)
     expect(page).to have_content(step_2.title)
@@ -119,7 +114,7 @@ feature "Officer views a response plan" do
     background_text = "This is the person's background info"
     response_plan = create(:response_plan, background_info: background_text)
 
-    visit response_plan_path(response_plan)
+    visit person_path(response_plan.person)
 
     expect(page).to have_content(background_text)
   end
@@ -136,7 +131,7 @@ feature "Officer views a response plan" do
       notes: "Only available from 9am - 5pm",
     )
 
-    visit response_plan_path(response_plan)
+    visit person_path(response_plan.person)
 
     expect(page).to have_content(contact.name)
     expect(page).to have_content(contact.relationship)
@@ -149,7 +144,7 @@ feature "Officer views a response plan" do
     officer = create(:officer, name: "Jacques Clouseau")
     response_plan = create(:response_plan, author: officer)
 
-    visit response_plan_path(response_plan)
+    visit person_path(response_plan.person)
 
     expect(page).to have_content("Prepared by Jacques Clouseau")
   end
@@ -159,7 +154,7 @@ feature "Officer views a response plan" do
       sign_in_officer
       response_plan = create(:response_plan)
 
-      visit response_plan_path(response_plan)
+      visit person_path(response_plan.person)
 
       expect(page).not_to have_content(t("response_plans.approval.required"))
     end
@@ -169,7 +164,7 @@ feature "Officer views a response plan" do
       officer = create(:officer, name: "Jacques Clouseau")
       response_plan = create(:response_plan, approver: officer)
 
-      visit response_plan_path(response_plan)
+      visit person_path(response_plan.person)
 
       expect(page).to have_content("Approved by Jacques Clouseau")
     end
@@ -182,7 +177,7 @@ feature "Officer views a response plan" do
       sign_in_officer(admin)
       response_plan = create(:response_plan, approver: nil)
 
-      visit response_plan_path(response_plan)
+      visit person_path(response_plan.person)
 
       expect(page).to have_content(t("response_plans.approval.required"))
     end
@@ -193,7 +188,7 @@ feature "Officer views a response plan" do
       sign_in_officer(admin)
       response_plan = create(:response_plan, approver: nil)
 
-      visit response_plan_path(response_plan)
+      visit person_path(response_plan.person)
       click_on t("response_plans.approval.action")
 
       expect(response_plan.reload).to be_approved
@@ -208,7 +203,7 @@ feature "Officer views a response plan" do
       sign_in_officer(admin)
       response_plan = create(:response_plan, approver: nil, author: admin)
 
-      visit response_plan_path(response_plan)
+      visit person_path(response_plan.person)
       click_on t("response_plans.approval.action")
 
       expect(response_plan.reload).not_to be_approved
@@ -221,7 +216,7 @@ feature "Officer views a response plan" do
       sign_in_officer
       response_plan = create(:response_plan)
 
-      visit response_plan_path(response_plan)
+      visit person_path(response_plan.person)
 
       expect(page).to have_content(t("response_plans.safety.none"))
     end
@@ -237,7 +232,7 @@ feature "Officer views a response plan" do
         description: "Owns a gun",
       )
 
-      visit response_plan_path(response_plan)
+      visit person_path(response_plan.person)
 
       expect(page).to have_content("Owns a gun")
     end
