@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805135401) do
+ActiveRecord::Schema.define(version: 20160808125211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,7 +207,10 @@ ActiveRecord::Schema.define(version: 20160805135401) do
     t.string   "pin",              null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "person_id"
   end
+
+  add_index "rms_people", ["person_id"], name: "index_rms_people_on_person_id", using: :btree
 
   create_table "safety_concerns", force: :cascade do |t|
     t.string   "description",        null: false
@@ -238,6 +241,7 @@ ActiveRecord::Schema.define(version: 20160805135401) do
   add_foreign_key "response_plans", "people"
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "rms_crisis_incidents", "rms_people"
+  add_foreign_key "rms_people", "people"
   add_foreign_key "safety_concerns", "response_plans"
   add_foreign_key "triggers", "response_plans"
 end

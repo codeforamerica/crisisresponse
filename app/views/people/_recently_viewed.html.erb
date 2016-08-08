@@ -1,0 +1,18 @@
+<div class="recently-viewed-plans">
+  <h2>Response Plans</h2>
+
+  <% @response_plans.each do |person, response_plan| %>
+    <%= link_to person_path(person), class: "recently-viewed-plan" do %>
+      <% unless response_plan && response_plan.approved? %>
+        <span class="needs-approval-banner">Needs Approval</span>
+      <% end %>
+
+      <%= image_tag person.profile_image_url %>
+
+      <div class="recently-viewed-plan-labels">
+        <span class="recently-viewed-plan-name"><%= person.display_name %></span>
+        <span class="recently-viewed-plan-dob"><%= l person.date_of_birth %></span>
+      </div>
+    <% end %>
+  <% end %>
+</div>

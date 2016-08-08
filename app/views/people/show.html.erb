@@ -1,0 +1,44 @@
+<%= content_for(:header) do %>
+  <%= render "identity", person: @person %>
+<% end %>
+
+<div class="main">
+  <%#TODO refactor with Null Object %>
+  <% if @response_plan && !@response_plan.approved? %>
+    <div class="needs-approval">
+      <%= t("response_plans.approval.required") %>
+      <%= link_to(
+        t("response_plans.approval.action"),
+        approve_response_plan_path(@response_plan),
+        method: :patch
+      ) %>
+    </div>
+  <% end %>
+
+  <div class="left-column">
+    <%= render "sections/images" %>
+    <%= render "sections/profile", person: @person %>
+    <%= render "sections/location" %>
+
+    <%# TODO refactor with Null Object %>
+    <% if @response_plan %>
+      <% @response_plan.contacts.each do |contact| %>
+        <%= render "sections/contact", contact: contact %>
+      <% end %>
+
+      <%= render "sections/about" %>
+    <% end %>
+  </div>
+
+  <div class="right-column">
+    <%# TODO refactor with Null Object %>
+    <% if @response_plan %>
+      <%= render "sections/safety_concerns" %>
+      <%= render "sections/deescalation_techniques" %>
+      <%= render "sections/triggers" %>
+      <%= render "sections/response_strategies" %>
+      <%= render "sections/background_info" %>
+      <%= render "sections/about" %>
+    <% end %>
+  </div>
+</div>

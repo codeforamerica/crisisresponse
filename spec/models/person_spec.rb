@@ -39,6 +39,13 @@ RSpec.describe Person, type: :model do
 
       expect(person.active_response_plan).to eq(plans.second)
     end
+
+    it "returns nil if there is no approved response plan" do
+      person = create(:person)
+      create(:response_plan, person: person, approved_at: nil, approver: nil)
+
+      expect(person.active_response_plan).to eq(nil)
+    end
   end
 
   describe "#display_name" do

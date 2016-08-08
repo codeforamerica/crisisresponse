@@ -11,7 +11,7 @@ class FeedbacksController < ApplicationController
     message = FeedbackMailer.officer_feedback(feedback)
     EmailService.send(message)
 
-    redirect_to response_plans_path, notice: t("feedbacks.create.success")
+    redirect_to people_path, notice: t("feedbacks.create.success")
   end
 
   private

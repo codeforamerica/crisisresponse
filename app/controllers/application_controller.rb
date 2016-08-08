@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def authorize_admin
     unless officer_signed_in? && current_officer.admin?
       redirect_to(
-        response_plans_path,
+        people_path,
         alert: t("authentication.unauthorized.new_response_plan"),
       )
     end

@@ -64,8 +64,10 @@ FactoryGirl.define do
     response_plan
   end
 
-  factory :rms_person, :class => 'Rms::Person' do
-    name "John Doe"
+  factory :rms_person, :class => 'RMS::Person' do
+    person
+    first_name "John"
+    last_name "Doe"
     sex "Male"
     race "AFRICAN AMERICAN/BLACK"
     height_in_inches 66
@@ -76,7 +78,7 @@ FactoryGirl.define do
     pin "0123456789abcdef"
   end
 
-  factory :rms_crisis_incident, :class => 'Rms::CrisisIncident' do
+  factory :rms_crisis_incident, :class => 'RMS::CrisisIncident' do
     rms_person
     reported_at { 1.week.ago }
     go_number "2016001234"
