@@ -42,6 +42,20 @@ class Person < ActiveRecord::Base
   has_many :aliases, dependent: :destroy
   has_many :images, dependent: :destroy
   has_many :response_plans
+  has_one :rms_person, class_name: "RMS::Person"
+
+  def sex; super || SEX_CODES.invert[rms_person.sex] rescue nil; end
+  def race; super || RACE_CODES.invert[rms_person.race] rescue nil; end
+  def date_of_birth; super || rms_person.date_of_birth rescue nil; end
+  def first_name; super || rms_person.first_name rescue nil; end
+  def last_name; super || rms_person.last_name rescue nil; end
+  def height_in_inches; super || rms_person.height_in_inches rescue nil; end
+  def weight_in_pounds; super || rms_person.weight_in_pounds rescue nil; end
+  def hair_color; super || rms_person.hair_color rescue nil; end
+  def eye_color; super || rms_person.eye_color rescue nil; end
+  def scars_and_marks; super || rms_person.scars_and_marks rescue nil; end
+  def location_name; super || rms_person.location_name rescue nil; end
+  def location_address; super || rms_person.location_address rescue nil; end
 
   validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
   validates :race, inclusion: RACE_CODES.keys, allow_nil: true
@@ -52,6 +66,7 @@ class Person < ActiveRecord::Base
   pg_search_scope(
     :search,
     against: [:first_name, :last_name],
+    associated_against: { rms_person: [:first_name, :last_name] },
     using: [:tsearch, :dmetaphone, :trigram],
   )
 

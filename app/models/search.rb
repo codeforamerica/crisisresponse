@@ -7,9 +7,9 @@ class Search
     :date_of_birth,
     :eye_color,
     :hair_color,
-    :height,
+    :height_in_inches,
     :name,
-    :weight,
+    :weight_in_pounds,
     :sex,
     :race,
   ]
@@ -34,12 +34,8 @@ class Search
     end
   end
 
-  def exact_matches
-    []
-  end
-
   def close_matches
-    people = Person
+    people = Person.joins("LEFT OUTER JOIN rms_people ON rms_people.person_id = people.id")
 
     if name.present?
       people = people.search(name)
@@ -47,46 +43,42 @@ class Search
 
     if date_of_birth.present?
       date_of_birth_range = range(date_of_birth, 1.year)
-      people = people.where(date_of_birth: date_of_birth_range)
+      people = query_value_based_on_range(people, :date_of_birth, date_of_birth_range)
     end
 
     if age.present?
       expected_dob = (Date.today - age.to_i.years)
       expected_dob_range = range(expected_dob, 5.years)
-      people = people.where(date_of_birth: expected_dob_range)
+      people = query_value_based_on_range(people, :date_of_birth, expected_dob_range)
     end
 
-    if height.present?
-      height_range = range(height.to_i, 3)
-      people = people.where(height_in_inches: height_range)
+    if height_in_inches.present?
+      height_range = range(height_in_inches.to_i, 3)
+      people = query_value_based_on_range(people, :height_in_inches, height_range)
     end
 
-    if weight.present?
-      weight_range = range(weight.to_i, 25)
-      people = people.where(weight_in_pounds: weight_range)
+    if weight_in_pounds.present?
+      weight_range = range(weight_in_pounds.to_i, 25)
+      people = query_value_based_on_range(people, :weight_in_pounds, weight_range)
     end
 
     if eye_color.any?
-      people = people.where(eye_color: eye_color)
+      people = query_for_array_of_values(people, :eye_color, eye_color)
     end
 
     if hair_color.any?
-      people = people.where(hair_color: hair_color)
+      people = query_for_array_of_values(people, :hair_color, hair_color)
     end
 
     if race.any?
-      people = people.where(race: race)
+      people = query_for_array_of_values(people, :race, race)
     end
 
     if sex.any?
-      people = people.where(sex: sex)
+      people = query_for_array_of_values(people, :sex, sex)
     end
 
     people.all
-  end
-
-  def partial_matches
-    []
   end
 
   def eye_color
@@ -122,5 +114,29 @@ class Search
   rescue ArgumentError
     @invalid_date = true
     @date_of_birth = nil
+  end
+
+  def query_value_based_on_range(relation, attribute, range)
+    relation.
+      where(<<-SQL)
+        people.#{attribute} BETWEEN '#{range.min}' AND '#{range.max}'
+        OR (
+          people.#{attribute} is null
+          AND rms_people.#{attribute} BETWEEN '#{range.min}' AND '#{range.max}'
+        )
+    SQL
+  end
+
+  def query_for_array_of_values(relation, attribute, values)
+    selected_values = "(#{values.map {|s| "'#{s}'"}.join(",")})"
+
+    relation.
+      where(<<-SQL)
+        people.#{attribute} IN #{selected_values}
+        OR (
+          people.#{attribute} is null
+          AND rms_people.#{attribute} IN #{selected_values}
+        )
+    SQL
   end
 end
