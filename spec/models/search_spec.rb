@@ -139,6 +139,18 @@ describe Search do
 
         expect(matches).to eq([person])
       end
+
+      it "returns results with names stored in RMS::Person record" do
+        people = build_list(:person, 3, first_name: nil, last_name: nil)
+        people.each { |p| p.save!(validate: false) }
+        first_name_match = create(:rms_person, person: people[0], first_name: "John", last_name: "Doe")
+        last_name_match = create(:rms_person, person: people[1], first_name: "Doe", last_name: "John")
+        _mismatch = create(:rms_person, person: people[2], first_name: "Foo", last_name: "Bar")
+
+        matches = Search.new(name: "John").close_matches
+
+        expect(matches).to match_array([first_name_match.person, last_name_match.person])
+      end
     end
 
     describe "searching by date of birth" do
@@ -183,6 +195,18 @@ describe Search do
 
         expect(matches).to eq([match])
       end
+
+      it "returns results with date of birth stored in an RMS::Person record" do
+        people = build_list(:person, 2, date_of_birth: nil)
+        people.each { |p| p.save!(validate: false) }
+        match = create(:rms_person, person: people[0], date_of_birth: 20.years.ago)
+        _mismatch = create(:rms_person, person: people[1], date_of_birth: 10.years.ago)
+
+        dob = I18n.l(20.years.ago.to_date)
+        matches = Search.new(date_of_birth: dob).close_matches
+
+        expect(matches).to match_array([match.person])
+      end
     end
 
     describe "searching by name and DOB" do
@@ -223,6 +247,258 @@ describe Search do
         matches = Search.new(name: "Mary", date_of_birth: "01-02-1980").close_matches
 
         expect(matches).to eq([])
+      end
+    end
+
+    describe "searching by height" do
+      it "returns results when attributes are pulled from RMS" do
+        match = create(:person, height_in_inches: nil)
+        create(:rms_person, person: match, height_in_inches: 72)
+        mismatch = create(:person, height_in_inches: nil)
+        create(:rms_person, person: mismatch, height_in_inches: 50)
+
+        search = Search.new(height_in_inches: 72)
+
+        expect(search.close_matches).to eq([match])
+      end
+
+      it "returns results when attributes from RMS are overridden by Person" do
+        person = create(:person, height_in_inches: 72)
+        _associated = create(:rms_person, height_in_inches: 50)
+
+        search = Search.new(height_in_inches: 72)
+
+        expect(search.close_matches).to eq([person])
+      end
+
+      it "does not return results for the attributes that have been overridden" do
+        person = create(:person, height_in_inches: 50)
+        create(:rms_person, height_in_inches: 72, person: person)
+
+        search = Search.new(height_in_inches: 72)
+
+        expect(search.close_matches).to eq([])
+      end
+
+      it "returns results when there is no backing RMS record" do
+        match = create(:person, height_in_inches: 72)
+        _mismatch = create(:person, height_in_inches: 50)
+
+        search = Search.new(height_in_inches: 72)
+
+        expect(search.close_matches).to eq([match])
+      end
+    end
+
+    describe "searching by weight" do
+      it "returns results when attributes are pulled from RMS" do
+        match = create(:person, weight_in_pounds: nil)
+        create(:rms_person, person: match, weight_in_pounds: 200)
+        mismatch = create(:person, weight_in_pounds: nil)
+        create(:rms_person, person: mismatch, weight_in_pounds: 100)
+
+        search = Search.new(weight_in_pounds: 200)
+
+        expect(search.close_matches).to eq([match])
+      end
+
+      it "returns results when attributes from RMS are overridden by Person" do
+        person = create(:person, weight_in_pounds: 200)
+        _associated = create(:rms_person, person: person, weight_in_pounds: 100)
+
+        search = Search.new(weight_in_pounds: 200)
+
+        expect(search.close_matches).to eq([person])
+      end
+
+      it "does not return results for the attributes that have been overridden" do
+        person = create(:person, weight_in_pounds: 100)
+        create(:rms_person, weight_in_pounds: 200, person: person)
+
+        search = Search.new(weight_in_pounds: 200)
+
+        expect(search.close_matches).to eq([])
+      end
+
+      it "returns results when there is no backing RMS record" do
+        match = create(:person, weight_in_pounds: 200)
+        _mismatch = create(:person, weight_in_pounds: 100)
+
+        search = Search.new(weight_in_pounds: 200)
+
+        expect(search.close_matches).to eq([match])
+      end
+    end
+
+    describe "searching by sex" do
+      it "returns results when attributes are pulled from RMS" do
+        match = create(:person, sex: nil)
+        create(:rms_person, person: match, sex: "Male")
+        mismatch = create(:person, sex: nil)
+        create(:rms_person, person: mismatch, sex: "Female")
+
+        search = Search.new(sex: "Male")
+
+        expect(search.close_matches).to eq([match])
+      end
+
+      it "returns results when attributes from RMS are overridden by Person" do
+        person = create(:person, sex: "Male")
+        create(:rms_person, person: person, sex: "Female")
+
+        search = Search.new(sex: "Male")
+
+        matches = search.close_matches
+        expect(matches).to eq([person])
+      end
+
+      it "does not return results for the attributes that have been overridden" do
+        person = create(:person, sex: "Female")
+        create(:rms_person, sex: "Male", person: person)
+
+        search = Search.new(sex: "Male")
+
+        expect(search.close_matches).to eq([])
+      end
+
+      it "returns results when there is no backing RMS record" do
+        match = create(:person, sex: "Male")
+        _mismatch = create(:person, sex: "Female")
+
+        search = Search.new(sex: "Male")
+
+        expect(search.close_matches).to eq([match])
+      end
+    end
+
+    describe "searching by race" do
+      it "returns results when attributes are pulled from RMS" do
+        match = create(:person, race: nil)
+        create(:rms_person, person: match, race: "WHITE")
+        mismatch = create(:person, race: nil)
+        create(:rms_person, person: mismatch, race: "UNKNOWN")
+
+        search = Search.new(race: "WHITE")
+
+        expect(search.close_matches).to eq([match])
+      end
+
+      it "returns results when attributes from RMS are overridden by Person" do
+        person = create(:person, race: "WHITE")
+        _associated = create(:rms_person, race: "UNKNOWN")
+
+        search = Search.new(race: "WHITE")
+
+        expect(search.close_matches).to eq([person])
+      end
+
+      it "does not return results for the attributes that have been overridden" do
+        person = create(:person, race: "UNKNOWN")
+        create(:rms_person, race: "WHITE", person: person)
+
+        search = Search.new(race: "WHITE")
+
+        expect(search.close_matches).to eq([])
+      end
+
+      it "returns results when there is no backing RMS record" do
+        match = create(:person, race: "WHITE")
+        _mismatch = create(:person, race: "UNKNOWN")
+
+        search = Search.new(race: "WHITE")
+
+        expect(search.close_matches).to eq([match])
+      end
+    end
+
+    describe "searching by hair_color" do
+      it "returns results when attributes are pulled from RMS" do
+        match = create(:person, hair_color: nil)
+        create(:rms_person, person: match, hair_color: :black)
+        mismatch = create(:person, hair_color: nil)
+        create(:rms_person, person: mismatch, hair_color: :brown)
+
+        search = Search.new(hair_color: :black)
+
+        expect(search.close_matches).to eq([match])
+      end
+
+      it "returns results when attributes from RMS are overridden by Person" do
+        person = create(:person, hair_color: :black)
+        _associated = create(:rms_person, person: person, hair_color: :brown)
+
+        search = Search.new(hair_color: :black)
+
+        expect(search.close_matches).to eq([person])
+      end
+
+      it "does not return results for the attributes that have been overridden" do
+        person = create(:person, hair_color: :brown)
+        create(:rms_person, hair_color: :black, person: person)
+
+        search = Search.new(hair_color: :black)
+
+        expect(search.close_matches).to eq([])
+      end
+
+      it "returns results when there is no backing RMS record" do
+        match = create(:person, hair_color: :black)
+        _mismatch = create(:person, hair_color: :brown)
+
+        search = Search.new(hair_color: :black)
+
+        expect(search.close_matches).to eq([match])
+      end
+    end
+
+    describe "searching by eye_color" do
+      it "returns results when attributes are pulled from RMS" do
+        match = create(:person, eye_color: nil)
+        create(:rms_person, person: match, eye_color: :blue)
+        mismatch = create(:person, eye_color: nil)
+        create(:rms_person, person: mismatch, eye_color: :black)
+
+        search = Search.new(eye_color: :blue)
+
+        expect(search.close_matches).to eq([match])
+      end
+
+      it "returns results when attributes from RMS are overridden by Person" do
+        person = create(:person, eye_color: :blue)
+        create(:rms_person, person: person, eye_color: :black)
+
+        search = Search.new(eye_color: :blue)
+
+        expect(search.close_matches).to eq([person])
+      end
+
+      it "does not return results for the attributes that have been overridden" do
+        person = create(:person, eye_color: :black)
+        create(:rms_person, eye_color: :blue, person: person)
+
+        search = Search.new(eye_color: :blue)
+
+        expect(search.close_matches).to eq([])
+      end
+
+      it "returns results when there is no backing RMS record" do
+        match = create(:person, eye_color: :blue)
+        _mismatch = create(:person, eye_color: :black)
+
+        search = Search.new(eye_color: :blue)
+
+        expect(search.close_matches).to eq([match])
+      end
+
+      describe "searching by one ranged value and one list value" do
+        it "returns matches" do
+          match = create(:person, eye_color: :blue, weight_in_pounds: 200)
+          _mismatch = create(:person, eye_color: :green, weight_in_pounds: 200)
+
+          search = Search.new(eye_color: :blue, weight_in_pounds: 200)
+
+          expect(search.close_matches).to eq([match])
+        end
       end
     end
   end

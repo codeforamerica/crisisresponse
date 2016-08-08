@@ -33,8 +33,8 @@
       <%= f.input :age %>
       <%= f.input :sex, as: :check_boxes, collection: Person::SEX_CODES.keys %>
       <%= f.input :race, as: :check_boxes, collection: Person::RACE_CODES.keys %>
-      <%= f.input :height %>
-      <%= f.input :weight %>
+      <%= f.input :height_in_inches %>
+      <%= f.input :weight_in_pounds %>
 
       <div class="hair-color-field collapsed">
         <%= f.input(
