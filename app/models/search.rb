@@ -7,7 +7,8 @@ class Search
     :date_of_birth,
     :eye_color,
     :hair_color,
-    :height_in_inches,
+    :height_feet,
+    :height_inches,
     :name,
     :weight_in_pounds,
     :sex,
@@ -53,7 +54,8 @@ class Search
       people = query_value_based_on_range(people, :date_of_birth, expected_dob_range)
     end
 
-    if height_in_inches.present?
+    if height_inches.present? || height_feet.present?
+      height_in_inches = height_feet.to_i * 12 + height_inches.to_i
       height_range = range(height_in_inches.to_i, 3)
       people = query_value_based_on_range(people, :height_in_inches, height_range)
     end
