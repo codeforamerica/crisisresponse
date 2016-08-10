@@ -79,7 +79,12 @@ class Search
       people = query_for_array_of_values(people, :sex, sex)
     end
 
-    people.all
+    people.order(<<-SQL)
+      CASE WHEN people.last_name IS NOT NULL
+      THEN people.last_name
+      ELSE rms_people.last_name
+      END
+    SQL
   end
 
   def eye_color

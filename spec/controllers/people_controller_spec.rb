@@ -26,6 +26,19 @@ RSpec.describe PeopleController, type: :controller do
       expect(assigns(:response_plans)).to eq(person => nil)
     end
 
+    it "shows people in alphabetical order" do
+      officer = create(:officer)
+
+      charlie = create(:person, last_name: "Charlie")
+      alice = create(:rms_person, last_name: "Alice").person
+      alice.update(last_name: nil)
+      bob = create(:person, last_name: "Bob")
+
+      get :index, {}, { officer_id: officer.id }
+
+      expect(assigns(:response_plans).keys).to eq([alice, bob, charlie])
+    end
+
     context "as a non-admin" do
       it "does not show response plans that have not been approved" do
         officer = create(:officer)
