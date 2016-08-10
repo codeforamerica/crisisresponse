@@ -115,7 +115,8 @@ feature "Search" do
       sign_in_officer
       visit people_path
       click_on t("search.physicals.show")
-      fill_in "Height", with: 60
+      fill_in :search_height_feet, with: 5
+      fill_in :search_height_inches, with: 3
       run_search
 
       expect(page).to have_content("5'0\"")

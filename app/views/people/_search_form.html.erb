@@ -30,11 +30,21 @@
     </div>
 
     <div class="physicals-search-fields collapsed">
-      <%= f.input :age %>
+      <%= f.input :age, as: :integer %>
       <%= f.input :sex, as: :check_boxes, collection: Person::SEX_CODES.keys %>
       <%= f.input :race, as: :check_boxes, collection: Person::RACE_CODES.keys %>
-      <%= f.input :height_in_inches %>
-      <%= f.input :weight_in_pounds %>
+
+      <div class="input">
+        <%= f.label "Height" %>
+        <div class="height-field">
+          <%= f.input_field :height_feet, as: :integer, label: false %>
+          <%= f.label :height_feet, label: '"' %>
+          <%= f.input_field :height_inches, as: :integer, label: false %>
+          <%= f.label :height_inches, label: "'" %>
+        </div>
+      </div>
+
+      <%= f.input :weight_in_pounds, as: :integer, label: "Weight" %>
 
       <div class="hair-color-field collapsed">
         <%= f.input(

@@ -15,6 +15,23 @@
     display: none;
   }
 
+  .height-field {
+    overflow: hidden;
+
+    input {
+      @include span-columns(1 of 4);
+      display: inline-block;
+      margin-right: 0;
+    }
+
+    label {
+      display: inline-block;
+      float: left;
+      margin-right: $base-spacing;
+      margin-left: $tiny-spacing;
+    }
+  }
+
   .hair-color-field.collapsed,
   .eye-color-field.collapsed {
     .checkbox:nth-child(n + 5) {
@@ -140,6 +157,11 @@
     .eye-color-field {
       overflow: hidden;
       margin-bottom: $base-spacing;
+    }
+
+    .height-field input {
+      @include span-columns(1 of 8);
+      margin-right: 0;
     }
   }
 }

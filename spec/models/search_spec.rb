@@ -261,38 +261,38 @@ describe Search do
     describe "searching by height" do
       it "returns results when attributes are pulled from RMS" do
         match = create(:person, height_in_inches: nil)
-        create(:rms_person, person: match, height_in_inches: 72)
+        create(:rms_person, person: match, height_in_inches: 78)
         mismatch = create(:person, height_in_inches: nil)
         create(:rms_person, person: mismatch, height_in_inches: 50)
 
-        search = Search.new(height_in_inches: 72)
+        search = Search.new(height_feet: 6, height_inches: 6)
 
         expect(search.close_matches).to eq([match])
       end
 
       it "returns results when attributes from RMS are overridden by Person" do
-        person = create(:person, height_in_inches: 72)
+        person = create(:person, height_in_inches: 78)
         _associated = create(:rms_person, height_in_inches: 50)
 
-        search = Search.new(height_in_inches: 72)
+        search = Search.new(height_feet: 6, height_inches: 6)
 
         expect(search.close_matches).to eq([person])
       end
 
       it "does not return results for the attributes that have been overridden" do
         person = create(:person, height_in_inches: 50)
-        create(:rms_person, height_in_inches: 72, person: person)
+        create(:rms_person, height_in_inches: 78, person: person)
 
-        search = Search.new(height_in_inches: 72)
+        search = Search.new(height_feet: 6, height_inches: 6)
 
         expect(search.close_matches).to eq([])
       end
 
       it "returns results when there is no backing RMS record" do
-        match = create(:person, height_in_inches: 72)
+        match = create(:person, height_in_inches: 78)
         _mismatch = create(:person, height_in_inches: 50)
 
-        search = Search.new(height_in_inches: 72)
+        search = Search.new(height_feet: 6, height_inches: 6)
 
         expect(search.close_matches).to eq([match])
       end
