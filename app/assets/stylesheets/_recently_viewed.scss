@@ -29,6 +29,21 @@
         width: auto;
         float: none;
       }
+
+      .identity-name,
+      .identity-dob {
+        color: $base-font-color;
+        display: block;
+
+        @include media($medium-screen-up) {
+          text-align: center;
+        }
+      }
+
+      .identity-name {
+        font-weight: 600;
+        text-transform: uppercase;
+      }
     }
 
     @include media($medium-screen-up) {
@@ -63,21 +78,6 @@
         margin-right: auto;
         max-width: none;
       }
-    }
-
-    .recently-viewed-plan-name,
-    .recently-viewed-plan-dob {
-      color: $base-font-color;
-      display: block;
-
-      @include media($medium-screen-up) {
-        text-align: center;
-      }
-    }
-
-    .recently-viewed-plan-name {
-      font-weight: 600;
-      text-transform: uppercase;
     }
   }
 }
