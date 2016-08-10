@@ -210,31 +210,4 @@ feature "Officer views a response plan" do
       expect(page).to have_content(t("response_plans.approval.failure"))
     end
   end
-
-  context "when there are no safety concerns" do
-    pending "they see a note saying there are no concerns" do
-      sign_in_officer
-      response_plan = create(:response_plan)
-
-      visit person_path(response_plan.person)
-
-      expect(page).to have_content(t("response_plans.safety.none"))
-    end
-  end
-
-  context "when there are safety concerns" do
-    scenario "they see the safety concerns" do
-      sign_in_officer
-      response_plan = create(:response_plan)
-      concern = create(
-        :safety_concern,
-        response_plan: response_plan,
-        description: "Owns a gun",
-      )
-
-      visit person_path(response_plan.person)
-
-      expect(page).to have_content("Owns a gun")
-    end
-  end
 end
