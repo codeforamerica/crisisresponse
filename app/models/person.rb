@@ -53,8 +53,15 @@ class Person < ActiveRecord::Base
   pg_search_scope(
     :search,
     against: [:first_name, :last_name],
-    associated_against: { rms_person: [:first_name, :last_name] },
-    using: [:tsearch, :dmetaphone, :trigram],
+    associated_against: {
+      aliases: [:name],
+      rms_person: [:first_name, :last_name],
+    },
+    using: {
+      dmetaphone: {},
+      trigram: { threshold: 0.2 },
+      tsearch: {},
+    },
   )
 
   accepts_nested_attributes_for(

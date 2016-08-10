@@ -35,7 +35,8 @@ class Search
   end
 
   def close_matches
-    people = Person.joins("LEFT OUTER JOIN rms_people ON rms_people.person_id = people.id")
+    people = Person.
+      joins("LEFT OUTER JOIN rms_people ON rms_people.person_id = people.id")
 
     if name.present?
       people = people.search(name)
