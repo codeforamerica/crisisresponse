@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :theme, :inactive_theme, :officer_signed_in?, :current_officer
+  helper_method :theme, :officer_signed_in?, :current_officer
 
   def authenticate_officer!
     unless officer_signed_in?
@@ -33,19 +33,5 @@ class ApplicationController < ActionController::Base
 
   def theme
     session[:theme] || :day
-  end
-
-  def inactive_theme
-    toggle(:day, :night, theme)
-  end
-
-  private
-
-  def toggle(first, second, current)
-    {
-      first => second,
-      second => first,
-      nil => second,
-    }.with_indifferent_access[current]
   end
 end

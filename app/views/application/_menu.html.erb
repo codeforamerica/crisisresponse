@@ -1,10 +1,10 @@
 <div class="menu">
-  <a class="change-theme" role="link">
+  <%= link_to preferences_path, method: :post, class: "change-theme" do %>
     <div class="change-theme-toggle">
       <span class="theme day-theme <%= "selected" if theme == "day" %>">Light</span>
       <span class="theme night-theme <%= "selected" if theme == "night" %>">Dark</span>
     </div>
-  </a>
+  <% end %>
 
   <%= link_to("About", page_path("about")) %>
   <%= link_to("App Updates", page_path("changelog")) %>

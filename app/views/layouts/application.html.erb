@@ -8,20 +8,7 @@
 
   <title><%= title %></title>
 
-  <%= stylesheet_link_tag(
-    theme,
-    media: "all",
-    class: "theme-stylesheet",
-    data: { alternate: stylesheet_path(inactive_theme) }
-  ) %>
-  <style>
-.change-theme-toggle .theme {
-  transition-property: background-color, color;
-  transition-duration: 150ms;
-  transition-timing-function: ease;
-  transition-delay: initial;
-}
-  </style>
+  <%= stylesheet_link_tag(theme, media: "all") %>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
   <link rel="stylesheet" href="/assets/print.css" media="print" />
   <%= csrf_meta_tags %>

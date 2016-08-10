@@ -10,15 +10,10 @@ feature "Night mode" do
   end
 
   scenario "Officer switches to night mode", :js do
-    pending "
-    This must be tested in Javascript,
-    because it appears that Poltergeist does not support
-    swapping out CSS link tag `href` attributes."
-
     visit new_authentication_path
 
-    find(".menu-icon").click
-    find(".change-theme").trigger('click')
+    find(".menu-icon").trigger('click')
+    find(".change-theme").click
 
     header_color = get_header_background_color
     expect(header_color).to eq("rgb(33, 33, 33)")
