@@ -4,7 +4,6 @@ class ResponsePlan < ActiveRecord::Base
   has_many :contacts, dependent: :destroy
   has_many :deescalation_techniques, dependent: :destroy
   has_many :response_strategies, -> { order(:priority) }, dependent: :destroy
-  has_many :safety_concerns, dependent: :destroy
   has_many :triggers, dependent: :destroy
 
   accepts_nested_attributes_for(:person)
@@ -21,11 +20,6 @@ class ResponsePlan < ActiveRecord::Base
   )
   accepts_nested_attributes_for(
     :response_strategies,
-    reject_if: :all_blank,
-    allow_destroy: true,
-  )
-  accepts_nested_attributes_for(
-    :safety_concerns,
     reject_if: :all_blank,
     allow_destroy: true,
   )
@@ -59,16 +53,6 @@ class ResponsePlan < ActiveRecord::Base
     else
       self.approved_at = nil
     end
-  end
-
-  def safety_concerns_by_category
-    SafetyConcern::CATEGORIES.map do |category|
-      concerns = safety_concerns.where(category: category)
-
-      if concerns.any?
-        [category, concerns]
-      end
-    end.compact.to_h
   end
 
   private

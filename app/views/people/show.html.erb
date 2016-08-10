@@ -3,7 +3,6 @@
 <% end %>
 
 <div class="main">
-  <%#TODO refactor with Null Object %>
   <% if @response_plan && !@response_plan.approved? %>
     <div class="needs-approval">
       <%= t("response_plans.approval.required") %>
@@ -20,7 +19,6 @@
     <%= render "sections/profile", person: @person %>
     <%= render "sections/location" %>
 
-    <%# TODO refactor with Null Object %>
     <% if @response_plan %>
       <% @response_plan.contacts.each do |contact| %>
         <%= render "sections/contact", contact: contact %>
@@ -31,9 +29,7 @@
   </div>
 
   <div class="right-column">
-    <%# TODO refactor with Null Object %>
     <% if @response_plan %>
-      <%= render "sections/safety_concerns" %>
       <%= render "sections/deescalation_techniques" %>
       <%= render "sections/triggers" %>
       <%= render "sections/response_strategies" %>

@@ -1,12 +1,6 @@
 $radius: 6px;
 $bullet-size: 3rem;
 
-.safety-concerns {
-  li {
-    margin-bottom: $small-spacing;
-  }
-}
-
 .needs-approval {
   @include fill-parent;
   background-color: $needs-approval-background-color;

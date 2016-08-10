@@ -16,8 +16,6 @@ en:
         create: Search
 
   response_plans:
-    safety:
-      none: No officer safety concerns.
     create:
       success: Created a response plan for %{name}
     update:
@@ -51,25 +49,6 @@ en:
 
   titles:
     application: Crisis Response
-
-  safety_concerns:
-    categories:
-      assaultive_law:
-        title: "P1: Law Enforcement"
-        subtitle: History of assault or threat to assault to law enforcement.
-        example: E.g. Grabbed at officer's duty belt.
-      assaultive_public:
-        title: "P2: Public, general assaultive behavior"
-        subtitle: History of assaultive behavior to non-officers.
-        example: E.g. spitting.
-      weapon:
-        title: "P3: Weapons"
-        subtitle: History of weapons possession.
-        example: E.g. Guns, knives.
-      chemical:
-        title: "P4: Chemical dependencies"
-        subtitle: History of encouters while on drugs.
-        example: ""
 
   search:
     results:

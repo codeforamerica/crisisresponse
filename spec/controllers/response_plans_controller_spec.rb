@@ -80,20 +80,6 @@ RSpec.describe ResponsePlansController, type: :controller do
       expect(clone).not_to be_persisted
     end
 
-    it "copies over safety concerns" do
-      officer = create(:officer, username: "admin")
-      stub_admin_permissions(officer)
-      original = create(:safety_concern, category: "assaultive_law", physical_or_threat: :threat, description: "knife")
-
-      get :edit, { id: original.response_plan.id }, { officer_id: officer.id }
-
-      clone = assigns(:response_plan).safety_concerns.first
-      expect(clone.description).to eq(original.description)
-      expect(clone.category).to eq(original.category)
-      expect(clone.physical_or_threat).to eq(original.physical_or_threat)
-      expect(clone).not_to be_persisted
-    end
-
     it "copies over triggers" do
       officer = create(:officer, username: "admin")
       stub_admin_permissions(officer)

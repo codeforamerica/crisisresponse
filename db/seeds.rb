@@ -7,7 +7,6 @@ Alias.destroy_all
 Contact.destroy_all
 Image.destroy_all
 ResponseStrategy.destroy_all
-SafetyConcern.destroy_all
 
 ResponsePlan.destroy_all
 
@@ -225,28 +224,6 @@ Image.create!(source: image("tannen_biff/1.png"), person: biff)
 Image.create!(source: image("tannen_gregory/1.png"), person: gregory)
 Image.create!(source: image("tannen_martha/1.png"), person: martha)
 Image.create!(source: image("tannen_martha/2.jpg"), person: martha)
-
-SafetyConcern.create!(
-  category: :assaultive_law,
-  description: "RMS caution entry for being assaultive to and threatening law enforcement",
-  physical_or_threat: :physical,
-  response_plan: biff.response_plans.last,
-)
-SafetyConcern.create!(
-  category: :weapon,
-  description: "Tannen is most often armed with some sort of sharp instrument (knife, box knife, antler).",
-  response_plan: biff.response_plans.last,
-)
-SafetyConcern.create!(
-  category: :weapon,
-  description: "Sometimes has 9mm pistol on his person",
-  response_plan: biff.response_plans.last,
-)
-SafetyConcern.create!(
-  category: :chemical,
-  description: "Needles have been found on Martha.",
-  response_plan: martha.response_plans.last,
-)
 
 ResponsePlan.all.each do |plan|
   plan.update(approver: sergeant)

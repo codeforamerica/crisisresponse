@@ -32,7 +32,6 @@ RSpec.describe ResponsePlan, type: :model do
   end
 
   describe "associations" do
-    it { should have_many(:safety_concerns).dependent(:destroy) }
     it { should have_many(:contacts).dependent(:destroy) }
     it { should have_many(:response_strategies).dependent(:destroy) }
     it { should belong_to(:author) }
@@ -110,30 +109,6 @@ RSpec.describe ResponsePlan, type: :model do
       response_plan.approver = nil
 
       expect(response_plan.approved_at).to eq(nil)
-    end
-  end
-
-  describe "#safety_concerns" do
-    it "returns an empty array if there are no safety concerns" do
-      response_plan = build(:response_plan)
-
-      expect(response_plan.safety_concerns).to be_empty
-    end
-  end
-
-  describe "#safety_concerns_by_category" do
-    it "returns a hash of safety concerns sorted by category" do
-      plan = create(:response_plan)
-      one = create(:safety_concern, response_plan: plan, category: :assaultive_law, physical_or_threat: :threat, description: "1")
-      two = create(:safety_concern, response_plan: plan, category: :assaultive_public, physical_or_threat: :threat, description: "2")
-      three = create(:safety_concern, response_plan: plan, category: :assaultive_law, physical_or_threat: :threat, description: "3")
-
-      concerns = plan.safety_concerns_by_category
-
-      expect(concerns).to eq(
-        "assaultive_law" => [one, three],
-        "assaultive_public" => [two],
-      )
     end
   end
 end
