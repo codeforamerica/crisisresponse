@@ -10,5 +10,5 @@ Rails.application.routes.draw do
     member { patch :approve }
   end
 
-  root to: "response_plans#index"
+  root to: "people#index"
 end

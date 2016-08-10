@@ -101,4 +101,31 @@ RSpec.describe Person, type: :model do
       build(:person, person_attrs).shorthand_description
     end
   end
+
+  describe "RMS fallbacks" do
+    specify { expect_to_fallback_to_rms_person_for(:date_of_birth) }
+    specify { expect_to_fallback_to_rms_person_for(:eye_color) }
+    specify { expect_to_fallback_to_rms_person_for(:first_name) }
+    specify { expect_to_fallback_to_rms_person_for(:hair_color) }
+    specify { expect_to_fallback_to_rms_person_for(:height_in_inches) }
+    specify { expect_to_fallback_to_rms_person_for(:last_name) }
+    specify { expect_to_fallback_to_rms_person_for(:location_address, "foo") }
+    specify { expect_to_fallback_to_rms_person_for(:location_name, "foo") }
+    specify { expect_to_fallback_to_rms_person_for(:scars_and_marks, "foo") }
+    specify { expect_to_fallback_to_rms_person_for(:weight_in_pounds) }
+
+    def expect_to_fallback_to_rms_person_for(attribute, value = nil)
+      options = value ? { attribute => value } : {}
+      person = build(:person)
+      rms_person = build(:rms_person, options)
+      person.rms_person = rms_person
+      person.assign_attributes(attribute => nil)
+
+      actual = person.public_send(attribute)
+      expected = rms_person.public_send(attribute)
+
+      expect(actual).not_to be_nil
+      expect(actual).to eq(expected)
+    end
+  end
 end

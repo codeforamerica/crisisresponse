@@ -44,19 +44,6 @@ class Person < ActiveRecord::Base
   has_many :response_plans
   has_one :rms_person, class_name: "RMS::Person"
 
-  def sex; super || SEX_CODES.invert[rms_person.sex] rescue nil; end
-  def race; super || RACE_CODES.invert[rms_person.race] rescue nil; end
-  def date_of_birth; super || rms_person.date_of_birth rescue nil; end
-  def first_name; super || rms_person.first_name rescue nil; end
-  def last_name; super || rms_person.last_name rescue nil; end
-  def height_in_inches; super || rms_person.height_in_inches rescue nil; end
-  def weight_in_pounds; super || rms_person.weight_in_pounds rescue nil; end
-  def hair_color; super || rms_person.hair_color rescue nil; end
-  def eye_color; super || rms_person.eye_color rescue nil; end
-  def scars_and_marks; super || rms_person.scars_and_marks rescue nil; end
-  def location_name; super || rms_person.location_name rescue nil; end
-  def location_address; super || rms_person.location_address rescue nil; end
-
   validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
   validates :race, inclusion: RACE_CODES.keys, allow_nil: true
   validates :date_of_birth, presence: true
@@ -81,20 +68,40 @@ class Person < ActiveRecord::Base
     allow_destroy: true,
   )
 
+  def self.fallback_to_rms_person(attribute)
+    define_method(attribute) do |*args|
+      super(*args) ||
+        (rms_person && rms_person.public_send(attribute))
+    end
+  end
+
+  fallback_to_rms_person(:date_of_birth)
+  fallback_to_rms_person(:eye_color)
+  fallback_to_rms_person(:first_name)
+  fallback_to_rms_person(:hair_color)
+  fallback_to_rms_person(:height_in_inches)
+  fallback_to_rms_person(:last_name)
+  fallback_to_rms_person(:location_address)
+  fallback_to_rms_person(:location_name)
+  fallback_to_rms_person(:scars_and_marks)
+  fallback_to_rms_person(:weight_in_pounds)
+
+  def sex
+    super ||
+      (rms_person && SEX_CODES.invert[rms_person.sex])
+  end
+
+  def race
+    super ||
+      (rms_person && RACE_CODES.invert[rms_person.race])
+  end
+
   def active_response_plan
     response_plans.where.not(approved_at: nil).order(:approved_at).last
   end
 
   def display_name
     "#{last_name}, #{first_name}"
-  end
-
-  def eye_color
-    super || "Unknown"
-  end
-
-  def hair_color
-    super || "Unknown"
   end
 
   def name

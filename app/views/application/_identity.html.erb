@@ -1,9 +1,12 @@
 <div class="identity">
   <span class="identity-name">
-    <%= person.last_name.upcase %>,
-    <%= person.first_name.titleize %>
+    <%= person.last_name.to_s.upcase %>,
+    <%= person.first_name.to_s.titleize %>
   </span>
-  <span class="identity-dob">
-    <%= l person.date_of_birth %>
-  </span>
+
+  <% if person.date_of_birth %>
+    <span class="identity-dob">
+      <%= l person.date_of_birth %>
+    </span>
+  <% end %>
 </div>

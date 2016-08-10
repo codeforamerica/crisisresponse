@@ -10,8 +10,7 @@
       <%= image_tag person.profile_image_url %>
 
       <div class="recently-viewed-plan-labels">
-        <span class="recently-viewed-plan-name"><%= person.display_name %></span>
-        <span class="recently-viewed-plan-dob"><%= l person.date_of_birth %></span>
+        <%= render "identity", person: person %>
       </div>
     <% end %>
   <% end %>
