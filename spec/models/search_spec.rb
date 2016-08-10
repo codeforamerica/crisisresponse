@@ -92,6 +92,15 @@ describe Search do
         expect(matches).to eq([person])
       end
 
+      it "returns records that match on alias" do
+        person = create(:person, name: "Foo Bar")
+        create(:alias, person: person, name: "Buddy")
+
+        matches = Search.new(name: "Bud").close_matches
+
+        expect(matches).to eq([person])
+      end
+
       it "returns records that match on the reversed name" do
         person = create(:person, name: "John Doe")
 
@@ -100,7 +109,7 @@ describe Search do
         expect(matches).to eq([person])
       end
 
-      pending "returns records that contain the searched name" do
+      it "returns records that contain the searched name" do
         person = create(:person, name: "Christopher Nolan")
 
         matches = Search.new(name: "Chris").close_matches
@@ -154,13 +163,12 @@ describe Search do
     end
 
     describe "searching by date of birth" do
-      pending "ignores dates in an unrecognized format" do
-        match = create(:person)
-        mismatch = create(:person, date_of_birth: Date.new(1978, 01, 02))
+      it "ignores dates in an unrecognized format" do
+        match = create(:person, date_of_birth: Date.new(1978, 01, 02))
 
         matches = Search.new(date_of_birth: "foo").close_matches
 
-        expect(matches).to eq([person])
+        expect(matches).to eq([match])
       end
 
       it "parses dates in 'mm-dd-yyyy'" do
