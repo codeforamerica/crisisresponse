@@ -47,7 +47,7 @@ function initMap() {
   });
 
   function setUpMap(location) {
-    var mapElement = $(".location-map")[0];
+    var mapElement = $(".location-map-canvas")[0];
 
     map = new google.maps.Map(mapElement, {
       center: location,
@@ -60,6 +60,10 @@ function initMap() {
       map: map,
       icon: mapMarkerIcon
     });
+
+    setTimeout(function() {
+      $(".location-map").addClass("collapsed");
+    }, 500);
 
     return map;
   }
