@@ -3,15 +3,18 @@
 # The data can then be loaded with `rake db:seed`
 # (or created alongside the db with db:setup).
 
+RMS::CrisisIncident.destroy_all
+RMS::Person.destroy_all
+
 Alias.destroy_all
 Contact.destroy_all
 Image.destroy_all
 ResponseStrategy.destroy_all
 
+PageView.destroy_all
 ResponsePlan.destroy_all
-
-Officer.destroy_all
 Person.destroy_all
+Officer.destroy_all
 
 officer = Officer.create!(
   name: "Ofc. John Doe",
