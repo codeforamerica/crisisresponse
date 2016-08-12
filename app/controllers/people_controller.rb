@@ -6,7 +6,9 @@ class PeopleController < ApplicationController
     @search.validate
     people = @search.close_matches
 
-    @response_plans = people.map do |person|
+    @response_plans = people.select do |person|
+      visible_plan_for(person)
+    end.map do |person|
       [person, visible_plan_for(person)]
     end.to_h
   end
