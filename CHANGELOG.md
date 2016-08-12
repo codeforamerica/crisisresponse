@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented here.
 
+## [0.1.7] - 2016-08-12
+
+### Added
+
+* We now record which response plans officers view, for auditing purposes.
+* You can now search by a person's name or alias in the "name" field.
+  Results for both will appear.
+* The app now supports individuals' triggers,
+  though we have not released content for it just yet.
+  We are working with CRT to finalize the designs and content.
+* A favicon for the site! ![favicon](app/assets/images/icons/favicon.ico)
+
+### Changed
+
+* To save space, we've removed the "Officer Safety" box
+  until we finalize its design.
+* We now sort people on the search page in alphabetical order
+  by their last name.
+* We've separated out "feet" and "inches" fields to improve searching by height.
+* Officers reported that the map interfered with scrolling down the page,
+  so we've hidden it behind a drop-down button.
+* Many small interface improvements!
+
+### Fixed
+
+* Searching by date of birth on Android phones
+  would display the numbers backwards. Not anymore.
+* Several officers reported bugs when switching to night mode.
+  They should be fixed now.
+
 ## [0.1.6] - 2016-07-29
 
 ### Added
@@ -173,7 +203,9 @@ All notable changes to this project will be documented here.
 * Text entered into search or feedback fields is now visible in night mode
 
 [Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.5...HEAD
-[0.1.5]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.3...v0.1.5
+[0.1.7]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.6...v0.1.7
+[0.1.6]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.5...v0.1.6
+[0.1.5]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.1...v0.1.2
