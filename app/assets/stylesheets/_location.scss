@@ -1,9 +1,5 @@
 $zoom-control-height: 1.5em;
 
-.location-map {
-  height: 12em;
-}
-
 .location-name,
 .location-address {
   display: block;
@@ -16,6 +12,10 @@ $zoom-control-height: 1.5em;
 .location-address-line-one,
 .location-address-line-two {
   display: block;
+}
+
+.location-map.collapsed {
+  display: none;
 }
 
 .map-controls {
@@ -36,4 +36,8 @@ $zoom-control-height: 1.5em;
 
 .zoom-out {
   background-image: $zoom_out_image;
+}
+
+.location-map-canvas {
+  height: 12em;
 }
