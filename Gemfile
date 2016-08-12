@@ -21,13 +21,24 @@ gem "rack-canonical-host"
 gem "rails", "~> 4.2.0"
 gem "rails-assets-bowser", source: "https://rails-assets.org"
 gem "rails-assets-jquery-ujs", source: "https://rails-assets.org"
-gem "rails-assets-jquery.maskedinput", source: "https://rails-assets.org"
 gem "rdiscount"
 gem "recipient_interceptor"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "title"
 gem "uglifier"
+
+# The released version of this library, v1.4.1,
+# contains a bug on Android devices that causes input to be displayed backwards.
+# This has been fixed in
+# https://github.com/digitalBush/jquery.maskedinput/pull/320,
+# but has not been released.
+# To get around this, we're including the fix manually through the file
+# vendor/assets/javascripts/jquery.maskedinput.js
+# Once the fix is included in a new release (likely in version 1.4.2),
+# then we'll be able to load the asset through this Gemfile once again.
+#
+# gem "rails-assets-jquery.maskedinput", source: "https://rails-assets.org"
 
 group :development do
   gem "quiet_assets"
