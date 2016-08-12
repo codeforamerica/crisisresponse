@@ -63,7 +63,7 @@ function initMap() {
 
     setTimeout(function() {
       $(".location-map").addClass("collapsed");
-    }, 500);
+    }, 1000);
 
     return map;
   }

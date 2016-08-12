@@ -101,6 +101,22 @@ describe Search do
         expect(matches).to eq([person])
       end
 
+      it "uses equivalent fuzzy matching on aliases and proper names" do
+        a = create(:person, first_name: "Christopher")
+        b = create(:person, first_name: "Kristina")
+
+        matches = Search.new(name: "Kris").close_matches
+
+        expect(matches).to match_array([b])
+        Person.destroy_all
+
+        a = create(:alias, name: "Christopher").person
+        b = create(:alias, name: "Kristina").person
+
+        matches = Search.new(name: "Kris").close_matches
+        expect(matches).to match_array([b])
+      end
+
       it "returns records that match on the reversed name" do
         person = create(:person, name: "John Doe")
 

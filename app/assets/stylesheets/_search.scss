@@ -88,6 +88,11 @@
       text-align: right;
     }
 
+    input[type="number"] {
+      @include span-columns(1 of 10);
+      float: none;
+    }
+
     .basic-search-fields {
       @include span-columns(8 of 12);
 

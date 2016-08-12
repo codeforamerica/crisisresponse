@@ -8,7 +8,7 @@
 
   <div class="fields">
     <div class="basic-search-fields">
-      <%= f.input :name, placeholder: "Doe, John" %>
+      <%= f.input :name, placeholder: "Enter name or alias" %>
       <%= f.input :date_of_birth,
         label: "DOB",
         placeholder: "mm-dd-yyyy",
@@ -32,15 +32,20 @@
     <div class="physicals-search-fields collapsed">
       <%= f.input :age, as: :integer %>
       <%= f.input :sex, as: :check_boxes, collection: Person::SEX_CODES.keys %>
-      <%= f.input :race, as: :check_boxes, collection: Person::RACE_CODES.keys %>
+      <%= f.input(
+        :race,
+        as: :check_boxes,
+        collection: Person::RACE_CODES.keys,
+        label_method: lambda { |race| race.downcase.gsub("/", " / ") },
+      ) %>
 
       <div class="input">
         <%= f.label "Height" %>
         <div class="height-field">
           <%= f.input_field :height_feet, as: :integer, label: false %>
-          <%= f.label :height_feet, label: '"' %>
+          <%= f.label :height_feet, label: "'" %>
           <%= f.input_field :height_inches, as: :integer, label: false %>
-          <%= f.label :height_inches, label: "'" %>
+          <%= f.label :height_inches, label: '"' %>
         </div>
       </div>
 
