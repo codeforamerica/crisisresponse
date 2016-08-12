@@ -16,7 +16,7 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   describe "GET #index" do
-    it "shows people who do not have a response plan" do
+    pending "shows people who do not have a response plan" do
       officer = create(:officer)
       rms_person = create(:rms_person, first_name: "John", last_name: "Doe")
       person = rms_person.person
@@ -34,6 +34,11 @@ RSpec.describe PeopleController, type: :controller do
       alice.update(last_name: nil)
       bob = create(:person, last_name: "Bob")
 
+      # TODO these should eventually not be necessary
+      create(:response_plan, person: alice)
+      create(:response_plan, person: bob)
+      create(:response_plan, person: charlie)
+
       get :index, {}, { officer_id: officer.id }
 
       expect(assigns(:response_plans).keys).to eq([alice, bob, charlie])
@@ -49,7 +54,10 @@ RSpec.describe PeopleController, type: :controller do
 
         expect(assigns(:response_plans)).to eq(
           approved.person => approved,
-          unapproved.person => nil,
+          # TODO: For now, don't show people without a respones plan.
+          # We'll add them in once we have a plan
+          # for the basic information layout.
+          # unapproved.person => nil,
         )
       end
     end
