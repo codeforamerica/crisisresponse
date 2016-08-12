@@ -29,5 +29,24 @@ window.onbeforeunload = function (event) {
   keenClient.addEvent("Page Unload", pageData);
 }
 
+function recordClickEventCallback(eventName) {
+  return function(event) {
+    keenClient.addEvent(eventName, {
+      element: {
+        data: event.target.dataset,
+        class: event.target.classList
+      },
+      page: pageData,
+      keen: { timestamp: pageLoadDate.toISOString() }
+    });
+  }
+}
+
+$(function() {
+  $(".toggle").on("click", recordClickEventCallback("Toggle"));
+  $(".zoom-out").on("click", recordClickEventCallback("Zoom"));
+  $(".zoom-in").on("click", recordClickEventCallback("Zoom"));
+});
+
   </script>
 <% end %>
