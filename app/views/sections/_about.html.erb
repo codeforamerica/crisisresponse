@@ -7,16 +7,16 @@
 
   <div class="section-body">
     <div class="about-label author-label">Prepared by</div>
-    <div class="author-name"><%= @response_plan.author.name %></div>
+    <div class="author-name"><%= @person.response_plans.first.author.name %></div>
     <div class="author-unit">Crisis Response Unit</div>
 
     <div class="about-label date-label">Prepared on</div>
-    <div class="created-date"><%= l @response_plan.updated_at.to_date %></div>
+    <div class="created-date"><%= l @person.response_plans.first.updated_at.to_date %></div>
 
-    <% if @response_plan.approver.present? %>
+    <% if @person.response_plans.first.approver.present? %>
       <div class="about-label approver-label">Approved by</div>
       <div class="approver-name">
-        <div><%= @response_plan.approver.name %></div>
+        <div><%= @person.response_plans.first.approver.name %></div>
       </div>
     <% end %>
   </div>

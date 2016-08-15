@@ -59,7 +59,7 @@ class Person < ActiveRecord::Base
     },
     using: {
       dmetaphone: {},
-      trigram: { threshold: 0.2 },
+      trigram: { threshold: 0.12 },
       tsearch: {},
     },
   )

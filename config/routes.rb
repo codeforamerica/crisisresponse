@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     member { patch :approve }
   end
 
+  get "/response_plans", to: redirect("/")
   root to: "people#index"
 end
