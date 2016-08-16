@@ -1,9 +1,4 @@
 class Person < ActiveRecord::Base
-  include PgSearch
-
-  include Analytics
-  before_create :generate_analytics_token
-
   RACE_CODES = {
     "AFRICAN AMERICAN/BLACK" => "B",
     "AMERICAN INDIAN/ALASKAN NATIVE" => "I",
@@ -39,16 +34,16 @@ class Person < ActiveRecord::Base
     :red,
   ].freeze
 
+  include PgSearch
+  include PersonValidations
+  include Analytics
+
+  before_create :generate_analytics_token
+
   has_many :aliases, dependent: :destroy
   has_many :images, dependent: :destroy
   has_many :response_plans
   has_one :rms_person, class_name: "RMS::Person"
-
-  validates :sex, inclusion: SEX_CODES.keys, allow_nil: true
-  validates :race, inclusion: RACE_CODES.keys, allow_nil: true
-  validates :date_of_birth, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
 
   pg_search_scope(
     :search,
@@ -98,18 +93,12 @@ class Person < ActiveRecord::Base
   fallback_to_rms_person(:last_name)
   fallback_to_rms_person(:location_address)
   fallback_to_rms_person(:location_name)
+  fallback_to_rms_person(:race)
   fallback_to_rms_person(:scars_and_marks)
+  fallback_to_rms_person(:sex)
   fallback_to_rms_person(:weight_in_pounds)
-
-  def sex
-    super ||
-      (rms_person && SEX_CODES.invert[rms_person.sex])
-  end
-
-  def race
-    super ||
-      (rms_person && RACE_CODES.invert[rms_person.race])
-  end
+  fallback_to_rms_person(:weight_in_pounds)
+  fallback_to_rms_person(:weight_in_pounds)
 
   def active_response_plan
     response_plans.where.not(approved_at: nil).order(:approved_at).last
