@@ -114,6 +114,28 @@ RSpec.describe Person, type: :model do
     specify { expect_to_fallback_to_rms_person_for(:scars_and_marks, "foo") }
     specify { expect_to_fallback_to_rms_person_for(:weight_in_pounds) }
 
+    specify { expect_identical_assignment_to_not_update_person(:date_of_birth, Date.today) }
+    specify { expect_identical_assignment_to_not_update_person(:eye_color, "blue") }
+    specify { expect_identical_assignment_to_not_update_person(:first_name, "Foo") }
+    specify { expect_identical_assignment_to_not_update_person(:hair_color, "brown") }
+    specify { expect_identical_assignment_to_not_update_person(:height_in_inches, 60) }
+    specify { expect_identical_assignment_to_not_update_person(:last_name, "Foo") }
+    specify { expect_identical_assignment_to_not_update_person(:location_address, "foo") }
+    specify { expect_identical_assignment_to_not_update_person(:location_name, "foo") }
+    specify { expect_identical_assignment_to_not_update_person(:scars_and_marks, "foo") }
+    specify { expect_identical_assignment_to_not_update_person(:weight_in_pounds, 200) }
+
+    specify { expect_different_assignment_to_update_person(:date_of_birth, Date.today, 20.years.ago.to_date) }
+    specify { expect_different_assignment_to_update_person(:eye_color, "Blue", "Brown") }
+    specify { expect_different_assignment_to_update_person(:first_name, "Foo", "Bar") }
+    specify { expect_different_assignment_to_update_person(:hair_color, "Brown", "black") }
+    specify { expect_different_assignment_to_update_person(:height_in_inches, 50, 60) }
+    specify { expect_different_assignment_to_update_person(:last_name, "Foo", "Bar") }
+    specify { expect_different_assignment_to_update_person(:location_address, "foo", "bar") }
+    specify { expect_different_assignment_to_update_person(:location_name, "foo", "bar") }
+    specify { expect_different_assignment_to_update_person(:scars_and_marks, "foo", "bar") }
+    specify { expect_different_assignment_to_update_person(:weight_in_pounds, 200, 180) }
+
     def expect_to_fallback_to_rms_person_for(attribute, value = nil)
       options = value ? { attribute => value } : {}
       person = build(:person)
@@ -126,6 +148,27 @@ RSpec.describe Person, type: :model do
 
       expect(actual).not_to be_nil
       expect(actual).to eq(expected)
+    end
+
+    def expect_identical_assignment_to_not_update_person(attribute, value)
+      person = build(:person, attribute => nil)
+      person.save(validate: false)
+      rms_person = create(:rms_person, person: person, attribute => value)
+
+      expect do
+        person.update(attribute => value)
+      end.not_to change { person.reload.attributes[attribute.to_s] }
+    end
+
+    def expect_different_assignment_to_update_person(attribute, old, new)
+      person = build(:person, attribute => nil)
+      person.save(validate: false)
+      rms_person = create(:rms_person, person: person, attribute => old)
+
+      expect { person.update(attribute => new) }.
+        to change { person.reload.attributes[attribute.to_s] }.
+        from(nil).
+        to(new)
     end
   end
 end
