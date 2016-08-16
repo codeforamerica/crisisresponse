@@ -1,5 +1,6 @@
 require "rails_helper"
 require "shared/analytics_token"
+require "shared/person_validations"
 
 RSpec.describe Person, type: :model do
   it_should_behave_like "it has an analytics token"
@@ -11,21 +12,7 @@ RSpec.describe Person, type: :model do
   end
 
   describe "validations" do
-    it { should allow_value("Female").for(:sex) }
-    it { should allow_value("Male").for(:sex) }
-    it { should allow_value(nil).for(:sex) }
-    it { should_not allow_value("FEMALE").for(:sex) }
-    it { should_not allow_value("M").for(:sex) }
-
-    it { should allow_value("AFRICAN AMERICAN/BLACK").for(:race) }
-    it { should allow_value("AMERICAN INDIAN/ALASKAN NATIVE").for(:race) }
-    it { should allow_value("ASIAN (ALL)/PACIFIC ISLANDER").for(:race) }
-    it { should allow_value("UNKNOWN").for(:race) }
-    it { should allow_value("WHITE").for(:race) }
-    it { should allow_value(nil).for(:race) }
-    it { should_not allow_value("BLACK").for(:race) }
-    it { should_not allow_value("W").for(:race) }
-    it { should_not allow_value("White").for(:race) }
+    it_should_behave_like "a validated person"
   end
 
   describe "#active_response_plan" do
@@ -111,7 +98,9 @@ RSpec.describe Person, type: :model do
     specify { expect_to_fallback_to_rms_person_for(:last_name) }
     specify { expect_to_fallback_to_rms_person_for(:location_address, "foo") }
     specify { expect_to_fallback_to_rms_person_for(:location_name, "foo") }
+    specify { expect_to_fallback_to_rms_person_for(:race) }
     specify { expect_to_fallback_to_rms_person_for(:scars_and_marks, "foo") }
+    specify { expect_to_fallback_to_rms_person_for(:sex) }
     specify { expect_to_fallback_to_rms_person_for(:weight_in_pounds) }
 
     specify { expect_identical_assignment_to_not_update_person(:date_of_birth, Date.today) }
@@ -122,7 +111,9 @@ RSpec.describe Person, type: :model do
     specify { expect_identical_assignment_to_not_update_person(:last_name, "Foo") }
     specify { expect_identical_assignment_to_not_update_person(:location_address, "foo") }
     specify { expect_identical_assignment_to_not_update_person(:location_name, "foo") }
+    specify { expect_identical_assignment_to_not_update_person(:race, "WHITE") }
     specify { expect_identical_assignment_to_not_update_person(:scars_and_marks, "foo") }
+    specify { expect_identical_assignment_to_not_update_person(:sex, "Male") }
     specify { expect_identical_assignment_to_not_update_person(:weight_in_pounds, 200) }
 
     specify { expect_different_assignment_to_update_person(:date_of_birth, Date.today, 20.years.ago.to_date) }
@@ -133,7 +124,9 @@ RSpec.describe Person, type: :model do
     specify { expect_different_assignment_to_update_person(:last_name, "Foo", "Bar") }
     specify { expect_different_assignment_to_update_person(:location_address, "foo", "bar") }
     specify { expect_different_assignment_to_update_person(:location_name, "foo", "bar") }
+    specify { expect_different_assignment_to_update_person(:race, "WHITE", "UNKNOWN") }
     specify { expect_different_assignment_to_update_person(:scars_and_marks, "foo", "bar") }
+    specify { expect_different_assignment_to_update_person(:sex, "Male", "Female") }
     specify { expect_different_assignment_to_update_person(:weight_in_pounds, 200, 180) }
 
     def expect_to_fallback_to_rms_person_for(attribute, value = nil)
