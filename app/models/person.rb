@@ -80,6 +80,14 @@ class Person < ActiveRecord::Base
       super(*args) ||
         (rms_person && rms_person.public_send(attribute))
     end
+
+    define_method("#{attribute}=") do |value|
+      if rms_person.try(attribute) == value
+        super(nil)
+      else
+        super(value)
+      end
+    end
   end
 
   fallback_to_rms_person(:date_of_birth)

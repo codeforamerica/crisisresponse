@@ -31,7 +31,9 @@ RSpec.describe PeopleController, type: :controller do
 
       charlie = create(:person, last_name: "Charlie")
       alice = create(:rms_person, last_name: "Alice").person
-      alice.update(last_name: nil)
+      alice.last_name = nil
+      alice.save(validate: false)
+      alice.reload
       bob = create(:person, last_name: "Bob")
 
       # TODO these should eventually not be necessary

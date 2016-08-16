@@ -40,7 +40,8 @@ FactoryGirl.define do
   end
 
   factory :person do
-    name "John Doe"
+    first_name "John"
+    last_name "Doe"
     sex "Male"
     race "AFRICAN AMERICAN/BLACK"
     height_in_inches 66
