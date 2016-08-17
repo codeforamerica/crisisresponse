@@ -1,39 +1,4 @@
 class Person < ActiveRecord::Base
-  RACE_CODES = {
-    "AFRICAN AMERICAN/BLACK" => "B",
-    "AMERICAN INDIAN/ALASKAN NATIVE" => "I",
-    "ASIAN (ALL)/PACIFIC ISLANDER" => "A",
-    "UNKNOWN" => "U",
-    "WHITE" => "W",
-  }.freeze
-
-  SEX_CODES = {
-    "Male" => "M",
-    "Female" => "F",
-  }.freeze
-
-  EYE_COLORS = [
-    :black,
-    :blue,
-    :brown,
-    :gray,
-    :green,
-    :hazel,
-    :maroon,
-    :multicolored,
-    :pink,
-    :unknown,
-  ].freeze
-
-  HAIR_COLORS = [
-    :bald,
-    :black,
-    :blonde,
-    :brown,
-    :grey,
-    :red,
-  ].freeze
-
   include PgSearch
   include PersonValidations
   include Analytics
@@ -130,7 +95,7 @@ class Person < ActiveRecord::Base
 
   def shorthand_description
     [
-      RACE_CODES.fetch(race) + SEX_CODES.fetch(sex),
+      RMS::RACE_CODES.fetch(race) + RMS::SEX_CODES.fetch(sex),
       height_in_feet_and_inches,
       weight_in_pounds ? "#{weight_in_pounds} lb" : nil,
     ].compact.join(" – ")

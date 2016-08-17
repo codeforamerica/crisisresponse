@@ -128,3 +128,27 @@ docker-compose up
 # To run the server
 docker-compose up
 ```
+
+## Importing Data from the SPD Record Management System
+
+* Set the `RMS_PASSWORD`, `RMS_URL`, and `RMS_USERNAME` environment variables.
+* run:
+
+  ```bash
+  app run --rm web rails c
+  ```
+
+* Inside the rails console, type:
+
+  ```ruby
+  require "rms_importer"
+  RMSImporter.new.import
+  ```
+
+This will run for a while as it searches for updates
+to all of the crisis incident records.
+When it finishes,
+check the log files that it wrote under `log/import`
+for notes about unprocessable records,
+skipped records,
+or duplicate records.
