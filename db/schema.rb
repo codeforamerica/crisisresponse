@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810040357) do
+ActiveRecord::Schema.define(version: 20160822150030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,6 +187,8 @@ ActiveRecord::Schema.define(version: 20160810040357) do
     t.boolean  "verbalization"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "xml_crisis_id",             null: false
+    t.text     "narrative"
   end
 
   add_index "rms_crisis_incidents", ["rms_person_id"], name: "index_rms_crisis_incidents_on_rms_person_id", using: :btree

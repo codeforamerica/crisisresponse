@@ -6,8 +6,8 @@
       <%= person.input :date_of_birth, label: "DOB", as: :string %>
       <%= render "nested_form", f: person, relationship: :aliases, html_classes: [] %>
 
-      <%= person.input :race, collection: Person::RACE_CODES.keys %>
-      <%= person.input :sex, collection: Person::SEX_CODES.keys %>
+      <%= person.input :race, collection: RMS::RACE_CODES.keys %>
+      <%= person.input :sex, collection: RMS::SEX_CODES.keys %>
       <%= person.input :weight_in_pounds, label: "Weight" %>
       <%= person.input :height_in_inches, label: "Height" %>
       <%= person.input :eye_color %>
