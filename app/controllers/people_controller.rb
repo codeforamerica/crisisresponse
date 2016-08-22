@@ -6,9 +6,15 @@ class PeopleController < ApplicationController
     @search.validate
     people = @search.close_matches
 
-    @response_plans = people.select do |person|
-      visible_plan_for(person)
-    end.map do |person|
+    if current_officer.can_view_people_without_response_plans?
+      people_with_visible_plans = people
+    else
+      people_with_visible_plans = people.select do |person|
+        visible_plan_for(person)
+      end
+    end
+
+    @response_plans = people_with_visible_plans.map do |person|
       [person, visible_plan_for(person)]
     end.to_h
   end
