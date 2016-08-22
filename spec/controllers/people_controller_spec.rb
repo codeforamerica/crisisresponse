@@ -16,14 +16,35 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   describe "GET #index" do
-    pending "shows people who do not have a response plan" do
-      officer = create(:officer)
-      rms_person = create(:rms_person, first_name: "John", last_name: "Doe")
-      person = rms_person.person
+    # TODO temporary feature flag
+    # This should be adjusted when we allow all officers
+    # to view people without a response plan
+    context "when the officer can view people without a response plan" do
+      it "shows people who do not have a response plan" do
+        officer = create(:officer, username: "foobar")
+        stub_view_without_response_plan_permissions(officer)
+        rms_person = create(:rms_person, first_name: "John", last_name: "Doe")
+        person = rms_person.person
 
-      get :index, {}, { officer_id: officer.id }
+        get :index, {}, { officer_id: officer.id }
 
-      expect(assigns(:response_plans)).to eq(person => nil)
+        expect(assigns(:response_plans)).to eq(person => nil)
+      end
+    end
+
+    # TODO temporary feature flag
+    # This should be removed when we allow all officers
+    # to view people without a response plan
+    context "when the officer can only view people with a response plan" do
+      it "does not shows people who do not have a response plan" do
+        officer = create(:officer)
+        rms_person = create(:rms_person, first_name: "John", last_name: "Doe")
+        person = rms_person.person
+
+        get :index, {}, { officer_id: officer.id }
+
+        expect(assigns(:response_plans)).to eq({})
+      end
     end
 
     it "shows people in alphabetical order" do
