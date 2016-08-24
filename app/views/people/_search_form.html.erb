@@ -39,15 +39,7 @@
         label_method: lambda { |race| race.downcase.gsub("/", " / ") },
       ) %>
 
-      <div class="input">
-        <%= f.label "Height" %>
-        <div class="height-field">
-          <%= f.input_field :height_feet, as: :integer, label: false %>
-          <%= f.label :height_feet, label: "'" %>
-          <%= f.input_field :height_inches, as: :integer, label: false %>
-          <%= f.label :height_inches, label: '"' %>
-        </div>
-      </div>
+      <%= render "application/height_fields", form: f %>
 
       <%= f.input :weight_in_pounds, as: :integer, label: "Weight" %>
 

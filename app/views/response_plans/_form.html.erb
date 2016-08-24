@@ -3,15 +3,50 @@
     <%= f.fields_for :person do |person| %>
       <%= person.input :first_name %>
       <%= person.input :last_name %>
-      <%= person.input :date_of_birth, label: "DOB", as: :string %>
+
+      <%= person.input(
+        :date_of_birth,
+        as: :string,
+        label: "DOB",
+        placeholder: "mm-dd-yyyy",
+        input_html: {
+          value: (
+            l(@response_plan.person.date_of_birth) rescue
+            params[:response_plan][:person_attributes][:date_of_birth] rescue
+            nil
+          )
+        }
+      ) %>
+
       <%= render "nested_form", f: person, relationship: :aliases, html_classes: [] %>
 
-      <%= person.input :race, collection: RMS::RACE_CODES.keys %>
-      <%= person.input :sex, collection: RMS::SEX_CODES.keys %>
-      <%= person.input :weight_in_pounds, label: "Weight" %>
-      <%= person.input :height_in_inches, label: "Height" %>
-      <%= person.input :eye_color %>
-      <%= person.input :hair_color %>
+      <%= person.input(
+        :race,
+        collection: RMS::RACE_CODES.keys,
+        label_method: lambda { |race| race.titlecase.gsub("/", " / ") },
+        required: true,
+      ) %>
+      <%= person.input(
+        :sex,
+        collection: RMS::SEX_CODES.keys,
+        label_method: lambda { |sex| sex.titlecase },
+        required: true
+      ) %>
+
+      <%= person.input :weight_in_pounds, as: :integer, label: "Weight" %>
+      <%= render "application/height_fields", form: person %>
+
+      <%= person.input(
+        :eye_color,
+        collection: RMS::EYE_COLOR_CODES.values,
+        label_method: lambda(&:titlecase),
+      ) %>
+      <%= person.input(
+        :hair_color,
+        collection: RMS::HAIR_COLOR_CODES.values,
+        label_method: lambda(&:titlecase),
+      ) %>
+
       <%= person.input :scars_and_marks %>
     <% end %>
 

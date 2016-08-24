@@ -9,12 +9,18 @@
       <%= link_to(
         t("response_plans.approval.action"),
         approve_response_plan_path(@response_plan),
-        method: :patch
+        method: :patch,
       ) %>
     </div>
   <% end %>
 
   <div class="left-column">
+    <% if @response_plan && current_officer.admin? %>
+      <div class="needs-approval edit-response-plan">
+        <%= link_to("Edit", edit_response_plan_path(@response_plan)) %>
+      </div>
+    <% end %>
+
     <%= render "sections/images" %>
     <%= render "sections/profile", person: @person %>
     <%= render "sections/location" %>
