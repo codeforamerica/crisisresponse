@@ -10,6 +10,7 @@ gem "deep_cloneable"
 gem "delayed_job_active_record"
 gem "flutie"
 gem "high_voltage"
+gem "kaminari"
 gem "neat", "~> 1.7.0"
 gem "net-ldap"
 gem "newrelic_rpm", ">= 3.9.8"
@@ -38,6 +39,9 @@ gem "uglifier"
 # vendor/assets/javascripts/jquery.maskedinput.js
 # Once the fix is included in a new release (likely in version 1.4.2),
 # then we'll be able to load the asset through this Gemfile once again.
+#
+# To check the current version number,
+# see https://rails-assets.org/#/components/jquery.maskedinput
 #
 # gem "rails-assets-jquery.maskedinput", source: "https://rails-assets.org"
 

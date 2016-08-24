@@ -1,20 +1,27 @@
 class PeopleController < ApplicationController
+  RECORDS_PER_PAGE = 12
+
   before_action :authenticate_officer!
 
   def index
-    @search = Search.new(search_params)
-    @search.validate
-    people = @search.close_matches
-
     if current_officer.can_view_people_without_response_plans?
-      people_with_visible_plans = people
+      @search = Search.new(search_params)
     else
-      people_with_visible_plans = people.select do |person|
-        visible_plan_for(person)
-      end
+      plans = current_officer.admin? ? ResponsePlan : ResponsePlan.where.not(approved_at: nil)
+      people_with_response_plans = Person.where(id: plans.pluck(:person_id).uniq)
+      @search = Search.new(search_params, people_with_response_plans)
     end
 
-    @response_plans = people_with_visible_plans.map do |person|
+    @search.validate
+
+    @people = @search.
+      close_matches.
+      includes(:rms_person).
+      includes(:images).
+      page(params[:page]).
+      per(RECORDS_PER_PAGE)
+
+    @response_plans = @people.map do |person|
       [person, visible_plan_for(person)]
     end.to_h
   end
