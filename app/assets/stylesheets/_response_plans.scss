@@ -8,6 +8,10 @@ $bullet-size: 3rem;
   margin-bottom: $base-spacing;
   padding: $small-spacing;
   text-align: center;
+
+  &.edit-response-plan {
+    @include card;
+  }
 }
 
 .response-plan {

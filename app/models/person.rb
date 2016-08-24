@@ -3,6 +3,8 @@ class Person < ActiveRecord::Base
   include PersonValidations
   include Analytics
 
+  attr_accessor :height_feet, :height_inches
+
   before_create :generate_analytics_token
 
   has_many :aliases, dependent: :destroy
@@ -91,6 +93,14 @@ class Person < ActiveRecord::Base
 
   def response_plan
     response_plans.last
+  end
+
+  def save(*args)
+    if height_feet && height_inches
+      self.height_in_inches = height_feet.to_i * 12 + height_inches.to_i
+    end
+
+    super(*args)
   end
 
   def shorthand_description

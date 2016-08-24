@@ -13,8 +13,26 @@
 
     input,
     select,
-    textarea {
+    textarea,
+    .height-field {
       @include span-columns(6 of 12);
+    }
+  }
+
+  .height-field {
+    overflow: hidden;
+
+    input[type='number'] {
+      @include span-columns(1 of 6);
+      display: inline-block;
+      margin-right: 0;
+    }
+
+    label {
+      display: inline-block;
+      float: left;
+      margin-right: $base-spacing;
+      margin-left: $tiny-spacing;
     }
   }
 

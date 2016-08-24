@@ -13,7 +13,7 @@ feature "Response Plan Form" do
       fill_in "First name", with: "John"
       fill_in "Last name", with: "Doe"
       fill_in "DOB", with: "1980-01-02"
-      select "WHITE", from: "Race"
+      select "White", from: "Race"
       select "Male", from: "Sex"
       click_on "Create Response plan"
 
@@ -34,11 +34,12 @@ feature "Response Plan Form" do
       fill_in "Last name", with: "Doe"
       fill_in "DOB", with: "1980-01-02"
       fill_in "Weight", with: 160
-      fill_in "Height", with: 72
-      fill_in "Eye color", with: "Blue"
-      fill_in "Hair color", with: "Brown"
+      fill_in :response_plan_person_attributes_height_feet, with: 5
+      fill_in :response_plan_person_attributes_height_inches, with: 3
+      select "Blue", from: "Eye color"
+      select "Brown", from: "Hair color"
       fill_in "Scars and marks", with: "Spider tattoo on neck"
-      select "WHITE", from: "Race"
+      select "White", from: "Race"
       select "Male", from: "Sex"
       fill_in "Background info", with: "Lorem Ipsum Dolor Si Amet"
       fill_in "Location name", with: "The Morrison Hotel"
@@ -53,7 +54,7 @@ feature "Response Plan Form" do
       expect(page).to have_content("Doe")
       expect(page).to have_content(l(Date.new(1980, 1, 2)))
       expect(page).to have_content("160 lb")
-      expect(page).to have_content("6'0\"")
+      expect(page).to have_content("5'3\"")
       expect(page).to have_content("Blue")
       expect(page).to have_content("Brown")
       expect(page).to have_content("Spider tattoo on neck")
@@ -90,7 +91,8 @@ feature "Response Plan Form" do
       stub_admin_permissions(officer)
       sign_in_officer(officer)
 
-      visit edit_response_plan_path(plan)
+      visit person_path(person)
+      click_on "Edit"
       fill_in "First name", with: "Mary"
       click_on "Create Response plan"
 
