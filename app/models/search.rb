@@ -17,8 +17,10 @@ class Search
 
   attr_accessor(*SEARCHABLE_ATTRS)
 
-  def initialize(*args)
-    super(*args)
+  def initialize(attributes = {}, candidates = Person.all)
+    super(attributes)
+
+    @candidates = candidates
 
     if @date_of_birth.present?
       parse_date_of_birth
@@ -36,7 +38,7 @@ class Search
   end
 
   def close_matches
-    people = Person.
+    people = @candidates.
       joins("LEFT OUTER JOIN rms_people ON rms_people.person_id = people.id")
 
     if name.present?

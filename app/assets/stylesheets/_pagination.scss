@@ -1,0 +1,9 @@
+.pagination {
+  @include span-columns(12 of 12);
+  margin-bottom: $base-spacing;
+  text-align: center;
+
+  span {
+    margin: 0 $small-spacing;
+  }
+}
