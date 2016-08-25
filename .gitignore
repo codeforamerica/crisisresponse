@@ -4,8 +4,10 @@
 *.swp
 /.bundle
 /.env.local
+/backups
 /build/
 /coverage/*
+/data
 /db/*.sqlite3
 /log/*
 /public/assets
@@ -13,5 +15,3 @@
 /public/uploads
 /tags
 /tmp/*
-
-/data

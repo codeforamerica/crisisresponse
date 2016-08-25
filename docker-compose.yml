@@ -5,13 +5,30 @@ services:
     ports:
       - "5432:5432"
 
+  backup:
+    image: postgres:latest
+    command: |
+      bash -c 'exec pg_dump -h db -p 5432 -U postgres -v -d crisisresponse_development > /backups/`date '+%Y-%m-%d_%H:%M:%S'`.sql'
+    links:
+      - db
+    volumes:
+      - './backups:/backups'
+
+  restore:
+    build: containers/restore
+    entrypoint: |
+      psql -h db -p 5432 -U postgres -v -d crisisresponse_development -f
+    links:
+      - db
+    volumes:
+      - '.:/backup'
+
   web:
     build: .
     image: codeforamerica/crisisresponse
     command: ./bin/serve
-    environment:
-      DB_HOST: db
-      DB_USER: postgres
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     links:
