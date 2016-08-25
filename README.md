@@ -152,3 +152,16 @@ check the log files that it wrote under `log/import`
 for notes about unprocessable records,
 skipped records,
 or duplicate records.
+
+## Backups
+
+Backups are stored in the application root,
+under the `backups/` subfolder.
+
+```bash
+# Create a backup of the database
+docker-compose run --rm backup
+
+# Restore a backup
+docker-compose run --rm restore backups/2016-01-02_12:00:00.sql
+```
