@@ -1,5 +1,6 @@
 machine:
   environment:
+    DB_HOST: localhost
     LD_LIBRARY_PATH: $HOME/$CIRCLE_PROJECT_REPONAME/dependencies/instantclient_11_2
 dependencies:
   pre:
