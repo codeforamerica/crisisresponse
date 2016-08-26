@@ -15,13 +15,23 @@ class Officer < ActiveRecord::Base
     dependent: :destroy
 
   def admin?
-    ENV.fetch("ADMIN_USERNAMES").to_s.split(",").include?(username)
+    username_defined_in_env_variable?("ADMIN_USERNAMES")
   end
 
   # TODO temporary feature flag
   # This should be removed when we allow all officers
   # to view people without response plans.
   def can_view_people_without_response_plans?
-    ENV.fetch("CAN_VIEW_WITHOUT_RESPONSE_PLANS").to_s.split(",").include?(username)
+    username_defined_in_env_variable?("CAN_VIEW_WITHOUT_RESPONSE_PLANS")
+  end
+
+  private
+
+  def username_defined_in_env_variable?(env_var)
+    ENV.fetch(env_var).
+      to_s.
+      gsub(/["']/, "").
+      split(",").
+      include?(username)
   end
 end
