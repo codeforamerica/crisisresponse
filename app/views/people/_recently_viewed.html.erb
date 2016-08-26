@@ -3,7 +3,8 @@
 
   <% @response_plans.each do |person, response_plan| %>
     <%= link_to person_path(person), class: "recently-viewed-plan" do %>
-      <% unless response_plan && response_plan.approved? %>
+
+      <% if response_plan && !response_plan.approved? %>
         <span class="needs-approval-banner">Needs Approval</span>
       <% end %>
 
