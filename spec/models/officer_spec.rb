@@ -21,5 +21,17 @@ RSpec.describe Officer, type: :model do
       expect(admin).to be_admin
       expect(non_admin).not_to be_admin
     end
+
+    it "can handle quotes in the env variable" do
+      allow(ENV).to receive(:fetch).
+        with("ADMIN_USERNAMES").
+        and_return('"foo,bar"')
+
+      admin = build(:officer, username: "foo")
+      non_admin = build(:officer, username: "other")
+
+      expect(admin).to be_admin
+      expect(non_admin).not_to be_admin
+    end
   end
 end
