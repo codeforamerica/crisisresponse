@@ -10,12 +10,20 @@
           <span class="filter">
             <span class="filter-attribute"><%= filter.to_s.humanize %></span>
             <span class="filter-value">
+
               <% if filter == :date_of_birth %>
                 <%= l(@search.send(filter)) %>
               <% else %>
                 <%= Array(@search.send(filter)).join(", ") %>
               <% end %>
             </span>
+
+            <%= link_to(
+              people_path(search: params[:search].except(filter)),
+              class: "filter-remove",
+            ) do %>
+              <%= image_tag "remove-#{theme}.svg" %>
+            <% end %>
           </span>
         <% end %>
       </div>
