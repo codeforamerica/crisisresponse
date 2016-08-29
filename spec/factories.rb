@@ -28,10 +28,11 @@ FactoryGirl.define do
   end
 
   factory :officer, aliases: [:author, :approver] do
-    title "Officer"
     name "Johnson"
-    unit "Crisis Response Unit"
     phone "222-333-4444"
+    sequence(:username) { |n| "officer_#{n}" }
+    title "Officer"
+    unit "Crisis Response Unit"
   end
 
   factory :page_view do
@@ -56,6 +57,20 @@ FactoryGirl.define do
     author
     approver
     updated_at { 1.second.ago }
+    submitted_for_approval_at { 1.second.ago }
+
+    trait :approved # This is the default
+
+    trait :draft do
+      submitted_for_approval_at nil
+      approver nil
+      approved_at nil
+    end
+
+    trait :pending_approval do
+      approver nil
+      approved_at nil
+    end
   end
 
   factory :response_strategy do

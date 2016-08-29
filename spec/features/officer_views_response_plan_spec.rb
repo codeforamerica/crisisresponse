@@ -156,7 +156,7 @@ feature "Officer views a response plan" do
 
       visit person_path(response_plan.person)
 
-      expect(page).not_to have_content(t("response_plans.approval.required"))
+      expect(page).not_to have_content(t("response_plans.pending_approval.title"))
     end
 
     scenario "They see the approving officer" do
@@ -179,7 +179,7 @@ feature "Officer views a response plan" do
 
       visit person_path(response_plan.person)
 
-      expect(page).to have_content(t("response_plans.approval.required"))
+      expect(page).to have_content(t("response_plans.pending_approval.title"))
     end
 
     scenario "an admin approves it" do

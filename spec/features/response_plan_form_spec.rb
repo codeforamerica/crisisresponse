@@ -5,31 +5,35 @@ feature "Response Plan Form" do
 
   context "Creating a new response plan" do
     scenario "Officer fills in minimum information" do
-      admin_officer = create(:officer, username: "admin")
+      admin_officer = create(:officer)
       sign_in_officer(admin_officer)
       stub_admin_permissions(admin_officer)
+      person = create(:person)
 
-      visit new_response_plan_path
+      visit person_path(person)
+      click_on t("response_plans.new.action")
       fill_in "First name", with: "John"
       fill_in "Last name", with: "Doe"
       fill_in "DOB", with: "1980-01-02"
       select "White", from: "Race"
       select "Male", from: "Sex"
-      click_on "Create Response plan"
+      click_on "Update Response plan"
 
-      expect(page).to have_content(t("response_plans.create.success", name: "John Doe"))
-      expect(page).to have_content(t("response_plans.approval.required"))
+      expect(page).to have_content(t("response_plans.update.success", name: "John Doe"))
+      expect(page).to have_content(t("response_plans.draft.title"))
       expect(page).to have_content("John")
       expect(page).to have_content("Doe")
       expect(page).to have_content(l(Date.new(1980, 1, 2)))
     end
 
     scenario "Officer fills in all information" do
-      admin_officer = create(:officer, username: "admin")
+      admin_officer = create(:officer)
       sign_in_officer(admin_officer)
       stub_admin_permissions(admin_officer)
+      person = create(:person)
 
-      visit new_response_plan_path
+      visit person_path(person)
+      click_on t("response_plans.new.action")
       fill_in "First name", with: "John"
       fill_in "Last name", with: "Doe"
       fill_in "DOB", with: "1980-01-02"
@@ -45,11 +49,11 @@ feature "Response Plan Form" do
       fill_in "Location name", with: "The Morrison Hotel"
       fill_in "Location address", with: "509 3rd Ave"
       fill_in "Private notes", with: "These notes should be private"
-      click_on "Create Response plan"
+      click_on "Update Response plan"
 
       expect(page).
-        to have_content(t("response_plans.create.success", name: "John Doe"))
-      expect(page).to have_content(t("response_plans.approval.required"))
+        to have_content(t("response_plans.update.success", name: "John Doe"))
+      expect(page).to have_content(t("response_plans.draft.title"))
       expect(page).to have_content("John")
       expect(page).to have_content("Doe")
       expect(page).to have_content(l(Date.new(1980, 1, 2)))
@@ -63,48 +67,34 @@ feature "Response Plan Form" do
     end
 
     scenario "Officer fills out form with errors" do
-      admin_officer = create(:officer, username: "admin")
+      admin_officer = create(:officer)
       sign_in_officer(admin_officer)
       stub_admin_permissions(admin_officer)
+      person = create(:person)
 
-      visit new_response_plan_path
-      click_on "Create Response plan"
+      visit person_path(person)
+      click_on t("response_plans.new.action")
+      fill_in "First name", with: ""
+      click_on "Update Response plan"
 
-      expect(page).to have_content "is not included in the list"
+      expect(page).to have_content "can't be blank"
     end
 
     scenario "Non-admin officer is not allowed access" do
       sign_in_officer
+      person = create(:person)
 
-      visit new_response_plan_path
+      visit person_path(person)
+      click_on t("response_plans.new.action")
 
       expect(page).
         to have_content(t("authentication.unauthorized.new_response_plan"))
     end
   end
 
-  context "Editing an existing response plan" do
-    scenario "updated plan needs re-approval" do
-      person = create(:person, first_name: "Jane", last_name: "Doe")
-      plan = create(:response_plan, person: person, approved_at: 1.day.ago)
-      officer = create(:officer, username: "foo")
-      stub_admin_permissions(officer)
-      sign_in_officer(officer)
-
-      visit person_path(person)
-      click_on "Edit"
-      fill_in "First name", with: "Mary"
-      click_on "Create Response plan"
-
-      expect(page).to have_content(t("response_plans.approval.required"))
-      # expect(page).
-      #   to have_content(t("response_plans.update.success", name: "Mary Doe"))
-    end
-  end
-
   feature "nested forms", :js do
     scenario "adding a nested response strategy" do
-      admin_officer = create(:officer, username: "admin")
+      admin_officer = create(:officer)
       sign_in_officer(admin_officer)
       stub_admin_permissions(admin_officer)
       plan = create(:response_plan)
@@ -114,7 +104,7 @@ feature "Response Plan Form" do
       click_on "add response strategy"
       first("input[name*='[title]']").set("Response strategy 1")
       first("textarea[name*='[description]']").set("Response strategy description 1")
-      click_on "Create Response plan"
+      click_on "Update Response plan"
 
       person.reload
       new_plan = person.response_plans.last
@@ -124,7 +114,7 @@ feature "Response Plan Form" do
     end
 
     scenario "removing a nested alias" do
-      admin_officer = create(:officer, username: "admin")
+      admin_officer = create(:officer)
       sign_in_officer(admin_officer)
       stub_admin_permissions(admin_officer)
       plan = create(:response_plan)
@@ -133,13 +123,13 @@ feature "Response Plan Form" do
       visit edit_response_plan_path(plan)
       click_on "remove alias"
       expect(first(".alias-field input")).to be_nil
-      click_on "Create Response plan"
+      click_on "Update Response plan"
 
       expect(page).not_to have_content("Foo")
     end
 
     scenario "removing a nested response strategy" do
-      admin_officer = create(:officer, username: "admin")
+      admin_officer = create(:officer)
       sign_in_officer(admin_officer)
       stub_admin_permissions(admin_officer)
       title = "Call case manager"
@@ -148,13 +138,13 @@ feature "Response Plan Form" do
 
       visit edit_response_plan_path(plan)
       click_on "remove step"
-      click_on "Create Response plan"
+      click_on "Update Response plan"
 
       expect(page).not_to have_content(title)
     end
 
     scenario "updating a nested response strategy" do
-      admin_officer = create(:officer, username: "admin")
+      admin_officer = create(:officer)
       sign_in_officer(admin_officer)
       stub_admin_permissions(admin_officer)
       original_title = "Call case manager"
@@ -164,7 +154,7 @@ feature "Response Plan Form" do
 
       visit edit_response_plan_path(plan)
       first("input[name*='[title]']").set(new_title)
-      click_on "Create Response plan"
+      click_on "Update Response plan"
 
       expect(page).not_to have_content(original_title)
       expect(page).to have_content(new_title)
