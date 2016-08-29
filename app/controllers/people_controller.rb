@@ -56,7 +56,8 @@ class PeopleController < ApplicationController
 
   def visible_plan_for(person)
     if current_officer.admin?
-      person.response_plans.order(:approved_at).last
+      person.response_plans.order(:approved_at).last ||
+        person.response_plans.last
     else
       person.active_response_plan
     end

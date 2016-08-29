@@ -3,24 +3,7 @@
 <% end %>
 
 <div class="main">
-  <% if @response_plan && !@response_plan.approved? %>
-    <div class="needs-approval">
-      <%= t("response_plans.approval.required") %>
-      <%= link_to(
-        t("response_plans.approval.action"),
-        approve_response_plan_path(@response_plan),
-        method: :patch,
-      ) %>
-    </div>
-  <% end %>
-
   <div class="left-column">
-    <% if @response_plan && current_officer.admin? %>
-      <div class="needs-approval edit-response-plan">
-        <%= link_to("Edit", edit_response_plan_path(@response_plan)) %>
-      </div>
-    <% end %>
-
     <%= render "sections/images" %>
     <%= render "sections/profile", person: @person %>
     <%= render "sections/location" %>
@@ -35,6 +18,12 @@
   </div>
 
   <div class="right-column">
+    <%= render(
+      "sections/title",
+      person: @person,
+      response_plan: @response_plan,
+    ) %>
+
     <% if @response_plan %>
       <%= render "sections/deescalation_techniques" %>
       <%= render "sections/triggers" %>

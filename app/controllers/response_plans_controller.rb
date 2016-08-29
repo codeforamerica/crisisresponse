@@ -6,39 +6,32 @@ class ResponsePlansController < ApplicationController
   before_action :authenticate_officer!
   before_action :authorize_admin, except: [:index, :show]
 
-  def new
-    @response_plan = ResponsePlan.new(person: Person.new)
-  end
-
   def create
-    id = response_plan_params[:person_attributes][:id]
-    person = id ? Person.find(id) : nil
+    person = Person.find(params.fetch(:person_id))
 
-    @response_plan = ResponsePlan.new(person: person, author: current_officer)
-    @response_plan.assign_attributes(response_plan_params)
-
-    if @response_plan.valid?
-      @response_plan.person.save && @response_plan.save
-      redirect_to(
-        person_path(@response_plan.person),
-        notice: t("response_plans.create.success", name: @response_plan.person.name),
-      )
+    if person.active_response_plan
+      plan = person.active_response_plan.deep_clone(
+        except: [
+          :approver_id,
+          :approved_at,
+          :submitted_for_approval_at,
+        ],
+        include: [
+          :contacts,
+          :deescalation_techniques,
+          :response_strategies,
+          :triggers,
+        ])
     else
-      render :new
+      plan = ResponsePlan.new(person: person, author: current_officer)
     end
+
+    plan.save!
+    redirect_to edit_response_plan_path(plan)
   end
 
   def edit
-    original = ResponsePlan.find(params[:id])
-
-    @response_plan = original.deep_clone(
-      include: [
-        :contacts,
-        :deescalation_techniques,
-        :response_strategies,
-        :triggers,
-      ]
-    )
+    @response_plan = ResponsePlan.find(params[:id])
   end
 
   def update
@@ -53,23 +46,6 @@ class ResponsePlansController < ApplicationController
       )
     else
       render :edit
-    end
-  end
-
-  def approve
-    plan = ResponsePlan.find(params[:id])
-    plan.approver = current_officer
-
-    if plan.save
-      redirect_to(
-        person_path(plan.person),
-        notice: t("response_plans.approval.success", name: plan.person.name),
-      )
-    else
-      redirect_to(
-        person_path(plan.person),
-        alert: t("response_plans.approval.failure"),
-      )
     end
   end
 

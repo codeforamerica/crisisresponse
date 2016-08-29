@@ -6,7 +6,7 @@ $dark-gray: #424242;
 $medium-gray: #9b9b9b;
 $light-gray: #ddd;
 $white: #ffffff;
-$yellow: #e8c925;
+$yellow: #ffc107;
 $off-white: #f0f0f0;
 $off-black: #212121;
 $black: #000000;
@@ -73,5 +73,6 @@ $filter-text-color: $white;
 $filter-outline: 1px solid $white;
 
 // Flashes & Notices
-$needs-approval-background-color: $yellow;
+$notice-color: $yellow;
+$needs-approval-background-color: $notice-color;
 $needs_approval-text-color: $dark-gray;

@@ -39,6 +39,14 @@ class ResponsePlan < ActiveRecord::Base
   validates :person, presence: true
   validate :errors_from_associated_person
 
+  def self.drafts
+    where(submitted_for_approval_at: nil)
+  end
+
+  def self.pending_approval
+    where.not(submitted_for_approval_at: nil).where(approved_at: nil)
+  end
+
   def approved?
     approved_at.present? &&
       approver.present? &&
@@ -53,6 +61,14 @@ class ResponsePlan < ActiveRecord::Base
     else
       self.approved_at = nil
     end
+  end
+
+  def draft?
+    !approved? && !pending_approval?
+  end
+
+  def pending_approval?
+    submitted_for_approval_at.present? && ! approved?
   end
 
   private

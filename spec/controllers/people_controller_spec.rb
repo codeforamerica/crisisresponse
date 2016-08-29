@@ -103,14 +103,27 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   describe "GET #show" do
-    context "when the plan has not been approved" do
+    context "when a plan is being drafted by another officer" do
       it "does not show the response plan information" do
         officer = create(:officer)
-        person = create(:person)
+        person = create(:response_plan, :draft).person
 
         get :show, { id: person.id }, { officer_id: officer.id }
 
         expect(assigns(:response_plan)).to be_nil
+      end
+    end
+
+    context "when a plan is being drafted by the current officer" do
+      it "shows the response plan information" do
+        officer = create(:officer)
+        stub_admin_permissions(officer)
+        plan = create(:response_plan, :draft, author: officer)
+        person = plan.person
+
+        get :show, { id: person.id }, { officer_id: officer.id }
+
+        expect(assigns(:response_plan)).to eq(plan)
       end
     end
 

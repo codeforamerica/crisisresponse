@@ -13,83 +13,192 @@ RSpec.describe ResponsePlansController, type: :controller do
         expect(response).to redirect_to(new_authentication_path)
       end
     end
+
+    context "when the officer is not an admin" do
+      it "redirects them to the root path" do
+        officer = create(:officer)
+
+        get :edit, { id: 1 }, { officer_id: officer.id }
+
+        expect(response).to redirect_to(people_path)
+      end
+    end
+  end
+
+  describe "POST #create" do
+    it "redirects to #edit" do
+      person = create(:person)
+      officer = create(:officer)
+      stub_admin_permissions(officer)
+
+      post :create, { person_id: person.id }, { officer_id: officer.id }
+
+      expect(response).to redirect_to edit_response_plan_path(ResponsePlan.last)
+    end
+
+    context "when the person does not have a response plan" do
+      it "creates a new response plan for the person" do
+        person = create(:person)
+        officer = create(:officer)
+        stub_admin_permissions(officer)
+
+        expect do
+          post :create, { person_id: person.id }, { officer_id: officer.id }
+        end.to change(ResponsePlan, :count).by(1)
+
+        plan = ResponsePlan.last
+        expect(plan.person).to eq(person)
+        expect(plan.author).to eq(officer)
+      end
+    end
+
+    context "when the person has a response plan in draft form" do
+      # TODO is this what we want?
+      it "ignores the information in the non-approved plan" do
+        officer = create(:officer, username: "admin")
+        stub_admin_permissions(officer)
+        original = create(
+          :response_plan,
+          approved_at: nil,
+          approver: nil,
+          background_info: "hello",
+        )
+
+        expect do
+          post :create, { person_id: original.person_id }, { officer_id: officer.id }
+        end.to change(ResponsePlan, :count).by(1)
+
+        plan = ResponsePlan.last
+        expect(plan.person).to eq(original.person)
+        expect(plan.author).to eq(officer)
+        expect(plan.background_info).not_to eq(original.background_info)
+      end
+    end
+
+    context "when the person already has a response plan" do
+      it "makes a copy of the response plan as a draft for the user to edit" do
+        officer = create(:officer, username: "admin")
+        stub_admin_permissions(officer)
+        original = create(:response_plan, background_info: "hello")
+
+        expect do
+          post :create, { person_id: original.person_id }, { officer_id: officer.id }
+        end.to change(ResponsePlan, :count).by(1)
+
+        plan = ResponsePlan.last
+        expect(plan.background_info).to eq(original.background_info)
+        expect(plan).to be_persisted
+        expect(plan).to be_draft
+      end
+
+      it "associates the copy with the original person" do
+        officer = create(:officer, username: "admin")
+        stub_admin_permissions(officer)
+        person = create(:person)
+        original = create(:response_plan, background_info: "hello")
+
+        post :create, { person_id: original.person_id }, { officer_id: officer.id }
+
+        plan = ResponsePlan.last
+        expect(plan.person).to eq(original.person)
+        expect(plan.person).to be_persisted
+      end
+
+      it "copies over contacts" do
+        officer = create(:officer, username: "admin")
+        stub_admin_permissions(officer)
+        original = create(:contact, name: "Ann", relationship: "mother")
+
+        post :create, { person_id: original.response_plan.person_id }, { officer_id: officer.id }
+
+        clone = ResponsePlan.last.contacts.first
+        expect(clone.name).to eq(original.name)
+        expect(clone.relationship).to eq(original.relationship)
+        expect(clone).to be_persisted
+      end
+
+      it "copies over deescalation_techniques" do
+        officer = create(:officer, username: "admin")
+        stub_admin_permissions(officer)
+        original = create(:deescalation_technique, description: "bar")
+
+        post :create, { person_id: original.response_plan.person_id }, { officer_id: officer.id }
+
+        clone = ResponsePlan.last.deescalation_techniques.first
+        expect(clone.description).to eq(original.description)
+        expect(clone).to be_persisted
+      end
+
+      it "copies over response_strategies" do
+        officer = create(:officer, username: "admin")
+        stub_admin_permissions(officer)
+        original = create(:response_strategy, priority: 1, title: "foo", description: "bar")
+
+        post :create, { person_id: original.response_plan.person_id }, { officer_id: officer.id }
+
+        clone = ResponsePlan.last.response_strategies.first
+        expect(clone.priority).to eq(original.priority)
+        expect(clone.title).to eq(original.title)
+        expect(clone.description).to eq(original.description)
+        expect(clone).to be_persisted
+      end
+
+      it "copies over triggers" do
+        officer = create(:officer, username: "admin")
+        stub_admin_permissions(officer)
+        original = create(:trigger, description: "bar")
+
+        post :create, { person_id: original.response_plan.person_id }, { officer_id: officer.id }
+
+        clone = ResponsePlan.last.triggers.first
+        expect(clone.description).to eq(original.description)
+        expect(clone).to be_persisted
+      end
+    end
   end
 
   describe "GET #edit" do
-    it "makes a copy of the response plan for the user to edit" do
-      officer = create(:officer, username: "admin")
+    it "redirects if the officer is not signed in"
+    it "redirects if the officer is not an admin"
+    it "redirects if the plan has been approved"
+    it "redirects if the plan has been submitted for approval"
+
+    # TODO is this the behavior that we want?
+    it "redirects if the current officer did not create the draft"
+
+    it "assigns the plan if it is still in draft form" do
+      officer = create(:officer)
       stub_admin_permissions(officer)
-      original = create(:response_plan, background_info: "hello")
+      plan = create(:response_plan)
 
-      get :edit, { id: original.id }, { officer_id: officer.id }
+      get :edit, { id: plan.id }, { officer_id: officer.id }
 
-      plan = assigns(:response_plan)
-      expect(plan.background_info).to eq(original.background_info)
-      expect(plan).not_to be_persisted
+      expect(assigns(:response_plan)).to eq(plan)
+    end
+  end
+
+  describe "PATCH #update" do
+    it "redirects if the officer is not signed in"
+    it "redirects if the officer is not an admin"
+
+    context "if the current officer did not create the draft" do
+      it "does not update the plan"
+      it "redirects to the person's page"
     end
 
-    it "associates the copy with the original person" do
-      officer = create(:officer, username: "admin")
-      stub_admin_permissions(officer)
-      person = create(:person)
-      original = create(:response_plan, background_info: "hello")
-
-      get :edit, { id: original.id }, { officer_id: officer.id }
-
-      plan = assigns(:response_plan)
-      expect(plan.person).to eq(original.person)
-      expect(plan.person).to be_persisted
+    context "if the plan has been submitted for approval" do
+      it "does not update the plan"
+      it "redirects to the person's page"
     end
 
-    it "copies over contacts" do
-      officer = create(:officer, username: "admin")
-      stub_admin_permissions(officer)
-      original = create(:contact, name: "Ann", relationship: "mother")
-
-      get :edit, { id: original.response_plan.id }, { officer_id: officer.id }
-
-      clone = assigns(:response_plan).contacts.first
-      expect(clone.name).to eq(original.name)
-      expect(clone.relationship).to eq(original.relationship)
-      expect(clone).not_to be_persisted
+    context "if the plan has been approved" do
+      it "does not update the plan"
+      it "redirects to the person's page"
     end
 
-    it "copies over deescalation_techniques" do
-      officer = create(:officer, username: "admin")
-      stub_admin_permissions(officer)
-      original = create(:deescalation_technique, description: "bar")
-
-      get :edit, { id: original.response_plan.id }, { officer_id: officer.id }
-
-      clone = assigns(:response_plan).deescalation_techniques.first
-      expect(clone.description).to eq(original.description)
-      expect(clone).not_to be_persisted
-    end
-
-    it "copies over response_strategies" do
-      officer = create(:officer, username: "admin")
-      stub_admin_permissions(officer)
-      original = create(:response_strategy, priority: 1, title: "foo", description: "bar")
-
-      get :edit, { id: original.response_plan.id }, { officer_id: officer.id }
-
-      clone = assigns(:response_plan).response_strategies.first
-      expect(clone.priority).to eq(original.priority)
-      expect(clone.title).to eq(original.title)
-      expect(clone.description).to eq(original.description)
-      expect(clone).not_to be_persisted
-    end
-
-    it "copies over triggers" do
-      officer = create(:officer, username: "admin")
-      stub_admin_permissions(officer)
-      original = create(:trigger, description: "bar")
-
-      get :edit, { id: original.response_plan.id }, { officer_id: officer.id }
-
-      clone = assigns(:response_plan).triggers.first
-      expect(clone.description).to eq(original.description)
-      expect(clone).not_to be_persisted
+    context "when everything checks out okay" do
+      it "updates the plan and associated records"
+      it "redirects to the draft preview page"
     end
   end
 end

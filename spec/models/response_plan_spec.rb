@@ -39,6 +39,26 @@ RSpec.describe ResponsePlan, type: :model do
     it { should belong_to(:person) }
   end
 
+  describe ".drafts" do
+    it "returns response plans that have not been submitted for approval" do
+      draft = create(:response_plan, :draft)
+      create(:response_plan, :pending_approval)
+      create(:response_plan, :approved)
+
+      expect(ResponsePlan.drafts).to eq([draft])
+    end
+  end
+
+  describe ".pending_approval" do
+    it "returns response plans that have not been submitted for approval" do
+      create(:response_plan, :draft)
+      pending_approval = create(:response_plan, :pending_approval)
+      create(:response_plan, :approved)
+
+      expect(ResponsePlan.pending_approval).to eq([pending_approval])
+    end
+  end
+
   describe "#approved?" do
     it "returns true if both `approved_at` and `approver` are non-nil" do
       officer = build(:officer)
@@ -109,6 +129,76 @@ RSpec.describe ResponsePlan, type: :model do
       response_plan.approver = nil
 
       expect(response_plan.approved_at).to eq(nil)
+    end
+  end
+
+  describe "#draft?" do
+    it "is true if the plan has not been submitted for approval or approved" do
+      plan = build_stubbed(
+        :response_plan,
+        approved_at: nil,
+        approver: nil,
+        submitted_for_approval_at: nil,
+      )
+
+      expect(plan).to be_draft
+    end
+
+    it "is false if the plan has been submitted and not approved" do
+      plan = build_stubbed(
+        :response_plan,
+        approved_at: nil,
+        approver: nil,
+        submitted_for_approval_at: 1.minute.ago,
+      )
+
+      expect(plan).not_to be_draft
+    end
+
+    it "is false if the plan has been approved" do
+      plan = build_stubbed(
+        :response_plan,
+        approved_at: 1.second.ago,
+        approver: build_stubbed(:officer),
+        submitted_for_approval_at: 1.minute.ago,
+      )
+
+      expect(plan).not_to be_draft
+    end
+  end
+
+  describe "#pending_approval?" do
+    it "is true if the plan has been submitted for approval and not approved" do
+      plan = build_stubbed(
+        :response_plan,
+        approved_at: nil,
+        approver: nil,
+        submitted_for_approval_at: 1.minute.ago,
+      )
+
+      expect(plan).to be_pending_approval
+    end
+
+    it "is false if the plan is still a draft" do
+      plan = build_stubbed(
+        :response_plan,
+        approved_at: nil,
+        approver: nil,
+        submitted_for_approval_at: nil,
+      )
+
+      expect(plan).not_to be_pending_approval
+    end
+
+    it "is false if the plan has been approved" do
+      plan = build_stubbed(
+        :response_plan,
+        approved_at: 1.second.ago,
+        approver: build_stubbed(:officer),
+        submitted_for_approval_at: 1.minute.ago,
+      )
+
+      expect(plan).not_to be_pending_approval
     end
   end
 end

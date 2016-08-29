@@ -16,15 +16,33 @@ en:
         create: Search
 
   response_plans:
-    create:
-      success: Created a response plan for %{name}
-    update:
-      success: "Updated %{name}'s response plan"
     approval:
-      required: This response plan will not be visible to patrol officers until it is approved.
       action: Approve
       success: "Approved %{name}'s response plan. It is now visible to patrol officers"
       failure: You cannot approve response plans that you wrote.
+    create:
+      success:
+        # TODO this should be a message about the draft
+        from_previous: a
+        from_scratch: a
+    draft:
+      description: This plan will not be visible to patrol officers until it is approved.
+      edit: Edit
+      submit: Submit for approval
+      submitted: Submitted for approval
+      title: Draft
+      new: + Update response plan
+      edit: Continue editing your draft
+    pending_approval:
+      approve: Approve
+      # TODO fill this in
+      approved: a
+      description: This plan will not be visible to patrol officers until it is approved.
+      title: Pending Approval
+    new:
+      action: + Add a response plan
+    update:
+      success: "Updated %{name}'s response plan"
 
   authentication:
     unauthenticated: Please sign in to continue.
