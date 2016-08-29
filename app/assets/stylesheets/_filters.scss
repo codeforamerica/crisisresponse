@@ -13,6 +13,7 @@
     margin-right: $small-spacing;
     margin-bottom: $small-spacing;
     padding: $tiny-spacing;
+    border: $filter-outline;
   }
 
   .filter-attribute {
@@ -22,5 +23,10 @@
 
   .filter-value {
     @include heavy-font;
+  }
+
+  .filter-remove {
+    vertical-align: sub;
+    margin-left: $small-spacing;
   }
 }

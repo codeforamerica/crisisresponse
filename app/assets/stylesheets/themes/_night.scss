@@ -68,8 +68,9 @@ $field-background-color: $white;
 $field-text-color: $dark-gray;
 
 // Filters
-$filter-background-color: $medium-gray;
+$filter-background-color: $dark-gray;
 $filter-text-color: $white;
+$filter-outline: 1px solid $white;
 
 // Flashes & Notices
 $needs-approval-background-color: $yellow;
