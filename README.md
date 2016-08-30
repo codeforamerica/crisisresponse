@@ -49,59 +49,48 @@ please [open an issue] to help us improve the documentation.
 
 ### Dependencies
 
-This project uses [Docker] to make it easy
-to develop, package, and deploy on any platform.
+Because this application handles information
+that is regulated by HIPAA and CJIS requirements,
+it is built to be hosted on an internal police server
+instead of on the cloud.
+We use [Docker] to make it easy
+to develop, package, and deploy the application
+on any platform.
 
-Before starting, install Docker.
-Their website has instructions for [mac], [windows], and [linux].
+Before starting, install Docker ([mac], [windows], [linux]) and [Docker Compose].
 
-After installing Docker,
-run this script to set up your development environment.
+After installing,
+pull [the application image] from Docker Hub,
+or build it yourself.
 All of the dependencies are managed through Docker,
 so there shouldn't be any problems running this script.
 If you do encounter a problem, please [open an issue] to report it.
 
-    % ./bin/setup
+```bash
+# Pull from Docker Hub
+docker pull codeforamerica/crisisresponse
+# Build the image locally
+docker-compose build
+```
 
 [Docker]: https://www.docker.com/
 [mac]: https://docs.docker.com/mac/
 [windows]: https://docs.docker.com/windows/
 [linux]: https://docs.docker.com/linux/
+[Docker Compose]: https://docs.docker.com/compose/install/
 [open an issue]: https://github.com/codeforamerica/crisisresponse
-
-### External Connections
-
-At the moment, the application makes no connections to external services.
-
-Eventually, we expect the application to pull data
-from the internal SPD database that powers the Records Management System (RMS).
-
-### Running Tests
-
-Currently, the application has no tests.
-
-Once we move out of the initial phase, we will introduce an automated test suite
-that can be used to make sure the application is functioning correctly.
+[the application image]: https://hub.docker.com/r/codeforamerica/crisisresponse/
 
 ### Starting the Application
 
-With `docker-compose` installed, you can run the application with the command:
+Run the application with the command:
 
 ```bash
-$ docker-compose up
+$ rm tmp/pids/server.pid; docker-compose up
 ```
 
 After running that command,
-access the application by visiting http://localhost:8080
-
-## Guidelines
-
-Use the following guides for getting things done, programming well, and
-programming in style.
-
-* [Protocol](http://github.com/thoughtbot/guides/blob/master/protocol)
-* [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
-* [Style](http://github.com/thoughtbot/guides/blob/master/style)
+access the application by visiting http://localhost:3000
 
 ## Managing Application Lifecycle
 
@@ -128,6 +117,14 @@ docker-compose up
 # To run the server
 docker-compose up
 ```
+
+### Running Tests
+
+The application's tests are stored in the `spec/` directory,
+and have the `_spec.rb` suffix.
+
+Run the entire test suite with `./bin/test`,
+or run an individual test file with `./bin/test spec/my/test/file.rb`.
 
 ## Importing Data from the SPD Record Management System
 
@@ -165,3 +162,14 @@ docker-compose run --rm backup
 # Restore a backup
 docker-compose run --rm restore backups/2016-01-02_12:00:00.sql
 ```
+
+## Development Guidelines
+
+Use the following guides for
+getting things done,
+programming well,
+and programming in style.
+
+* [Protocol](http://github.com/thoughtbot/guides/blob/master/protocol)
+* [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
+* [Style](http://github.com/thoughtbot/guides/blob/master/style)
