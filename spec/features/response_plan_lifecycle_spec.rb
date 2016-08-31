@@ -126,7 +126,8 @@ RSpec.feature "Response Plan Lifecycle" do
         officer = create(:officer)
         stub_admin_permissions(officer)
         sign_in_officer(officer)
-        person = create(:response_plan, :submission).person
+        plan = create(:response_plan, :submission, background_info: "unique")
+        person = plan.person
 
         visit submissions_path
         click_on person.shorthand_description
@@ -135,7 +136,7 @@ RSpec.feature "Response Plan Lifecycle" do
         # TODO confirm this redirect path
         expect(current_path).to eq(person_path(person))
         expect(page).to have_content t("response_plans.submission.approval.success", name: person.name)
-        expect(page).not_to have_content t("response_plans.submission.title")
+        expect(page).to have_content plan.background_info
       end
 
       scenario "they cannot approve response plans that are still being drafted"

@@ -7,7 +7,7 @@ class PeopleController < ApplicationController
     if current_officer.can_view_people_without_response_plans?
       @search = Search.new(search_params)
     else
-      plans = current_officer.admin? ? ResponsePlan : ResponsePlan.where.not(approved_at: nil)
+      plans = ResponsePlan.where.not(approved_at: nil)
       people_with_response_plans = Person.where(id: plans.pluck(:person_id).uniq)
       @search = Search.new(search_params, people_with_response_plans)
     end
@@ -55,11 +55,6 @@ class PeopleController < ApplicationController
   end
 
   def visible_plan_for(person)
-    if current_officer.admin?
-      person.response_plans.order(:approved_at).last ||
-        person.response_plans.last
-    else
-      person.active_response_plan
-    end
+    person.active_response_plan
   end
 end
