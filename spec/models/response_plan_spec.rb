@@ -39,6 +39,16 @@ RSpec.describe ResponsePlan, type: :model do
     it { should belong_to(:person) }
   end
 
+  describe ".approved" do
+    it "returns response plans that have been approved" do
+      create(:response_plan, :draft)
+      create(:response_plan, :submission)
+      approved = create(:response_plan, :approved)
+
+      expect(ResponsePlan.approved).to eq([approved])
+    end
+  end
+
   describe ".drafts" do
     it "returns response plans that have not been submitted for approval" do
       draft = create(:response_plan, :draft)
