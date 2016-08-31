@@ -2,8 +2,6 @@
   <h2>Response Plans</h2>
 
   <% @response_plans.each do |person, _| %>
-    <%= link_to person do %>
-      <%= render person %>
-    <% end %>
+    <%= render person, link: person %>
   <% end %>
 </div>
