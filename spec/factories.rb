@@ -67,7 +67,7 @@ FactoryGirl.define do
       approved_at nil
     end
 
-    trait :pending_approval do
+    trait :submission do
       approver nil
       approved_at nil
     end
