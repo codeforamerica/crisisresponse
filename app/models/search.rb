@@ -1,3 +1,18 @@
+# This class is responsible for searching the people in our app,
+# based on their name date of birth, and physical characteristics.
+#
+# Because many of the people in our app are pulled
+# from the records management system (RMS),
+# we have people stored in both the `Person` and `RMS::Person` models.
+# This class must search through both tables
+# in order to return all matching results.
+#
+# To do this,
+# the search starts with the `Person` model,
+# and looks for matching attributes on the record.
+# If an attribute is not defined on `Person`,
+# and the `Person` has an associated `RMS::Person`,
+# then we fall back to searching the attributes on the `RMS::Person`.
 class Search
   include ActiveModel::Model
   validate :proper_date_format
@@ -126,27 +141,33 @@ class Search
     @date_of_birth = nil
   end
 
+  # Query both `Person` and associated `RMS::Person` models
+  # for an attribute that falls within a given range of values.
+  #
+  # e.g. `date_of_birth BETWEEN 1969 AND 1970`
   def query_value_based_on_range(relation, attribute, range)
-    relation.
-      where(<<-SQL)
-        people.#{attribute} BETWEEN '#{range.min}' AND '#{range.max}'
-        OR (
-          people.#{attribute} is null
-          AND rms_people.#{attribute} BETWEEN '#{range.min}' AND '#{range.max}'
-        )
+    relation.where(<<-SQL)
+      people.#{attribute} BETWEEN '#{range.min}' AND '#{range.max}'
+      OR (
+        people.#{attribute} is null
+        AND rms_people.#{attribute} BETWEEN '#{range.min}' AND '#{range.max}'
+      )
     SQL
   end
 
+  # Query both `Person` and associated `RMS::Person` models
+  # for an attribute that is included in a list of values.
+  #
+  # e.g. `hair_color IN ('black','brown')`
   def query_for_array_of_values(relation, attribute, values)
     selected_values = "(#{values.map {|s| "'#{s}'"}.join(",")})"
 
-    relation.
-      where(<<-SQL)
-        people.#{attribute} IN #{selected_values}
-        OR (
-          people.#{attribute} is null
-          AND rms_people.#{attribute} IN #{selected_values}
-        )
+    relation.where(<<-SQL)
+      people.#{attribute} IN #{selected_values}
+      OR (
+        people.#{attribute} is null
+        AND rms_people.#{attribute} IN #{selected_values}
+      )
     SQL
   end
 end
