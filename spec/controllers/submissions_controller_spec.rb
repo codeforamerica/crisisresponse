@@ -38,9 +38,11 @@ RSpec.describe SubmissionsController do
       stub_admin_permissions(officer)
       plan = create(:response_plan, :submission)
 
-      patch :approve, { id: plan }, { officer_id: officer }
+      patch :approve, { id: plan }, { officer_id: officer.id }
 
       expect(response).to redirect_to(person_path(plan.person))
+      expect(flash[:notice]).
+        to eq t("submissions.approve.success", name: plan.person.name)
       expect(plan.reload).to be_approved
       expect(plan.approver).to eq(officer)
     end

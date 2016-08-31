@@ -102,18 +102,6 @@ RSpec.describe ResponsePlan, type: :model do
 
       expect(response_plan).not_to be_approved
     end
-
-    it "returns false if the plan has been edited since it was approved" do
-      officer = build(:officer)
-      response_plan = build_stubbed(
-        :response_plan,
-        approved_at: 1.day.ago,
-        approver: officer,
-        updated_at: Time.current,
-      )
-
-      expect(response_plan).not_to be_approved
-    end
   end
 
   describe "#approver=" do
