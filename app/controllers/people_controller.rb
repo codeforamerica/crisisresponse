@@ -20,15 +20,10 @@ class PeopleController < ApplicationController
       includes(:images).
       page(params[:page]).
       per(RECORDS_PER_PAGE)
-
-    @response_plans = @people.map do |person|
-      [person, person.active_plan]
-    end.to_h
   end
 
   def show
     @person = Person.find(params[:id])
-    @response_plan = @person.active_plan
 
     PageView.create(officer: current_officer, person: @person)
   end

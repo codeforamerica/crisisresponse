@@ -31,8 +31,8 @@
 
     <div class="results">
       <div class="loose-matches">
-        <% if @response_plans.any? %>
-          <% @response_plans.each do |person, _| %>
+        <% if @people.any? %>
+          <% @people.each do |person| %>
             <%= render person, link: person %>
           <% end %>
         <% else %>
