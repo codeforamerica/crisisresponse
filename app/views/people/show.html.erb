@@ -8,8 +8,8 @@
     <%= render "sections/profile", person: @person %>
     <%= render "sections/location", person: @person %>
 
-    <% if @response_plan %>
-      <% @response_plan.contacts.each do |contact| %>
+    <% if @person.active_plan %>
+      <% @person.active_plan.contacts.each do |contact| %>
         <%= render "sections/contact", contact: contact %>
       <% end %>
 
@@ -18,13 +18,13 @@
   </div>
 
   <div class="right-column">
-    <%= render "title", person: @person, response_plan: @response_plan %>
+    <%= render "title", person: @person, response_plan: @person.active_plan %>
 
-    <% if @response_plan %>
-      <%= render "sections/deescalation_techniques", plan: @response_plan %>
-      <%= render "sections/triggers", plan: @response_plan %>
-      <%= render "sections/response_strategies", plan: @response_plan %>
-      <%= render "sections/background_info", plan: @response_plan %>
+    <% if @person.active_plan %>
+      <%= render "sections/deescalation_techniques", plan: @person.active_plan %>
+      <%= render "sections/triggers", plan: @person.active_plan %>
+      <%= render "sections/response_strategies", plan: @person.active_plan %>
+      <%= render "sections/background_info", plan: @person.active_plan %>
       <%= render "sections/about", person: @person %>
     <% end %>
   </div>

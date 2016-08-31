@@ -13,8 +13,8 @@ class DraftsController < ApplicationController
   def create
     person = Person.find(params.fetch(:person_id))
 
-    if person.active_response_plan
-      plan = person.active_response_plan.deep_clone(
+    if person.active_plan
+      plan = person.active_plan.deep_clone(
         except: [
           :approver_id,
           :approved_at,
