@@ -1,4 +1,4 @@
-<% if @response_plan.triggers.any? %>
+<% if plan.triggers.any? %>
   <section class="triggers">
 
     <div class="section-header section-header-muted">
@@ -9,7 +9,7 @@
 
     <div class="section-body">
       <ul>
-        <% @response_plan.triggers.each do |trigger| %>
+        <% plan.triggers.each do |trigger| %>
           <li><%= trigger.description %></li>
         <% end %>
       </ul>

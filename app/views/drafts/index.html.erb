@@ -1,7 +1,7 @@
 <h1>Your Drafts</h1>
 
-<% @response_plans.each do |plan| %>
-  <%= link_to draft_path(plan) do %>
-    <%= render plan.person %>
+<% @drafts.each do |draft| %>
+  <%= link_to draft_path(draft) do %>
+    <%= render draft.person %>
   <% end %>
 <% end %>

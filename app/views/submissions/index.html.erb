@@ -1,7 +1,7 @@
 <h1>Pending Approval</h1>
 
-<% @response_plans.each do |plan| %>
-  <%= link_to submission_path(plan) do %>
-    <%= render plan.person %>
+<% @submissions.each do |submission| %>
+  <%= link_to submission_path(submission) do %>
+    <%= render submission.person %>
   <% end %>
 <% end %>

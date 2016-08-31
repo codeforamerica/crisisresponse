@@ -1,13 +1,12 @@
 class SubmissionsController < ApplicationController
   # Display a list of response plans pending approval
   def index
-    @response_plans = ResponsePlan.submitted
+    @submissions = ResponsePlan.submitted
   end
 
   # Display a single response plan pending approval
   def show
-    @response_plan = ResponsePlan.find(params[:id])
-    @person = @response_plan.person
+    @submission = ResponsePlan.find(params[:id])
   end
 
   # Submit a response plan for approval,
