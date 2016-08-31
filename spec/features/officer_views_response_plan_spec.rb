@@ -173,45 +173,4 @@ feature "Officer views a response plan" do
       expect(page).to have_content("Approved by Jacques Clouseau")
     end
   end
-
-  context "when the response plan needs approval" do
-    scenario "an admin sees a note that it needs approval" do
-      admin = create(:officer, username: "admin")
-      stub_admin_permissions(admin)
-      sign_in_officer(admin)
-      response_plan = create(:response_plan, approver: nil)
-
-      visit person_path(response_plan.person)
-
-      expect(page).to have_content(t("response_plans.submission.title"))
-    end
-
-    scenario "an admin approves it" do
-      admin = create(:officer, username: "admin")
-      stub_admin_permissions(admin)
-      sign_in_officer(admin)
-      response_plan = create(:response_plan, approver: nil)
-
-      visit person_path(response_plan.person)
-      click_on t("response_plans.submission.approve")
-
-      expect(response_plan.reload).to be_approved
-      expect(page).to have_content(
-        t("response_plans.submission.approval.success", name: response_plan.person.name)
-      )
-    end
-
-    scenario "the author cannot approve it" do
-      admin = create(:officer, username: "admin")
-      stub_admin_permissions(admin)
-      sign_in_officer(admin)
-      response_plan = create(:response_plan, approver: nil, author: admin)
-
-      visit person_path(response_plan.person)
-      click_on t("response_plans.submission.approve")
-
-      expect(response_plan.reload).not_to be_approved
-      expect(page).to have_content(t("response_plans.submission.approval.failure"))
-    end
-  end
 end

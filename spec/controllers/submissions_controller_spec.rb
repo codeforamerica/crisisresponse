@@ -23,6 +23,11 @@ RSpec.describe SubmissionsController do
     end
   end
 
+  describe "GET #show" do
+    it "assigns the response plan to `@response_plan`"
+    it "assigns the person to `@person`"
+  end
+
   describe "POST #create" do
     it "displays an error if the user is not the author"
   end

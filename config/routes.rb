@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :preferences, only: :create
   resources :response_plans, only: [:create, :edit, :update]
 
-  resources :submissions, only: [:index, :create] do
+  resources :submissions, only: [:index, :show, :create] do
     member { patch :approve }
   end
 

@@ -4,6 +4,12 @@ class SubmissionsController < ApplicationController
     @response_plans = ResponsePlan.submitted
   end
 
+  # Display a single response plan pending approval
+  def show
+    @response_plan = ResponsePlan.find(params[:id])
+    @person = @response_plan.person
+  end
+
   # Submit a response plan for approval,
   # taking it out of draft form
   # and adding it to the submissions page.

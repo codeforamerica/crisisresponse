@@ -138,5 +138,19 @@ RSpec.feature "Response Plan Lifecycle" do
 
       scenario "they cannot approve response plans that are still being drafted"
     end
+
+    scenario "the author cannot approve it" do
+      admin = create(:officer, username: "admin")
+      stub_admin_permissions(admin)
+      sign_in_officer(admin)
+      plan = create(:response_plan, approver: nil, author: admin)
+
+      visit submissions_path
+      click_on plan.person.shorthand_description
+      click_on t("response_plans.submission.approve")
+
+      expect(plan.reload).not_to be_approved
+      expect(page).to have_content(t("response_plans.submission.approval.failure"))
+    end
   end
 end
