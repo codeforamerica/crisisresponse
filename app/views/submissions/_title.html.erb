@@ -1,0 +1,17 @@
+<section class="page-title section-notice">
+  <h1 class="section-title">
+    <%= t("response_plans.submission.title") %>
+  </h1>
+
+  <div class="description">
+    <%= t("response_plans.submission.description") %>
+  </div>
+
+  <div class="page-title-actions">
+    <%= link_to(
+      t("response_plans.submission.approve"),
+      approve_submission_path(@response_plan),
+      method: :patch,
+    ) %>
+  </div>
+</section>
