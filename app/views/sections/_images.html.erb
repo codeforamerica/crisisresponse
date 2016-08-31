@@ -1,14 +1,14 @@
 <section class="images">
-  <%= image_tag @person.profile_image_url, class: "focused-image" %>
+  <%= image_tag person.profile_image_url, class: "focused-image" %>
 
   <div class="section-body">
     <div class="image-scroller">
       <span class="image-text">
         <span class="focused-image-index">1</span>
-        of <%= pluralize(@person.images.count, "photo") %>
+        of <%= pluralize(person.images.count, "photo") %>
       </span>
 
-      <% if @person.images.many? %>
+      <% if person.images.many? %>
         <%= image_tag(
           "arrow_left-#{theme}.svg",
           class: "image-scroll-arrow",
@@ -25,9 +25,9 @@
       <% end %>
     </div>
 
-    <% if @person.images.many? %>
+    <% if person.images.many? %>
       <div class="image-thumbnails">
-        <% @person.images.each.with_index do |image, index| %>
+        <% person.images.each.with_index do |image, index| %>
           <%= image_tag(
             image.source_url,
             class: "image-thumbnail #{'image-thumbnail-focused' if index == 0}",

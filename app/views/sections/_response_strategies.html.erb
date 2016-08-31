@@ -7,7 +7,7 @@
   </div>
 
   <div class="section-body">
-    <% @response_plan.response_strategies.each do |strategy| %>
+    <% plan.response_strategies.each do |strategy| %>
       <div class="response-strategy mobile-collapsed">
         <h3><%= strategy.title %></h3>
         <p><%= simple_format strategy.description %></p>

@@ -16,7 +16,7 @@ RSpec.describe DraftsController do
 
       get :index, {}, { officer_id: officer.id }
 
-      expect(assigns(:response_plans)).to eq([draft])
+      expect(assigns(:drafts)).to eq([draft])
     end
   end
 

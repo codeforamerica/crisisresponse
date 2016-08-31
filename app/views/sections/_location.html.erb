@@ -1,7 +1,7 @@
-<% if @person.location_address.present? %>
+<% if person.location_address.present? %>
   <section
     class="location"
-    data-address="<%= @person.location_address %>"
+    data-address="<%= person.location_address %>"
     >
     <div class="section-header section-header-muted">
       <div class="section-header-text">
@@ -11,7 +11,7 @@
 
     <div class="section-body">
       <span class="location-name">
-        <%= @person.location_name %>
+        <%= person.location_name %>
       </span>
 
       <span class="location-address">

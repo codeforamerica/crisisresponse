@@ -15,7 +15,7 @@ RSpec.describe SubmissionsController do
 
       get :index, {}, { officer_id: officer.id }
 
-      expect(assigns(:response_plans)).to eq([submission])
+      expect(assigns(:submissions)).to eq([submission])
     end
 
     context "as a non-admin" do

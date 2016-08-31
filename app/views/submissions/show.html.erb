@@ -1,31 +1,31 @@
 <%= content_for(:header) do %>
-  <%= render "identity", person: @person %>
+  <%= render "identity", person: @submission.person %>
 <% end %>
 
 <div class="main">
   <div class="left-column">
-    <%= render "sections/images" %>
-    <%= render "sections/profile", person: @person %>
-    <%= render "sections/location" %>
+    <%= render "sections/images", person: @submission.person %>
+    <%= render "sections/profile", person: @submission.person %>
+    <%= render "sections/location", person: @submission.person %>
 
-    <% if @response_plan %>
-      <% @response_plan.contacts.each do |contact| %>
+    <% if @submission %>
+      <% @submission.contacts.each do |contact| %>
         <%= render "sections/contact", contact: contact %>
       <% end %>
 
-      <%= render "sections/about" %>
+      <%= render "sections/about", person: @submission.person %>
     <% end %>
   </div>
 
   <div class="right-column">
-    <%= render "title", person: @person, response_plan: @response_plan %>
+    <%= render "title", person: @submission.person, submission: @submission %>
 
-    <% if @response_plan %>
-      <%= render "sections/deescalation_techniques" %>
-      <%= render "sections/triggers" %>
-      <%= render "sections/response_strategies" %>
-      <%= render "sections/background_info" %>
-      <%= render "sections/about" %>
+    <% if @submission %>
+      <%= render "sections/deescalation_techniques", plan: @submission %>
+      <%= render "sections/triggers", plan: @submission %>
+      <%= render "sections/response_strategies", plan: @submission %>
+      <%= render "sections/background_info", plan: @submission %>
+      <%= render "sections/about", person: @submission.person %>
     <% end %>
   </div>
 </div>

@@ -1,12 +1,4 @@
-<%# TODO
-  refactor this into a `Profile` model
-  that knows how to display a person,
-  whether they have a response plan or not.
-%>
-
 <% if response_plan %>
-
-    <%# The response plan is approved and visible to all officers %>
 
     <section class="page-title">
       <h1 class="section-title">Response Plan</h1>
@@ -21,7 +13,6 @@
     </section>
 
 <% else %>
-  <%# No response plan, just a core profile %>
 
   <section class="page-title">
     <h1 class="section-title">Basic Profile</h1>
