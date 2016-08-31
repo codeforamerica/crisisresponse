@@ -68,7 +68,7 @@ class Person < ActiveRecord::Base
   fallback_to_rms_person(:weight_in_pounds)
 
   def active_response_plan
-    response_plans.where.not(approved_at: nil).order(:approved_at).last
+    response_plans.approved.order(:approved_at).last
   end
 
   def display_name
@@ -89,10 +89,6 @@ class Person < ActiveRecord::Base
     else
       "/assets/default_image.png"
     end
-  end
-
-  def response_plan
-    response_plans.last
   end
 
   def save(*args)
