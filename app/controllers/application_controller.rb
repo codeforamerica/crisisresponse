@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :theme, :officer_signed_in?, :current_officer
+  helper_method :theme, :officer_signed_in?, :current_officer, :demo_mode?
 
   def authenticate_officer!
     unless officer_signed_in?
@@ -24,7 +24,12 @@ class ApplicationController < ActionController::Base
   end
 
   def current_officer
-    @current_officer ||= Officer.find_by(id: session[:officer_id])
+    @current_officer ||=
+      if demo_mode?
+        Officer.last
+      else
+        Officer.find_by(id: session[:officer_id])
+      end
   end
 
   def officer_signed_in?
@@ -33,5 +38,9 @@ class ApplicationController < ActionController::Base
 
   def theme
     session[:theme] || :day
+  end
+
+  def demo_mode?
+    ENV.fetch("DEMO_MODE") == "true"
   end
 end

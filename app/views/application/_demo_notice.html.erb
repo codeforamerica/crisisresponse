@@ -1,0 +1,7 @@
+<div class="flash-notice">
+  <%= t("demo.notice") %>
+
+  <% if current_officer.admin? %>
+    <%= t("demo.admin") %>
+  <% end %>
+</div>

@@ -6,6 +6,10 @@ en:
       with_weekday:
         "%a %m/%d/%y"
 
+  demo:
+    notice: This app is in demo mode – the data you see is not real.
+    admin: You have admin permissions.
+
   feedbacks:
     create:
       success: Thanks for your feedback! If the Code for America team has follow-up questions, they may reach out to you.

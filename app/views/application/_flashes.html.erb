@@ -1,5 +1,9 @@
-<% if flash.any? %>
+<% if flash.any? || demo_mode? %>
   <div class="flashes">
+    <% if demo_mode? %>
+      <%= render "demo_notice" %>
+    <% end %>
+
     <% user_facing_flashes.each do |key, value| -%>
       <div class="flash-<%= key %>"><%= value %></div>
     <% end -%>
