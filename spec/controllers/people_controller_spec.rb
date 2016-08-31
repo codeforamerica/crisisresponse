@@ -23,12 +23,11 @@ RSpec.describe PeopleController, type: :controller do
       it "shows people who do not have a response plan" do
         officer = create(:officer, username: "foobar")
         stub_view_without_response_plan_permissions(officer)
-        rms_person = create(:rms_person, first_name: "John", last_name: "Doe")
-        person = rms_person.person
+        person = create(:person, first_name: "John", last_name: "Doe")
 
         get :index, {}, { officer_id: officer.id }
 
-        expect(assigns(:response_plans)).to eq(person => nil)
+        expect(assigns(:people)).to eq([person])
       end
     end
 
@@ -36,19 +35,20 @@ RSpec.describe PeopleController, type: :controller do
     # This should be removed when we allow all officers
     # to view people without a response plan
     context "when the officer can only view people with a response plan" do
-      it "does not shows people who do not have a response plan" do
+      it "does not show people who do not have a response plan" do
         officer = create(:officer)
         rms_person = create(:rms_person, first_name: "John", last_name: "Doe")
         person = rms_person.person
 
         get :index, {}, { officer_id: officer.id }
 
-        expect(assigns(:response_plans)).to eq({})
+        expect(assigns(:people)).to be_empty
       end
     end
 
     it "shows people in alphabetical order" do
       officer = create(:officer)
+      stub_view_without_response_plan_permissions(officer)
 
       charlie = create(:person, last_name: "Charlie")
       alice = create(:rms_person, last_name: "Alice").person
@@ -57,14 +57,9 @@ RSpec.describe PeopleController, type: :controller do
       alice.reload
       bob = create(:person, last_name: "Bob")
 
-      # TODO these should eventually not be necessary
-      create(:response_plan, person: alice)
-      create(:response_plan, person: bob)
-      create(:response_plan, person: charlie)
-
       get :index, {}, { officer_id: officer.id }
 
-      expect(assigns(:response_plans).keys).to eq([alice, bob, charlie])
+      expect(assigns(:people)).to eq([alice, bob, charlie])
     end
 
     it "does not show response plans that have not been approved" do
@@ -75,13 +70,13 @@ RSpec.describe PeopleController, type: :controller do
 
       get :index, {}, { officer_id: officer.id }
 
-      expect(assigns(:response_plans)).to eq(
-        approved.person => approved,
+      expect(assigns(:people)).to eq([
+        approved.person,
         # TODO: For now, don't show people without a response plan.
         # We'll add them in once we have a plan
         # for the basic information layout.
-        # unapproved.person => nil,
-      )
+        # unapproved.person,
+      ])
     end
   end
 
