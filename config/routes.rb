@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   resources :people, only: [:index, :show]
   resources :preferences, only: :create
 
-  resources :drafts, only: [:index, :show, :create]
-  resources :response_plans, only: [:edit, :update]
+  resources :drafts, only: [:index, :show, :create, :edit, :update]
   resources :submissions, only: [:index, :show, :create] do
     member { patch :approve }
   end

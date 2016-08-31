@@ -100,7 +100,7 @@ feature "Response Plan Form" do
       plan = create(:response_plan)
       person = plan.person
 
-      visit edit_response_plan_path(plan)
+      visit edit_draft_path(plan)
       click_on "add response strategy"
       first("input[name*='[title]']").set("Response strategy 1")
       first("textarea[name*='[description]']").set("Response strategy description 1")
@@ -120,7 +120,7 @@ feature "Response Plan Form" do
       plan = create(:response_plan)
       create(:alias, name: "Foo", person: plan.person)
 
-      visit edit_response_plan_path(plan)
+      visit edit_draft_path(plan)
       click_on "remove alias"
       expect(first(".alias-field input")).to be_nil
       click_on "Update Response plan"
@@ -136,7 +136,7 @@ feature "Response Plan Form" do
       plan = create(:response_plan)
       create(:response_strategy, response_plan: plan, title: title)
 
-      visit edit_response_plan_path(plan)
+      visit edit_draft_path(plan)
       click_on "remove step"
       click_on "Update Response plan"
 
@@ -152,7 +152,7 @@ feature "Response Plan Form" do
       plan = create(:response_plan)
       create(:response_strategy, response_plan: plan, title: original_title)
 
-      visit edit_response_plan_path(plan)
+      visit edit_draft_path(plan)
       first("input[name*='[title]']").set(new_title)
       click_on "Update Response plan"
 

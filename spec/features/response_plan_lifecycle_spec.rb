@@ -43,7 +43,7 @@ RSpec.feature "Response Plan Lifecycle" do
         click_on t("response_plans.edit.current_draft")
 
         # TODO confirm this redirect path
-        expect(current_path).to eq(edit_response_plan_path(plan))
+        expect(current_path).to eq(edit_draft_path(plan))
       end
 
       scenario "updating a draft" do
@@ -81,7 +81,7 @@ RSpec.feature "Response Plan Lifecycle" do
         click_on plan.person.shorthand_description
         click_on t("response_plans.draft.edit")
 
-        expect(current_path).to eq(edit_response_plan_path(plan))
+        expect(current_path).to eq(edit_draft_path(plan))
       end
 
       # Not sure if we want to do this or not
