@@ -43,7 +43,7 @@ class ResponsePlan < ActiveRecord::Base
     where(submitted_for_approval_at: nil)
   end
 
-  def self.pending_approval
+  def self.submitted
     where.not(submitted_for_approval_at: nil).where(approved_at: nil)
   end
 
@@ -64,10 +64,10 @@ class ResponsePlan < ActiveRecord::Base
   end
 
   def draft?
-    !approved? && !pending_approval?
+    !approved? && !submitted?
   end
 
-  def pending_approval?
+  def submitted?
     submitted_for_approval_at.present? && ! approved?
   end
 

@@ -1,7 +1,7 @@
 require "rails_helper"
 require "support/permissions"
 
-RSpec.describe ApprovalsController do
+RSpec.describe SubmissionsController do
   include Permissions
 
   describe "GET #index" do
@@ -10,12 +10,12 @@ RSpec.describe ApprovalsController do
       stub_admin_permissions(officer)
 
       _draft = create(:response_plan, :draft)
-      pending_approval = create(:response_plan, :pending_approval)
+      submission = create(:response_plan, :submission)
       _approved = create(:response_plan, :approved)
 
       get :index, {}, { officer_id: officer.id }
 
-      expect(assigns(:response_plans)).to eq([pending_approval])
+      expect(assigns(:response_plans)).to eq([submission])
     end
 
     context "as a non-admin" do
@@ -37,7 +37,7 @@ RSpec.describe ApprovalsController do
     it "approves the response plan if it is pending approval" do
       officer = create(:officer)
       stub_admin_permissions(officer)
-      plan = create(:response_plan, :pending_approval)
+      plan = create(:response_plan, :submission)
 
       patch :approve, { id: plan }, { officer_id: officer }
 

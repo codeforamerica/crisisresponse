@@ -6,22 +6,22 @@
 
 <% if response_plan %>
 
-  <% if response_plan.pending_approval? %>
+  <% if response_plan.submitted? %>
     <%# The response plan has been submitted for approval but not yet approved %>
 
     <section class="page-title section-notice">
       <h1 class="section-title">
-        <%= t("response_plans.pending_approval.title") %>
+        <%= t("response_plans.submission.title") %>
       </h1>
 
       <div class="description">
-        <%= t("response_plans.pending_approval.description") %>
+        <%= t("response_plans.submission.description") %>
       </div>
 
       <div class="page-title-actions">
         <%= link_to(
-          t("response_plans.pending_approval.approve"),
-          approve_approval_path(@response_plan),
+          t("response_plans.submission.approve"),
+          approve_submission_path(@response_plan),
           method: :patch,
         ) %>
       </div>
@@ -45,7 +45,7 @@
         <strong>
           <%= link_to(
             t("response_plans.draft.submit"),
-            approvals_path(response_plan_id: response_plan),
+            submissions_path(response_plan_id: response_plan),
             method: :post,
           ) %>
         </strong>

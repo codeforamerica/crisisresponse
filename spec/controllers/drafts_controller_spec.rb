@@ -11,7 +11,7 @@ RSpec.describe DraftsController do
 
       draft = create(:response_plan, :draft, author: officer)
       _draft_from_other_officer = create(:response_plan, :draft)
-      _pending = create(:response_plan, :pending_approval)
+      _pending = create(:response_plan, :submission)
       _approved = create(:response_plan, :approved)
 
       get :index, {}, { officer_id: officer.id }

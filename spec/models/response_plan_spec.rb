@@ -42,20 +42,20 @@ RSpec.describe ResponsePlan, type: :model do
   describe ".drafts" do
     it "returns response plans that have not been submitted for approval" do
       draft = create(:response_plan, :draft)
-      create(:response_plan, :pending_approval)
+      create(:response_plan, :submission)
       create(:response_plan, :approved)
 
       expect(ResponsePlan.drafts).to eq([draft])
     end
   end
 
-  describe ".pending_approval" do
+  describe ".submitted" do
     it "returns response plans that have not been submitted for approval" do
       create(:response_plan, :draft)
-      pending_approval = create(:response_plan, :pending_approval)
+      submission = create(:response_plan, :submission)
       create(:response_plan, :approved)
 
-      expect(ResponsePlan.pending_approval).to eq([pending_approval])
+      expect(ResponsePlan.submitted).to eq([submission])
     end
   end
 
@@ -167,7 +167,7 @@ RSpec.describe ResponsePlan, type: :model do
     end
   end
 
-  describe "#pending_approval?" do
+  describe "#submitted?" do
     it "is true if the plan has been submitted for approval and not approved" do
       plan = build_stubbed(
         :response_plan,
@@ -176,7 +176,7 @@ RSpec.describe ResponsePlan, type: :model do
         submitted_for_approval_at: 1.minute.ago,
       )
 
-      expect(plan).to be_pending_approval
+      expect(plan).to be_submitted
     end
 
     it "is false if the plan is still a draft" do
@@ -187,7 +187,7 @@ RSpec.describe ResponsePlan, type: :model do
         submitted_for_approval_at: nil,
       )
 
-      expect(plan).not_to be_pending_approval
+      expect(plan).not_to be_submitted
     end
 
     it "is false if the plan has been approved" do
@@ -198,7 +198,7 @@ RSpec.describe ResponsePlan, type: :model do
         submitted_for_approval_at: 1.minute.ago,
       )
 
-      expect(plan).not_to be_pending_approval
+      expect(plan).not_to be_submitted
     end
   end
 end
