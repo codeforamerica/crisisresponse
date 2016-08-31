@@ -6,7 +6,7 @@
       <span class="page-title-action">
         <%= link_to(
           t("response_plans.draft.new"),
-          response_plans_path(person_id: person.id),
+          drafts_path(person_id: person.id),
           method: :post,
         ) %>
       </span>
@@ -20,7 +20,7 @@
     <span class="page-title-action">
       <%= link_to(
         t("response_plans.new.action"),
-        response_plans_path(person_id: person.id),
+        drafts_path(person_id: person.id),
         method: :post,
       ) %>
     </span>
