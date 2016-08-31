@@ -1,4 +1,16 @@
 en:
+  authentication:
+    sign_in:
+      link: Sign in
+      success: Signed in as %{name}
+      failure: Your username or password was incorrect. Please try again.
+    sign_out:
+      link: Sign out
+      success: Successfully signed out.
+    unauthenticated: Please sign in to continue.
+    unauthorized:
+      new_response_plan: You are not allowed to create new response plans.
+
   date:
     formats:
       default:
@@ -7,8 +19,24 @@ en:
         "%a %m/%d/%y"
 
   demo:
-    notice: This app is in demo mode – the data you see is not real.
     admin: You have admin permissions.
+    notice: This app is in demo mode – the data you see is not real.
+
+  drafts:
+    create:
+      success:
+        from_previous: "Created a new draft for %{name}'s response plan."
+        from_scratch: "Created a new draft for %{name}'s response plan."
+    index:
+      link: Your Drafts
+      title: Your Drafts
+    show:
+      description: This plan will not be visible to patrol officers until it is approved.
+      edit: Continue editing your response plan
+      submit: Submit for approval
+      title: Draft
+    update:
+      success: "Updated %{name}'s response plan"
 
   feedbacks:
     create:
@@ -19,60 +47,10 @@ en:
       search:
         create: Search
 
-  response_plans:
-    create:
-      success:
-        from_previous: "Created a new draft for %{name}'s response plan."
-        from_scratch: "Created a new draft for %{name}'s response plan."
-    draft:
-      index:
-        header: Your Drafts
-        link: Your Drafts
-      description: This plan will not be visible to patrol officers until it is approved.
-      edit: Edit
-      submit: Submit for approval
-      submitted: Submitted for approval
-      title: Draft
-      new: + Update response plan
-      edit: Continue editing your draft
-    submission:
-      index:
-        header: Pending Approval
-        link: Pending Approval
-      approve: Approve
-      description: This plan will not be visible to patrol officers until it is approved.
-      title: Pending Approval
-      approval:
-        success: "Approved %{name}'s response plan. It is now visible to patrol officers"
-        failure: You cannot approve response plans that you wrote.
-    new:
-      action: + Add a response plan
-    update:
-      success: "Updated %{name}'s response plan"
-
-  authentication:
-    unauthenticated: Please sign in to continue.
-    sign_in:
-      link: Sign in
-      success: Signed in as %{name}
-      failure: Your username or password was incorrect. Please try again.
-    sign_out:
-      link: Sign out
-      success: Successfully signed out.
-    unauthorized:
-      new_response_plan: You are not allowed to create new response plans.
-
-  time:
-    formats:
-      default:
-        "%a, %b %-d, %Y at %r"
-      date:
-        "%b %-d, %Y"
-      short:
-        "%B %d"
-
-  titles:
-    application: Crisis Response App
+  people:
+    show:
+      new_plan: + Add a response plan
+      new_draft: + Update response plan
 
   search:
     results:
@@ -89,8 +67,8 @@ en:
   simple_form:
     labels:
       feedback:
-        name: 'Your name'
-        description: 'Feedback'
+        description: Feedback
+        name: Your name
     placeholders:
       feedback:
         name: First Last
@@ -100,3 +78,29 @@ en:
           - What happened
           - What you were doing in the app when the issue occurred
           - What page you were on
+
+  submissions:
+    approve:
+      failure: You cannot approve response plans that you wrote.
+      success: "Approved %{name}'s response plan. It is now visible to patrol officers"
+    create:
+      success: Submitted for approval
+    index:
+      link: Pending Approval
+      title: Pending Approval
+    show:
+      approve: Approve
+      description: This plan will not be visible to patrol officers until it is approved.
+      title: Pending Approval
+
+  time:
+    formats:
+      default:
+        "%a, %b %-d, %Y at %r"
+      date:
+        "%b %-d, %Y"
+      short:
+        "%B %d"
+
+  titles:
+    application: Crisis Response App

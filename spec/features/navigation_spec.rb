@@ -14,17 +14,17 @@ RSpec.describe "Navigation" do
     scenario "officers can access drafts from home page", :js do
       visit root_path
       open_menu
-      click_on t("response_plans.draft.index.link") # "Your Drafts"
+      click_on t("drafts.index.link") # "Your Drafts"
 
-      expect(page).to have_header t("response_plans.draft.index.header")
+      expect(page).to have_header t("drafts.index.title")
     end
 
     scenario "officers can access submissions from home page", :js do
       visit root_path
       open_menu
-      click_on t("response_plans.submission.index.link") # "Pending approval"
+      click_on t("submissions.index.link") # "Pending approval"
 
-      expect(page).to have_header t("response_plans.submission.index.header")
+      expect(page).to have_header t("submissions.index.title")
     end
   end
 
@@ -33,14 +33,14 @@ RSpec.describe "Navigation" do
       visit root_path
       open_menu
 
-      expect(page).not_to have_link t("response_plans.draft.index.link")
+      expect(page).not_to have_link t("drafts.index.link")
     end
 
     scenario "officers cannot access submissions from home page", :js do
       visit root_path
       open_menu
 
-      expect(page).not_to have_link t("response_plans.submission.index.link")
+      expect(page).not_to have_link t("submissions.index.link")
     end
   end
 

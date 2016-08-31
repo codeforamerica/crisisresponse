@@ -18,11 +18,7 @@
   </div>
 
   <div class="right-column">
-    <%= render(
-      "sections/title",
-      person: @person,
-      response_plan: @response_plan,
-    ) %>
+    <%= render "title", person: @person, response_plan: @response_plan %>
 
     <% if @response_plan %>
       <%= render "sections/deescalation_techniques", plan: @response_plan %>
