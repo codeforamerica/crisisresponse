@@ -86,7 +86,7 @@ docker-compose build
 Run the application with the command:
 
 ```bash
-$ rm tmp/pids/server.pid; docker-compose up
+$ touch .env.local; rm tmp/pids/server.pid; docker-compose up
 ```
 
 After running that command,

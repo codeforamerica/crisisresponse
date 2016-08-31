@@ -29,6 +29,7 @@ services:
     command: ./bin/serve
     env_file:
       - .env
+      - .env.local
     ports:
       - "3000:3000"
     links:
