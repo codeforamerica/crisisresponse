@@ -2,7 +2,7 @@
   Edit Response Plan
 <% end %>
 
-<%= simple_form_for(@response_plan) do |f| %>
+<%= simple_form_for(@response_plan, url: draft_path(@response_plan)) do |f| %>
   <div class="response_plan_form">
     <%= f.fields_for :person do |person| %>
       <%= person.input :first_name %>
