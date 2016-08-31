@@ -33,9 +33,7 @@
       <div class="loose-matches">
         <% if @response_plans.any? %>
           <% @response_plans.each do |person, _| %>
-            <%= link_to person do %>
-              <%= render person %>
-            <% end %>
+            <%= render person, link: person %>
           <% end %>
         <% else %>
           <%= t("search.results.none") %>
