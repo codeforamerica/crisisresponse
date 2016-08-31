@@ -26,12 +26,18 @@ class DraftsController < ApplicationController
           :response_strategies,
           :triggers,
         ])
+      source = "from_previous"
     else
       plan = ResponsePlan.new(person: person, author: current_officer)
+      source = "from_scratch"
     end
 
     plan.save!
-    redirect_to edit_draft_path(plan)
+
+    redirect_to(
+      edit_draft_path(plan),
+      notice: t("response_plans.create.success.#{source}", name: person.name),
+    )
   end
 
   def edit
