@@ -52,9 +52,7 @@ class ResponsePlan < ActiveRecord::Base
   end
 
   def approved?
-    approved_at.present? &&
-      approver.present? &&
-      approved_at > (updated_at - 1.second)
+    approved_at.present? && approver.present?
   end
 
   def approver=(value)

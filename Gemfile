@@ -19,7 +19,7 @@ gem "pg"
 gem "pg_search"
 gem "puma"
 gem "rack-canonical-host"
-gem "rails", "~> 4.2.0"
+gem "rails", "~> 5.0"
 gem "rails-assets-bowser", source: "https://rails-assets.org"
 gem "rails-assets-jquery-ujs", source: "https://rails-assets.org"
 gem "rdiscount"
@@ -46,7 +46,6 @@ gem "uglifier"
 # gem "rails-assets-jquery.maskedinput", source: "https://rails-assets.org"
 
 group :development do
-  gem "quiet_assets"
   gem "refills"
   gem "web-console"
 end
@@ -59,7 +58,8 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "pry-byebug"
   gem "pry-rails"
-  gem "rspec-rails", "~> 3.4.0"
+  gem "rails-controller-testing"
+  gem "rspec-rails", "~> 3.4"
 end
 
 group :test do
