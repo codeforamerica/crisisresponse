@@ -25,6 +25,9 @@ en:
         from_previous: "Created a new draft for %{name}'s response plan."
         from_scratch: "Created a new draft for %{name}'s response plan."
     draft:
+      index:
+        header: Your Drafts
+        link: Your Drafts
       description: This plan will not be visible to patrol officers until it is approved.
       edit: Edit
       submit: Submit for approval
@@ -33,6 +36,9 @@ en:
       new: + Update response plan
       edit: Continue editing your draft
     submission:
+      index:
+        header: Pending Approval
+        link: Pending Approval
       approve: Approve
       description: This plan will not be visible to patrol officers until it is approved.
       title: Pending Approval

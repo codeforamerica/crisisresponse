@@ -6,6 +6,11 @@
     </div>
   <% end %>
 
+  <% if current_officer.try(:admin?) %>
+    <%= link_to t("response_plans.draft.index.link"), drafts_path %>
+    <%= link_to t("response_plans.submission.index.link"), submissions_path %>
+  <% end %>
+
   <%= link_to("About", page_path("about")) %>
   <%= link_to("App Updates", page_path("changelog")) %>
 

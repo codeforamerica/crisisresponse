@@ -67,38 +67,21 @@ RSpec.describe PeopleController, type: :controller do
       expect(assigns(:response_plans).keys).to eq([alice, bob, charlie])
     end
 
-    context "as a non-admin" do
-      it "does not show response plans that have not been approved" do
-        officer = create(:officer)
-        approved = create(:response_plan)
-        unapproved = create(:response_plan, approver: nil)
+    it "does not show response plans that have not been approved" do
+      officer = create(:officer)
+      stub_admin_permissions(officer)
+      approved = create(:response_plan)
+      unapproved = create(:response_plan, :submission)
 
-        get :index, {}, { officer_id: officer.id }
+      get :index, {}, { officer_id: officer.id }
 
-        expect(assigns(:response_plans)).to eq(
-          approved.person => approved,
-          # TODO: For now, don't show people without a respones plan.
-          # We'll add them in once we have a plan
-          # for the basic information layout.
-          # unapproved.person => nil,
-        )
-      end
-    end
-
-    context "as an admin" do
-      it "shows response plans that have not been approved" do
-        officer = create(:officer, username: "admin")
-        stub_admin_permissions(officer)
-        approved = create(:response_plan)
-        unapproved = create(:response_plan, approver: nil)
-
-        get :index, {}, { officer_id: officer.id }
-
-        expect(assigns(:response_plans)).to eq(
-          approved.person => approved,
-          unapproved.person => unapproved,
-        )
-      end
+      expect(assigns(:response_plans)).to eq(
+        approved.person => approved,
+        # TODO: For now, don't show people without a response plan.
+        # We'll add them in once we have a plan
+        # for the basic information layout.
+        # unapproved.person => nil,
+      )
     end
   end
 
@@ -115,7 +98,7 @@ RSpec.describe PeopleController, type: :controller do
     end
 
     context "when a plan is being drafted by the current officer" do
-      it "shows the response plan information" do
+      it "does not show the response plan information" do
         officer = create(:officer)
         stub_admin_permissions(officer)
         plan = create(:response_plan, :draft, author: officer)
@@ -123,7 +106,7 @@ RSpec.describe PeopleController, type: :controller do
 
         get :show, { id: person.id }, { officer_id: officer.id }
 
-        expect(assigns(:response_plan)).to eq(plan)
+        expect(assigns(:response_plan)).to eq(nil)
       end
     end
 
