@@ -18,7 +18,8 @@ RSpec.feature "Response Plan Lifecycle" do
         visit person_path(person)
         click_on t("response_plans.new.action")
 
-        expect(page).to have_content t("response_plans.create.success.from_scratch")
+        expect(page).to have_content \
+          t("response_plans.create.success.from_scratch", name: person.name)
       end
 
       scenario "they can draft a new plan for a person who already has one" do
@@ -30,7 +31,8 @@ RSpec.feature "Response Plan Lifecycle" do
         visit person_path(person)
         click_on t("response_plans.draft.new")
 
-        expect(page).to have_content t("response_plans.create.success.from_previous")
+        expect(page).to have_content \
+          t("response_plans.create.success.from_previous", name: person.name)
       end
 
       xscenario "they cannot create multiple drafts for a person at the same time" do

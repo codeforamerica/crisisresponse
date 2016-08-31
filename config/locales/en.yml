@@ -18,9 +18,8 @@ en:
   response_plans:
     create:
       success:
-        # TODO this should be a message about the draft
-        from_previous: a
-        from_scratch: a
+        from_previous: "Created a new draft for %{name}'s response plan."
+        from_scratch: "Created a new draft for %{name}'s response plan."
     draft:
       description: This plan will not be visible to patrol officers until it is approved.
       edit: Edit
