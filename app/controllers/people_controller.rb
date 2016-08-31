@@ -22,13 +22,13 @@ class PeopleController < ApplicationController
       per(RECORDS_PER_PAGE)
 
     @response_plans = @people.map do |person|
-      [person, visible_plan_for(person)]
+      [person, person.active_plan]
     end.to_h
   end
 
   def show
     @person = Person.find(params[:id])
-    @response_plan = visible_plan_for(@person)
+    @response_plan = @person.active_plan
 
     PageView.create(officer: current_officer, person: @person)
   end
@@ -52,9 +52,5 @@ class PeopleController < ApplicationController
     else
       {}
     end
-  end
-
-  def visible_plan_for(person)
-    person.active_response_plan
   end
 end

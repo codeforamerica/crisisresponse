@@ -15,7 +15,7 @@ RSpec.describe Person, type: :model do
     it_should_behave_like "a validated person"
   end
 
-  describe "#active_response_plan" do
+  describe "#active_plan" do
     it "returns the most recent approved response plan" do
       person = create(:person)
       plans = [
@@ -24,14 +24,14 @@ RSpec.describe Person, type: :model do
         create(:response_plan, person: person, approved_at: nil, approver: nil),
       ]
 
-      expect(person.active_response_plan).to eq(plans.second)
+      expect(person.active_plan).to eq(plans.second)
     end
 
     it "returns nil if there is no approved response plan" do
       person = create(:person)
       create(:response_plan, person: person, approved_at: nil, approver: nil)
 
-      expect(person.active_response_plan).to eq(nil)
+      expect(person.active_plan).to eq(nil)
     end
   end
 

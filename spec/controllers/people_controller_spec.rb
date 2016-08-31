@@ -93,7 +93,7 @@ RSpec.describe PeopleController, type: :controller do
 
         get :show, { id: person.id }, { officer_id: officer.id }
 
-        expect(assigns(:response_plan)).to be_nil
+        expect(assigns(:person).active_plan).to be_nil
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe PeopleController, type: :controller do
 
         get :show, { id: person.id }, { officer_id: officer.id }
 
-        expect(assigns(:response_plan)).to eq(nil)
+        expect(assigns(:person).active_plan).to be_nil
       end
     end
 

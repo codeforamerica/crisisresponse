@@ -67,7 +67,7 @@ class Person < ActiveRecord::Base
   fallback_to_rms_person(:weight_in_pounds)
   fallback_to_rms_person(:weight_in_pounds)
 
-  def active_response_plan
+  def active_plan
     response_plans.approved.order(:approved_at).last
   end
 
