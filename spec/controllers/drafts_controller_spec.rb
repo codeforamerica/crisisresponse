@@ -19,4 +19,9 @@ RSpec.describe DraftsController do
       expect(assigns(:response_plans)).to eq([draft])
     end
   end
+
+  describe "GET #show" do
+    it "assigns the response plan to `@response_plan`"
+    it "assigns the person to `@person`"
+  end
 end

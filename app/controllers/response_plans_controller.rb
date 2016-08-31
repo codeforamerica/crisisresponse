@@ -41,7 +41,7 @@ class ResponsePlansController < ApplicationController
 
     if @response_plan.save
       redirect_to(
-        person_path(@response_plan.person),
+        draft_path(@response_plan),
         notice: t("response_plans.update.success", name: @response_plan.person.name),
       )
     else
