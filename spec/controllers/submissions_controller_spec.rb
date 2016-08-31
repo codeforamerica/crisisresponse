@@ -24,13 +24,7 @@ RSpec.describe SubmissionsController do
   end
 
   describe "POST #create" do
-    it "approves a plan"
-
-    it "cannot approve plans that are still being drafted"
-
-    it "cannot approve plans that have already been approved"
-
-    it "does not approve the plan unless the user is an admin"
+    it "displays an error if the user is not the author"
   end
 
   describe "PATCH #approve" do

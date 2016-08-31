@@ -10,11 +10,15 @@ feature "Officer views a response plan" do
       name: "John Doe",
       date_of_birth: Date.new(1980),
     )
+    # TODO this should be removed once all officers can view core profiles
+    create(:response_plan, person: person)
 
-    visit person_path(person)
+    visit people_path
+    click_on person.shorthand_description
 
     expect(page).to have_content("DOE, John")
     expect(page).to have_content(l(person.date_of_birth))
+    expect(page).to have_content(person.shorthand_description)
   end
 
   scenario "They see the person's pictures", :js do
@@ -189,11 +193,11 @@ feature "Officer views a response plan" do
       response_plan = create(:response_plan, approver: nil)
 
       visit person_path(response_plan.person)
-      click_on t("response_plans.approval.action")
+      click_on t("response_plans.submission.approve")
 
       expect(response_plan.reload).to be_approved
       expect(page).to have_content(
-        t("response_plans.approval.success", name: response_plan.person.name)
+        t("response_plans.submission.approval.success", name: response_plan.person.name)
       )
     end
 
@@ -204,10 +208,10 @@ feature "Officer views a response plan" do
       response_plan = create(:response_plan, approver: nil, author: admin)
 
       visit person_path(response_plan.person)
-      click_on t("response_plans.approval.action")
+      click_on t("response_plans.submission.approve")
 
       expect(response_plan.reload).not_to be_approved
-      expect(page).to have_content(t("response_plans.approval.failure"))
+      expect(page).to have_content(t("response_plans.submission.approval.failure"))
     end
   end
 end

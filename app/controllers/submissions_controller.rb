@@ -8,6 +8,8 @@ class SubmissionsController < ApplicationController
   # taking it out of draft form
   # and adding it to the submissions page.
   def create
+    plan = ResponsePlan.find_by(params[:id])
+    plan.update!(submitted_for_approval_at: Time.current)
     redirect_to :drafts, notice: t("response_plans.draft.submitted")
   end
 
@@ -21,12 +23,12 @@ class SubmissionsController < ApplicationController
     if plan.save
       redirect_to(
         person_path(plan.person),
-        notice: t("response_plans.approval.success", name: plan.person.name),
+        notice: t("response_plans.submission.approval.success", name: plan.person.name),
       )
     else
       redirect_to(
         person_path(plan.person),
-        alert: t("response_plans.approval.failure"),
+        alert: t("response_plans.submission.approval.failure"),
       )
     end
   end

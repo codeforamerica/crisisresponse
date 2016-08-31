@@ -13,6 +13,8 @@ feature "Search" do
     expect(page).to have_content("DOE, John")
     expect(page).to have_content(l(dob))
     expect(page).to have_content(person.shorthand_description)
+    click_on person.shorthand_description
+    expect(current_path).to eq(person_path(person))
   end
 
   scenario "Officer searches and doesn't find a record" do

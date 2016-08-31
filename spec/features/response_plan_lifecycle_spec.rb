@@ -42,6 +42,7 @@ RSpec.feature "Response Plan Lifecycle" do
         visit person_path(plan.person)
         click_on t("response_plans.edit.current_draft")
 
+        # TODO confirm this redirect path
         expect(current_path).to eq(edit_response_plan_path(plan))
       end
 
@@ -77,7 +78,7 @@ RSpec.feature "Response Plan Lifecycle" do
         plan = create(:response_plan, :draft, author: officer)
 
         visit drafts_path
-        click_on l(plan.person.date_of_birth)
+        click_on plan.person.shorthand_description
         click_on t("response_plans.draft.edit")
 
         expect(current_path).to eq(edit_response_plan_path(plan))
@@ -93,12 +94,13 @@ RSpec.feature "Response Plan Lifecycle" do
         plan = create(:response_plan, :draft, author: officer)
 
         visit drafts_path
-        click_on l(plan.person.date_of_birth)
+        click_on plan.person.shorthand_description
         click_on t("response_plans.draft.submit")
 
+        # TODO confirm this redirect path
         expect(current_path).to eq(drafts_path)
         expect(page).to have_content(t("response_plans.draft.submitted"))
-        expect(page).not_to have_content(plan.person.date_of_birth)
+        expect(page).not_to have_content(plan.person.shorthand_description)
       end
 
       scenario "they can delete a draft that they've created"
@@ -118,7 +120,22 @@ RSpec.feature "Response Plan Lifecycle" do
     end
 
     context "when the officer is a super admin" do
-      scenario "they can approve submitted response plans"
+      scenario "they can approve submitted response plans" do
+        officer = create(:officer)
+        stub_admin_permissions(officer)
+        sign_in_officer(officer)
+        person = create(:response_plan, :submission).person
+
+        visit submissions_path
+        click_on person.shorthand_description
+        click_on t("response_plans.submission.approve")
+
+        # TODO confirm this redirect path
+        expect(current_path).to eq(person_path(person))
+        expect(page).to have_content t("response_plans.submission.approval.success", name: person.name)
+        expect(page).not_to have_content t("response_plans.submission.title")
+      end
+
       scenario "they cannot approve response plans that are still being drafted"
     end
   end

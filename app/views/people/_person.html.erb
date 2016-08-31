@@ -1,8 +1,8 @@
-<%= link_to person_path(person), class: "person-card" do %>
+<div class="person-card">
   <%= image_tag person.profile_image_url %>
 
   <div class="person-card-labels">
     <%= render "identity", person: person %>
     <div class="description"><%= person.shorthand_description %></div>
   </div>
-<% end %>
+</div>
