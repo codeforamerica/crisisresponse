@@ -15,7 +15,7 @@ class SubmissionsController < ApplicationController
   def create
     plan = ResponsePlan.find_by(params[:id])
     plan.update!(submitted_for_approval_at: Time.current)
-    redirect_to :drafts, notice: t("response_plans.draft.submitted")
+    redirect_to :drafts, notice: t(".success")
   end
 
   # Approve a response plan,
@@ -28,12 +28,12 @@ class SubmissionsController < ApplicationController
     if plan.save
       redirect_to(
         person_path(plan.person),
-        notice: t("response_plans.submission.approval.success", name: plan.person.name),
+        notice: t(".success", name: plan.person.name),
       )
     else
       redirect_to(
         person_path(plan.person),
-        alert: t("response_plans.submission.approval.failure"),
+        alert: t(".failure"),
       )
     end
   end

@@ -36,7 +36,7 @@ class DraftsController < ApplicationController
 
     redirect_to(
       edit_draft_path(plan),
-      notice: t("response_plans.create.success.#{source}", name: person.name),
+      notice: t(".success.#{source}", name: person.name),
     )
   end
 
@@ -52,7 +52,7 @@ class DraftsController < ApplicationController
     if @response_plan.save
       redirect_to(
         draft_path(@response_plan),
-        notice: t("response_plans.update.success", name: @response_plan.person.name),
+        notice: t(".success", name: @response_plan.person.name),
       )
     else
       render :edit

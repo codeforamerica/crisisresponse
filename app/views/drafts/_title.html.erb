@@ -1,18 +1,18 @@
 <section class="page-title section-notice">
   <h1 class="section-title">
-    <%= t("response_plans.draft.title") %>
+    <%= t("drafts.show.title") %>
   </h1>
 
   <div class="description">
-    <%= t("response_plans.draft.description") %>
+    <%= t("drafts.show.description") %>
   </div>
 
   <div class="page-title-actions">
-    <%= link_to t("response_plans.draft.edit"), edit_draft_path(draft) %>
+    <%= link_to t("drafts.show.edit"), edit_draft_path(draft) %>
     or
     <strong>
       <%= link_to(
-        t("response_plans.draft.submit"),
+        t("drafts.show.submit"),
         submissions_path(response_plan_id: draft),
         method: :post,
       ) %>

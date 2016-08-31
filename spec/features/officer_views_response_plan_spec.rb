@@ -143,34 +143,15 @@ feature "Officer views a response plan" do
     expect(page).to have_content(contact.notes)
   end
 
-  scenario "They see the preparing officer" do
+  scenario "They see the author and approver" do
     sign_in_officer
-    officer = create(:officer, name: "Jacques Clouseau")
-    response_plan = create(:response_plan, author: officer)
+    author = create(:officer, name: "Jacques Clouseau")
+    approver = create(:officer, name: "Sherlock Holmes")
+    response_plan = create(:response_plan, author: author, approver: approver)
 
     visit person_path(response_plan.person)
 
     expect(page).to have_content("Prepared by Jacques Clouseau")
-  end
-
-  context "when the response plan has been approved" do
-    scenario "they don't see a note that it needs approval" do
-      sign_in_officer
-      response_plan = create(:response_plan)
-
-      visit person_path(response_plan.person)
-
-      expect(page).not_to have_content(t("response_plans.submission.title"))
-    end
-
-    scenario "They see the approving officer" do
-      sign_in_officer
-      officer = create(:officer, name: "Jacques Clouseau")
-      response_plan = create(:response_plan, approver: officer)
-
-      visit person_path(response_plan.person)
-
-      expect(page).to have_content("Approved by Jacques Clouseau")
-    end
+    expect(page).to have_content("Approved by Sherlock Holmes")
   end
 end

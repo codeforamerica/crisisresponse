@@ -16,10 +16,10 @@ RSpec.feature "Response Plan Lifecycle" do
         person = create(:person)
 
         visit person_path(person)
-        click_on t("response_plans.new.action")
+        click_on t("people.show.new_plan")
 
         expect(page).to have_content \
-          t("response_plans.create.success.from_scratch", name: person.name)
+          t("drafts.create.success.from_scratch", name: person.name)
       end
 
       scenario "they can draft a new plan for a person who already has one" do
@@ -29,23 +29,10 @@ RSpec.feature "Response Plan Lifecycle" do
         person = create(:response_plan, :approved).person
 
         visit person_path(person)
-        click_on t("response_plans.draft.new")
+        click_on t("people.show.new_draft")
 
         expect(page).to have_content \
-          t("response_plans.create.success.from_previous", name: person.name)
-      end
-
-      xscenario "they cannot create multiple drafts for a person at the same time" do
-        officer = create(:officer)
-        stub_admin_permissions(officer)
-        sign_in_officer(officer)
-        plan = create(:response_plan, :draft)
-
-        visit person_path(plan.person)
-        click_on t("response_plans.edit.current_draft")
-
-        # TODO confirm this redirect path
-        expect(current_path).to eq(edit_draft_path(plan))
+          t("drafts.create.success.from_previous", name: person.name)
       end
 
       scenario "updating a draft" do
@@ -56,13 +43,13 @@ RSpec.feature "Response Plan Lifecycle" do
         sign_in_officer(officer)
 
         visit person_path(person)
-        click_on t("response_plans.draft.new")
+        click_on t("people.show.new_draft")
         fill_in "Background info", with: "Lorem Ipsum dolor si amet."
         click_on "Update Response plan"
 
-        expect(page).to have_content t("response_plans.draft.title")
+        expect(page).to have_content t("drafts.show.title")
         # expect(page).
-        #   to have_content(t("response_plans.draft.update.success", name: "Mary Doe"))
+        #   to have_content(t("drafts.update.success", name: "Mary Doe"))
       end
     end
   end
@@ -81,7 +68,7 @@ RSpec.feature "Response Plan Lifecycle" do
 
         visit drafts_path
         click_on plan.person.shorthand_description
-        click_on t("response_plans.draft.edit")
+        click_on t("drafts.show.edit")
 
         expect(current_path).to eq(edit_draft_path(plan))
       end
@@ -97,11 +84,11 @@ RSpec.feature "Response Plan Lifecycle" do
 
         visit drafts_path
         click_on plan.person.shorthand_description
-        click_on t("response_plans.draft.submit")
+        click_on t("drafts.show.submit")
 
         # TODO confirm this redirect path
         expect(current_path).to eq(drafts_path)
-        expect(page).to have_content(t("response_plans.draft.submitted"))
+        expect(page).to have_content t("submissions.create.success")
         expect(page).not_to have_content(plan.person.shorthand_description)
       end
 
@@ -131,11 +118,12 @@ RSpec.feature "Response Plan Lifecycle" do
 
         visit submissions_path
         click_on person.shorthand_description
-        click_on t("response_plans.submission.approve")
+        click_on t("submissions.show.approve")
 
         # TODO confirm this redirect path
         expect(current_path).to eq(person_path(person))
-        expect(page).to have_content t("response_plans.submission.approval.success", name: person.name)
+        expect(page).
+          to have_content t("submissions.approve.success", name: person.name)
         expect(page).to have_content plan.background_info
       end
 
@@ -150,10 +138,10 @@ RSpec.feature "Response Plan Lifecycle" do
 
       visit submissions_path
       click_on plan.person.shorthand_description
-      click_on t("response_plans.submission.approve")
+      click_on t("submissions.show.approve")
 
       expect(plan.reload).not_to be_approved
-      expect(page).to have_content(t("response_plans.submission.approval.failure"))
+      expect(page).to have_content t("submissions.approve.failure")
     end
   end
 end

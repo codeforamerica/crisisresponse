@@ -11,7 +11,7 @@ feature "Response Plan Form" do
       person = create(:person)
 
       visit person_path(person)
-      click_on t("response_plans.new.action")
+      click_on t("people.show.new_plan")
       fill_in "First name", with: "John"
       fill_in "Last name", with: "Doe"
       fill_in "DOB", with: "1980-01-02"
@@ -19,8 +19,8 @@ feature "Response Plan Form" do
       select "Male", from: "Sex"
       click_on "Update Response plan"
 
-      expect(page).to have_content(t("response_plans.update.success", name: "John Doe"))
-      expect(page).to have_content(t("response_plans.draft.title"))
+      expect(page).to have_content t("drafts.update.success", name: "John Doe")
+      expect(page).to have_content t("drafts.show.title")
       expect(page).to have_content("John")
       expect(page).to have_content("Doe")
       expect(page).to have_content(l(Date.new(1980, 1, 2)))
@@ -33,7 +33,7 @@ feature "Response Plan Form" do
       person = create(:person)
 
       visit person_path(person)
-      click_on t("response_plans.new.action")
+      click_on t("people.show.new_plan")
       fill_in "First name", with: "John"
       fill_in "Last name", with: "Doe"
       fill_in "DOB", with: "1980-01-02"
@@ -52,8 +52,8 @@ feature "Response Plan Form" do
       click_on "Update Response plan"
 
       expect(page).
-        to have_content(t("response_plans.update.success", name: "John Doe"))
-      expect(page).to have_content(t("response_plans.draft.title"))
+        to have_content t("drafts.update.success", name: "John Doe")
+      expect(page).to have_content t("drafts.show.title")
       expect(page).to have_content("John")
       expect(page).to have_content("Doe")
       expect(page).to have_content(l(Date.new(1980, 1, 2)))
@@ -73,7 +73,7 @@ feature "Response Plan Form" do
       person = create(:person)
 
       visit person_path(person)
-      click_on t("response_plans.new.action")
+      click_on t("people.show.new_plan")
       fill_in "First name", with: ""
       click_on "Update Response plan"
 
@@ -85,10 +85,10 @@ feature "Response Plan Form" do
       person = create(:person)
 
       visit person_path(person)
-      click_on t("response_plans.new.action")
+      click_on t("people.show.new_plan")
 
       expect(page).
-        to have_content(t("authentication.unauthorized.new_response_plan"))
+        to have_content t("authentication.unauthorized.new_response_plan")
     end
   end
 
