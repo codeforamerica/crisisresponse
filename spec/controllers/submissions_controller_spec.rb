@@ -8,12 +8,11 @@ RSpec.describe SubmissionsController do
     it "only shows plans that are pending approval" do
       officer = create(:officer)
       stub_admin_permissions(officer)
-
       _draft = create(:response_plan, :draft)
       submission = create(:response_plan, :submission)
       _approved = create(:response_plan, :approved)
 
-      get :index, {}, { officer_id: officer.id }
+      get :index, session: { officer_id: officer.id }
 
       expect(assigns(:submissions)).to eq([submission])
     end
@@ -38,7 +37,7 @@ RSpec.describe SubmissionsController do
       stub_admin_permissions(officer)
       plan = create(:response_plan, :submission)
 
-      patch :approve, { id: plan }, { officer_id: officer.id }
+      patch :approve, params: { id: plan }, session: { officer_id: officer.id }
 
       expect(response).to redirect_to(person_path(plan.person))
       expect(flash[:notice]).
