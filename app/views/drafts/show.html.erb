@@ -1,0 +1,31 @@
+<%= content_for(:header) do %>
+  <%= render "identity", person: @person %>
+<% end %>
+
+<div class="main">
+  <div class="left-column">
+    <%= render "sections/images" %>
+    <%= render "sections/profile", person: @person %>
+    <%= render "sections/location" %>
+
+    <% if @response_plan %>
+      <% @response_plan.contacts.each do |contact| %>
+        <%= render "sections/contact", contact: contact %>
+      <% end %>
+
+      <%= render "sections/about" %>
+    <% end %>
+  </div>
+
+  <div class="right-column">
+    <%= render "title", person: @person, response_plan: @response_plan %>
+
+    <% if @response_plan %>
+      <%= render "sections/deescalation_techniques" %>
+      <%= render "sections/triggers" %>
+      <%= render "sections/response_strategies" %>
+      <%= render "sections/background_info" %>
+      <%= render "sections/about" %>
+    <% end %>
+  </div>
+</div>
