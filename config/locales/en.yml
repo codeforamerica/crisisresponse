@@ -16,10 +16,6 @@ en:
         create: Search
 
   response_plans:
-    approval:
-      action: Approve
-      success: "Approved %{name}'s response plan. It is now visible to patrol officers"
-      failure: You cannot approve response plans that you wrote.
     create:
       success:
         # TODO this should be a message about the draft
@@ -37,6 +33,9 @@ en:
       approve: Approve
       description: This plan will not be visible to patrol officers until it is approved.
       title: Pending Approval
+      approval:
+        success: "Approved %{name}'s response plan. It is now visible to patrol officers"
+        failure: You cannot approve response plans that you wrote.
     new:
       action: + Add a response plan
     update:

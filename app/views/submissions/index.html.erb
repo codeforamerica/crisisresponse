@@ -1,3 +1,7 @@
 <h1>Pending Approval</h1>
 
-<%= render @response_plans.map(&:person) %>
+<% @response_plans.each do |plan| %>
+  <%= link_to plan.person do %>
+    <%= render plan.person %>
+  <% end %>
+<% end %>
