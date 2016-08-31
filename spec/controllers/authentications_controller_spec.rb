@@ -7,7 +7,7 @@ describe AuthenticationsController do
       FakeAuthentication.new.stub_success
 
       expect do
-        post :create, session_params(username: username)
+        post :create, params: session_params(username: username)
       end.to change(Officer, :count).by(1)
     end
 
@@ -15,7 +15,7 @@ describe AuthenticationsController do
       username = "foobar"
       FakeAuthentication.new(username: username).stub_success
 
-      post :create, session_params(username: username)
+      post :create, params: session_params(username: username)
 
       officer = Officer.find_by(username: username)
       expect(session[:officer_id]).to eq(officer.id)
@@ -30,7 +30,7 @@ describe AuthenticationsController do
       create(:officer, name: name, username: username)
 
       expect do
-        post :create, session_params(username: username)
+        post :create, params: session_params(username: username)
       end.not_to change(Officer, :count)
     end
 
@@ -40,7 +40,7 @@ describe AuthenticationsController do
       officer = create(:officer, name: name, username: username)
       FakeAuthentication.new(name: name, username: username).stub_success
 
-      post :create, session_params(username: username)
+      post :create, params: session_params(username: username)
 
       expect(session[:officer_id]).to eq(officer.id)
     end
@@ -51,7 +51,7 @@ describe AuthenticationsController do
       FakeAuthentication.new.stub_failure
 
       expect do
-        post :create, session_params
+        post :create, params: session_params
       end.not_to change(Officer, :count)
     end
   end

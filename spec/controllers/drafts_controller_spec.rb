@@ -8,7 +8,7 @@ RSpec.describe DraftsController do
   describe "authentication" do
     context "when the officer ID in the session isn't in the system" do
       it "logs the user out and redirects them to sign in" do
-        get :edit, { id: 1 }, { officer_id: 1 }
+        get :edit, params: { id: 1 }, session: { officer_id: 1 }
 
         expect(response).to redirect_to(new_authentication_path)
       end
@@ -18,7 +18,7 @@ RSpec.describe DraftsController do
       it "redirects them to the root path" do
         officer = create(:officer)
 
-        get :edit, { id: 1 }, { officer_id: officer.id }
+        get :edit, params: { id: 1 }, session: { officer_id: officer.id }
 
         expect(response).to redirect_to(people_path)
       end
@@ -35,7 +35,7 @@ RSpec.describe DraftsController do
       _pending = create(:response_plan, :submission)
       _approved = create(:response_plan, :approved)
 
-      get :index, {}, { officer_id: officer.id }
+      get :index, session: { officer_id: officer.id }
 
       expect(assigns(:drafts)).to eq([draft])
     end
@@ -52,7 +52,11 @@ RSpec.describe DraftsController do
       officer = create(:officer)
       stub_admin_permissions(officer)
 
-      post :create, { person_id: person.id }, { officer_id: officer.id }
+      post(
+        :create,
+        params: { person_id: person.id },
+        session: { officer_id: officer.id },
+      )
 
       expect(response).to redirect_to edit_draft_path(ResponsePlan.last)
     end
@@ -64,7 +68,11 @@ RSpec.describe DraftsController do
         stub_admin_permissions(officer)
 
         expect do
-          post :create, { person_id: person.id }, { officer_id: officer.id }
+          post(
+            :create,
+            params: { person_id: person.id },
+            session: { officer_id: officer.id },
+          )
         end.to change(ResponsePlan, :count).by(1)
 
         plan = ResponsePlan.last
@@ -86,7 +94,11 @@ RSpec.describe DraftsController do
         )
 
         expect do
-          post :create, { person_id: original.person_id }, { officer_id: officer.id }
+          post(
+            :create,
+            params: { person_id: original.person_id },
+            session: { officer_id: officer.id },
+          )
         end.to change(ResponsePlan, :count).by(1)
 
         plan = ResponsePlan.last
@@ -103,7 +115,11 @@ RSpec.describe DraftsController do
         original = create(:response_plan, background_info: "hello")
 
         expect do
-          post :create, { person_id: original.person_id }, { officer_id: officer.id }
+          post(
+            :create,
+            params: { person_id: original.person_id },
+            session: { officer_id: officer.id },
+          )
         end.to change(ResponsePlan, :count).by(1)
 
         plan = ResponsePlan.last
@@ -118,7 +134,11 @@ RSpec.describe DraftsController do
         person = create(:person)
         original = create(:response_plan, background_info: "hello")
 
-        post :create, { person_id: original.person_id }, { officer_id: officer.id }
+        post(
+          :create,
+          params: { person_id: original.person_id },
+          session: { officer_id: officer.id },
+        )
 
         plan = ResponsePlan.last
         expect(plan.person).to eq(original.person)
@@ -130,7 +150,11 @@ RSpec.describe DraftsController do
         stub_admin_permissions(officer)
         original = create(:contact, name: "Ann", relationship: "mother")
 
-        post :create, { person_id: original.response_plan.person_id }, { officer_id: officer.id }
+        post(
+          :create,
+          params: { person_id: original.response_plan.person_id },
+          session: { officer_id: officer.id },
+        )
 
         clone = ResponsePlan.last.contacts.first
         expect(clone.name).to eq(original.name)
@@ -143,7 +167,11 @@ RSpec.describe DraftsController do
         stub_admin_permissions(officer)
         original = create(:deescalation_technique, description: "bar")
 
-        post :create, { person_id: original.response_plan.person_id }, { officer_id: officer.id }
+        post(
+          :create,
+          params: { person_id: original.response_plan.person_id },
+          session: { officer_id: officer.id },
+        )
 
         clone = ResponsePlan.last.deescalation_techniques.first
         expect(clone.description).to eq(original.description)
@@ -155,7 +183,11 @@ RSpec.describe DraftsController do
         stub_admin_permissions(officer)
         original = create(:response_strategy, priority: 1, title: "foo", description: "bar")
 
-        post :create, { person_id: original.response_plan.person_id }, { officer_id: officer.id }
+        post(
+          :create,
+          params: { person_id: original.response_plan.person_id },
+          session: { officer_id: officer.id },
+        )
 
         clone = ResponsePlan.last.response_strategies.first
         expect(clone.priority).to eq(original.priority)
@@ -169,7 +201,11 @@ RSpec.describe DraftsController do
         stub_admin_permissions(officer)
         original = create(:trigger, description: "bar")
 
-        post :create, { person_id: original.response_plan.person_id }, { officer_id: officer.id }
+        post(
+          :create,
+          params: { person_id: original.response_plan.person_id },
+          session: { officer_id: officer.id },
+        )
 
         clone = ResponsePlan.last.triggers.first
         expect(clone.description).to eq(original.description)
@@ -192,7 +228,11 @@ RSpec.describe DraftsController do
       stub_admin_permissions(officer)
       plan = create(:response_plan)
 
-      get :edit, { id: plan.id }, { officer_id: officer.id }
+      get(
+        :edit,
+        params: { id: plan.id },
+        session: { officer_id: officer.id },
+      )
 
       expect(assigns(:response_plan)).to eq(plan)
     end

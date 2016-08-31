@@ -8,7 +8,7 @@ RSpec.describe PeopleController, type: :controller do
   describe "authentication" do
     context "when the officer ID in the session isn't in the system" do
       it "logs the user out and redirects them to sign in" do
-        get :index, {}, { officer_id: 1 }
+        get :index, session: { officer_id: 1 }
 
         expect(response).to redirect_to(new_authentication_path)
       end
@@ -25,7 +25,7 @@ RSpec.describe PeopleController, type: :controller do
         stub_view_without_response_plan_permissions(officer)
         person = create(:person, first_name: "John", last_name: "Doe")
 
-        get :index, {}, { officer_id: officer.id }
+        get :index, session: { officer_id: officer.id }
 
         expect(assigns(:people)).to eq([person])
       end
@@ -40,7 +40,7 @@ RSpec.describe PeopleController, type: :controller do
         rms_person = create(:rms_person, first_name: "John", last_name: "Doe")
         person = rms_person.person
 
-        get :index, {}, { officer_id: officer.id }
+        get :index, session: { officer_id: officer.id }
 
         expect(assigns(:people)).to be_empty
       end
@@ -57,7 +57,7 @@ RSpec.describe PeopleController, type: :controller do
       alice.reload
       bob = create(:person, last_name: "Bob")
 
-      get :index, {}, { officer_id: officer.id }
+      get :index, session: { officer_id: officer.id }
 
       expect(assigns(:people)).to eq([alice, bob, charlie])
     end
@@ -68,7 +68,7 @@ RSpec.describe PeopleController, type: :controller do
       approved = create(:response_plan)
       unapproved = create(:response_plan, :submission)
 
-      get :index, {}, { officer_id: officer.id }
+      get :index, session: { officer_id: officer.id }
 
       expect(assigns(:people)).to eq([
         approved.person,
@@ -86,7 +86,11 @@ RSpec.describe PeopleController, type: :controller do
         officer = create(:officer)
         person = create(:response_plan, :draft).person
 
-        get :show, { id: person.id }, { officer_id: officer.id }
+        get(
+          :show,
+          params: { id: person.id },
+          session: { officer_id: officer.id },
+        )
 
         expect(assigns(:person).active_plan).to be_nil
       end
@@ -99,7 +103,11 @@ RSpec.describe PeopleController, type: :controller do
         plan = create(:response_plan, :draft, author: officer)
         person = plan.person
 
-        get :show, { id: person.id }, { officer_id: officer.id }
+        get(
+          :show,
+          params: { id: person.id },
+          session: { officer_id: officer.id },
+        )
 
         expect(assigns(:person).active_plan).to be_nil
       end
@@ -111,7 +119,11 @@ RSpec.describe PeopleController, type: :controller do
         person = create(:person)
 
         expect do
-          get :show, { id: person.id }, { officer_id: officer.id }
+          get(
+            :show,
+            params: { id: person.id },
+            session: { officer_id: officer.id },
+          )
         end.to change(PageView, :count).by(1)
 
         page_view = PageView.last
