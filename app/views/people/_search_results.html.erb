@@ -31,11 +31,11 @@
 
     <div class="results">
       <div class="loose-matches">
-        <% if @people.any? %>
-          <% @people.each do |person| %>
-            <%= render person, link: person %>
-          <% end %>
-        <% else %>
+        <% @people.each do |person| %>
+          <%= render person, link: person %>
+        <% end %>
+
+        <% if @people.none? %>
           <%= t("search.results.none") %>
         <% end %>
       </div>

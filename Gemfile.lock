@@ -74,6 +74,7 @@ GEM
     concurrent-ruby (1.0.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    dalli (2.7.6)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     deep_cloneable (2.2.1)
@@ -281,6 +282,7 @@ DEPENDENCIES
   bundler-audit
   carrierwave
   cocoon
+  dalli
   database_cleaner
   deep_cloneable
   delayed_job_active_record

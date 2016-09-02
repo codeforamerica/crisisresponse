@@ -1,8 +1,10 @@
 <%= link_to link, class: "person-card" do %>
-  <%= image_tag person.profile_image_url %>
+  <%= cache person do %>
+    <%= image_tag person.profile_image_url %>
 
-  <div class="person-card-labels">
-    <%= render "identity", person: person %>
-    <div class="description"><%= person.shorthand_description %></div>
-  </div>
+    <div class="person-card-labels">
+      <%= render "identity", person: person %>
+      <div class="description"><%= person.shorthand_description %></div>
+    </div>
+  <% end %>
 <% end %>

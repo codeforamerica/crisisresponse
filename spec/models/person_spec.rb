@@ -48,7 +48,7 @@ RSpec.describe Person, type: :model do
       it "returns a URL to the default profile image" do
         person = Person.new
 
-        expect(person.profile_image_url).to eq("/assets/default_image.png")
+        expect(person.profile_image_url).to eq("/default_profile.png")
       end
     end
   end

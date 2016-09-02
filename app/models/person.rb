@@ -39,8 +39,9 @@ class Person < ActiveRecord::Base
 
   def self.fallback_to_rms_person(attribute)
     define_method(attribute) do |*args|
-      super(*args) ||
-        (rms_person && rms_person.public_send(attribute))
+      cache_if_record_is_persisted(attribute) do
+        super(*args) || (rms_person && rms_person.public_send(attribute))
+      end
     end
 
     define_method("#{attribute}=") do |value|
@@ -68,7 +69,10 @@ class Person < ActiveRecord::Base
   fallback_to_rms_person(:weight_in_pounds)
 
   def active_plan
-    response_plans.approved.order(:approved_at).last
+    @active_plan ||= response_plans.
+      approved.
+      order(:approved_at).
+      last
   end
 
   def display_name
@@ -84,10 +88,8 @@ class Person < ActiveRecord::Base
   end
 
   def profile_image_url
-    if images.any?
-      images.first.source_url
-    else
-      "/default_profile.png"
+    Rails.cache.fetch([self, "profile_image_url"]) do
+      images.first.try(:source_url) || "/default_profile.png"
     end
   end
 
@@ -114,6 +116,14 @@ class Person < ActiveRecord::Base
       "#{height_in_inches / 12}'#{height_in_inches % 12}\""
     else
       nil
+    end
+  end
+
+  def cache_if_record_is_persisted(cache_label)
+    if persisted?
+      Rails.cache.fetch([self, cache_label]) { yield }
+    else
+      yield
     end
   end
 end

@@ -1,10 +1,5 @@
 version: '2'
 services:
-  db:
-    image: postgres:latest
-    ports:
-      - "5432:5432"
-
   backup:
     image: postgres:latest
     command: |
@@ -13,6 +8,14 @@ services:
       - db
     volumes:
       - './backups:/backups'
+
+  cache:
+    image: memcached:latest
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
 
   restore:
     build: containers/restore
@@ -34,5 +37,6 @@ services:
       - "3000:3000"
     links:
       - db
+      - cache
     volumes:
       - .:/app
