@@ -13,7 +13,7 @@ class SubmissionsController < ApplicationController
   # taking it out of draft form
   # and adding it to the submissions page.
   def create
-    plan = ResponsePlan.find_by(params[:id])
+    plan = ResponsePlan.drafts.find(params[:response_plan_id])
     plan.update!(submitted_for_approval_at: Time.current)
     redirect_to :drafts, notice: t(".success")
   end
