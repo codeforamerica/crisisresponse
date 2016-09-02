@@ -5,7 +5,7 @@
     <div class="image-scroller">
       <span class="image-text">
         <span class="focused-image-index">1</span>
-        of <%= pluralize(person.images.count, "photo") %>
+        of <%= pluralize(person.images.length, "photo") %>
       </span>
 
       <% if person.images.many? %>
