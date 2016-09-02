@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -15,17 +14,16 @@ ActiveRecord::Schema.define(version: 20160829225841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
   enable_extension "fuzzystrmatch"
+  enable_extension "pg_trgm"
 
   create_table "aliases", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "person_id",  null: false
+    t.index ["person_id"], name: "index_aliases_on_person_id", using: :btree
   end
-
-  add_index "aliases", ["person_id"], name: "index_aliases_on_person_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "response_plan_id"
@@ -36,18 +34,16 @@ ActiveRecord::Schema.define(version: 20160829225841) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "organization"
+    t.index ["response_plan_id"], name: "index_contacts_on_response_plan_id", using: :btree
   end
-
-  add_index "contacts", ["response_plan_id"], name: "index_contacts_on_response_plan_id", using: :btree
 
   create_table "deescalation_techniques", force: :cascade do |t|
     t.string   "description",      null: false
     t.integer  "response_plan_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["response_plan_id"], name: "index_deescalation_techniques_on_response_plan_id", using: :btree
   end
-
-  add_index "deescalation_techniques", ["response_plan_id"], name: "index_deescalation_techniques_on_response_plan_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -61,9 +57,8 @@ ActiveRecord::Schema.define(version: 20160829225841) do
     t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "feedbacks", force: :cascade do |t|
     t.string   "name"
@@ -77,9 +72,8 @@ ActiveRecord::Schema.define(version: 20160829225841) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "person_id",  null: false
+    t.index ["person_id"], name: "index_images_on_person_id", using: :btree
   end
-
-  add_index "images", ["person_id"], name: "index_images_on_person_id", using: :btree
 
   create_table "officers", force: :cascade do |t|
     t.string   "name",            null: false
@@ -90,19 +84,17 @@ ActiveRecord::Schema.define(version: 20160829225841) do
     t.datetime "updated_at",      null: false
     t.string   "username"
     t.string   "analytics_token"
+    t.index ["username"], name: "index_officers_on_username", unique: true, using: :btree
   end
-
-  add_index "officers", ["username"], name: "index_officers_on_username", unique: true, using: :btree
 
   create_table "page_views", force: :cascade do |t|
     t.integer  "officer_id"
     t.integer  "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["officer_id"], name: "index_page_views_on_officer_id", using: :btree
+    t.index ["person_id"], name: "index_page_views_on_person_id", using: :btree
   end
-
-  add_index "page_views", ["officer_id"], name: "index_page_views_on_officer_id", using: :btree
-  add_index "page_views", ["person_id"], name: "index_page_views_on_person_id", using: :btree
 
   create_table "people", force: :cascade do |t|
     t.datetime "created_at",       null: false
@@ -132,11 +124,10 @@ ActiveRecord::Schema.define(version: 20160829225841) do
     t.text     "private_notes"
     t.integer  "person_id"
     t.datetime "submitted_for_approval_at"
+    t.index ["approver_id"], name: "index_response_plans_on_approver_id", using: :btree
+    t.index ["author_id"], name: "index_response_plans_on_author_id", using: :btree
+    t.index ["person_id"], name: "index_response_plans_on_person_id", using: :btree
   end
-
-  add_index "response_plans", ["approver_id"], name: "index_response_plans_on_approver_id", using: :btree
-  add_index "response_plans", ["author_id"], name: "index_response_plans_on_author_id", using: :btree
-  add_index "response_plans", ["person_id"], name: "index_response_plans_on_person_id", using: :btree
 
   create_table "response_strategies", force: :cascade do |t|
     t.integer  "priority"
@@ -145,9 +136,8 @@ ActiveRecord::Schema.define(version: 20160829225841) do
     t.integer  "response_plan_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["response_plan_id"], name: "index_response_strategies_on_response_plan_id", using: :btree
   end
-
-  add_index "response_strategies", ["response_plan_id"], name: "index_response_strategies_on_response_plan_id", using: :btree
 
   create_table "rms_crisis_incidents", force: :cascade do |t|
     t.integer  "rms_person_id",             null: false
@@ -190,9 +180,8 @@ ActiveRecord::Schema.define(version: 20160829225841) do
     t.datetime "updated_at",                null: false
     t.integer  "xml_crisis_id",             null: false
     t.text     "narrative"
+    t.index ["rms_person_id"], name: "index_rms_crisis_incidents_on_rms_person_id", using: :btree
   end
-
-  add_index "rms_crisis_incidents", ["rms_person_id"], name: "index_rms_crisis_incidents_on_rms_person_id", using: :btree
 
   create_table "rms_people", force: :cascade do |t|
     t.string   "first_name"
@@ -211,18 +200,16 @@ ActiveRecord::Schema.define(version: 20160829225841) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "person_id"
+    t.index ["person_id"], name: "index_rms_people_on_person_id", using: :btree
   end
-
-  add_index "rms_people", ["person_id"], name: "index_rms_people_on_person_id", using: :btree
 
   create_table "triggers", force: :cascade do |t|
     t.string   "description",      null: false
     t.integer  "response_plan_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["response_plan_id"], name: "index_triggers_on_response_plan_id", using: :btree
   end
-
-  add_index "triggers", ["response_plan_id"], name: "index_triggers_on_response_plan_id", using: :btree
 
   add_foreign_key "aliases", "people"
   add_foreign_key "contacts", "response_plans"
