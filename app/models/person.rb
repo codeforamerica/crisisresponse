@@ -87,7 +87,7 @@ class Person < ActiveRecord::Base
     if images.any?
       images.first.source_url
     else
-      "/assets/default_image.png"
+      "/default_profile.png"
     end
   end
 
