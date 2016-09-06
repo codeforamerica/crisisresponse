@@ -62,10 +62,23 @@
       <%= render "nested_form", f: person, relationship: :images, html_classes: [] %>
     <% end %>
 
-    <%= render "nested_form", f: f, relationship: :deescalation_techniques, html_classes: [] %>
-    <%= render "nested_form", f: f, relationship: :triggers, html_classes: [] %>
-    <%= render "nested_form", f: f, relationship: :contacts, html_classes: ["multi-field"] %>
-    <%= render "nested_form", f: f, relationship: :response_strategies, html_classes: ["multi-field"] %>
+    <%= render "nested_form", f: f, relationship: :deescalation_techniques %>
+    <%= render "nested_form", f: f, relationship: :triggers %>
+
+    <%= render(
+      "nested_form",
+      f: f,
+      relationship: :contacts,
+      html_classes: ["multi-field"],
+    ) %>
+
+    <%= render(
+      "nested_form",
+      f: f,
+      relationship: :response_strategies,
+      label: "Response Plan",
+      html_classes: ["multi-field"],
+    ) %>
 
     <%= f.input :private_notes %>
 
