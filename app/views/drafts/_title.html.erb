@@ -8,12 +8,12 @@
   </div>
 
   <div class="page-title-actions">
-    <%= link_to t("drafts.show.edit"), edit_draft_path(draft) %>
+    <%= link_to t("drafts.show.edit"), edit_draft_path(plan) %>
     or
     <strong>
       <%= link_to(
         t("drafts.show.submit"),
-        submissions_path(response_plan_id: draft),
+        submissions_path(response_plan_id: plan),
         method: :post,
       ) %>
     </strong>
