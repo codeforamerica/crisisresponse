@@ -5,7 +5,7 @@
     <% end %>
 
     <% user_facing_flashes.each do |key, value| -%>
-      <div class="flash-<%= key %>"><%= value %></div>
+      <div class="flash-<%= key %>"><%= value.html_safe %></div>
     <% end -%>
   </div>
 <% end %>

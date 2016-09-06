@@ -84,7 +84,9 @@ en:
       failure: You cannot approve response plans that you wrote.
       success: "Approved %{name}'s response plan. It is now visible to patrol officers"
     create:
-      success: Submitted for approval
+      success:
+        text: Submitted for approval.
+        link: View pending response plan.
       failure: Could not submit the response plan.
     index:
       link: Pending Approval

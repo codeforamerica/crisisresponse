@@ -15,7 +15,13 @@ class SubmissionsController < ApplicationController
   def create
     plan = ResponsePlan.drafts.find(params[:response_plan_id])
     plan.update!(submitted_for_approval_at: Time.current)
-    redirect_to :drafts, notice: t(".success")
+
+    message = [
+      t(".success.text"),
+      view_context.link_to(t(".success.link")),
+    ].join(" ")
+
+    redirect_to :drafts, notice: message
   end
 
   # Approve a response plan,

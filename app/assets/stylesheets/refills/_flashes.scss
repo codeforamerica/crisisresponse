@@ -9,15 +9,6 @@ $success-color: #e6efc2 !default;
   display: block;
   padding: $small-spacing;
   text-align: center;
-
-  a {
-    color: darken($color, 70%);
-
-    &:focus,
-    &:hover {
-      color: darken($color, 90%);
-    }
-  }
 }
 
 .flash-alert {
