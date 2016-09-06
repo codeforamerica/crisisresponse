@@ -88,7 +88,7 @@ RSpec.feature "Response Plan Lifecycle" do
 
         # TODO confirm this redirect path
         expect(current_path).to eq(drafts_path)
-        expect(page).to have_content t("submissions.create.success")
+        expect(page).to have_content t("submissions.create.success.text")
         expect(page).not_to have_content(plan.person.shorthand_description)
       end
 

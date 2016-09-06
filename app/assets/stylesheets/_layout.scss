@@ -18,7 +18,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   @include heavy-font;
-  margin: 0;
+  margin-bottom: $base-spacing;
 }
 
 .main-content {

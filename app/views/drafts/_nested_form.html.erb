@@ -1,5 +1,8 @@
+<% label ||= relationship.to_s.titleize %>
+<% html_classes ||= [] %>
+
 <div class="nested-form <%= relationship.to_s %> <%= html_classes.join(" ") %>">
-  <label><%= relationship.to_s.titleize %></label>
+  <label><%= label %></label>
 
   <div class="nested-field-container <%= relationship.to_s.singularize %>-fields">
     <%= f.simple_fields_for relationship do |nested_form| %>
@@ -8,7 +11,7 @@
 
     <div class="links">
       <%= link_to_add_association(
-        "add #{relationship.to_s.singularize.humanize.downcase}",
+        "+ Add #{relationship.to_s.singularize.humanize.downcase}",
         f,
         relationship,
       ) %>
