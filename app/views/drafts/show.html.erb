@@ -2,30 +2,4 @@
   <%= render "identity", person: @draft.person %>
 <% end %>
 
-<div class="main">
-  <div class="left-column">
-    <%= render "sections/images", person: @draft.person %>
-    <%= render "sections/profile", person: @draft.person %>
-    <%= render "sections/location", person: @draft.person %>
-
-    <% if @draft %>
-      <% @draft.contacts.each do |contact| %>
-        <%= render "sections/contact", contact: contact %>
-      <% end %>
-
-      <%= render "sections/about", person: @draft.person %>
-    <% end %>
-  </div>
-
-  <div class="right-column">
-    <%= render "title", person: @draft.person, draft: @draft %>
-
-    <% if @draft %>
-      <%= render "sections/deescalation_techniques", plan: @draft %>
-      <%= render "sections/triggers", plan: @draft %>
-      <%= render "sections/response_strategies", plan: @draft %>
-      <%= render "sections/background_info", plan: @draft %>
-      <%= render "sections/about", person: @draft.person %>
-    <% end %>
-  </div>
-</div>
+<%= render "application/profile", person: @draft.person, plan: @draft %>
