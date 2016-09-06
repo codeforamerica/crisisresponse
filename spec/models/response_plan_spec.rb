@@ -3,15 +3,6 @@ require "shared/analytics_token"
 
 RSpec.describe ResponsePlan, type: :model do
   describe "validations" do
-    it "does not allow the same officer to both author and approve" do
-      officer = build(:officer)
-      response_plan = build(:response_plan, author: officer, approver: officer)
-
-      expect(response_plan).not_to be_valid
-      expect(response_plan.errors[:approver]).
-        to include("can not be the person who authored the plan")
-    end
-
     it "does not allow approval without a timestamp" do
       officer = build(:officer)
       response_plan = build(:response_plan, approver: officer)

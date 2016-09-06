@@ -32,7 +32,6 @@ class ResponsePlan < ActiveRecord::Base
   belongs_to :author, class_name: "Officer"
   belongs_to :approver, class_name: "Officer"
 
-  validate :approver_is_not_author
   validate :approved_at_is_present_if_approver_exists
   validate :approver_is_present_if_approved_at_exists
 
@@ -74,12 +73,6 @@ class ResponsePlan < ActiveRecord::Base
   end
 
   private
-
-  def approver_is_not_author
-    if approver_id == author_id
-      errors.add(:approver, "can not be the person who authored the plan")
-    end
-  end
 
   def approved_at_is_present_if_approver_exists
     if approver.present? && approved_at.nil?
