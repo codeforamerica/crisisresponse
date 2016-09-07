@@ -80,7 +80,7 @@ FactoryGirl.define do
     response_plan
   end
 
-  factory :rms_person, :class => 'RMS::Person' do
+  factory :rms_person, class: "RMS::Person" do
     person
     first_name "John"
     last_name "Doe"
@@ -94,10 +94,15 @@ FactoryGirl.define do
     pin "0123456789abcdef"
   end
 
-  factory :rms_crisis_incident, :class => 'RMS::CrisisIncident' do
+  factory(
+    :rms_crisis_incident,
+    aliases: [:incident],
+    class: "RMS::CrisisIncident",
+  ) do
     rms_person
     reported_at { 1.week.ago }
     go_number "2016001234"
+    xml_crisis_id "12345"
   end
 
   factory :trigger do

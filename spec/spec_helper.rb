@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+ENV["DEMO_MODE"] = "false"
+
 if ENV.fetch("COVERAGE", false)
   require "simplecov"
   SimpleCov.start "rails"

@@ -8,6 +8,11 @@ class Person < ActiveRecord::Base
   before_create :generate_analytics_token
 
   has_many :aliases, dependent: :destroy
+  has_many(
+    :crisis_incidents,
+    through: :rms_person,
+    class_name: "RMS::CrisisIncident",
+  )
   has_many :images, dependent: :destroy
   has_many :response_plans
   has_one :rms_person, class_name: "RMS::Person"
@@ -77,6 +82,10 @@ class Person < ActiveRecord::Base
 
   def display_name
     "#{last_name}, #{first_name}"
+  end
+
+  def incidents_since(moment)
+    crisis_incidents.where(reported_at: (moment..Time.current))
   end
 
   def name

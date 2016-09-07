@@ -1,0 +1,11 @@
+<section class="past-year-incident-count">
+  <div class="section-body">
+    <span class="incident-count">
+      <%= pluralize(person.incidents_since(1.year.ago).count, "crisis call") %>
+    </span>
+
+    <span class="secondary">
+      (in the past year)
+    </span>
+  </div>
+</section>
