@@ -3,25 +3,21 @@
     display: block;
   }
 
-  img {
-    width: $base-spacing;
-    margin-right: $small-spacing;
-  }
-
   .shorthand-description {
     @include heavy-font;
   }
 
-  .section-body img {
+  .eye-color-icon,
+  .hair-color-icon {
     width: $base-spacing;
     margin-right: $small-spacing;
   }
 
-  .hair-color img {
-    transform: translateY(0.5rem);
+  .eye-color-icon {
+    transform: translateY(0.2rem);
   }
 
-  .eye-color img {
-    transform: translateY(0.2rem);
+  .hair-color-icon {
+    transform: translateY(0.5rem);
   }
 }

@@ -21,5 +21,8 @@
     <% end %>
   </div>
 
-  <%= render "section_dialer", phone: ENV.fetch("ADMINISTRATOR_CONTACT_PHONE") %>
+  <%= render(
+    "section_dialer",
+    phone: ENV.fetch("ADMINISTRATOR_CONTACT_PHONE"),
+  ) %>
 </section>

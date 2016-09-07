@@ -1,0 +1,20 @@
+@mixin icon-color($color) {
+  svg {
+    path,
+    circle {
+      &:not([fill='none']) {
+        fill: $color;
+      }
+
+      &[fill='none'] {
+        stroke: $color;
+      }
+    }
+  }
+}
+
+@include icon-color($icon-color);
+
+a {
+  @include icon-color($action-color);
+}

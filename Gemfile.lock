@@ -107,6 +107,10 @@ GEM
     hashdiff (0.3.0)
     high_voltage (3.0.0)
     i18n (0.7.0)
+    inline_svg (0.11.0)
+      activesupport (>= 4.0)
+      loofah (>= 2.0)
+      nokogiri (~> 1.6)
     json (2.0.2)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
@@ -291,6 +295,7 @@ DEPENDENCIES
   flutie
   formulaic
   high_voltage
+  inline_svg
   kaminari
   launchy
   neat (~> 1.7.0)

@@ -47,7 +47,8 @@ $secondary-text-color: rgba(256, 256, 256, 0.80);
 $contact-notes-color: darken($base-font-color, 25%);
 
 // Icons
-$bullet-background: image_url("/assets/circle-white.svg");
+$icon-color: $white;
+$bullet-background: image_url("/assets/circle-night.svg");
 $zoom_in_image: image_url("zoom_in-night.svg");
 $zoom_out_image: image_url("zoom_out-night.svg");
 $arrow_up: image_url("arrow_up-night.svg");

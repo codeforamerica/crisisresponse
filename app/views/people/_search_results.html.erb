@@ -22,7 +22,7 @@
               people_path(search: @search.attributes.except(filter)),
               class: "filter-remove",
             ) do %>
-              <%= image_tag "remove-#{theme}.svg" %>
+              <%= inline_svg "remove.svg" %>
             <% end %>
           </span>
         <% end %>
