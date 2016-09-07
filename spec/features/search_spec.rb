@@ -29,6 +29,10 @@ feature "Search" do
     expect(page).to have_content(t("search.results.none"))
     expect(page).not_to have_content("John")
     expect(page).not_to have_content(l(dob))
+
+    find(".filter-remove").click
+    expect(page).to have_content("John")
+    expect(page).to have_content(l(dob))
   end
 
   scenario "Officer searches for a malformed date" do

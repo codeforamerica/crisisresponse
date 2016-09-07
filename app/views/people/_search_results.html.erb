@@ -19,7 +19,7 @@
             </span>
 
             <%= link_to(
-              people_path(search: params[:search].except(filter)),
+              people_path(search: @search.attributes.except(filter)),
               class: "filter-remove",
             ) do %>
               <%= image_tag "remove-#{theme}.svg" %>

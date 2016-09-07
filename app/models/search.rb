@@ -52,6 +52,10 @@ class Search
     end
   end
 
+  def attributes
+    SEARCHABLE_ATTRS.map { |attr| [attr, public_send(attr)] }.to_h
+  end
+
   def close_matches
     people = @candidates.
       joins("LEFT OUTER JOIN rms_people ON rms_people.person_id = people.id")
