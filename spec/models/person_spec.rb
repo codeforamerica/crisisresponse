@@ -43,6 +43,20 @@ RSpec.describe Person, type: :model do
     end
   end
 
+  describe "#incidents_since" do
+    it "returns the number of incidents since a given time" do
+      rms_person = create(:rms_person)
+      _old = create(:incident, reported_at: 3.days.ago, rms_person: rms_person)
+      recent = create(:incident, reported_at: 1.day.ago, rms_person: rms_person)
+
+      has_no_incidents = build_stubbed(:person)
+      has_incidents = rms_person.person
+
+      expect(has_no_incidents.incidents_since(2.days.ago)).to eq([])
+      expect(has_incidents.incidents_since(2.days.ago)).to eq([recent])
+    end
+  end
+
   describe "#profile_image_url" do
     context "when no image is uploaded" do
       it "returns a URL to the default profile image" do

@@ -52,6 +52,11 @@ en:
       new_plan: + Add a response plan
       new_draft: + Update response plan
 
+  profile:
+    core:
+      incident_count:
+        recent: within the last 48 hours
+
   search:
     results:
       none: No results found
