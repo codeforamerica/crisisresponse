@@ -24,12 +24,12 @@
       </span>
 
       <span class="hair-color">
-        <%= image_tag("physical/hair-#{theme}.svg") %>
+        <%= inline_svg "physical/hair.svg", class: "hair-color-icon" %>
         <%= person.hair_color.to_s.humanize %>
       </span>
 
       <span class="eye-color">
-        <%= image_tag("physical/eye-#{theme}.svg") %>
+        <%= inline_svg "physical/eye.svg", class: "eye-color-icon" %>
         <%= person.eye_color.to_s.humanize %>
       </span>
 

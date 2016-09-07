@@ -45,7 +45,8 @@ $secondary-text-color: rgba(0, 0, 0, 0.54);
 $contact-notes-color: $secondary-text-color;
 
 // Icons
-$bullet-background: image_url("/assets/circle.svg");
+$icon-color: $dark-gray;
+$bullet-background: image_url("/assets/circle-day.svg");
 $zoom_in_image: image_url("zoom_in-day.svg");
 $zoom_out_image: image_url("zoom_out-day.svg");
 $arrow_up: image_url("arrow_up-day.svg");

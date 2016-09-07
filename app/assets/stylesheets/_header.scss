@@ -6,6 +6,7 @@
 
 .header {
   @include heavy-font;
+  @include icon-color($section-header-font-color);
   background-color: $header-background-color;
   box-shadow: $shadow-level-4;
   color: $header-font-color;

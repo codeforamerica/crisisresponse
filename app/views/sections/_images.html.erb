@@ -9,15 +9,15 @@
       </span>
 
       <% if person.images.many? %>
-        <%= image_tag(
-          "arrow_left-#{theme}.svg",
+        <%= inline_svg(
+          "arrow_left.svg",
           class: "image-scroll-arrow",
           data: { direction: "prev" },
           role: "link",
         ) %>
 
-        <%= image_tag(
-          "arrow_right-#{theme}.svg",
+        <%= inline_svg(
+          "arrow_right.svg",
           class: "image-scroll-arrow",
           data: { direction: "next" },
           role: "link",

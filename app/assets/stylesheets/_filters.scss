@@ -26,6 +26,7 @@
   }
 
   .filter-remove {
+    @include icon-color($icon-color);
     vertical-align: sub;
     margin-left: $small-spacing;
   }
