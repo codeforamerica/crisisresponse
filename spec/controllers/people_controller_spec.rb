@@ -16,40 +16,17 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   describe "GET #index" do
-    # TODO temporary feature flag
-    # This should be adjusted when we allow all officers
-    # to view people without a response plan
-    context "when the officer can view people without a response plan" do
-      it "shows people who do not have a response plan" do
-        officer = create(:officer, username: "foobar")
-        stub_view_without_response_plan_permissions(officer)
-        person = create(:person, first_name: "John", last_name: "Doe")
+    it "shows people who do not have a response plan" do
+      officer = create(:officer, username: "foobar")
+      person = create(:person, first_name: "John", last_name: "Doe")
 
-        get :index, session: { officer_id: officer.id }
+      get :index, session: { officer_id: officer.id }
 
-        expect(assigns(:people)).to eq([person])
-      end
-    end
-
-    # TODO temporary feature flag
-    # This should be removed when we allow all officers
-    # to view people without a response plan
-    context "when the officer can only view people with a response plan" do
-      it "does not show people who do not have a response plan" do
-        officer = create(:officer)
-        rms_person = create(:rms_person, first_name: "John", last_name: "Doe")
-        person = rms_person.person
-
-        get :index, session: { officer_id: officer.id }
-
-        expect(assigns(:people)).to be_empty
-      end
+      expect(assigns(:people)).to eq([person])
     end
 
     it "shows people in alphabetical order" do
       officer = create(:officer)
-      stub_view_without_response_plan_permissions(officer)
-
       charlie = create(:person, last_name: "Charlie")
       alice = create(:rms_person, last_name: "Alice").person
       alice.last_name = nil
@@ -62,20 +39,19 @@ RSpec.describe PeopleController, type: :controller do
       expect(assigns(:people)).to eq([alice, bob, charlie])
     end
 
-    it "does not show response plans that have not been approved" do
+    it "shows people with and without an approved response plan" do
       officer = create(:officer)
       stub_admin_permissions(officer)
       approved = create(:response_plan)
       unapproved = create(:response_plan, :submission)
+      person_without_plan = create(:person)
 
       get :index, session: { officer_id: officer.id }
 
-      expect(assigns(:people)).to eq([
+      expect(assigns(:people)).to match_array([
         approved.person,
-        # TODO: For now, don't show people without a response plan.
-        # We'll add them in once we have a plan
-        # for the basic information layout.
-        # unapproved.person,
+        unapproved.person,
+        person_without_plan,
       ])
     end
   end

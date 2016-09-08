@@ -4,14 +4,7 @@ class PeopleController < ApplicationController
   before_action :authenticate_officer!
 
   def index
-    if current_officer.can_view_people_without_response_plans?
-      @search = Search.new(search_params)
-    else
-      plans = ResponsePlan.where.not(approved_at: nil)
-      people_with_response_plans = Person.where(id: plans.pluck(:person_id).uniq)
-      @search = Search.new(search_params, people_with_response_plans)
-    end
-
+    @search = Search.new(search_params)
     @search.validate
 
     @people = @search.
