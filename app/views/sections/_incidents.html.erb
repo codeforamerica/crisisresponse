@@ -1,0 +1,27 @@
+<section class="incidents">
+  <div class="section-header section-header-muted">
+    <div class="section-header-text">
+      <span class="section-title">Incident History</span>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <% person.recent_incidents.each do |incident| %>
+      <div class="incident">
+        <div class="incident-date"><%= l(incident.reported_at.to_date) %></div>
+
+        <ul class="incident-behaviors">
+          <% incident.behaviors.each do |behavior| %>
+            <li class="incident-behavior"><%= behavior %></li>
+          <% end %>
+        </ul>
+
+        <div class="incident-narrative"><%= incident.narrative %></div>
+
+        <a href="#" class="incident-go-link">
+          <%= incident.go_number[0...4] %>-<%= incident.go_number[4..-1] %>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</section>
