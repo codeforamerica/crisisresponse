@@ -1,0 +1,26 @@
+<section class="behaviors">
+  <div class="section-header section-header-muted">
+    <div class="section-header-text">
+      <span class="section-title">Behaviors</span>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <ul>
+      <% person.
+        incidents_since(1.year.ago).
+        frequent_behaviors.
+        sort_by { |_, count| count }.
+        reverse.
+        each do |behavior, count| %>
+        <li class="behavior">
+          <span class="behavior-name"><%= behavior.to_s.titleize %></span>
+          <span class="behavior-count"><%= count %></span>
+          <span class="behavior-frequency">
+            (<%= 100 * count / person.incidents_since(1.year.ago).count %>%)
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>

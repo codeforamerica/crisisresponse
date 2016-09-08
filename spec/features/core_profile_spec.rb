@@ -24,4 +24,15 @@ feature "Core Profile" do
 
     expect(page).not_to have_content t("profile.core.incident_count.recent")
   end
+
+  it "shows recent behaviors" do
+    sign_in_officer
+    rms_person = create(:rms_person)
+    create(:incident, mania: true, rms_person: rms_person)
+    create(:incident, mania: false, rms_person: rms_person)
+
+    visit person_path(rms_person.person)
+
+    expect(page).to have_content "Mania 1 (50%)"
+  end
 end
