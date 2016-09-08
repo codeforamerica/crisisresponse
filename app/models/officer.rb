@@ -1,30 +1,32 @@
+# frozen_string_literal: true
+
 class Officer < ActiveRecord::Base
   include Analytics
+
+  NORMAL = "normal"
+  ADMIN = "admin"
+  ROLES = [NORMAL, ADMIN].freeze
+
   before_create :generate_analytics_token
 
   validates :name, presence: true
+  validates :role, inclusion: { in: ROLES }
 
-  has_many :authored_response_plans,
+  has_many(
+    :authored_response_plans,
     class_name: "ResponsePlan",
     foreign_key: :author_id,
-    dependent: :destroy
+    dependent: :destroy,
+  )
 
-  has_many :approved_response_plans,
+  has_many(
+    :approved_response_plans,
     class_name: "ResponsePlan",
     foreign_key: :approver_id,
-    dependent: :destroy
+    dependent: :destroy,
+  )
 
   def admin?
-    username_defined_in_env_variable?("ADMIN_USERNAMES")
-  end
-
-  private
-
-  def username_defined_in_env_variable?(env_var)
-    ENV.fetch(env_var).
-      to_s.
-      gsub(/["']/, "").
-      split(",").
-      include?(username)
+    role == ADMIN
   end
 end

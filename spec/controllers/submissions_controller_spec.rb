@@ -1,9 +1,6 @@
 require "rails_helper"
-require "support/permissions"
 
 RSpec.describe SubmissionsController do
-  include Permissions
-
   describe "GET #index" do
     it "only shows plans that are pending approval" do
       _draft = create(:response_plan, :draft)
@@ -81,8 +78,7 @@ RSpec.describe SubmissionsController do
     end
   end
 
-  def stubbed_admin_session(officer = create(:officer))
-    stub_admin_permissions(officer)
+  def stubbed_admin_session(officer = create(:officer, :admin))
     { officer_id: officer.id }
   end
 end

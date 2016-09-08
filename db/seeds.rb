@@ -18,6 +18,7 @@ Officer.destroy_all
 
 officer = Officer.create!(
   name: "Ofc. John Doe",
+  role: Officer::ADMIN,
   unit: "Crisis Response Team",
   title: nil,
   phone: "206-123-4567",
@@ -26,6 +27,7 @@ officer = Officer.create!(
 
 sergeant = Officer.create!(
   name: "Sgt Jones",
+  role: Officer::ADMIN,
   unit: "Crisis Response Team",
   title: nil,
   phone: nil,

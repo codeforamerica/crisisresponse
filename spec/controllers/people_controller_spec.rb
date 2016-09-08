@@ -1,8 +1,6 @@
 require "rails_helper"
-require "support/permissions"
 
 RSpec.describe PeopleController, type: :controller do
-  include Permissions
   render_views
 
   describe "authentication" do
@@ -40,8 +38,7 @@ RSpec.describe PeopleController, type: :controller do
     end
 
     it "shows people with and without an approved response plan" do
-      officer = create(:officer)
-      stub_admin_permissions(officer)
+      officer = create(:officer, :admin)
       approved = create(:response_plan)
       unapproved = create(:response_plan, :submission)
       person_without_plan = create(:person)
@@ -74,8 +71,7 @@ RSpec.describe PeopleController, type: :controller do
 
     context "when a plan is being drafted by the current officer" do
       it "does not show the response plan information" do
-        officer = create(:officer)
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         plan = create(:response_plan, :draft, author: officer)
         person = plan.person
 

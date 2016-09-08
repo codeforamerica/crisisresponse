@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Response Plan Lifecycle" do
-  include Permissions
-
   describe "creating a draft" do
     context "when the officer is not an admin" do
       scenario "they cannot create a draft"
@@ -10,9 +8,8 @@ RSpec.feature "Response Plan Lifecycle" do
 
     context "when the officer is an admin" do
       scenario "they can draft a plan for a person who doesn't have one" do
-        officer = create(:officer)
+        officer = create(:officer, :admin)
         sign_in_officer(officer)
-        stub_admin_permissions(officer)
         person = create(:person)
 
         visit person_path(person)
@@ -23,8 +20,7 @@ RSpec.feature "Response Plan Lifecycle" do
       end
 
       scenario "they can draft a new plan for a person who already has one" do
-        officer = create(:officer)
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         sign_in_officer(officer)
         person = create(:response_plan, :approved).person
 
@@ -38,8 +34,7 @@ RSpec.feature "Response Plan Lifecycle" do
       scenario "updating a draft" do
         person = create(:person, first_name: "Jane", last_name: "Doe")
         plan = create(:response_plan, :approved, person: person)
-        officer = create(:officer)
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         sign_in_officer(officer)
 
         visit person_path(person)
@@ -61,8 +56,7 @@ RSpec.feature "Response Plan Lifecycle" do
 
     context "when the officer is an admin" do
       scenario "they can edit a draft that they created" do
-        officer = create(:officer)
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         sign_in_officer(officer)
         plan = create(:response_plan, :draft, author: officer)
 
@@ -77,8 +71,7 @@ RSpec.feature "Response Plan Lifecycle" do
       scenario "they can(not?) edit a draft that someone else has created"
 
       scenario "they can submit a draft for approval" do
-        officer = create(:officer)
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         sign_in_officer(officer)
         plan = create(:response_plan, :draft, author: officer)
 
@@ -110,8 +103,7 @@ RSpec.feature "Response Plan Lifecycle" do
 
     context "when the officer is a super admin" do
       scenario "they can approve submitted response plans" do
-        officer = create(:officer)
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         sign_in_officer(officer)
         plan = create(:response_plan, :submission, background_info: "unique")
         person = plan.person

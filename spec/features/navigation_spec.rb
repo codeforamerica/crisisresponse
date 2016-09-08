@@ -1,13 +1,9 @@
 require "rails_helper"
-require "support/permissions"
 
 RSpec.describe "Navigation" do
-  include Permissions
-
   context "as an admin" do
     before(:each) do
-      officer = create(:officer)
-      stub_admin_permissions(officer)
+      officer = create(:officer, :admin)
       sign_in_officer(officer)
     end
 

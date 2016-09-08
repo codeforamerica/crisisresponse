@@ -1,8 +1,6 @@
 require "rails_helper"
 
 feature "Officer views a response plan" do
-  include Permissions
-
   scenario "They see the person's basic information" do
     sign_in_officer
     person = create(

@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-require "support/permissions"
 
 feature "Core Profile" do
-  include Permissions
-
   it "displays the number of crisis incidents in the past year" do
     sign_in_officer
     rms_person = create(:rms_person)

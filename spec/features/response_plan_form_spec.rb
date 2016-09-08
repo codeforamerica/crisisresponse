@@ -1,13 +1,10 @@
 require "rails_helper"
 
 feature "Response Plan Form" do
-  include Permissions
-
   context "Creating a new response plan" do
     scenario "Officer fills in minimum information" do
-      admin_officer = create(:officer)
+      admin_officer = create(:officer, :admin)
       sign_in_officer(admin_officer)
-      stub_admin_permissions(admin_officer)
       person = create(:person)
 
       visit person_path(person)
@@ -27,9 +24,8 @@ feature "Response Plan Form" do
     end
 
     scenario "Officer fills in all information" do
-      admin_officer = create(:officer)
+      admin_officer = create(:officer, :admin)
       sign_in_officer(admin_officer)
-      stub_admin_permissions(admin_officer)
       person = create(:person)
 
       visit person_path(person)
@@ -67,9 +63,8 @@ feature "Response Plan Form" do
     end
 
     scenario "Officer fills out form with errors" do
-      admin_officer = create(:officer)
+      admin_officer = create(:officer, :admin)
       sign_in_officer(admin_officer)
-      stub_admin_permissions(admin_officer)
       person = create(:person)
 
       visit person_path(person)
@@ -94,9 +89,8 @@ feature "Response Plan Form" do
 
   feature "nested forms", :js do
     scenario "adding a nested response strategy" do
-      admin_officer = create(:officer)
+      admin_officer = create(:officer, :admin)
       sign_in_officer(admin_officer)
-      stub_admin_permissions(admin_officer)
       plan = create(:response_plan)
       person = plan.person
 
@@ -114,9 +108,8 @@ feature "Response Plan Form" do
     end
 
     scenario "removing a nested alias" do
-      admin_officer = create(:officer)
+      admin_officer = create(:officer, :admin)
       sign_in_officer(admin_officer)
-      stub_admin_permissions(admin_officer)
       plan = create(:response_plan)
       create(:alias, name: "Foo", person: plan.person)
 
@@ -129,9 +122,8 @@ feature "Response Plan Form" do
     end
 
     scenario "removing a nested response strategy" do
-      admin_officer = create(:officer)
+      admin_officer = create(:officer, :admin)
       sign_in_officer(admin_officer)
-      stub_admin_permissions(admin_officer)
       title = "Call case manager"
       plan = create(:response_plan)
       create(:response_strategy, response_plan: plan, title: title)
@@ -144,9 +136,8 @@ feature "Response Plan Form" do
     end
 
     scenario "updating a nested response strategy" do
-      admin_officer = create(:officer)
+      admin_officer = create(:officer, :admin)
       sign_in_officer(admin_officer)
-      stub_admin_permissions(admin_officer)
       original_title = "Call case manager"
       new_title = "Response strategy 1"
       plan = create(:response_plan)
