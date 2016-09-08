@@ -50,5 +50,9 @@ module RMS
         ]
       end.reject { |_, count| count.zero? }.to_h
     end
+
+    def behaviors
+      BEHAVIORS.select { |behavior| public_send(behavior) }
+    end
   end
 end

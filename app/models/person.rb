@@ -3,6 +3,8 @@ class Person < ActiveRecord::Base
   include PersonValidations
   include Analytics
 
+  RECENCY_TIMEFRAME = 1.year
+
   attr_accessor :height_feet, :height_inches
 
   before_create :generate_analytics_token
@@ -100,6 +102,10 @@ class Person < ActiveRecord::Base
     Rails.cache.fetch([self, "profile_image_url"]) do
       images.first.try(:source_url) || "/default_profile.png"
     end
+  end
+
+  def recent_incidents
+    incidents_since(RECENCY_TIMEFRAME.ago)
   end
 
   def save(*args)

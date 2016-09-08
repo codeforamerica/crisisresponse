@@ -35,4 +35,15 @@ feature "Core Profile" do
 
     expect(page).to have_content "Mania 1 (50%)"
   end
+
+  it "shows recent incident narratives" do
+    sign_in_officer
+    rms_person = create(:rms_person)
+    narrative = "This is a crisis incident narrative."
+    create(:incident, narrative: narrative, rms_person: rms_person)
+
+    visit person_path(rms_person.person)
+
+    expect(page).to have_content(narrative)
+  end
 end
