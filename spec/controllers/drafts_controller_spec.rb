@@ -1,8 +1,6 @@
 require "rails_helper"
-require "support/permissions"
 
 RSpec.describe DraftsController do
-  include Permissions
   render_views
 
   describe "authentication" do
@@ -27,9 +25,7 @@ RSpec.describe DraftsController do
 
   describe "GET #index" do
     it "only shows plans that are drafts" do
-      officer = create(:officer)
-      stub_admin_permissions(officer)
-
+      officer = create(:officer, :admin)
       draft = create(:response_plan, :draft, author: officer)
       _draft_from_other_officer = create(:response_plan, :draft)
       _pending = create(:response_plan, :submission)
@@ -49,8 +45,7 @@ RSpec.describe DraftsController do
   describe "POST #create" do
     it "redirects to #edit" do
       person = create(:person)
-      officer = create(:officer)
-      stub_admin_permissions(officer)
+      officer = create(:officer, :admin)
 
       post(
         :create,
@@ -64,8 +59,7 @@ RSpec.describe DraftsController do
     context "when the person does not have a response plan" do
       it "creates a new response plan for the person" do
         person = create(:person)
-        officer = create(:officer)
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
 
         expect do
           post(
@@ -84,8 +78,7 @@ RSpec.describe DraftsController do
     context "when the person has a response plan in draft form" do
       # TODO is this what we want?
       it "ignores the information in the non-approved plan" do
-        officer = create(:officer, username: "admin")
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         original = create(
           :response_plan,
           approved_at: nil,
@@ -110,8 +103,7 @@ RSpec.describe DraftsController do
 
     context "when the person already has a response plan" do
       it "makes a copy of the response plan as a draft for the user to edit" do
-        officer = create(:officer, username: "admin")
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         original = create(:response_plan, background_info: "hello")
 
         expect do
@@ -129,8 +121,7 @@ RSpec.describe DraftsController do
       end
 
       it "associates the copy with the original person" do
-        officer = create(:officer, username: "admin")
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         person = create(:person)
         original = create(:response_plan, background_info: "hello")
 
@@ -146,8 +137,7 @@ RSpec.describe DraftsController do
       end
 
       it "copies over contacts" do
-        officer = create(:officer, username: "admin")
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         original = create(:contact, name: "Ann", relationship: "mother")
 
         post(
@@ -163,8 +153,7 @@ RSpec.describe DraftsController do
       end
 
       it "copies over deescalation_techniques" do
-        officer = create(:officer, username: "admin")
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         original = create(:deescalation_technique, description: "bar")
 
         post(
@@ -179,8 +168,7 @@ RSpec.describe DraftsController do
       end
 
       it "copies over response_strategies" do
-        officer = create(:officer, username: "admin")
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         original = create(:response_strategy, priority: 1, title: "foo", description: "bar")
 
         post(
@@ -197,8 +185,7 @@ RSpec.describe DraftsController do
       end
 
       it "copies over triggers" do
-        officer = create(:officer, username: "admin")
-        stub_admin_permissions(officer)
+        officer = create(:officer, :admin)
         original = create(:trigger, description: "bar")
 
         post(
@@ -224,8 +211,7 @@ RSpec.describe DraftsController do
     it "redirects if the current officer did not create the draft"
 
     it "assigns the plan if it is still in draft form" do
-      officer = create(:officer)
-      stub_admin_permissions(officer)
+      officer = create(:officer, :admin)
       plan = create(:response_plan)
 
       get(

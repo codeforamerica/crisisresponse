@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829225841) do
+ActiveRecord::Schema.define(version: 20160908191644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
+  enable_extension "fuzzystrmatch"
 
   create_table "aliases", force: :cascade do |t|
     t.string   "name",       null: false
@@ -76,14 +76,15 @@ ActiveRecord::Schema.define(version: 20160829225841) do
   end
 
   create_table "officers", force: :cascade do |t|
-    t.string   "name",            null: false
+    t.string   "name",                               null: false
     t.string   "unit"
     t.string   "title"
     t.string   "phone"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "username"
     t.string   "analytics_token"
+    t.string   "role",            default: "normal", null: false
     t.index ["username"], name: "index_officers_on_username", unique: true, using: :btree
   end
 

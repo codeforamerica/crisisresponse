@@ -33,6 +33,10 @@ FactoryGirl.define do
     sequence(:username) { |n| "officer_#{n}" }
     title "Officer"
     unit "Crisis Response Unit"
+
+    trait :admin do
+      role Officer::ADMIN
+    end
   end
 
   factory :page_view do

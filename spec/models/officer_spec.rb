@@ -9,28 +9,22 @@ RSpec.describe Officer, type: :model do
     it { should have_many(:approved_response_plans).dependent(:destroy) }
   end
 
-  describe "#admin?" do
-    it "is true if officer's username is in the ADMIN_USERNAMES env variable" do
-      allow(ENV).to receive(:fetch).
-        with("ADMIN_USERNAMES").
-        and_return("foo,bar")
+  describe "#validations" do
+    it { is_expected.to allow_value(:admin).for(:role) }
+    it { is_expected.to allow_value(:normal).for(:role) }
+    it { is_expected.not_to allow_value(:other).for(:role) }
+  end
 
-      admin = build(:officer, username: "foo")
-      non_admin = build(:officer, username: "other")
+  describe "#admin?" do
+    it "is true if officer's role is `admin`" do
+      admin = build_stubbed(:officer, role: "admin")
 
       expect(admin).to be_admin
-      expect(non_admin).not_to be_admin
     end
 
-    it "can handle quotes in the env variable" do
-      allow(ENV).to receive(:fetch).
-        with("ADMIN_USERNAMES").
-        and_return('"foo,bar"')
+    it "is false if the officer's role is `normal`" do
+      non_admin = build_stubbed(:officer, role: "normal")
 
-      admin = build(:officer, username: "foo")
-      non_admin = build(:officer, username: "other")
-
-      expect(admin).to be_admin
       expect(non_admin).not_to be_admin
     end
   end

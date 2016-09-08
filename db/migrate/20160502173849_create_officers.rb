@@ -1,6 +1,3 @@
-class Officer < ActiveRecord::Base; end
-class ResponsePlan < ActiveRecord::Base; end
-
 class CreateOfficers < ActiveRecord::Migration
   def up
     create_table :officers do |t|
@@ -12,10 +9,10 @@ class CreateOfficers < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    officer = Officer.create(
-      name: "TEMPORARY - REPLACE ME",
-      unit: "TEMPORARY - REPLACE ME",
-    )
+    execute(<<-SQL)
+      INSERT INTO officers (name,unit,created_at,updated_at)
+      VALUES ('PLACEHOLDER - REPLACE ME','PLACEHOLDER - REPLACE ME',now(),now())
+    SQL
 
     add_column :response_plans, :author_id, :integer
     add_column :response_plans, :approver_id, :integer
@@ -24,7 +21,9 @@ class CreateOfficers < ActiveRecord::Migration
     add_index :response_plans, :approver_id
     add_index :response_plans, :author_id
 
-    ResponsePlan.update_all(author_id: officer.id)
+    execute(<<-SQL)
+      UPDATE response_plans SET author_id = (SELECT id FROM officers LIMIT 1)
+    SQL
 
     change_column_null :response_plans, :author_id, false
   end
