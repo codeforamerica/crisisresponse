@@ -29,6 +29,8 @@ Optional variables:
     <%= render "past_year_incident_count", person: person %>
     <%= render "recent_incident_count", person: person %>
 
+    <%= render "sections/behaviors", person: person %>
+
     <% if plan %>
       <%= render "sections/deescalation_techniques", plan: plan %>
       <%= render "sections/triggers", plan: plan %>
