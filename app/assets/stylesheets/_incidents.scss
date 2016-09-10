@@ -1,0 +1,106 @@
+.incidents {
+  position: relative;
+
+  @include media($medium-screen-up) {
+    .section-body {
+      position: relative;
+    }
+
+    .section-body::before {
+      $timeline-width: $tiny-spacing;
+      background-color: $timeline-color;
+      bottom: 0;
+      content: "";
+      position: absolute;
+      top: 0;
+      transform: translate($small-spacing - $timeline-width / 2, $small-spacing);
+      width: $timeline-width;
+    }
+  }
+}
+
+.incident {
+  margin-bottom: $base-spacing;
+
+  @include media($medium-screen-up) {
+    margin-left: 2 * $base-spacing;
+
+    &::before {
+      background-image: $bullet-background;
+      background-repeat: no-repeat;
+      background-size: $base-spacing;
+      content: "";
+      height: $base-spacing;
+      left: $base-spacing;
+      line-height: $base-spacing;
+      position: absolute;
+      width: $base-spacing;
+    }
+  }
+
+  // The style for the link when the section is open
+  .expand {
+    background-color: $card-background;
+    bottom: 0;
+    display: block;
+    left: 0;
+    min-height: 5em;
+    padding: 0.75em;
+    position: fixed;
+    right: 0;
+    text-align: center;
+  }
+}
+
+.incident-date {
+  @include heavy-font;
+}
+
+.incident-behavior {
+  @include light-font;
+  background-color: $tag-background-color;
+  color: $tag-text-color;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-bottom: $tiny-spacing;
+  padding: $tiny-spacing;
+}
+
+.mobile-collapsed {
+  .expand::after {
+    background-image: $arrow_down;
+  }
+
+  .incident-narrative {
+    max-height: 3em;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+
+    &::after {
+      background-image: linear-gradient($transparent, $card-background);
+      bottom: 0;
+      content: "";
+      display: block;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  // The style for the link when the section is collapsed
+  .expand {
+    min-height: auto;
+    padding: 0;
+    position: relative;
+  }
+}
+
+@include media($medium-screen-up) {
+  .mobile-collapsed {
+    .expand {
+      display: inline;
+    }
+  }
+}

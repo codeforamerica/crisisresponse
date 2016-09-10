@@ -11,11 +11,14 @@
 
 @import "mixins/*";
 
+@import "behaviors";
 @import "deescalation_techniques";
 @import "feedbacks";
 @import "filters";
 @import "footer";
 @import "header";
+@import "incident_count";
+@import "incidents";
 @import "layout";
 @import "location";
 @import "menu";

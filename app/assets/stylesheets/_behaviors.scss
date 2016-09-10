@@ -1,0 +1,37 @@
+.behaviors {
+  @include span-columns(4 of 4);
+}
+
+.behavior {
+  border-bottom: $base-border;
+  margin-bottom: $tiny-spacing;
+  overflow: hidden;
+  padding-bottom: $tiny-spacing;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.behavior-name {
+  @include span-columns(2.5 of 4);
+}
+
+.behavior-count {
+  @include span-columns(1.5 of 4);
+  margin-right: 0;
+  text-align: right;
+}
+
+.behavior-frequency {
+  @include light-font;
+  color: $secondary-text-color;
+  font-size: 0.8em;
+  margin-left: $tiny-spacing;
+}
+
+@include media($medium-screen-up) {
+  .behaviors {
+    @include span-columns(4 of 8);
+  }
+}

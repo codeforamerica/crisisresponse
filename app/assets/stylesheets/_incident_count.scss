@@ -1,0 +1,18 @@
+.secondary {
+  @include light-font;
+  color: $secondary-text-color;
+}
+
+.incident-count {
+  text-align: center;
+}
+
+.urgent-incident-icon {
+  height: 1em;
+  margin-right: $small-spacing;
+}
+
+.recent-incident-count .incident-count-number {
+  @include heavy-font;
+  text-transform: capitalize;
+}

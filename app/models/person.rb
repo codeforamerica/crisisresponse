@@ -3,7 +3,8 @@ class Person < ActiveRecord::Base
   include PersonValidations
   include Analytics
 
-  RECENCY_TIMEFRAME = 1.year
+  URGENT_TIMEFRAME = 7.days
+  RECENT_TIMEFRAME = 1.year
 
   attr_accessor :height_feet, :height_inches
 
@@ -105,7 +106,7 @@ class Person < ActiveRecord::Base
   end
 
   def recent_incidents
-    incidents_since(RECENCY_TIMEFRAME.ago)
+    @recent_incidents ||= incidents_since(RECENT_TIMEFRAME.ago)
   end
 
   def save(*args)

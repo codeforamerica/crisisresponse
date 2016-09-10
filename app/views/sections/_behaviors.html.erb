@@ -12,12 +12,16 @@
         frequent_behaviors.
         sort_by { |_, count| count }.
         reverse.
+        first(4).
         each do |behavior, count| %>
         <li class="behavior">
           <span class="behavior-name"><%= behavior.to_s.titleize %></span>
-          <span class="behavior-count"><%= count %></span>
-          <span class="behavior-frequency">
-            (<%= 100 * count / person.recent_incidents.count %>%)
+          <span class="behavior-count">
+            <%= count %>
+
+            <span class="behavior-frequency">
+              (<%= 100 * count / person.recent_incidents.count %>%)
+            </span>
           </span>
         </li>
       <% end %>
