@@ -6,16 +6,18 @@
 # Exit if any subcommand fails
 set -e
 
-# Set up Ruby dependencies via Bundler
-gem install bundler --conservative
-bundle check || bundle install
-
-# Set up database and add any development seed data
-bin/rake dev:prime
-
 # Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
 mkdir -p .git/safe
 
+# Make sure .env.local exists - our docker-compose configuration depends on it.
+touch .env.local
+
 # Only if this isn't CI
-# if [ -z "$CI" ]; then
-# fi
+if [ -z "$CI" ]; then
+  # Build the docker image
+  docker-compose build
+
+  # Set up the database for our app
+  docker-compose run web rake db:create db:migrate
+  docker-compose run web rake db:seed
+fi
