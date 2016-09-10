@@ -59,18 +59,39 @@ on any platform.
 
 Before starting, install Docker ([mac], [windows], [linux]) and [Docker Compose].
 
-After installing,
-pull [the application image] from Docker Hub,
-or build it yourself.
-All of the dependencies are managed through Docker,
-so there shouldn't be any problems running this script.
-If you do encounter a problem, please [open an issue] to report it.
+#### Mac or Windows VM setup
+
+If you are running Docker for the first time on OS X or Windows,
+you'll need to [install docker-machine] and [VirtualBox],
+then create a virtual machine:
 
 ```bash
-# Pull from Docker Hub
-docker pull codeforamerica/crisisresponse
-# Build the image locally
-docker-compose build
+$ docker-machine create --driver virtualbox default
+
+# Add relevant environment variables to your shell
+# (if you don't use bash, replace with `.zshrc`, `.profile`, etc.
+$ cat 'eval $(docker-machine env)' >> ~/.bashrc && source ~/.bashrc
+
+# Open up port 3000 between the host and the virtualbox machine
+$ VBoxManage modifyvm "default" --natpf1 "guestnginx,tcp,,3000,,3000"
+```
+
+#### Confirm dependencies are installed correctly:
+
+```bash
+$ docker run --rm hello-world
+# should print something like:
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+...
+
+$ docker-compose version
+# should print something like:
+docker-compose version 1.8.0, build f3628c7
+docker-py version: 1.9.0
+CPython version: 2.7.9
+OpenSSL version: OpenSSL 1.0.2h  3 May 2016
 ```
 
 [Docker]: https://www.docker.com/
@@ -78,44 +99,38 @@ docker-compose build
 [windows]: https://docs.docker.com/windows/
 [linux]: https://docs.docker.com/linux/
 [Docker Compose]: https://docs.docker.com/compose/install/
-[open an issue]: https://github.com/codeforamerica/crisisresponse
-[the application image]: https://hub.docker.com/r/codeforamerica/crisisresponse/
+[install docker-machine]: https://docs.docker.com/machine/install-machine
+[VirtualBox]: https://www.virtualbox.org/wiki/Downloads
 
-### Starting the Application
+## Running and Managing the Application
 
-Run the application with the command:
-
-```bash
-$ touch .env.local; rm tmp/pids/server.pid; docker-compose up
-```
-
-After running that command,
-access the application by visiting http://localhost:3000
-
-## Managing Application Lifecycle
+There are a few common commands to get you set up:
 
 ```bash
 # start by cloning the repository
-git clone git@github.com:codeforamerica/crisisresponse.git
+$ git clone git@github.com:codeforamerica/crisisresponse.git && cd crisisresponse
 
-# To set up:
-docker-compose build
-docker-compose run web rake db:create db:migrate
+# Set up the app for development:
+$ ./bin/setup
 
-# To run the server
-docker-compose up
+# Run the server
+$ docker-compose up
+```
 
-# After updating the `Dockerfile`:
-docker-compose build
+After those commands,
+your application should be serving the site on port 3000.
+Open <http://localhost:3000> in your web browser to see the site.
+
+There are a few more commands
+that you'll need after you change the application's dependencies:
+
+```bash
+# After updating the `Dockerfile` or `Gemfile`,
+# you'll need to rebuild the application container.
+$ docker-compose build
 
 # Push a new docker image to Docker Hub:
-docker-compose build && docker push codeforamerica/crisisresponse
-
-# After updating the `Gemfile`:
-docker-compose up
-
-# To run the server
-docker-compose up
+$ docker-compose build && docker push codeforamerica/crisisresponse
 ```
 
 ### Running Tests
@@ -132,7 +147,7 @@ or run an individual test file with `./bin/test spec/my/test/file.rb`.
 * run:
 
   ```bash
-  app run --rm web rails c
+  $ app run --rm web rails c
   ```
 
 * Inside the rails console, type:
@@ -157,10 +172,10 @@ under the `backups/` subfolder.
 
 ```bash
 # Create a backup of the database
-docker-compose run --rm backup
+$ docker-compose run --rm backup
 
 # Restore a backup
-docker-compose run --rm restore backups/2016-01-02_12:00:00.sql
+$ docker-compose run --rm restore backups/2016-01-02_12:00:00.sql
 ```
 
 ## Development Guidelines
