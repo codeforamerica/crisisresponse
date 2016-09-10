@@ -6,11 +6,6 @@ module RMS
 
     BEHAVIORS = [
       :weapon,
-      :threaten_violence,
-      :biologically_induced,
-      :medically_induced,
-      :chemically_induced,
-      :unknown_crisis_nature,
       :neglect_self_care,
       :disorganize_communication,
       :disoriented_confused,
@@ -24,8 +19,22 @@ module RMS
       :out_of_touch_reality,
       :halluc_delusion,
       :excited_delirium,
-      :chronic,
+    ].freeze
+
+    OTHER = [
+      :threaten_violence,
+    ].freeze
+
+    NATURE_OF_CRISIS = [
+      :biologically_induced,
+      :medically_induced,
+      :chemically_induced,
+      :unknown_crisis_nature,
+    ].freeze
+
+    DISPOSITIONS = [
       :treatment_referral,
+      :chronic,
       :resource_declined,
       :mobile_crisis_team,
       :grat,
@@ -37,7 +46,6 @@ module RMS
       :emergent_ita,
       :voluntary_commit,
       :arrested,
-      :verbalization,
     ].freeze
 
     def self.frequent_behaviors
@@ -53,6 +61,10 @@ module RMS
 
     def behaviors
       BEHAVIORS.select { |behavior| public_send(behavior) }
+    end
+
+    def formatted_go_number
+      "#{go_number[0...4]}-#{go_number[4..-1]}"
     end
   end
 end

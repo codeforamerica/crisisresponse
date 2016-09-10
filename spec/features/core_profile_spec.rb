@@ -12,8 +12,8 @@ feature "Core Profile" do
 
     visit person_path(rms_person.person)
 
-    expect(page).to have_content("2 crisis calls (in the past year)")
-    expect(page).to have_content("1 crisis call within the last 48 hours")
+    expect(page).to have_content("2 crisis calls (in the last year)")
+    expect(page).to have_content("1 crisis call within the last 7 days")
   end
 
   it "does not show the recent crisis count if there are no recent incidents" do

@@ -1,0 +1,15 @@
+<% if person.incidents_since(Person::URGENT_TIMEFRAME.ago).any? %>
+  <section class="incident-count urgent-incident-count">
+    <div class="section-body">
+      <%= inline_svg "alert", class: "urgent-incident-icon" %>
+
+      <span class="incident-count-number">
+        <%= pluralize(
+          person.incidents_since(Person::URGENT_TIMEFRAME.ago).count,
+          "crisis call",
+        ) %>
+        within the last <%= distance_of_time_in_words(Person::URGENT_TIMEFRAME) %>
+      </span>
+    </div>
+  </section>
+<% end %>

@@ -1,10 +1,11 @@
-<% if person.incidents_since(2.days.ago).any? %>
-  <section class="recent-incident-count">
-    <div class="section-body">
-      <span class="incident-count">
-        <%= pluralize(person.incidents_since(2.days.ago).count, "crisis call") %>
-        within the last 48 hours
-      </span>
-    </div>
-  </section>
-<% end %>
+<section class="incident-count recent-incident-count">
+  <div class="section-body">
+    <span class="incident-count-number">
+      <%= pluralize(person.recent_incidents.count, "crisis call") %>
+    </span>
+
+    <span class="secondary">
+      (in the last year)
+    </span>
+  </div>
+</section>

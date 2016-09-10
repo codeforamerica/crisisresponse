@@ -7,17 +7,17 @@
   }
 
   .filter {
-    background-color: $filter-background-color;
+    background-color: $tag-background-color;
     border-radius: 3em;
+    border: $tag-outline;
     display: inline-block;
-    margin-right: $small-spacing;
     margin-bottom: $small-spacing;
+    margin-right: $small-spacing;
     padding: $tiny-spacing;
-    border: $filter-outline;
   }
 
   .filter-attribute {
-    border-right: 1px solid $filter-text-color;
+    border-right: 1px solid $tag-text-color;
     padding: 0 $tiny-spacing;
   }
 

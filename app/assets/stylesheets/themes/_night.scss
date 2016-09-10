@@ -68,12 +68,15 @@ $fieldset-background-color: tint($base-border-color, 75%);
 $field-background-color: $white;
 $field-text-color: $dark-gray;
 
-// Filters
-$filter-background-color: $dark-gray;
-$filter-text-color: $white;
-$filter-outline: 1px solid $white;
+// Tags
+$tag-background-color: $dark-gray;
+$tag-text-color: $white;
+$tag-outline: 1px solid $white;
 
 // Flashes & Notices
 $notice-color: $yellow;
 $needs-approval-background-color: $notice-color;
 $needs_approval-text-color: $dark-gray;
+
+// Timeline
+$timeline-color: $white;

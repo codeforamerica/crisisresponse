@@ -7,7 +7,7 @@
 
   <div class="section-body">
     <% person.recent_incidents.each do |incident| %>
-      <div class="incident">
+      <div class="incident mobile-collapsed">
         <div class="incident-date"><%= l(incident.reported_at.to_date) %></div>
 
         <ul class="incident-behaviors">
@@ -16,10 +16,16 @@
           <% end %>
         </ul>
 
-        <div class="incident-narrative"><%= incident.narrative %></div>
+        <div class="incident-narrative">
+          <%= incident.narrative %>
+        </div>
 
-        <a href="#" class="incident-go-link">
-          <%= incident.go_number[0...4] %>-<%= incident.go_number[4..-1] %>
+        <a
+          href="#"
+          class="expand"
+          data-text-swap="Hide <%= incident.formatted_go_number %>"
+          >
+          Read <%= incident.formatted_go_number %>
         </a>
       </div>
     <% end %>

@@ -16,7 +16,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @person = Person.find(params[:id])
+    @person = Person.includes(:images).find(params[:id])
 
     PageView.create(officer: current_officer, person: @person)
   end
