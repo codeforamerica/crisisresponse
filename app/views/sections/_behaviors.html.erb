@@ -18,8 +18,6 @@
         <% person.
           recent_incidents.
           frequent_behaviors.
-          sort_by { |_, count| count }.
-          reverse.
           first(4).
           each do |behavior, count| %>
           <li class="behavior">

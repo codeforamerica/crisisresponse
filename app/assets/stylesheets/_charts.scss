@@ -1,0 +1,36 @@
+.chart {
+  margin-bottom: $base-spacing;
+}
+
+.chart-field {
+  @include fill-parent;
+  margin-bottom: $small-spacing;
+  overflow: hidden;
+}
+
+.chart-label {
+  @include span-columns(4 of 12);
+  font-size: 0.8em;
+  text-align: right;
+}
+
+.chart-bar-background {
+  @include span-columns(4 of 12);
+  background-color: lighten($action-color, 40%);
+}
+
+.chart-bar {
+  background-color: $action-color;
+  padding-left: 1px;
+}
+
+.chart-field-count {
+  @include heavy-font;
+  margin-right: 0;
+}
+
+.chart-field-frequency {
+  @include light-font;
+  color: $secondary-text-color;
+  font-size: 0.8em;
+}

@@ -49,14 +49,23 @@ module RMS
     ].freeze
 
     def self.frequent_behaviors
-      behaviors_by_incident = pluck(*BEHAVIORS)
+      by_frequency(:behaviors)
+    end
 
-      BEHAVIORS.map.with_index do |behavior, index|
+    def self.by_frequency(category)
+      observations = RMS::CrisisIncident.const_get(category.to_s.upcase)
+      observations_by_incident = pluck(*observations)
+
+      observations.map.with_index do |observation, index|
         [
-          behavior,
-          behaviors_by_incident.count { |incident| incident[index] },
+          observation,
+          observations_by_incident.count { |incident| incident[index] },
         ]
-      end.reject { |_, count| count.zero? }.to_h
+      end.
+        reject { |_, count| count.zero? }.
+        sort_by { |_, count| count }.
+        reverse.
+        to_h
     end
 
     def behaviors
