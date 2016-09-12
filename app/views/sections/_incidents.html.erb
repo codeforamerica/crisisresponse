@@ -30,5 +30,22 @@
         View older crisis calls
       </a>
     </div>
+
+    <div class="section-body">
+      <h3>Behaviors</h3>
+      <%= render "chart",
+        incidents: person.recent_incidents,
+        category: :behaviors %>
+
+      <h3>Nature of Crisis</h3>
+      <%= render "chart",
+        incidents: person.recent_incidents,
+        category: :nature_of_crisis %>
+
+      <h3>Disposition</h3>
+      <%= render "chart",
+        incidents: person.recent_incidents,
+        category: :dispositions %>
+    </div>
   </section>
 <% end %>

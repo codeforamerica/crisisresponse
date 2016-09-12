@@ -16,7 +16,7 @@ body {
   padding-top: 0;
 }
 
-* {
+*:not(.chart-bar) {
   background: none !important;
 }
 
@@ -98,4 +98,22 @@ section .section-header {
 
 .profile-safety-concerns {
   @include omega;
+}
+
+.ct-chart {
+  transform: scale(0.5) translate(-70px, -30px);
+  left: 0;
+  height: 8em;
+}
+
+.ct-grid {
+  display: none;
+}
+
+.ct-label.ct-horizontal {
+  display: none;
+}
+
+.stat__label {
+  padding-left: 0 !important;
 }
