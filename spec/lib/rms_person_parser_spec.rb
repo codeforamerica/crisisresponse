@@ -81,6 +81,12 @@ describe RMSPersonParser do
       expect(parser.height_in_inches).to eq(66)
     end
 
+    it "handles height without delimeters" do
+      parser = RMSPersonParser.new("HEIGHT" => "506")
+
+      expect(parser.height_in_inches).to eq(66)
+    end
+
     it "handles nil" do
       parser = RMSPersonParser.new("HEIGHT" => nil)
 

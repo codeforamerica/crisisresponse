@@ -47,7 +47,8 @@ class RMSPersonParser
     height = data.fetch("HEIGHT")
 
     if height
-      feet, inches = height.split("'")
+      feet = height.strip[0]
+      inches = height.strip[1..-1].scan(/\d+/).first
       feet.to_i * 12 + inches.to_i
     end
   end
