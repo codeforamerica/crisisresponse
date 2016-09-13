@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
   before_action :authenticate_officer!
 
   def index
-    @search = Search.new(search_params)
+    @search = Search.new(search_params, Person.visible)
     @search.validate
 
     @people = @search.

@@ -23,6 +23,15 @@ RSpec.describe PeopleController, type: :controller do
       expect(assigns(:people)).to eq([person])
     end
 
+    it "does not show people below the threshold" do
+      officer = create(:officer, username: "foobar")
+      create(:person, visible: false)
+
+      get :index, session: { officer_id: officer.id }
+
+      expect(assigns(:people)).to be_empty
+    end
+
     it "shows people in alphabetical order" do
       officer = create(:officer)
       charlie = create(:person, last_name: "Charlie")
