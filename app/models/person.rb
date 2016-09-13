@@ -5,6 +5,7 @@ class Person < ActiveRecord::Base
 
   URGENT_TIMEFRAME = 7.days
   RECENT_TIMEFRAME = 1.year
+  RECENT_INCIDENT_THRESHOLD = 12
 
   attr_accessor :height_feet, :height_inches
 
@@ -75,6 +76,23 @@ class Person < ActiveRecord::Base
   fallback_to_rms_person(:weight_in_pounds)
   fallback_to_rms_person(:weight_in_pounds)
   fallback_to_rms_person(:weight_in_pounds)
+
+  def self.update_visibility
+    Person.update_all(visible: false)
+
+    over_threhsold = RMS::CrisisIncident.
+      where(reported_at: (RECENT_TIMEFRAME.ago..Time.current)).
+      group(:rms_person_id).
+      count.
+      reject { |_, incident_count| incident_count < RECENT_INCIDENT_THRESHOLD }.
+      keys
+
+    people_ids =
+      RMS::Person.find(over_threhsold).pluck(:person_id) +
+      ResponsePlan.approved.pluck(:person_id)
+
+    Person.where(id: people_ids).update_all(visible: true)
+  end
 
   def self.visible
     where(visible: true)

@@ -15,6 +15,44 @@ RSpec.describe Person, type: :model do
     it_should_behave_like "a validated person"
   end
 
+  describe ".update_visibility" do
+    it "sets `visible` if # of recent incidents are below the threshold" do
+      rms_person = create(:rms_person)
+      person = rms_person.person
+      person.update(visible: false)
+      create_list(
+        :incident,
+        Person::RECENT_INCIDENT_THRESHOLD,
+        rms_person: rms_person,
+      )
+
+      Person.update_visibility
+
+      person.reload
+      expect(person).to be_visible
+    end
+
+    it "sets `visible` if there is an active response plan" do
+      person = create(:person, visible: false)
+      create(:response_plan, :approved, person: person)
+
+      Person.update_visibility
+
+      person.reload
+      expect(person).to be_visible
+    end
+
+    it "unsets `visible` if # of recent incidents are below the threshold" do
+      person = create(:rms_person).person
+      person.update(visible: true)
+
+      Person.update_visibility
+
+      person.reload
+      expect(person).not_to be_visible
+    end
+  end
+
   describe ".visible" do
     it "returns people who are visible" do
       visible = create(:person, visible: true)

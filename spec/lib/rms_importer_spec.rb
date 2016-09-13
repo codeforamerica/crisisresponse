@@ -204,9 +204,16 @@ describe RMSImporter do
     end
   end
 
-  describe "database resource constraints" do
-    xit "fetches incidents in batches of less than 100k"
-    xit "fetches people in batches of less than 100k"
+  describe "threshold" do
+    it "updates the person's visibility" do
+      stub_crisis_incidents
+      person = create(:person, visible: true)
+
+      RMSImporter.new.import
+
+      person.reload
+      expect(person).not_to be_visible
+    end
   end
 
   private

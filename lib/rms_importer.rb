@@ -22,10 +22,9 @@ class RMSImporter
     create_log_path
 
     results = query(SQL_QUERY)
+    results.each { |result| parse_sql_result(result) }
 
-    results.each do |result|
-      parse_sql_result(result)
-    end
+    Person.update_visibility
 
     log_unimported_incidents
     log_duplicate_incidents(results)
