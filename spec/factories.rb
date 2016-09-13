@@ -54,6 +54,7 @@ FactoryGirl.define do
     hair_color "black"
     eye_color "blue"
     date_of_birth { 25.years.ago }
+    visible true
   end
 
   factory :response_plan do

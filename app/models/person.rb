@@ -76,6 +76,10 @@ class Person < ActiveRecord::Base
   fallback_to_rms_person(:weight_in_pounds)
   fallback_to_rms_person(:weight_in_pounds)
 
+  def self.visible
+    where(visible: true)
+  end
+
   def active_plan
     @active_plan ||= response_plans.
       approved.

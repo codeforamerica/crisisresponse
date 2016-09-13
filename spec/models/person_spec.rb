@@ -15,6 +15,15 @@ RSpec.describe Person, type: :model do
     it_should_behave_like "a validated person"
   end
 
+  describe ".visible" do
+    it "returns people who are visible" do
+      visible = create(:person, visible: true)
+      create(:person, visible: false)
+
+      expect(Person.visible).to eq([visible])
+    end
+  end
+
   describe "#active_plan" do
     it "returns the most recent approved response plan" do
       person = create(:person)
