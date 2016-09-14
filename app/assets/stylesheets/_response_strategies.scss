@@ -1,27 +1,3 @@
-.mobile-collapsed {
-  .expand::after {
-    background-image: $arrow_down;
-  }
-
-  p {
-    max-height: 3em;
-    overflow: hidden;
-    position: relative;
-    text-overflow: ellipsis;
-
-    &::after {
-      background-image: linear-gradient($transparent, $card-background);
-      bottom: 0;
-      content: "";
-      display: block;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-  }
-}
-
 .response-strategy {
   display: inline-block;
   position: relative;
@@ -62,6 +38,30 @@
     height: $arrow-size;
     vertical-align: middle;
     width: $arrow-size;
+  }
+}
+
+.mobile-collapsed {
+  .expand::after {
+    background-image: $arrow_down;
+  }
+
+  p {
+    max-height: 3em;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+
+    &::after {
+      background-image: linear-gradient($transparent, $card-background);
+      bottom: 0;
+      content: "";
+      display: block;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
 }
 

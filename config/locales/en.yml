@@ -47,6 +47,41 @@ en:
       search:
         create: Search
 
+  incidents:
+    behaviors:
+      neglect_self_care: Neglect of self-care
+      disorganize_communication: Disorganized speech / communication
+      disoriented_confused: Disorientation / Confusion
+      disorderly_disruptive: Disorderly / disruptive behavior
+      unusual_fright_scared: Unusually frightened or scared
+      belligerent_uncooperative: Belligerent / uncooperative, angry
+      hopeless_depressed: Hopeless / Depressed
+      bizarre_unusual_behavior: Bizarre, unusual behavior
+      suicide_threat_attempt: Suicide behaviors, threat, or attempt
+      mania: Mania
+      out_of_touch_reality: Out of touch with reality
+      halluc_delusion: Hallucinations / Delusions
+      excited_delirium: Excited delirium
+    nature_of_crisis:
+      biologically_induced: Biologically Induced
+      medically_induced: Medically Induced
+      chemically_induced: Chemically Induced
+      unknown_crisis_nature: Unknown Crisis Nature
+    dispositions:
+      treatment_referral: Social service / alcohol and drug / treatment referral
+      chronic: Chronic complaint
+      resource_declined: Resources offered / declined
+      mobile_crisis_team: MCT (Mobile Crisis Team)
+      grat: GRAT (Geriatric Regional Assessment Team)
+      shelter: Shelter
+      no_action_poss_necc: No action possible / necessary
+      casemanager_notice: Case manager / MH agency notified
+      dmhp_refer: DMHP / referral
+      crisis_clinic: Crisis clinic
+      emergent_ita: Emergent detention / ITA
+      voluntary_commit: Voluntary committal
+      arrested: Arrested
+
   people:
     show:
       new_plan: + Add a response plan

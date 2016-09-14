@@ -6,28 +6,27 @@
   </div>
 
   <div class="section-body">
-    <% person.recent_incidents.each do |incident| %>
-      <div class="incident mobile-collapsed">
-        <div class="incident-date"><%= l(incident.reported_at.to_date) %></div>
+    <h2>Police Interactions</h2>
 
-        <ul class="incident-behaviors">
-          <% incident.behaviors.each do |behavior| %>
-            <li class="incident-behavior"><%= behavior %></li>
-          <% end %>
-        </ul>
+    <div class="incidents-container">
+      <% person.recent_incidents[0...3].each do |incident| %>
+        <%= render "incident_summary", incident: incident %>
+      <% end %>
 
-        <div class="incident-narrative">
-          <%= incident.narrative %>
-        </div>
-
-        <a
-          href="#"
-          class="expand"
-          data-text-swap="Hide <%= incident.formatted_go_number %>"
-          >
-          Read <%= incident.formatted_go_number %>
-        </a>
+      <div class="additional-incidents collapsed">
+        <% Array(person.recent_incidents[3...6]).each do |incident| %>
+          <%= render "incident_summary", incident: incident %>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+
+    <a
+      href="#"
+      class="toggle additional-incidents-toggle"
+      data-toggle-target=".additional-incidents"
+      data-toggle-text="Hide older crisis calls"
+      >
+      View older crisis calls
+    </a>
   </div>
 </section>

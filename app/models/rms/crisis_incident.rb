@@ -5,7 +5,6 @@ module RMS
     belongs_to :rms_person, class_name: "RMS::Person"
 
     BEHAVIORS = [
-      :weapon,
       :neglect_self_care,
       :disorganize_communication,
       :disoriented_confused,
@@ -23,6 +22,7 @@ module RMS
 
     OTHER = [
       :threaten_violence,
+      :weapon,
     ].freeze
 
     NATURE_OF_CRISIS = [
@@ -61,6 +61,10 @@ module RMS
 
     def behaviors
       BEHAVIORS.select { |behavior| public_send(behavior) }
+    end
+
+    def dispositions
+      DISPOSITIONS.select { |disposition| public_send(disposition) }
     end
 
     def formatted_go_number

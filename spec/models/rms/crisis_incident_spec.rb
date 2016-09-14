@@ -35,4 +35,17 @@ RSpec.describe RMS::CrisisIncident, type: :model do
       expect(incident.behaviors).to match_array([:mania, :disoriented_confused])
     end
   end
+
+  describe "#dispositions" do
+    it "returns a list of dispositions that have been displayed" do
+      incident = create(
+        :incident,
+        emergent_ita: true,
+        grat: true,
+        shelter: false,
+      )
+
+      expect(incident.dispositions).to match_array([:emergent_ita, :grat])
+    end
+  end
 end

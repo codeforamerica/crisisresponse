@@ -1,0 +1,29 @@
+<div class="incident">
+  <div class="incident-date"><%= l(incident.reported_at.to_date) %></div>
+
+  <ul class="incident-behaviors">
+    <% incident.behaviors.each do |behavior| %>
+      <li class="incident-behavior">
+        <%= t("incidents.behaviors.#{behavior}") %>
+      </li>
+    <% end %>
+
+    <% incident.dispositions.each do |disposition| %>
+      <li class="incident-disposition">
+        <%= t("incidents.dispositions.#{disposition}") %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="incident-narrative">
+    <%= incident.narrative.to_s.truncate(100) %>
+  </div>
+
+  <%= render(
+    "modal",
+    link: "GO # #{incident.formatted_go_number}",
+    key: incident.go_number,
+  ) do %>
+    <%= simple_format incident.narrative %>
+  <% end %>
+</div>
