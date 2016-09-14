@@ -1,6 +1,6 @@
 AllCops:
   Exclude:
-    - spec/example_app/db/schema.rb
+    - db/schema.rb
 
 AccessorMethodName:
   Enabled: false
