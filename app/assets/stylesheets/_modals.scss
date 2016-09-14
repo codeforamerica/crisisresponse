@@ -1,0 +1,40 @@
+.modal {
+  background-color: $modal-background-color;
+  bottom: 0;
+  content: "";
+  display: none;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+
+  &.active {
+    display: block;
+  }
+}
+
+.modal-foreground {
+  @include card;
+  bottom: 10%;
+  display: flex;
+  flex-direction: column;
+  left: 10%;
+  position: fixed;
+  right: 10%;
+  top: 20%;
+  z-index: 2;
+}
+
+.modal-contents {
+  border-bottom: $base-border;
+  max-height: 100%;
+  overflow-y: scroll;
+  padding: $small-spacing $base-spacing;
+}
+
+.modal-close {
+  display: block;
+  padding: $small-spacing $base-spacing;
+  text-align: right;
+}

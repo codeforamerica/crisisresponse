@@ -128,7 +128,8 @@ class Person < ActiveRecord::Base
   end
 
   def recent_incidents
-    @recent_incidents ||= incidents_since(RECENT_TIMEFRAME.ago)
+    @recent_incidents ||= incidents_since(RECENT_TIMEFRAME.ago).
+      order(reported_at: :desc)
   end
 
   def save(*args)
