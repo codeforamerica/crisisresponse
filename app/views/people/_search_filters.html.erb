@@ -1,0 +1,34 @@
+<div class="section-body section-body-filters">
+  <h2><%= t("search.filters.heading") %></h2>
+
+  <%= link_to(
+    t("search.filters.adjust"),
+    "#",
+    class: "toggle toggle-physicals-search",
+    data: {
+      "toggle-text" => t("search.filters.adjust"),
+      "toggle-target" => ".physicals-search-fields",
+    }) %>
+
+  <div class="filters">
+    <% search.active_filters.each do |filter| %>
+      <span class="filter">
+        <span class="filter-attribute"><%= filter.to_s.humanize %></span>
+        <span class="filter-value">
+          <% if filter == :date_of_birth %>
+            <%= l(search.send(filter)) %>
+          <% else %>
+            <%= Array(search.send(filter)).join(", ") %>
+          <% end %>
+        </span>
+
+        <%= link_to(
+          people_path(search: search.attributes.except(filter)),
+          class: "filter-remove",
+        ) do %>
+        <%= inline_svg "remove.svg" %>
+      <% end %>
+      </span>
+    <% end %>
+  </div>
+</div>

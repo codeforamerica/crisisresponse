@@ -55,13 +55,13 @@ RSpec.feature "Response Plan Lifecycle" do
     end
 
     context "when the officer is an admin" do
-      scenario "they can edit a draft that they created" do
+      scenario "they can edit a draft that they created", :js do
         officer = create(:officer, :admin)
         sign_in_officer(officer)
         plan = create(:response_plan, :draft, author: officer)
 
         visit drafts_path
-        click_on plan.person.shorthand_description
+        find(".description", text: plan.person.shorthand_description).click
         click_on t("drafts.show.edit")
 
         expect(current_path).to eq(edit_draft_path(plan))
@@ -70,18 +70,18 @@ RSpec.feature "Response Plan Lifecycle" do
       # Not sure if we want to do this or not
       scenario "they can(not?) edit a draft that someone else has created"
 
-      scenario "they can submit a draft for approval" do
+      scenario "they can submit a draft for approval", :js do
         officer = create(:officer, :admin)
         sign_in_officer(officer)
         plan = create(:response_plan, :draft, author: officer)
+        description = plan.person.shorthand_description
 
         visit drafts_path
-        click_on plan.person.shorthand_description
-        click_on t("drafts.show.submit")
+        find(".description", text: description).trigger("click")
+        find("a", text: t("drafts.show.submit")).trigger("click")
 
-        # TODO confirm this redirect path
-        expect(current_path).to eq(drafts_path)
         expect(page).to have_content t("submissions.create.success.text")
+        expect(current_path).to eq(drafts_path)
         expect(page).not_to have_content(plan.person.shorthand_description)
       end
 
@@ -102,17 +102,16 @@ RSpec.feature "Response Plan Lifecycle" do
     end
 
     context "when the officer is a super admin" do
-      scenario "they can approve submitted response plans" do
+      scenario "they can approve submitted response plans", :js do
         officer = create(:officer, :admin)
         sign_in_officer(officer)
         plan = create(:response_plan, :submission, background_info: "unique")
         person = plan.person
 
         visit submissions_path
-        click_on person.shorthand_description
+        find(".description", text: person.shorthand_description).click
         click_on t("submissions.show.approve")
 
-        # TODO confirm this redirect path
         expect(current_path).to eq(person_path(person))
         expect(page).
           to have_content t("submissions.approve.success", name: person.name)

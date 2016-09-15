@@ -1,10 +1,30 @@
-<%= link_to link, class: "person-card" do %>
+<div class="person" role="link" data-link="<%= link %>">
   <%= cache person do %>
     <%= image_tag person.profile_image_url %>
 
-    <div class="person-card-labels">
-      <%= render "identity", person: person %>
-      <div class="description"><%= person.shorthand_description %></div>
+    <div class="person-information">
+      <div class="person-information-profile">
+        <%= render "identity", person: person %>
+        <div class="description"><%= person.shorthand_description %></div>
+      </div>
+
+      <div class="person-incident-count">
+        <%= person.recent_incidents.count %> crisis calls
+      </div>
+
+      <div class="person-links">
+        <% if person.recent_incidents.any? %>
+          <%= render "modal", link: "Last Report", key: "person-#{person.id}" do %>
+            <%= simple_format person.recent_incidents.first.narrative %>
+          <% end %>
+        <% end %>
+
+        <% if person.active_plan %>
+          <%= link_to "Response Plan", person, class: "person-link-plan button" %>
+        <% else %>
+          <%= link_to "Profile", person, class: "person-link-profile button" %>
+        <% end %>
+      </div>
     </div>
   <% end %>
-<% end %>
+</div>

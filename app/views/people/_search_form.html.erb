@@ -1,81 +1,89 @@
-<%= simple_form_for(
-  @search,
-  url: people_path,
-  method: :get,
-  html: { class: "search" },
-) do |f| %>
-  <h1>Search for a Response Plan</h1>
+<section class="section-search">
+  <div class="section-body">
+    <%= simple_form_for(
+      @search,
+      url: people_path,
+      method: :get,
+      html: { class: "search" },
+    ) do |f| %>
+      <h1><%= t("search.title") %></h1>
 
-  <div class="fields">
-    <div class="basic-search-fields">
-      <%= f.input :name, placeholder: "Enter name or alias" %>
-      <%= f.input :date_of_birth,
-        label: "DOB",
-        placeholder: "mm-dd-yyyy",
-        input_html: { value: (l(@search.date_of_birth) rescue nil) }
-      %>
-    </div>
+      <div class="fields">
+        <div class="basic-search-fields">
+          <%= f.input :name, placeholder: "Enter name or alias" %>
+          <%= f.input :date_of_birth,
+            label: "DOB",
+            placeholder: "mm-dd-yyyy",
+            input_html: { value: (l(@search.date_of_birth) rescue nil) }
+          %>
+        </div>
 
-    <div class="actions">
-      <%= f.submit %>
+        <div class="actions">
+          <%= f.submit %>
 
-      <%= link_to(
-        t("search.physicals.show"),
-        "#",
-        class: "toggle toggle-physicals-search",
-        data: {
-          "toggle-text" => t("search.physicals.hide"),
-          "toggle-target" => ".physicals-search-fields",
-        }) %>
-    </div>
+          <%= link_to(
+            t("search.physicals.show"),
+            "#",
+            class: "toggle toggle-physicals-search",
+            data: {
+              "toggle-text" => t("search.physicals.hide"),
+              "toggle-target" => ".physicals-search-fields",
+            }) %>
+        </div>
 
-    <div class="physicals-search-fields collapsed">
-      <%= f.input :age, as: :integer %>
-      <%= f.input :sex, as: :check_boxes, collection: RMS::SEX_CODES.keys %>
-      <%= f.input(
-        :race,
-        as: :check_boxes,
-        collection: RMS::RACE_CODES.keys,
-        label_method: lambda { |race| race.downcase.gsub("/", " / ") },
-      ) %>
+        <div class="physicals-search-fields collapsed">
+          <%= f.input :age, as: :integer %>
+          <%= f.input :sex, as: :check_boxes, collection: RMS::SEX_CODES.keys %>
+          <%= f.input(
+            :race,
+            as: :check_boxes,
+            collection: RMS::RACE_CODES.keys,
+            label_method: lambda { |race| race.downcase.gsub("/", " / ") },
+          ) %>
 
-      <%= render "application/height_fields", form: f %>
+          <%= render "application/height_fields", form: f %>
 
-      <%= f.input :weight_in_pounds, as: :integer, label: "Weight" %>
+          <%= f.input :weight_in_pounds, as: :integer, label: "Weight" %>
 
-      <div class="hair-color-field collapsed">
-        <%= f.input(
-          :hair_color,
-          as: :check_boxes,
-          collection: RMS::HAIR_COLORS,
-        ) %>
-        <%= link_to(
-          t("search.options.show"),
-          "#",
-          class: "toggle toggle-hair-options",
-          data: {
-            "toggle-text" => t("search.options.hide"),
-            "toggle-target" => ".hair-color-field",
-        }) %>
+          <div class="hair-color-field collapsed">
+            <%= f.input(
+              :hair_color,
+              as: :check_boxes,
+              collection: RMS::HAIR_COLORS,
+            ) %>
+            <%= link_to(
+              t("search.options.show"),
+              "#",
+              class: "toggle toggle-hair-options",
+              data: {
+                "toggle-text" => t("search.options.hide"),
+                "toggle-target" => ".hair-color-field",
+            }) %>
+          </div>
+
+          <div class="eye-color-field collapsed">
+            <%= f.input(
+              :eye_color,
+              as: :check_boxes,
+              collection: RMS::EYE_COLORS,
+            ) %>
+            <%= link_to(
+              t("search.options.show"),
+              "#",
+              class: "toggle toggle-eye-options",
+              data: {
+                "toggle-text" => t("search.options.hide"),
+                "toggle-target" => ".eye-color-field",
+            }) %>
+          </div>
+
+          <%= f.submit %>
+        </div>
       </div>
-
-      <div class="eye-color-field collapsed">
-        <%= f.input(
-          :eye_color,
-          as: :check_boxes,
-          collection: RMS::EYE_COLORS,
-        ) %>
-        <%= link_to(
-          t("search.options.show"),
-          "#",
-          class: "toggle toggle-eye-options",
-          data: {
-            "toggle-text" => t("search.options.hide"),
-            "toggle-target" => ".eye-color-field",
-        }) %>
-      </div>
-
-      <%= f.submit %>
-    </div>
+    <% end %>
   </div>
-<% end %>
+
+  <% if @search.active? %>
+    <%= render "search_filters", search: @search %>
+  <% end %>
+</section>

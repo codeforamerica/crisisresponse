@@ -30,13 +30,17 @@ Optional variables:
     <%= render "urgent_incident_count", person: person %>
 
     <%= render "sections/behaviors", person: person %>
-    <%= render "sections/incidents", person: person %>
 
     <% if plan %>
       <%= render "sections/deescalation_techniques", plan: plan %>
       <%= render "sections/triggers", plan: plan %>
       <%= render "sections/response_strategies", plan: plan %>
       <%= render "sections/background_info", plan: plan %>
+    <% end %>
+
+    <%= render "sections/incidents", person: person %>
+
+    <% if plan %>
       <%= render "sections/about", person: person %>
     <% end %>
   </div>

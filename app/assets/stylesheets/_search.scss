@@ -1,8 +1,4 @@
 .search {
-  @include card;
-  padding: $small-spacing $base-spacing;
-  box-shadow: $shadow-level-1;
-
   h1 {
     margin-bottom: $base-spacing;
   }

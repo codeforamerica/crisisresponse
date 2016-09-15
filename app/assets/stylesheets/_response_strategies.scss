@@ -1,6 +1,7 @@
 .response-strategy {
   display: inline-block;
   position: relative;
+  margin-bottom: $base-spacing;
 
   &:before {
     background-image: $bullet-background;
@@ -46,7 +47,7 @@
     background-image: $arrow_down;
   }
 
-  p {
+  .response-strategy-description {
     max-height: 3em;
     overflow: hidden;
     position: relative;
@@ -61,25 +62,6 @@
       position: absolute;
       right: 0;
       top: 0;
-    }
-  }
-}
-
-@include media($medium-screen-up) {
-  .response-strategy {
-    .mobile-collapsed {
-      p {
-        margin-left: $bullet-size;
-        max-height: 100%;
-      }
-
-      p::after {
-        display: none;
-      }
-
-      .expand {
-        display: none;
-      }
     }
   }
 }

@@ -1,44 +1,15 @@
-<section>
-  <div class="search-results">
-    <div class="section-body">
-      <h1>Matches</h1>
+<div class="search-results">
+  <h1>Matches</h1>
 
-      <div class="filters">
-        <h2>Active Filters</h2>
+  <div class="results">
+    <div class="loose-matches">
+      <% @people.each do |person| %>
+        <%= render person, link: person_path(person) %>
+      <% end %>
 
-        <% @search.active_filters.each do |filter| %>
-          <span class="filter">
-            <span class="filter-attribute"><%= filter.to_s.humanize %></span>
-            <span class="filter-value">
-
-              <% if filter == :date_of_birth %>
-                <%= l(@search.send(filter)) %>
-              <% else %>
-                <%= Array(@search.send(filter)).join(", ") %>
-              <% end %>
-            </span>
-
-            <%= link_to(
-              people_path(search: @search.attributes.except(filter)),
-              class: "filter-remove",
-            ) do %>
-              <%= inline_svg "remove.svg" %>
-            <% end %>
-          </span>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="results">
-      <div class="loose-matches">
-        <% @people.each do |person| %>
-          <%= render person, link: person %>
-        <% end %>
-
-        <% if @people.none? %>
-          <%= t("search.results.none") %>
-        <% end %>
-      </div>
+      <% if @people.none? %>
+        <%= t("search.results.none") %>
+      <% end %>
     </div>
   </div>
-</section>
+</div>
