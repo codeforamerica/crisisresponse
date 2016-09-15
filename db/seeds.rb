@@ -16,6 +16,12 @@ ResponsePlan.destroy_all
 Person.destroy_all
 Officer.destroy_all
 
+NARRATIVE = <<-NARRATIVE.freeze
+Danish icing gingerbread gummies jujubes topping. Chocolate cake sweet roll pudding ice cream chocolate cake cookie toffee soufflé jelly beans. Bonbon sesame snaps biscuit danish jujubes marzipan cake croissant jelly beans. Tootsie roll cake wafer. Marzipan pie tiramisu gummies. Bonbon carrot cake oat cake carrot cake pastry toffee macaroon. Jujubes powder fruitcake toffee soufflé tiramisu. Jelly marzipan tootsie roll. Marshmallow chocolate bar toffee jelly beans croissant. Soufflé cake gummi bears jelly chocolate bar candy. Carrot cake lemon drops jelly beans candy canes cheesecake cake. Carrot cake brownie cookie cheesecake dragée tootsie roll muffin pudding. Toffee marshmallow icing caramels macaroon. Lollipop pudding chupa chups. Donut chupa chups chocolate danish. Croissant ice cream chocolate cake cake cotton candy pudding gummi bears cake.
+
+Apple pie cake gingerbread gummi bears bear claw toffee. Sugar plum cupcake candy cookie wafer marzipan danish. Biscuit powder oat cake soufflé dessert. Cotton candy soufflé cake candy cupcake danish chupa chups candy pastry. Sweet roll dragée apple pie bear claw gingerbread cookie soufflé. Chupa chups tart candy canes pie donut. Cheesecake dragée chocolate marzipan dragée lollipop. Jelly jelly-o wafer liquorice cotton
+NARRATIVE
+
 officer = Officer.create!(
   name: "Ofc. John Doe",
   role: Officer::ADMIN,
@@ -35,39 +41,42 @@ sergeant = Officer.create!(
 )
 
 biff = Person.create!(
- first_name: "Biff",
- last_name: "TANNEN",
- sex: "Male",
- race: "WHITE",
- height_in_inches: 70,
- weight_in_pounds: 220,
- hair_color: "Blonde",
- eye_color: "Green",
- date_of_birth: Date.new(1980, 7, 14),
- scars_and_marks: "Small tattoo on arm",
- location_name: "The Morrison",
- location_address: "509 3rd Ave, Seattle, WA, 98104",
+  first_name: "Biff",
+  last_name: "TANNEN",
+  sex: "Male",
+  race: "WHITE",
+  height_in_inches: 70,
+  weight_in_pounds: 220,
+  hair_color: "Blonde",
+  eye_color: "Green",
+  date_of_birth: Date.new(1980, 7, 14),
+  scars_and_marks: "Small tattoo on arm",
+  location_name: "The Morrison",
+  location_address: "509 3rd Ave, Seattle, WA, 98104",
 )
 ResponsePlan.create!(
- person: biff,
- author: officer,
- background_info: "TANNEN, Biff (aka B-Tan) has a history of mental health issues and drug dependency. TANNEN has been diagnosed with Bi-Polar disorder and Poly-Substance abuse. He was last enrolled with DESC through the criminal justice liaison program back in 2010.  TANNEN is currently enrolled with DESC as terms of his probation. TANNEN has been using the cell phone number, 206.123.4556.  ",
- private_notes: nil,
+  person: biff,
+  author: officer,
+  background_info: "TANNEN, Biff (aka B-Tan) has a history of mental health issues and drug dependency. TANNEN has been diagnosed with Bi-Polar disorder and Poly-Substance abuse. He was last enrolled with DESC through the criminal justice liaison program back in 2010.  TANNEN is currently enrolled with DESC as terms of his probation. TANNEN has been using the cell phone number, 206.123.4556.  ",
+  private_notes: nil,
 )
 
-gregory = Person.create!(
- first_name: "Gregory",
- last_name: "Tannen",
- sex: "Male",
- race: "AFRICAN AMERICAN/BLACK",
- height_in_inches: 70,
- weight_in_pounds: 180,
- hair_color: "Black",
- eye_color: "Brown",
- date_of_birth: Date.new(1998, 5, 12),
- scars_and_marks: nil,
- location_name: nil,
- location_address: "S King St & 6th Ave, Seattle, WA, 98104",
+gregory = Person.new.tap { |p| p.save!(validate: false) }
+RMS::Person.create!(
+  person: gregory,
+  pin: "000000",
+  first_name: "Gregory",
+  last_name: "Tannen",
+  sex: "Male",
+  race: "AFRICAN AMERICAN/BLACK",
+  height_in_inches: 70,
+  weight_in_pounds: 180,
+  hair_color: "Black",
+  eye_color: "Brown",
+  date_of_birth: Date.new(1998, 5, 12),
+  scars_and_marks: nil,
+  location_name: nil,
+  location_address: "S King St & 6th Ave, Seattle, WA, 98104",
 )
 ResponsePlan.create!(
   person: gregory,
@@ -76,19 +85,22 @@ ResponsePlan.create!(
   private_notes: nil,
 )
 
-martha = Person.create!(
- first_name: "Martha",
- last_name: "Tannen",
- sex: "Female",
- race: "ASIAN (ALL)/PACIFIC ISLANDER",
- height_in_inches: 63,
- weight_in_pounds: 110,
- hair_color: "Black",
- eye_color: "Brown",
- date_of_birth: Date.new(1955, 7, 17),
- scars_and_marks: nil,
- location_name: nil,
- location_address: "",
+martha = Person.new.tap { |p| p.save!(validate: false) }
+RMS::Person.create!(
+  person: martha,
+  pin: "000000",
+  first_name: "Martha",
+  last_name: "Tannen",
+  sex: "Female",
+  race: "ASIAN (ALL)/PACIFIC ISLANDER",
+  height_in_inches: 63,
+  weight_in_pounds: 110,
+  hair_color: "Black",
+  eye_color: "Brown",
+  date_of_birth: Date.new(1955, 7, 17),
+  scars_and_marks: nil,
+  location_name: nil,
+  location_address: "",
 )
 ResponsePlan.create!(
   person: martha,
@@ -233,3 +245,38 @@ Image.create!(source: image("tannen_martha/2.jpg"), person: martha)
 ResponsePlan.all.each do |plan|
   plan.update(approver: sergeant)
 end
+
+def create_incidents_for(person)
+  (6..12).to_a.sample.times do
+    behavior_attrs = RMS::CrisisIncident::BEHAVIORS.
+      sample(3).
+      map { |behavior| [behavior, true] }.
+      to_h
+
+    disposition_attrs = RMS::CrisisIncident::DISPOSITIONS.
+      sample(2).
+      map { |disposition| [disposition, true] }.to_h
+
+    nature_attrs = { RMS::CrisisIncident::NATURE_OF_CRISIS.sample => true }
+
+    RMS::CrisisIncident.create!(
+      nature_attrs.
+      merge(disposition_attrs).
+      merge(behavior_attrs).
+      merge(
+        go_number: "20160001234",
+        narrative: NARRATIVE,
+        reported_at: (1..40).to_a.sample.weeks.ago,
+        rms_person: person.rms_person,
+        xml_crisis_id: "000000",
+      ),
+    )
+  end
+end
+
+create_incidents_for(gregory)
+create_incidents_for(martha)
+
+gregory.update(visible: true)
+martha.update(visible: true)
+biff.update(visible: true)
