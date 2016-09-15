@@ -1,69 +1,67 @@
-.person-card {
-  @include span-columns(4 of 4);
+.person {
+  @include card;
+  padding: $base-spacing;
   position: relative;
 
-  .person-card-labels {
-    width: 55%;
-    float: right;
-    overflow: hidden;
+  transition: all $base-duration $base-timing;
 
-    @include media($medium-screen-up) {
-      width: auto;
-      float: none;
-    }
+  &:hover {
+    box-shadow: $shadow-level-3;
+    transform: translateY(-1px);
+  }
+}
 
-    .identity {
-      margin-bottom: 0;
-    }
+.person-information-profile .identity {
+  margin-bottom: 0;
+}
 
-    .identity-name,
-    .identity-dob,
-    .description {
-      color: $base-font-color;
-      display: block;
+.person-incident-count {
+  text-align: right;
+}
 
-      @include media($medium-screen-up) {
-        text-align: center;
-      }
-    }
+.person-links {
+  overflow: hidden;
+  text-align: right;
 
-    .identity-name {
-      font-weight: 600;
-      text-transform: uppercase;
+  a {
+    @include button($card-background, $action-color);
+    margin-right: $base-spacing;
+
+    &:last-child {
+      margin-right: 0;
     }
   }
 
-  @include media($medium-screen-up) {
-    @include span-columns(2 of 8);
-
-    &:nth-of-type(4n) {
-      @include omega;
-    }
-
-    &:nth-of-type(4n+1) {
-      clear: left;
-    }
+  .person-link-plan {
+    @include button($action-color, $card-background);
   }
+}
 
-  @include media($large-screen-up) {
-    @include span-columns(3 of 12);
+@include media($medium-screen-up) {
+  .person {
+    @include shift(1);
+    @include span-columns(10 of 12);
   }
-
-  margin-bottom: $base-spacing;
 
   img {
-    border: $dark-border;
-    height: 6em;
-    margin: 0;
-    max-width: 40%;
+    @include span-columns(2 of 10);
+  }
 
-    @include media($medium-screen-up) {
-      display: block;
-      height: 8em;
-      margin-bottom: $small-spacing;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: none;
-    }
+  .person-information {
+    @include span-columns(8 of 10);
+  }
+
+  .person-information-profile {
+    @include span-columns(4 of 8);
+  }
+
+  .person-incident-count {
+    @include span-columns(3 of 8);
+    @include shift(1);
+    @include omega;
+  }
+
+  .person-links {
+    @include fill-parent;
   }
 }

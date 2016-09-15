@@ -1,9 +1,18 @@
-.filters {
-  margin: $base-spacing 0;
-  font-size: 0.8em;
+.section-body-filters {
+  border-top: $base-border;
 
   h2 {
-    margin-bottom: $small-spacing;
+    display: inline-block;
+    margin-bottom: $base-spacing;
+  }
+
+  .toggle-physicals-search {
+    font-size: 0.8em;
+    margin-left: $small-spacing;
+  }
+
+  .filters {
+    @include fill-parent;
   }
 
   .filter {
@@ -11,6 +20,7 @@
     border-radius: 3em;
     border: $tag-outline;
     display: inline-block;
+    font-size: 0.8em;
     margin-bottom: $small-spacing;
     margin-right: $small-spacing;
     padding: $tiny-spacing;

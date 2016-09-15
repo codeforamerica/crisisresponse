@@ -1,18 +1,16 @@
 require "rails_helper"
 
 feature "Officer views a response plan" do
-  scenario "They see the person's basic information" do
+  scenario "They see the person's basic information", :js do
     sign_in_officer
     person = create(
       :person,
       name: "John Doe",
       date_of_birth: Date.new(1980),
     )
-    # TODO this should be removed once all officers can view core profiles
-    create(:response_plan, person: person)
 
     visit people_path
-    click_on person.shorthand_description
+    find(".description", text: person.shorthand_description).click
 
     expect(page).to have_content("DOE, John")
     expect(page).to have_content(l(person.date_of_birth))

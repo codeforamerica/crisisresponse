@@ -93,16 +93,20 @@ en:
         recent: within the last 48 hours
 
   search:
-    results:
-      none: No results found
+    filters:
+      heading: Active Filters
+      adjust: Adjust Filters
     form:
       label: Search by name, DOB, or physical description
-    physicals:
-      show: Search by physicals
-      hide: Hide physicals
     options:
       show: "More options"
       hide: "Fewer options"
+    physicals:
+      show: Search by physicals
+      hide: Hide physicals
+    results:
+      none: No results found
+    title: Search for a Person
 
   simple_form:
     labels:

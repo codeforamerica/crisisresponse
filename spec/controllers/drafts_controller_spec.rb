@@ -76,7 +76,6 @@ RSpec.describe DraftsController do
     end
 
     context "when the person has a response plan in draft form" do
-      # TODO is this what we want?
       it "ignores the information in the non-approved plan" do
         officer = create(:officer, :admin)
         original = create(
@@ -206,8 +205,6 @@ RSpec.describe DraftsController do
     it "redirects if the officer is not an admin"
     it "redirects if the plan has been approved"
     it "redirects if the plan has been submitted for approval"
-
-    # TODO is this the behavior that we want?
     it "redirects if the current officer did not create the draft"
 
     it "assigns the plan if it is still in draft form" do

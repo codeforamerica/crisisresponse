@@ -1,8 +1,7 @@
-#{$all-buttons},
-.button {
+@mixin button($color, $button-font-color) {
   appearance: none;
-  background-color: $action-color;
-  border: 0;
+  background-color: $color;
+  border: 1px solid $button-font-color;
   border-radius: $base-border-radius;
   color: $button-font-color;
   cursor: pointer;
@@ -21,7 +20,7 @@
 
   &:hover,
   &:focus {
-    background-color: shade($action-color, 20%);
+    background-color: shade($color, 20%);
     color: $button-font-color;
   }
 
@@ -30,7 +29,12 @@
     opacity: 0.5;
 
     &:hover {
-      background-color: $action-color;
+      background-color: $color;
     }
   }
+}
+
+#{$all-buttons},
+.button {
+  @include button($action-color, $button-font-color);
 }

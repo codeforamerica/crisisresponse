@@ -1,3 +1,10 @@
+<%# Variables:
+  key: a unique identifier
+  link: text for the modal activation link
+
+  This partial also takes a block, which it renders into the modal.
+%>
+
 <a href="#" class="modal-open" data-modal-target="modal-<%= key %>">
   <%= link %>
 </a>
