@@ -52,5 +52,11 @@ RSpec.shared_examples "a boolean attribute is parsed out" do
 
     expect(parser.public_send(attribute)).to eq(true)
   end
+
+  it "ignores whitespace" do
+    parser = RMSIncidentParser.new(rms_key => " No")
+
+    expect(parser.public_send(attribute)).to eq(false)
+  end
 end
 

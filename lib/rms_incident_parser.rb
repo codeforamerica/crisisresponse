@@ -10,7 +10,7 @@ class RMSIncidentParser
     chemically_induced: "CHBK_CHEMICALLY_INDUCED",
     chronic: "CHBK_DISPO_CHRONIC",
     crisis_clinic: "CHBK_DISPO_CRISIS_CLINIC",
-    disorderly_disruptive: "CHBK_DISORDERLY_DISRUPTIVE" ,
+    disorderly_disruptive: "CHBK_DISORDERLY_DISRUPTIVE",
     disorganize_communication: "CHBK_DISORGANIZE_COMMUNICATION",
     disoriented_confused: "CHBK_DISORIENTED_CONFUSED",
     dmhp_refer: "CHBK_DISPO_DMHP_REFER",
@@ -33,6 +33,7 @@ class RMSIncidentParser
     unknown_crisis_nature: "CHBK_UNKNOWN_CRISIS_NATURE",
     unusual_fright_scared: "CHBK_UNUSUAL_FRIGHT_SCARED",
     verbalization: "CHBK_VERBALIZATION",
+    veteran: "CRISIS_CONTACTED_VET_YN_UNK",
     voluntary_commit: "CHBK_DSIPO_VOLUNTARY_COMMIT",
     weapon: "WEAPON_YN_DK",
   }.freeze

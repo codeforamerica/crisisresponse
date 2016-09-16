@@ -288,6 +288,13 @@ describe RMSIncidentParser do
     it_should_behave_like "a boolean attribute is parsed out"
   end
 
+  describe "#veteran" do
+    let(:attribute) { :veteran }
+    let(:rms_key) { "CRISIS_CONTACTED_VET_YN_UNK" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
   describe "#voluntary_commit" do
     let(:attribute) { :voluntary_commit }
     let(:rms_key) { "CHBK_DSIPO_VOLUNTARY_COMMIT" }
