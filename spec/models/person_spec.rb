@@ -22,7 +22,7 @@ RSpec.describe Person, type: :model do
       person.update(visible: false)
       create_list(
         :incident,
-        Person::RECENT_INCIDENT_THRESHOLD,
+        ENV.fetch("RECENT_CRISIS_INCIDENT_THRESHOLD").to_i,
         rms_person: rms_person,
       )
 
