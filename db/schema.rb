@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160913212716) do
     t.string   "location_name"
     t.string   "location_address"
     t.boolean  "visible",          default: false, null: false
+    t.index ["visible"], name: "index_people_on_visible", using: :btree
   end
 
   create_table "response_plans", force: :cascade do |t|
