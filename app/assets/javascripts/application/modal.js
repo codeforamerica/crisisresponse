@@ -1,12 +1,20 @@
 $(function() {
   $(".modal-open").on("click", function(e) {
-    var modal = $("#" + e.target.dataset.modalTarget);
+    e.stopPropagation();
+
+    var targetSelector = e.target.getAttribute("data-modal-target");
+    var modal = $(targetSelector);
     modal.addClass("active");
 
-    var close = function() { this.removeClass("active"); };
+    var close = function(e) {
+      e.stopPropagation();
+      this.removeClass("active");
+    };
 
     modal.on("click", close.bind(modal));
     modal.find(".modal-close").on("click", close.bind(modal));
     modal.find(".modal-foreground").on("click", function() { return false; });
+
+    return false;
   });
 });
