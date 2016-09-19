@@ -7,10 +7,19 @@
   font-size: 1.2em;
 }
 
+.incident-full-behaviors {
+  margin-bottom: $base-spacing;
+}
+
+.close-page {
+  display: block;
+  margin: $base-spacing;
+}
+
 .incident-behavior,
 .incident-disposition,
 .incident-narrative,
-.incident .modal-open {
+.incident-link {
   font-size: 0.8em;
 }
 

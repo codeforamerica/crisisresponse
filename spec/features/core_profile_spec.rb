@@ -40,10 +40,13 @@ feature "Core Profile" do
     sign_in_officer
     rms_person = create(:rms_person)
     narrative = "This is a crisis incident narrative."
-    create(:incident, narrative: narrative, rms_person: rms_person)
+    incident = create(:incident, narrative: narrative, rms_person: rms_person)
 
     visit person_path(rms_person.person)
-
     expect(page).to have_content(narrative)
+
+    click_on "GO # "
+    expect(page).to have_content(narrative)
+    expect(current_path).to eq(incident_path(incident))
   end
 end

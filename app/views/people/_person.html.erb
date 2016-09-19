@@ -14,9 +14,11 @@
 
       <div class="person-links">
         <% if person.recent_incidents.any? %>
-          <%= render "modal", link: "Last Report", key: "person-#{person.id}" do %>
-            <%= simple_format person.recent_incidents.first.narrative %>
-          <% end %>
+          <%= link_to(
+            "Last Report",
+            incident_path(person.recent_incidents.first),
+            target: "_blank",
+          ) %>
         <% end %>
 
         <% if person.active_plan %>

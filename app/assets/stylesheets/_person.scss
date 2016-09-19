@@ -3,6 +3,11 @@
   color: $base-font-color;
   padding: $base-spacing;
   position: relative;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-level-3;
+  }
 }
 
 .person-information-profile .identity {

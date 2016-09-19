@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :feedbacks, only: [:new, :create]
   resources :people, only: [:index, :show]
   resources :preferences, only: :create
+  resources :incidents, only: :show
 
   resources :drafts, only: [:index, :show, :create, :edit, :update]
   resources :submissions, only: [:index, :show, :create] do

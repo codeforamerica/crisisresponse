@@ -1,0 +1,29 @@
+<a class="close-page" onclick="window.close()">Close</a>
+
+<section class="incident-full">
+  <div class="section-body">
+    <h1>GO # <%= @incident.formatted_go_number %></h1>
+
+    <div class="incident-full-date"><%= l(@incident.reported_at.to_date) %></div>
+
+    <ul class="incident-full-behaviors">
+      <% @incident.behaviors.each do |behavior| %>
+        <li class="incident-behavior">
+          <%= t("incidents.behaviors.#{behavior}") %>
+        </li>
+      <% end %>
+
+      <% @incident.dispositions.each do |disposition| %>
+        <li class="incident-disposition">
+          <%= t("incidents.dispositions.#{disposition}") %>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="incident-full-narrative">
+      <%= simple_format @incident.narrative.to_s %>
+    </div>
+  </div>
+</section>
+
+<a class="close-page" onclick="window.close()">Close</a>
