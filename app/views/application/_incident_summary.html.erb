@@ -19,11 +19,10 @@
     <%= incident.narrative.to_s.truncate(100) %>
   </div>
 
-  <%= render(
-    "modal",
-    link: "GO # #{incident.formatted_go_number}",
-    key: incident.go_number,
-  ) do %>
-    <%= simple_format incident.narrative %>
-  <% end %>
+  <%= link_to(
+    "GO # #{incident.formatted_go_number}",
+    incident_path(incident),
+    class: "incident-link",
+    target: "_blank",
+  ) %>
 </div>
