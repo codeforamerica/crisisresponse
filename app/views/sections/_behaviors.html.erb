@@ -15,7 +15,10 @@
         first(4).
         each do |behavior, count| %>
         <li class="behavior">
-          <span class="behavior-name"><%= behavior.to_s.titleize %></span>
+          <span class="behavior-name">
+            <%= t("incidents.behaviors.#{behavior}") %>
+          </span>
+
           <span class="behavior-count">
             <%= count %>
 
