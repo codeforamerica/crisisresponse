@@ -1,14 +1,8 @@
 .person {
   @include card;
+  color: $base-font-color;
   padding: $base-spacing;
   position: relative;
-
-  transition: all $base-duration $base-timing;
-
-  &:hover {
-    box-shadow: $shadow-level-3;
-    transform: translateY(-1px);
-  }
 }
 
 .person-information-profile .identity {

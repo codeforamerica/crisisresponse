@@ -28,9 +28,11 @@
 
 .modal-contents {
   border-bottom: $base-border;
+  color: $base-font-color;
   max-height: 100%;
   overflow-y: scroll;
   padding: $small-spacing $base-spacing;
+  text-align: left;
 }
 
 .modal-close {
