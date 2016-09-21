@@ -39,6 +39,10 @@
 
 .person-top-behavior span {
   @include tag;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .person-links {
@@ -47,10 +51,10 @@
 
   a {
     @include button($card-background, $action-color);
+    border: 0;
     margin-right: $base-spacing;
     padding: 0;
     text-transform: uppercase;
-    border: 0;
 
     &:last-child {
       margin-right: 0;

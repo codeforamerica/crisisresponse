@@ -49,19 +49,19 @@ en:
 
   incidents:
     behaviors:
-      neglect_self_care: Neglect of self-care
-      disorganize_communication: Disorganized speech / communication
-      disoriented_confused: Disorientation / Confusion
-      disorderly_disruptive: Disorderly / disruptive behavior
-      unusual_fright_scared: Unusually frightened or scared
-      belligerent_uncooperative: Belligerent / uncooperative, angry
-      hopeless_depressed: Hopeless / Depressed
-      bizarre_unusual_behavior: Bizarre, unusual behavior
-      suicide_threat_attempt: Suicide behaviors, threat, or attempt
-      mania: Mania
-      out_of_touch_reality: Out of touch with reality
+      suicide_threat_attempt: Suicidal Attempt / Threat
+      excited_delirium: Excited Delirium
       halluc_delusion: Hallucinations / Delusions
-      excited_delirium: Excited delirium
+      belligerent_uncooperative: Belligerent / Uncooperative
+      mania: Mania
+      disorderly_disruptive: Disruptive / Disorderly Behavior
+      hopeless_depressed: Hopeless / Depressed
+      neglect_self_care: Neglect of Self-Care
+      disorganize_communication: Disorganized Communication 
+      disoriented_confused: Disorientation / Confusion
+      unusual_fright_scared: Unusually Scared
+      bizarre_unusual_behavior: Bizarre Behavior
+      out_of_touch_reality: Out of Touch with Reality
     nature_of_crisis:
       biologically_induced: Biologically Induced
       medically_induced: Medically Induced
