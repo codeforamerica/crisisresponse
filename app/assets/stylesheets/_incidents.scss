@@ -30,8 +30,13 @@
 .incident-behavior,
 .incident-disposition,
 .incident-narrative,
-.incident-link {
+.incident-footer {
   font-size: 0.8em;
+}
+
+.incident-footer {
+  @include heavy-font;
+  text-transform: uppercase;
 }
 
 .incident-date {
@@ -56,6 +61,7 @@
 }
 
 .incident-narrative {
+  color: $secondary-text-color;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
