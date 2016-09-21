@@ -1,15 +1,13 @@
 <div class="search-results">
   <h1>Matches</h1>
 
-  <div class="results">
-    <div class="loose-matches">
-      <% @people.each do |person| %>
-        <%= render person, link: person_path(person) %>
-      <% end %>
+  <section class="people">
+    <% @people.each do |person| %>
+      <%= render person, link: person_path(person) %>
+    <% end %>
 
-      <% if @people.none? %>
-        <%= t("search.results.none") %>
-      <% end %>
-    </div>
-  </div>
+    <% if @people.none? %>
+      <%= t("search.results.none") %>
+    <% end %>
+  </section>
 </div>

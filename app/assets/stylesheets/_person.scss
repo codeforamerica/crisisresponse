@@ -1,12 +1,20 @@
-.person {
+.people {
   @include card;
+}
+
+.person {
   color: $base-font-color;
   padding: $base-spacing;
   position: relative;
+  overflow: hidden;
 
   &:hover {
     transform: translateY(-1px);
-    box-shadow: $shadow-level-3;
+    box-shadow: $shadow-level-1;
+  }
+
+  &:not(last-child) {
+    border-bottom: $base-border;
   }
 }
 
