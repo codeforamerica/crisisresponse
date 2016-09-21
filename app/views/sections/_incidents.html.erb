@@ -1,32 +1,34 @@
-<section class="incidents">
-  <div class="section-header section-header-muted">
-    <div class="section-header-text">
-      <span class="section-title">Incident History</span>
-    </div>
-  </div>
-
-  <div class="section-body">
-    <h2>Police Interactions</h2>
-
-    <div class="incidents-container">
-      <% person.recent_incidents[0...3].each do |incident| %>
-        <%= render "incident_summary", incident: incident %>
-      <% end %>
-
-      <div class="additional-incidents collapsed">
-        <% Array(person.recent_incidents[3...6]).each do |incident| %>
-          <%= render "incident_summary", incident: incident %>
-        <% end %>
+<% if person.recent_incidents.any? %>
+  <section class="incidents">
+    <div class="section-header section-header-muted">
+      <div class="section-header-text">
+        <span class="section-title">Incident History</span>
       </div>
     </div>
 
-    <a
-      href="#"
-      class="toggle additional-incidents-toggle"
-      data-toggle-target=".additional-incidents"
-      data-toggle-text="Hide older crisis calls"
-      >
-      View older crisis calls
-    </a>
-  </div>
-</section>
+    <div class="section-body">
+      <h2>Police Interactions</h2>
+
+      <div class="incidents-container">
+        <% person.recent_incidents[0...3].each do |incident| %>
+          <%= render "incident_summary", incident: incident %>
+        <% end %>
+
+        <div class="additional-incidents collapsed">
+          <% Array(person.recent_incidents[3...6]).each do |incident| %>
+            <%= render "incident_summary", incident: incident %>
+          <% end %>
+        </div>
+      </div>
+
+      <a
+        href="#"
+        class="toggle additional-incidents-toggle"
+        data-toggle-target=".additional-incidents"
+        data-toggle-text="Hide older crisis calls"
+        >
+        View older crisis calls
+      </a>
+    </div>
+  </section>
+<% end %>
