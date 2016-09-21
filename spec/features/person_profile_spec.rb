@@ -10,7 +10,7 @@ feature "Officer views a response plan" do
     )
 
     visit people_path
-    find(".description", text: person.shorthand_description).click
+    find(".person-description", text: person.shorthand_description).click
 
     expect(page).to have_content("DOE, John")
     expect(page).to have_content(l(person.date_of_birth))

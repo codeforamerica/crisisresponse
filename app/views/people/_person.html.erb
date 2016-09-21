@@ -22,11 +22,13 @@
 
       <div class="person-top-behavior">
         <span>
-          <%= t([
-            :incidents,
-            :behaviors,
-            person.recent_incidents.frequent_behaviors.keys.first,
-          ].join(".")) %>
+          <% if person.recent_incidents.frequent_behaviors.any? %>
+            <%= t([
+              :incidents,
+              :behaviors,
+              person.recent_incidents.frequent_behaviors.keys.first,
+            ].join(".")) %>
+          <% end %>
         </span>
       </div>
 
@@ -47,9 +49,9 @@
         <% end %>
 
         <% if person.active_plan %>
-          <%= link_to "Response Plan", person, class: "person-link-plan button" %>
+          <%= link_to "Response Plan", link, class: "person-link-plan button" %>
         <% else %>
-          <%= link_to "Profile", person, class: "person-link-profile button" %>
+          <%= link_to "Profile", link, class: "person-link-profile button" %>
         <% end %>
       </div>
     </div>

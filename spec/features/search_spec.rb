@@ -178,7 +178,7 @@ feature "Search" do
     end
 
     def open_physicals_search
-      find("a", text: t("search.physicals.show")).trigger("click")
+      find("a.toggle-physicals-search").trigger("click")
     end
   end
 end

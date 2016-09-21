@@ -1,5 +1,7 @@
 <h1>Pending Approval</h1>
 
-<% @submissions.each do |submission| %>
-  <%= render submission.person, link: submission_path(submission) %>
-<% end %>
+<section class="people">
+  <% @submissions.each do |submission| %>
+    <%= render submission.person, link: submission_path(submission) %>
+  <% end %>
+</section>

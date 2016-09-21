@@ -6,7 +6,7 @@
       <span class="incident-count-number">
         <%= pluralize(
           person.incidents_since(Person::URGENT_TIMEFRAME.ago).count,
-          "crisis call",
+          "CRISIS call",
         ) %>
         within the last <%= distance_of_time_in_words(Person::URGENT_TIMEFRAME) %>
       </span>
