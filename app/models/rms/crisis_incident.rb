@@ -5,19 +5,19 @@ module RMS
     belongs_to :rms_person, class_name: "RMS::Person"
 
     BEHAVIORS = [
-      :neglect_self_care,
-      :disorganize_communication,
-      :disoriented_confused,
-      :disorderly_disruptive,
-      :unusual_fright_scared,
+      :suicide_threat_attempt,
+      :excited_delirium,
+      :halluc_delusion,
       :belligerent_uncooperative,
+      :mania,
+      :disorderly_disruptive,
       :hopeless_depressed,
       :bizarre_unusual_behavior,
-      :suicide_threat_attempt,
-      :mania,
       :out_of_touch_reality,
-      :halluc_delusion,
-      :excited_delirium,
+      :disorganize_communication,
+      :disoriented_confused,
+      :unusual_fright_scared,
+      :neglect_self_care,
     ].freeze
 
     OTHER = [

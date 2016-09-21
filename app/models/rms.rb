@@ -34,10 +34,10 @@ module RMS
   }.freeze
 
   EYE_COLOR_CODES = {
-    "BLK" => "black",
-    "BLU" => "blue",
     "BRO" => "brown",
+    "BLU" => "blue",
     "GRN" => "green",
+    "BLK" => "black",
     "GRY" => "gray",
     "HAZ" => "hazel",
     "MAR" => "maroon",
@@ -48,17 +48,18 @@ module RMS
 
   HAIR_COLOR_CODES = {
     "BLK" => "black",
-    "BLN" => "blonde",
-    "BLU" => "blue",
     "BRO" => "brown",
-    "GRN" => "green",
+    "BLN" => "blonde",
     "GRY" => "gray",
+    "BAL" => "bald",
+    "RED" => "red",
+    "BLU" => "blue",
+    "GRN" => "green",
     "HAZ" => "hazel",
     "MAR" => "maroon",
     "MUL" => "multicolored",
     "ONG" => "orange",
     "PNK" => "pink",
-    "RED" => "red",
     "SDY" => "sandy",
     "WHI" => "white",
     "XXX" => UNKNOWN,

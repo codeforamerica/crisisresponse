@@ -58,6 +58,7 @@ describe RMSPersonParser do
       expect(RMSPersonParser.new("HAIR_COLOR" => nil).hair_color).to eq("unknown")
 
       # These colors, we can make a pretty good guess about the translations.
+      expect(RMSPersonParser.new("HAIR_COLOR" => "BAL").hair_color).to eq("bald")
       expect(RMSPersonParser.new("HAIR_COLOR" => "BLN").hair_color).to eq("blonde")
       expect(RMSPersonParser.new("HAIR_COLOR" => "ONG").hair_color).to eq("orange")
       expect(RMSPersonParser.new("HAIR_COLOR" => "RED").hair_color).to eq("red")
@@ -67,7 +68,6 @@ describe RMSPersonParser do
       # For these hair color codes, we don't know what they translate into.
       # If we learn, we should update these tests and the code to match.
       # The next import will correct those records in our database.
-      expect(RMSPersonParser.new("HAIR_COLOR" => "BAL").hair_color).to eq("unknown")
       expect(RMSPersonParser.new("HAIR_COLOR" => "BO").hair_color).to eq("unknown")
       expect(RMSPersonParser.new("HAIR_COLOR" => "FO").hair_color).to eq("unknown")
       expect(RMSPersonParser.new("HAIR_COLOR" => "PLE").hair_color).to eq("unknown")
