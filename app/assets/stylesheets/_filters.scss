@@ -16,14 +16,8 @@
   }
 
   .filter {
-    background-color: $tag-background-color;
+    @include tag;
     border-radius: 3em;
-    border: $tag-outline;
-    display: inline-block;
-    font-size: 0.8em;
-    margin-bottom: $small-spacing;
-    margin-right: $small-spacing;
-    padding: $tiny-spacing;
   }
 
   .filter-attribute {

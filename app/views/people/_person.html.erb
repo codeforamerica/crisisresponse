@@ -3,13 +3,38 @@
     <%= image_tag person.profile_image_url %>
 
     <div class="person-information">
+      <span class="person-name">
+        <%= person.last_name.to_s.upcase %>,
+        <%= person.first_name.to_s.titleize %>
+      </span>
+
       <div class="person-information-profile">
-        <%= render "identity", person: person %>
-        <div class="description"><%= person.shorthand_description %></div>
+        <% if person.date_of_birth %>
+          <span class="person-dob">
+            <%= l person.date_of_birth %>
+          </span>
+        <% end %>
+
+        <div class="person-description">
+          <%= person.shorthand_description %>
+        </div>
+      </div>
+
+      <div class="person-top-behavior">
+        <span>
+          <%= t([
+            :incidents,
+            :behaviors,
+            person.recent_incidents.frequent_behaviors.keys.first,
+          ].join(".")) %>
+        </span>
       </div>
 
       <div class="person-incident-count">
-        <%= person.recent_incidents.count %> crisis calls
+        <span class="bold">
+          <%= person.recent_incidents.count %>
+        </span>
+        CRISIS Calls
       </div>
 
       <div class="person-links">

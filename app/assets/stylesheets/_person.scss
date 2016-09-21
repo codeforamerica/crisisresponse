@@ -10,12 +10,27 @@
   }
 }
 
-.person-information-profile .identity {
-  margin-bottom: 0;
+.person-name,
+.person-dob {
+  display: block;
+  font-weight: 100;
+}
+
+.person-name {
+  @include heavy-font;
+  font-size: 1.2em;
+}
+
+.person-dob {
+  @include light-font;
 }
 
 .person-incident-count {
   text-align: right;
+}
+
+.person-top-behavior span {
+  @include tag;
 }
 
 .person-links {
@@ -25,6 +40,9 @@
   a {
     @include button($card-background, $action-color);
     margin-right: $base-spacing;
+    padding: 0;
+    text-transform: uppercase;
+    border: 0;
 
     &:last-child {
       margin-right: 0;
@@ -38,25 +56,32 @@
 
 @include media($medium-screen-up) {
   .person {
-    @include shift(1);
-    @include span-columns(10 of 12);
+    @include fill-parent;
   }
 
   img {
-    @include span-columns(2 of 10);
+    @include span-columns(2 of 12);
   }
 
   .person-information {
-    @include span-columns(8 of 10);
+    @include span-columns(10 of 12);
+  }
+
+  .person-name {
+    @include fill-parent;
+    @include omega;
   }
 
   .person-information-profile {
-    @include span-columns(4 of 8);
+    @include span-columns(3 of 10);
+  }
+
+  .person-top-behavior {
+    @include span-columns(4 of 10);
   }
 
   .person-incident-count {
-    @include span-columns(3 of 8);
-    @include shift(1);
+    @include span-columns(3 of 10);
     @include omega;
   }
 
