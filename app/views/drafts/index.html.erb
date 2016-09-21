@@ -1,5 +1,7 @@
 <h1>Your Drafts</h1>
 
-<% @drafts.each do |draft| %>
-  <%= render draft.person, link: draft_path(draft) %>
-<% end %>
+<section class="people">
+  <% @drafts.each do |draft| %>
+    <%= render draft.person, link: draft_path(draft) %>
+  <% end %>
+</section>

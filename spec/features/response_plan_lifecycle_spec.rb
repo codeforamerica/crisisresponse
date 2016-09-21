@@ -55,13 +55,13 @@ RSpec.feature "Response Plan Lifecycle" do
     end
 
     context "when the officer is an admin" do
-      scenario "they can edit a draft that they created", :js do
+      scenario "they can edit a draft that they created" do
         officer = create(:officer, :admin)
         sign_in_officer(officer)
         plan = create(:response_plan, :draft, author: officer)
 
         visit drafts_path
-        find(".description", text: plan.person.shorthand_description).click
+        click_on "Profile"
         click_on t("drafts.show.edit")
 
         expect(current_path).to eq(edit_draft_path(plan))
@@ -70,15 +70,15 @@ RSpec.feature "Response Plan Lifecycle" do
       # Not sure if we want to do this or not
       scenario "they can(not?) edit a draft that someone else has created"
 
-      scenario "they can submit a draft for approval", :js do
+      scenario "they can submit a draft for approval" do
         officer = create(:officer, :admin)
         sign_in_officer(officer)
         plan = create(:response_plan, :draft, author: officer)
         description = plan.person.shorthand_description
 
         visit drafts_path
-        find(".description", text: description).trigger("click")
-        find("a", text: t("drafts.show.submit")).trigger("click")
+        click_on "Profile"
+        click_on t("drafts.show.submit")
 
         expect(page).to have_content t("submissions.create.success.text")
         expect(current_path).to eq(drafts_path)
@@ -102,14 +102,14 @@ RSpec.feature "Response Plan Lifecycle" do
     end
 
     context "when the officer is a super admin" do
-      scenario "they can approve submitted response plans", :js do
+      scenario "they can approve submitted response plans" do
         officer = create(:officer, :admin)
         sign_in_officer(officer)
         plan = create(:response_plan, :submission, background_info: "unique")
         person = plan.person
 
         visit submissions_path
-        find(".description", text: person.shorthand_description).click
+        click_on "Profile"
         click_on t("submissions.show.approve")
 
         expect(current_path).to eq(person_path(person))
