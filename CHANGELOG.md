@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented here.
 
+## [1.0.0] - 2016-09-21
+
+The app now includes people who do not have response plans,
+but who have a history of frequent crisis incidents.
+
+### For Everyone
+
+* Change the name of the app to "Ridealong Response"
+* Pull Crisis Incident Template data from the Records Management System.
+  We now show information for anyone with 7 or more crisis incident calls.
+* Display individuals' history of crisis calls
+* Display individuals' most common behaviors from previous crisis calls
+* Click to see previous crisis incident narratives
+* Widespread interface improvements
+  * Add pagination to the home page and search results,
+    to handle the new people we're importing
+  * Improve the layout of response plans
+  * Add links to remove active search filters
+* General speed improvements
+
+### For CRT
+
+* CRT officers can create drafts for response plans
+  * Save and return to your work without the information going live
+  * When you're ready, submit it for your Sergeant for approval
+  * Add admin links to drafts and submissions pages
+* Widespread interface improvements
+  * Fix up major usability problems with the CRT admin form
+
+### Technical
+
+* Add docker-compose commands for backup and restore
+* Improve the setup documentation and scripts
+* Create a demo mode that bypasses authentication
+
 ## [0.1.7] - 2016-08-12
 
 ### Added
@@ -203,6 +238,7 @@ All notable changes to this project will be documented here.
 * Text entered into search or feedback fields is now visible in night mode
 
 [Unreleased]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.5...HEAD
+[1.0.0]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.7...v1.0.0
 [0.1.7]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/codeforamerica/crisisresponse/compare/v0.1.4...v0.1.5
