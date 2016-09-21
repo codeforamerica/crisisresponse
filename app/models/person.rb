@@ -76,8 +76,9 @@ class Person < ActiveRecord::Base
   fallback_to_rms_person(:weight_in_pounds)
   fallback_to_rms_person(:weight_in_pounds)
 
-  def self.update_visibility
+  def self.update_visibility(
     threshold = ENV.fetch("RECENT_CRISIS_INCIDENT_THRESHOLD").to_i
+  )
     Person.update_all(visible: false)
 
     over_threhsold = RMS::CrisisIncident.
