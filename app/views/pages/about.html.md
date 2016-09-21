@@ -4,7 +4,7 @@
 
 Hello!
 
-Welcome to the Crisis Response App.
+Welcome to Ridealong Response.
 We are really excited to have you as a field tester.
 Before you jump into the app,
 we wanted to cover a few key things.
