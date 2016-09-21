@@ -91,6 +91,8 @@ en:
     core:
       incident_count:
         recent: within the last 48 hours
+    actions:
+      title: Admin Actions
 
   search:
     filters:

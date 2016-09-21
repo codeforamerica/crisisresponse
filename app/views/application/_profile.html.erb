@@ -24,7 +24,9 @@ Optional variables:
   </div>
 
   <div class="right-column">
-    <%= render "title", person: person, plan: plan %>
+    <% if current_officer.admin? %>
+      <%= render "title", person: person, plan: plan %>
+    <% end %>
 
     <%= render "recent_incident_count", person: person %>
     <%= render "urgent_incident_count", person: person %>

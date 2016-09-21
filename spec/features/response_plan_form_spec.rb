@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 feature "Response Plan Form" do
@@ -80,10 +82,7 @@ feature "Response Plan Form" do
       person = create(:person)
 
       visit person_path(person)
-      click_on t("people.show.new_plan")
-
-      expect(page).
-        to have_content t("authentication.unauthorized.new_response_plan")
+      expect(page).not_to have_content t("people.show.new_plan")
     end
   end
 
