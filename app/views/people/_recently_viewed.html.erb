@@ -1,7 +1,9 @@
 <div class="recently-viewed-plans">
   <h2>All Profiles</h2>
 
-  <% @people.each do |person| %>
-    <%= render person, link: person_path(person) %>
-  <% end %>
+  <section class="people">
+    <% @people.each do |person| %>
+      <%= render person, link: person_path(person) %>
+    <% end %>
+  </section>
 </div>
