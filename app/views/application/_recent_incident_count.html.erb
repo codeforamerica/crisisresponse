@@ -1,11 +1,15 @@
 <section class="incident-count recent-incident-count">
-  <div class="section-body">
-    <span class="incident-count-number">
-      <%= pluralize(person.recent_incidents.count, "crisis call") %>
-    </span>
+  <div class="section-header section-header-transparent">
+    <div class="section-header-text">
+      <span class="section-title">
+        <span class="incident-count-number">
+          <%= pluralize(person.recent_incidents.count, "CRISIS call") %>
+        </span>
 
-    <span class="secondary">
-      (in the last year)
-    </span>
+        <span class="secondary">
+          (in the last year)
+        </span>
+      </span>
+    </div>
   </div>
 </section>
