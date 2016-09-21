@@ -1,6 +1,6 @@
-<a class="close-page" onclick="window.close()">Close</a>
-
 <section class="incident-full">
+  <a class="close-page" onclick="window.close()">Close</a>
+
   <div class="section-body">
     <h1>GO # <%= @incident.formatted_go_number %></h1>
 
@@ -24,6 +24,6 @@
       <%= simple_format @incident.narrative.to_s %>
     </div>
   </div>
-</section>
 
-<a class="close-page" onclick="window.close()">Close</a>
+  <a class="close-page" onclick="window.close()">Close</a>
+</section>
