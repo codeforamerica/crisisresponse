@@ -10,17 +10,34 @@
 .incident-full {
   width: $optimal-reading-width;
   margin: auto;
-}
 
-.incident-full-behaviors {
-  margin-bottom: $base-spacing;
+  h1 {
+    font-size: 1.2em;
+  }
+
+  &-date {
+    color: $secondary-text-color;
+  }
+
+  &-go-number {
+    @include heavy-font;
+    margin: $base-spacing 0;
+  }
+
+  &-behaviors {
+    margin-bottom: $base-spacing;
+  }
 }
 
 .close-page {
   display: block;
-  margin: $base-spacing;
+  padding: $small-spacing $base-spacing;
   text-align: right;
   text-transform: uppercase;
+
+  &:first-child {
+    border-bottom: $base-border;
+  }
 
   &:last-child {
     border-top: $base-border;
