@@ -6,12 +6,13 @@ section {
 
   .section-header {
     @include icon-color($section-header-font-color);
+    align-items: center;
     background-color: $section-header-color;
     color: $section-header-font-color;
     display: flex;
-    padding: $small-spacing;
-    align-items: center;
     margin-bottom: $base-spacing;
+    padding: $small-spacing;
+    width: 100%;
   }
 
   .section-header-grey {
@@ -35,6 +36,7 @@ section {
     line-height: 1;
     margin-bottom: 0;
     margin-left: $small-spacing;
+    width: 100%;
   }
 
   .section-title {
@@ -52,5 +54,10 @@ section {
       font-size: 1em;
       font-weight: normal;
     }
+  }
+
+  .section-header-transparent {
+    background-color: $card-background;
+    color: $base-font-color;
   }
 }
