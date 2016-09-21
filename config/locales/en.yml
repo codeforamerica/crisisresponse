@@ -104,8 +104,8 @@ en:
       show: "More options"
       hide: "Fewer options"
     physicals:
-      show: Search by physicals
-      hide: Hide physicals
+      show: Search by physicals &#9660;
+      hide: Hide physicals &#9650;
     results:
       none: No results found
     title: Search for a Person

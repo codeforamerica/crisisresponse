@@ -20,15 +20,6 @@
 
         <div class="actions">
           <%= f.submit %>
-
-          <%= link_to(
-            t("search.physicals.show"),
-            "#",
-            class: "toggle toggle-physicals-search",
-            data: {
-              "toggle-text" => t("search.physicals.hide"),
-              "toggle-target" => ".physicals-search-fields",
-            }) %>
         </div>
 
         <div class="physicals-search-fields collapsed">
@@ -81,6 +72,15 @@
         </div>
       </div>
     <% end %>
+
+    <%= link_to(
+      t("search.physicals.show").html_safe,
+      "#",
+      class: "toggle toggle-physicals-search",
+      data: {
+        "toggle-text" => t("search.physicals.hide").html_safe,
+        "toggle-target" => ".physicals-search-fields",
+    }) %>
   </div>
 
   <% if @search.active? %>
