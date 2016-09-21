@@ -1,0 +1,15 @@
+<div class="page-title-actions">
+  <% if plan %>
+    <%= link_to(
+      t("people.show.new_draft"),
+      drafts_path(person_id: person.id),
+      method: :post,
+    ) %>
+  <% else %>
+    <%= link_to(
+      t("people.show.new_plan"),
+      drafts_path(person_id: person.id),
+      method: :post,
+    ) %>
+  <% end %>
+</div>
