@@ -33,10 +33,12 @@
         <%= person.eye_color.to_s.humanize %>
       </span>
 
-      <span class="scars-marks">
-        <span class="scars-marks-label">SMT</span>
-        <%= person.scars_and_marks.to_s.humanize %>
-      </span>
+      <% if person.scars_and_marks.present? %>
+        <span class="scars-marks">
+          <span class="scars-marks-label">SMT</span>
+          <%= person.scars_and_marks.to_s.humanize %>
+        </span>
+      <% end %>
     </div>
   </div>
 </section>

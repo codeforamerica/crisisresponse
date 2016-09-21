@@ -1,33 +1,35 @@
-<section class="behaviors">
-  <div class="section-header section-header-muted">
-    <div class="section-header-text">
-      <span class="section-title">Behaviors</span>
+<% if person.recent_incidents.frequent_behaviors.any? %>
+  <section class="behaviors">
+    <div class="section-header section-header-muted">
+      <div class="section-header-text">
+        <span class="section-title">Behaviors</span>
+      </div>
     </div>
-  </div>
 
-  <div class="section-body">
-    <ul>
-      <% person.
-        recent_incidents.
-        frequent_behaviors.
-        sort_by { |_, count| count }.
-        reverse.
-        first(4).
-        each do |behavior, count| %>
-        <li class="behavior">
-          <span class="behavior-name">
-            <%= t("incidents.behaviors.#{behavior}") %>
-          </span>
-
-          <span class="behavior-count">
-            <%= count %>
-
-            <span class="behavior-frequency">
-              (<%= 100 * count / person.recent_incidents.count %>%)
+    <div class="section-body">
+      <ul>
+        <% person.
+          recent_incidents.
+          frequent_behaviors.
+          sort_by { |_, count| count }.
+          reverse.
+          first(4).
+          each do |behavior, count| %>
+          <li class="behavior">
+            <span class="behavior-name">
+              <%= t("incidents.behaviors.#{behavior}") %>
             </span>
-          </span>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</section>
+
+            <span class="behavior-count">
+              <%= count %>
+
+              <span class="behavior-frequency">
+                (<%= 100 * count / person.recent_incidents.count %>%)
+              </span>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>
