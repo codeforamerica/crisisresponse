@@ -1,6 +1,7 @@
 .secondary {
   @include light-font;
   color: $secondary-text-color;
+  font-size: 0.8em;
 }
 
 .incident-count {
