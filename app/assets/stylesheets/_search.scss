@@ -42,11 +42,6 @@
     font-size: 0.8em;
   }
 
-  .toggle-physicals-search {
-    margin-top: $base-spacing;
-    text-align: center;
-  }
-
   .toggle-hair-options,
   .toggle-eye-options {
     margin-top: -1.5rem;
@@ -166,3 +161,11 @@
     }
   }
 }
+
+.toggle-physicals-search {
+  @include span-columns(10 of 12);
+  @include shift(2);
+  text-transform: uppercase;
+  padding: $base-spacing 0 $small-spacing 0;
+}
+
