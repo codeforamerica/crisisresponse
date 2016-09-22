@@ -63,7 +63,7 @@ $field-hover-border-color: shade($base-border-color, 20%);
 $table-header-border-color: shade($base-border-color, 25%);
 
 // Forms
-$disabled-field-background-color: shade($base-background-color, 5%);
+$disabled-field-background-color: $body-background-color;
 $fieldset-background-color: tint($base-border-color, 75%);
 $field-background-color: $white;
 $field-text-color: $dark-gray;

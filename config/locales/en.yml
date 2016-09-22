@@ -46,6 +46,8 @@ en:
     submit:
       search:
         create: Search
+      suggestion:
+        create: Submit
 
   incidents:
     behaviors:
@@ -81,6 +83,8 @@ en:
       emergent_ita: Emergent detention / ITA
       voluntary_commit: Voluntary committal
       arrested: Arrested
+    show:
+      title: Template Narrative
 
   people:
     show:
@@ -88,6 +92,11 @@ en:
       new_draft: + Update response plan
 
   profile:
+    suggestions:
+      new: Notify CRT
+      prompt:
+        first: "Know one of %{name}'s triggers?"
+        second: Are they trending?
     core:
       incident_count:
         recent: within the last 48 hours
@@ -115,6 +124,10 @@ en:
       feedback:
         description: Feedback
         name: Your name
+      suggestion:
+        body: Describe your feedback
+        person_name: Feedback for
+        urgent: URGENT Update
     placeholders:
       feedback:
         name: First Last
@@ -141,6 +154,12 @@ en:
       approve: Approve
       description: This plan will not be visible to patrol officers until it is approved.
       title: Pending Approval
+
+  suggestions:
+    create:
+      success: Feedback submitted!
+    show:
+      title: Summary
 
   time:
     formats:

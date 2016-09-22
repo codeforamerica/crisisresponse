@@ -1,0 +1,11 @@
+<section class="suggestion solo-page">
+  <div class="section-body">
+    <%= simple_form_for(@suggestion) do |form| %>
+      <%= form.input :person_id, as: :hidden %>
+      <%= form.input :person_name, disabled: true %>
+      <%= form.input :body %>
+      <%= form.input :urgent %>
+      <%= form.button :submit %>
+    <% end %>
+  </div>
+</section>

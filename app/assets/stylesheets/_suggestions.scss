@@ -1,0 +1,19 @@
+.profile-suggestion {
+  .suggestion-action {
+    margin-top: $base-spacing;
+    text-align: center;
+  }
+}
+
+.suggestion-person {
+  @include heavy-font;
+  margin-bottom: $base-spacing;
+}
+
+#suggestion_person_name {
+  width: 50%;
+}
+
+#suggestion_body {
+  height: 10em;
+}

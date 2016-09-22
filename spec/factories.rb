@@ -78,6 +78,13 @@ FactoryGirl.define do
     end
   end
 
+  factory :suggestion do
+    officer
+    person
+    body "MyText"
+    urgent false
+  end
+
   factory :response_strategy do
     priority 1
     title "Contact case worker"
