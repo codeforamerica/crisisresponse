@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   resource :authentication, only: [:new, :create, :destroy]
 
   resources :feedbacks, only: [:new, :create]
+  resources :incidents, only: :show
   resources :people, only: [:index, :show]
   resources :preferences, only: :create
-  resources :incidents, only: :show
+  resources :suggestions, only: [:new, :create, :show]
 
   resources :drafts, only: [:index, :show, :create, :edit, :update]
   resources :submissions, only: [:index, :show, :create] do

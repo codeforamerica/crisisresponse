@@ -1,0 +1,23 @@
+.solo-page {
+  width: $optimal-reading-width;
+  margin: auto;
+
+  h1 {
+    font-size: 1.2em;
+  }
+
+  .close-page {
+    display: block;
+    padding: $small-spacing $base-spacing;
+    text-align: right;
+    text-transform: uppercase;
+
+    &:first-child {
+      border-bottom: $base-border;
+    }
+
+    &:last-child {
+      border-top: $base-border;
+    }
+  }
+}

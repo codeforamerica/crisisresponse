@@ -1,0 +1,20 @@
+<section class="profile-suggestion">
+  <div class="section-body">
+    <div class="suggestion-prompt">
+      <%= t("profile.suggestions.prompt.first", name: person.last_name) %>
+    </div>
+
+    <div class="suggestion-prompt">
+      <%= t("profile.suggestions.prompt.second") %>
+    </div>
+
+    <div class="suggestion-action">
+      <%= link_to(
+        t("profile.suggestions.new"),
+        new_suggestion_path(person_id: person),
+        class: "button",
+        target: "_blank",
+      ) %>
+    </div>
+  </div>
+</section>

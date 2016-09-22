@@ -53,6 +53,7 @@ select[multiple=multiple] {
 
   &:disabled {
     background-color: $disabled-field-background-color;
+    color: $secondary-text-color;
     cursor: not-allowed;
 
     &:hover {

@@ -1,8 +1,8 @@
-<section class="incident-full">
+<section class="solo-page incident-full">
   <a class="close-page" onclick="window.close()">Close</a>
 
   <div class="section-body">
-    <h1>Template Narrative</h1>
+    <h1><%= t("incidents.show.title") %></h1>
 
     <div class="incident-full-date"><%= l(@incident.reported_at.to_date) %></div>
 

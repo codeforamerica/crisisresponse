@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916224610) do
+ActiveRecord::Schema.define(version: 20160922184433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,17 @@ ActiveRecord::Schema.define(version: 20160916224610) do
     t.index ["person_id"], name: "index_rms_people_on_person_id", using: :btree
   end
 
+  create_table "suggestions", force: :cascade do |t|
+    t.integer  "officer_id"
+    t.integer  "person_id"
+    t.text     "body"
+    t.boolean  "urgent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["officer_id"], name: "index_suggestions_on_officer_id", using: :btree
+    t.index ["person_id"], name: "index_suggestions_on_person_id", using: :btree
+  end
+
   create_table "triggers", force: :cascade do |t|
     t.string   "description",      null: false
     t.integer  "response_plan_id"
@@ -225,5 +236,7 @@ ActiveRecord::Schema.define(version: 20160916224610) do
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "rms_crisis_incidents", "rms_people"
   add_foreign_key "rms_people", "people"
+  add_foreign_key "suggestions", "officers"
+  add_foreign_key "suggestions", "people"
   add_foreign_key "triggers", "response_plans"
 end
