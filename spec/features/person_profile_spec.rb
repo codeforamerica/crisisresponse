@@ -62,6 +62,21 @@ feature "Officer views a response plan" do
     expect(page).to have_content("Skull tattoo on neck")
   end
 
+  scenario "They see the person's location" do
+    sign_in_officer
+    person = create(
+      :person,
+      location_name: "Residence",
+      location_address: "123 Main St, Seattle, WA",
+    )
+
+    visit person_path(person)
+
+    expect(page).to have_content("Residence")
+    expect(page).to have_content("123 Main St")
+    expect(page).to have_content("Seattle, WA")
+  end
+
   scenario "They see the person's aliases" do
     sign_in_officer
     aliases = ["Mark Smith", "Joe Andrews"]

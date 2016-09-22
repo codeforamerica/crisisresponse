@@ -106,6 +106,14 @@ class Person < ActiveRecord::Base
       last
   end
 
+  def address_line_one
+    location_address.split(",").first
+  end
+
+  def address_line_two
+    location_address.split(",")[1..-1].join(",")
+  end
+
   def display_name
     "#{last_name}, #{first_name}"
   end
