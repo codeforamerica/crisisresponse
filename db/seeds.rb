@@ -12,6 +12,7 @@ Image.destroy_all
 ResponseStrategy.destroy_all
 
 PageView.destroy_all
+Suggestion.destroy_all
 ResponsePlan.destroy_all
 Person.destroy_all
 Officer.destroy_all
@@ -43,6 +44,7 @@ sergeant = Officer.create!(
 biff = Person.create!(
   first_name: "Biff",
   last_name: "TANNEN",
+  middle_initial: "R",
   sex: "Male",
   race: "WHITE",
   height_in_inches: 70,
@@ -67,6 +69,7 @@ RMS::Person.create!(
   pin: "000000",
   first_name: "Gregory",
   last_name: "Tannen",
+  middle_initial: "M",
   sex: "Male",
   race: "AFRICAN AMERICAN/BLACK",
   height_in_inches: 70,
@@ -91,6 +94,7 @@ RMS::Person.create!(
   pin: "000000",
   first_name: "Martha",
   last_name: "Tannen",
+  middle_initial: "S",
   sex: "Female",
   race: "ASIAN (ALL)/PACIFIC ISLANDER",
   height_in_inches: 63,

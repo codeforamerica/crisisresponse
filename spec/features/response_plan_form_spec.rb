@@ -33,6 +33,7 @@ feature "Response Plan Form" do
       visit person_path(person)
       click_on t("people.show.new_plan")
       fill_in "First name", with: "John"
+      fill_in "Middle initial", with: "Q"
       fill_in "Last name", with: "Doe"
       fill_in "DOB", with: "1980-01-02"
       fill_in "Weight", with: 160
@@ -53,6 +54,7 @@ feature "Response Plan Form" do
         to have_content t("drafts.update.success", name: "John Doe")
       expect(page).to have_content t("drafts.show.title")
       expect(page).to have_content("John")
+      expect(page).to have_content("Q")
       expect(page).to have_content("Doe")
       expect(page).to have_content(l(Date.new(1980, 1, 2)))
       expect(page).to have_content("160 lb")

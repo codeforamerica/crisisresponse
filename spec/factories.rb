@@ -46,6 +46,7 @@ FactoryGirl.define do
 
   factory :person do
     first_name "John"
+    middle_initial "Q"
     last_name "Doe"
     sex "Male"
     race "AFRICAN AMERICAN/BLACK"
@@ -95,6 +96,7 @@ FactoryGirl.define do
   factory :rms_person, class: "RMS::Person" do
     person
     first_name "John"
+    middle_initial "Q"
     last_name "Doe"
     sex "Male"
     race "AFRICAN AMERICAN/BLACK"

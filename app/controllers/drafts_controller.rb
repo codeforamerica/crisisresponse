@@ -90,6 +90,7 @@ class DraftsController < ApplicationController
         :last_name,
         :location_address,
         :location_name,
+        :middle_initial,
         :race,
         :scars_and_marks,
         :sex,

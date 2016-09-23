@@ -24,10 +24,10 @@ class Person < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:first_name, :last_name],
+    against: [:first_name, :last_name, :middle_initial],
     associated_against: {
       aliases: [:name],
-      rms_person: [:first_name, :last_name],
+      rms_person: [:first_name, :last_name, :middle_initial],
     },
     using: {
       dmetaphone: {},
@@ -71,6 +71,7 @@ class Person < ApplicationRecord
   fallback_to_rms_person(:last_name)
   fallback_to_rms_person(:location_address)
   fallback_to_rms_person(:location_name)
+  fallback_to_rms_person(:middle_initial)
   fallback_to_rms_person(:race)
   fallback_to_rms_person(:scars_and_marks)
   fallback_to_rms_person(:sex)
@@ -117,7 +118,11 @@ class Person < ApplicationRecord
   end
 
   def display_name
-    "#{last_name}, #{first_name}"
+    if middle_initial.present?
+      "#{last_name}, #{first_name} #{middle_initial}"
+    else
+      "#{last_name}, #{first_name}"
+    end
   end
 
   def incidents_since(moment)
@@ -129,7 +134,13 @@ class Person < ApplicationRecord
   end
 
   def name=(value)
-    (self.first_name, self.last_name) = value.split
+    parts = value.split
+    self.first_name = parts.first
+    self.last_name = parts.last
+
+    if parts.count >= 3
+      self.middle_initial = parts.second
+    end
   end
 
   def profile_image_url

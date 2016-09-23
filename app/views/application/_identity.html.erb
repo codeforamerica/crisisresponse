@@ -2,6 +2,7 @@
   <span class="identity-name">
     <%= person.last_name.to_s.upcase %>,
     <%= person.first_name.to_s.titleize %>
+    <%= person.middle_initial.to_s.titleize %>
   </span>
 
   <% if person.date_of_birth %>
