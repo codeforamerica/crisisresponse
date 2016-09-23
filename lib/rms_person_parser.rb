@@ -10,6 +10,7 @@ class RMSPersonParser
     :height_in_inches,
     :last_name,
     :location_address,
+    :middle_initial,
     :race,
     :sex,
     :weight_in_pounds,
@@ -58,6 +59,14 @@ class RMSPersonParser
 
     if name
       name.strip.titlecase
+    end
+  end
+
+  def middle_initial
+    middle_initial = data.fetch("G2")
+
+    if middle_initial
+      middle_initial.to_s.strip[0]
     end
   end
 

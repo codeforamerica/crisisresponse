@@ -14,4 +14,7 @@ RSpec.shared_examples "a validated person" do
   it { should_not allow_value("BLACK").for(:race) }
   it { should_not allow_value("W").for(:race) }
   it { should_not allow_value("White").for(:race) }
+
+  it { should allow_value("A").for(:middle_initial) }
+  it { should_not allow_value("AB").for(:middle_initial) }
 end

@@ -108,6 +108,26 @@ describe RMSPersonParser do
     end
   end
 
+  describe "#middle_initial" do
+    it "retrieves, strips, and capitalizes the middle initial" do
+      parser = RMSPersonParser.new("G2" => "  L  ")
+
+      expect(parser.middle_initial).to eq("L")
+    end
+
+    it "shortens names down to a single letter" do
+      parser = RMSPersonParser.new("G2" => "  Louis  ")
+
+      expect(parser.middle_initial).to eq("L")
+    end
+
+    it "handles nil" do
+      parser = RMSPersonParser.new("G2" => nil)
+
+      expect(parser.middle_initial).to eq(nil)
+    end
+  end
+
   describe "#last_name" do
     it "retrieves, strips, and capitalizes the last name" do
       parser = RMSPersonParser.new("SURNAME" => "  JOHNSON      ")
