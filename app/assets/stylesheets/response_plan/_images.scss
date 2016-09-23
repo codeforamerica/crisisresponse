@@ -32,13 +32,17 @@
   }
 
   .image-thumbnails {
+    display: flex;
+    justify-content: center;
     margin-top: $small-spacing;
     text-align: center;
   }
 
   .image-thumbnail {
     border: $dark-border;
+    flex: 0 0 auto;
     height: 3em;
+    width: auto;
 
     &-focused {
       border: $selected-border;
