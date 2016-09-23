@@ -1,7 +1,11 @@
 $(function() {
   $("[role='link']").on("click", function(e) {
     if(e.target.tagName !== "A") {
-      window.location = e.currentTarget.getAttribute("data-link");
+      var destination = e.currentTarget.getAttribute("data-link");
+
+      if(destination) {
+        window.location = destination;
+      }
     }
   });
 });
