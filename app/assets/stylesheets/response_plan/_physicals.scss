@@ -1,12 +1,45 @@
 .profile-physicals {
-  .scars-marks-label {
+  .aliases-title {
+    @include light-font;
+    color: $secondary-text-color;
+  }
+
+  .identity-dob {
     @include heavy-font;
-    display: inline;
+  }
+}
+
+.physical {
+  margin-top: $small-spacing;
+
+  span {
+    display: block;
+  }
+
+  .shorthand-description {
+    @include heavy-font;
+    font-size: 1.2em;
+  }
+
+  .eye-color,
+  .hair-color,
+  .scars-marks {
+    @include light-font;
+    font-size: 0.8em;
+    margin-bottom: $tiny-spacing;
+  }
+
+  .eye-color-icon,
+  .hair-color-icon {
+    width: $base-spacing;
     margin-right: $small-spacing;
   }
 
-  .aliases ul {
-    list-style-type: disc;
-    padding-left: $base-spacing;
+  .eye-color-icon {
+    transform: translateY(0.2rem);
+  }
+
+  .hair-color-icon {
+    transform: translateY(0.5rem);
   }
 }

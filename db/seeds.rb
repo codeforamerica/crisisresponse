@@ -281,6 +281,8 @@ end
 create_incidents_for(gregory)
 create_incidents_for(martha)
 
+biff.aliases.create(name: "B-Tan")
+
 gregory.update(visible: true)
 martha.update(visible: true)
 biff.update(visible: true)
