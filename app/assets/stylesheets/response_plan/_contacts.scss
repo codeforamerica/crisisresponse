@@ -29,3 +29,13 @@
     height: 1.3em;
   }
 }
+
+@include media($medium-screen-up) {
+  .contact {
+    @include span-columns(4 of 12);
+
+    &:nth-child(3n) {
+      @include omega;
+    }
+  }
+}

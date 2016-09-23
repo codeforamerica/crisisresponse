@@ -13,18 +13,8 @@
   }
 }
 
-.right-column .about {
-  display: block;
-
+.about {
   @include media($medium-screen-up) {
-    display: none;
-  }
-}
-
-.left-column .about {
-  display: none;
-
-  @include media($medium-screen-up) {
-    display: block;
+    @include span-columns(4 of 12);
   }
 }
