@@ -21,17 +21,17 @@
         </div>
       </div>
 
-      <div class="person-top-behavior">
-        <span>
-          <% if person.recent_incidents.frequent_behaviors.any? %>
+      <% if person.recent_incidents.frequent_behaviors.any? %>
+        <div class="person-top-behavior">
+          <span class="person-top-behavior-text">
             <%= t([
               :incidents,
               :behaviors,
               person.recent_incidents.frequent_behaviors.keys.first,
             ].join(".")) %>
-          <% end %>
-        </span>
-      </div>
+          </span>
+        </div>
+      <% end %>
 
       <div class="person-incident-count">
         <span class="bold">
