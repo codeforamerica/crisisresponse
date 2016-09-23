@@ -37,7 +37,7 @@
   text-align: right;
 }
 
-.person-top-behavior span {
+.person-top-behavior-text {
   @include tag;
   max-width: 100%;
   overflow: hidden;
@@ -93,8 +93,13 @@
   }
 
   .person-incident-count {
+    @include shift(4);
     @include span-columns(3 of 10);
     @include omega;
+  }
+
+  .person-top-behavior + .person-incident-count {
+    @include shift(0);
   }
 
   .person-links {
