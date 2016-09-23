@@ -109,6 +109,10 @@ en:
       adjust: Adjust Filters
     form:
       label: Search by name, DOB, or physical description
+    hints:
+      age: (will search +/- 5 yrs.)
+      height: (will search +/- 2 in.)
+      weight: (will search +/- 10 lbs.)
     options:
       show: "More options"
       hide: "Fewer options"

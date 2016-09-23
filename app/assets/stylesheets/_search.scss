@@ -7,6 +7,11 @@
     @include light-font;
   }
 
+  .hint {
+    @include light-font;
+    font-size: 0.8em;
+  }
+
   .physicals-search-fields.collapsed {
     display: none;
   }
@@ -81,7 +86,9 @@
 
     input[type="number"] {
       @include span-columns(1 of 10);
+      display: inline-block;
       float: none;
+      margin-right: $base-spacing;
     }
 
     .basic-search-fields {
