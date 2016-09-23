@@ -23,7 +23,7 @@
         </div>
 
         <div class="physicals-search-fields collapsed">
-          <%= f.input :age, as: :integer %>
+          <%= f.input :age, as: :integer, hint: t("search.hints.age") %>
           <%= f.input :sex, as: :check_boxes, collection: RMS::SEX_CODES.keys %>
           <%= f.input(
             :race,
@@ -34,7 +34,12 @@
 
           <%= render "application/height_fields", form: f %>
 
-          <%= f.input :weight_in_pounds, as: :integer, label: "Weight" %>
+          <%= f.input(
+            :weight_in_pounds,
+            as: :integer,
+            label: "Weight",
+            hint: t("search.hints.weight"),
+          ) %>
 
           <div class="hair-color-field collapsed">
             <%= f.input(
