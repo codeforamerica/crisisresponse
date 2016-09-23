@@ -6,6 +6,7 @@
   <div class="response_plan_form">
     <%= f.fields_for :person do |person| %>
       <%= person.input :first_name %>
+      <%= person.input :middle_initial %>
       <%= person.input :last_name %>
 
       <%= person.input(
