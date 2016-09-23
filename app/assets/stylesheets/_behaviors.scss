@@ -1,5 +1,9 @@
-.behaviors {
+.profile-behaviors {
   @include span-columns(4 of 4);
+
+  @include media($medium-screen-up) {
+    @include span-columns(4 of 8);
+  }
 }
 
 .behavior {
@@ -29,10 +33,4 @@
   @include light-font;
   color: $secondary-text-color;
   font-size: 0.8em;
-}
-
-@include media($medium-screen-up) {
-  .behaviors {
-    @include span-columns(4 of 8);
-  }
 }

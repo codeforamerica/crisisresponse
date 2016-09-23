@@ -1,7 +1,7 @@
 $radius: 6px;
 $bullet-size: 3rem;
 
-.response-plan {
+.profile-response-strategies {
   @include span-columns(8 of 8);
   counter-reset: response-strategy-counter;
 }

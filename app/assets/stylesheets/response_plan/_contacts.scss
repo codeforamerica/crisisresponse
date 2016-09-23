@@ -1,3 +1,13 @@
+.profile-contact {
+  @include media($medium-screen-up) {
+    @include span-columns(4 of 12);
+
+    &:nth-child(3n) {
+      @include omega;
+    }
+  }
+}
+
 .contact-name {
   @include heavy-font;
 }
@@ -27,15 +37,5 @@
   svg {
     vertical-align: text-bottom;
     height: 1.3em;
-  }
-}
-
-@include media($medium-screen-up) {
-  .contact {
-    @include span-columns(4 of 12);
-
-    &:nth-child(3n) {
-      @include omega;
-    }
   }
 }
