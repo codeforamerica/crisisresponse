@@ -14,14 +14,6 @@ Optional variables:
     <%= render "sections/profile", person: person %>
     <%= render "sections/location", person: person %>
 
-    <% if plan %>
-      <% plan.contacts.each do |contact| %>
-        <%= render "sections/contact", contact: contact %>
-      <% end %>
-
-      <%= render "sections/about", person: person %>
-    <% end %>
-
     <%= render "sections/suggestion", person: person %>
   </div>
 
@@ -39,13 +31,22 @@ Optional variables:
       <%= render "sections/deescalation_techniques", plan: plan %>
       <%= render "sections/triggers", plan: plan %>
       <%= render "sections/response_strategies", plan: plan %>
-      <%= render "sections/background_info", plan: plan %>
     <% end %>
 
-    <%= render "sections/incidents", person: person %>
-
-    <% if plan %>
-      <%= render "sections/about", person: person %>
+    <% if plan.nil? %>
+      <%= render "sections/incidents", person: person %>
     <% end %>
   </div>
+
+  <% if plan %>
+    <div class="full-column">
+      <% plan.contacts.each do |contact| %>
+        <%= render "sections/contact", contact: contact %>
+      <% end %>
+    </div>
+
+    <%= render "sections/background_info", plan: plan %>
+    <%= render "sections/incidents", person: person %>
+    <%= render "sections/about", person: person %>
+  <% end %>
 </div>

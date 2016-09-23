@@ -55,5 +55,11 @@ h1, h2, h3, h4, h5, h6 {
 
   @include media($large-screen-up) {
     @include span-columns(8 of 12);
+    @include omega;
   }
+}
+
+.full-column {
+  @include fill-parent;
+  overflow: hidden;
 }
