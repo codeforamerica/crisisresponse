@@ -16,7 +16,7 @@ function initAutocomplete() {
 function initMap() {
   initAutocomplete();
 
-  var location_card = $(".location");
+  var location_card = $(".profile-location");
   if(location_card.length == 0) return;
 
   var address = location_card.data("address");

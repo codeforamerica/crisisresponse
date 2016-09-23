@@ -1,4 +1,4 @@
-.about {
+.profile-about {
   .about-label {
     @include light-font;
     color: $secondary-text-color;
@@ -11,9 +11,7 @@
     @include heavy-font;
     font-size: 1.2em;
   }
-}
 
-.about {
   @include media($medium-screen-up) {
     @include span-columns(4 of 12);
   }
