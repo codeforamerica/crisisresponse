@@ -1,7 +1,8 @@
 .response-strategy {
+  @include fill-parent;
   display: inline-block;
-  position: relative;
   margin-bottom: $base-spacing;
+  position: relative;
 
   &:before {
     background-image: $bullet-background;
