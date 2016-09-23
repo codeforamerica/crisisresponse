@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Officer < ActiveRecord::Base
+class Officer < ApplicationRecord
   include Analytics
 
   NORMAL = "normal"

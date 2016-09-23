@@ -1,4 +1,6 @@
-class Alias < ActiveRecord::Base
+# frozen_string_literal: true
+
+class Alias < ApplicationRecord
   belongs_to :person, touch: true
 
   validates :person, presence: true

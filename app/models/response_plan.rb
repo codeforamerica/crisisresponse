@@ -1,4 +1,6 @@
-class ResponsePlan < ActiveRecord::Base
+# frozen_string_literal: true
+
+class ResponsePlan < ApplicationRecord
   belongs_to :person
 
   has_many :contacts, dependent: :destroy
