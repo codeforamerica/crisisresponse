@@ -1,4 +1,44 @@
+# frozen_string_literal: true
+
 class DraftsController < ApplicationController
+  PERSON_ATTRIBUTES = [
+    :date_of_birth,
+    :eye_color,
+    :first_name,
+    :hair_color,
+    :height_feet,
+    :height_inches,
+    :id,
+    :last_name,
+    :location_address,
+    :location_name,
+    :middle_initial,
+    :race,
+    :scars_and_marks,
+    :sex,
+    :weight_in_pounds,
+    aliases_attributes: [:_destroy, :id, :name],
+    images_attributes: [:_destroy, :id, :source],
+  ].freeze
+
+  PERMITTED_PARAMS = [
+    :background_info,
+    :private_notes,
+    contacts_attributes: [
+      :_destroy,
+      :cell,
+      :id,
+      :name,
+      :notes,
+      :organization,
+      :relationship,
+    ],
+    deescalation_techniques_attributes: [:_destroy, :id, :description],
+    person_attributes: PERSON_ATTRIBUTES,
+    response_strategies_attributes: [:_destroy, :description, :id, :title],
+    triggers_attributes: [:_destroy, :id, :description],
+  ].freeze
+
   before_action :authenticate_officer!
   before_action :authorize_admin
 
@@ -62,61 +102,9 @@ class DraftsController < ApplicationController
   private
 
   def response_plan_params
-    params.require(:response_plan).permit(
-      :background_info,
-      :private_notes,
-      contacts_attributes: [
-        :_destroy,
-        :cell,
-        :id,
-        :name,
-        :notes,
-        :organization,
-        :relationship,
-      ],
-      deescalation_techniques_attributes: [
-        :_destroy,
-        :id,
-        :description,
-      ],
-      person_attributes: [
-        :date_of_birth,
-        :eye_color,
-        :first_name,
-        :hair_color,
-        :height_feet,
-        :height_inches,
-        :id,
-        :last_name,
-        :location_address,
-        :location_name,
-        :middle_initial,
-        :race,
-        :scars_and_marks,
-        :sex,
-        :weight_in_pounds,
-        aliases_attributes: [
-          :_destroy,
-          :id,
-          :name,
-        ],
-        images_attributes: [
-          :_destroy,
-          :id,
-          :source,
-        ],
-      ],
-      response_strategies_attributes: [
-        :_destroy,
-        :description,
-        :id,
-        :title,
-      ],
-      triggers_attributes: [
-        :_destroy,
-        :id,
-        :description,
-      ],
-    )
+    permitted = params.require(:response_plan).permit(PERMITTED_PARAMS)
+    dob = permitted[:person_attributes][:date_of_birth]
+    permitted[:person_attributes][:date_of_birth] = Date.strptime(dob, "%m-%d-%Y")
+    permitted
   end
 end
