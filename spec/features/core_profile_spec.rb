@@ -49,4 +49,24 @@ feature "Core Profile" do
     expect(page).to have_content(narrative)
     expect(current_path).to eq(incident_path(incident))
   end
+
+  scenario "admins can view non-visible profiles" do
+    admin = create(:officer, :admin)
+    sign_in_officer(admin)
+    person = create(:person, visible: false)
+
+    visit person_path(person)
+
+    expect(page).to have_content(l(person.date_of_birth))
+  end
+
+  scenario "non-admins can only view visible profiles" do
+    officer = create(:officer)
+    sign_in_officer(officer)
+    person = create(:person, visible: false)
+
+    expect do
+      visit person_path(person)
+    end.to raise_error(ActiveRecord::RecordNotFound)
+  end
 end

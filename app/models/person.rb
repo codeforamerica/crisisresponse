@@ -98,7 +98,7 @@ class Person < ApplicationRecord
     Person.where(id: people_ids).update_all(visible: true)
   end
 
-  def self.visible
+  def self.publicly_visible
     where(visible: true)
   end
 

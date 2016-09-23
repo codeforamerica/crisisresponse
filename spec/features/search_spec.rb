@@ -169,6 +169,26 @@ feature "Search" do
       end
     end
 
+    scenario "admins can see non-visible profiles" do
+      admin = create(:officer, :admin)
+      sign_in_officer(admin)
+      person = create(:person, visible: false)
+
+      visit people_path
+
+      expect(page).to have_content(l(person.date_of_birth))
+    end
+
+    scenario "non-admins can only see visible profiles" do
+      officer = create(:officer)
+      sign_in_officer(officer)
+      person = create(:person, visible: false)
+
+      visit people_path
+
+      expect(page).not_to have_content(l(person.date_of_birth))
+    end
+
     def check_option(attr, option)
       page.execute_script("$('.search_#{attr} [value=\"#{option}\"]').click()")
     end

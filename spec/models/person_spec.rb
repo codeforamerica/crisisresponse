@@ -53,12 +53,12 @@ RSpec.describe Person, type: :model do
     end
   end
 
-  describe ".visible" do
+  describe ".publicly_visible" do
     it "returns people who are visible" do
       visible = create(:person, visible: true)
       create(:person, visible: false)
 
-      expect(Person.visible).to eq([visible])
+      expect(Person.publicly_visible).to eq([visible])
     end
   end
 

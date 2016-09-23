@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
   before_action :authenticate_officer!
 
   def index
-    @search = Search.new(search_params, Person.visible)
+    @search = Search.new(search_params, visible_people)
     @search.validate
 
     @people = @search.
@@ -16,7 +16,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @person = Person.includes(:images).find(params[:id])
+    @person = visible_people.includes(:images).find(params[:id])
 
     PageView.create(officer: current_officer, person: @person)
   end
@@ -39,6 +39,14 @@ class PeopleController < ApplicationController
       )
     else
       {}
+    end
+  end
+
+  def visible_people
+    if current_officer.admin?
+      Person.all
+    else
+      Person.publicly_visible
     end
   end
 end
