@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922184433) do
+ActiveRecord::Schema.define(version: 20160923010334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160922184433) do
     t.string   "location_name"
     t.string   "location_address"
     t.boolean  "visible",          default: false, null: false
+    t.string   "middle_initial"
     t.index ["visible"], name: "index_people_on_visible", using: :btree
   end
 
@@ -204,6 +205,7 @@ ActiveRecord::Schema.define(version: 20160922184433) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "person_id"
+    t.string   "middle_initial"
     t.index ["person_id"], name: "index_rms_people_on_person_id", using: :btree
   end
 
