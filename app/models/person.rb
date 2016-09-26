@@ -103,8 +103,13 @@ class Person < ApplicationRecord
   end
 
   def active_plan
-    @active_plan ||= response_plans.
+    @active_plan ||= active_plan_at(Time.current)
+  end
+
+  def active_plan_at(time = Time.current)
+    response_plans.
       approved.
+      where("approved_at < :time", time: time).
       order(:approved_at).
       last
   end
