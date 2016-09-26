@@ -124,6 +124,10 @@ en:
     title: Search for a Person
 
   simple_form:
+    hints:
+      authentication:
+        username: Same username you use to log into SPD computers (e.g., smithj)
+        password: Same password you use to log into SPD computers
     labels:
       feedback:
         description: Feedback

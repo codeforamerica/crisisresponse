@@ -7,11 +7,6 @@
     @include light-font;
   }
 
-  .hint {
-    @include light-font;
-    font-size: 0.8em;
-  }
-
   .physicals-search-fields.collapsed {
     display: none;
   }

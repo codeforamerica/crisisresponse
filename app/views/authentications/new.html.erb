@@ -8,8 +8,15 @@
   <div class="section-body">
     <%= simple_form_for(sign_in, url: authentication_path) do |f| %>
       <div class="form-inputs">
-        <%= f.input :username, required: false, autofocus: true %>
-        <%= f.input :password, required: false %>
+        <%= f.input :username, autofocus: true, hint: false do %>
+          <%= f.hint :username %>
+          <%= f.text_field :username %>
+        <% end %>
+
+        <%= f.input :password, autofocus: true, hint: false do %>
+          <%= f.hint :password %>
+          <%= f.text_field :password %>
+        <% end %>
       </div>
 
       <div class="form-actions">

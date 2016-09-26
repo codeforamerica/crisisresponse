@@ -26,6 +26,12 @@ label {
   }
 }
 
+.hint {
+  @include light-font;
+  font-size: 0.8em;
+}
+
+
 #{$all-text-inputs},
 select[multiple=multiple] {
   background-color: $field-background-color;
