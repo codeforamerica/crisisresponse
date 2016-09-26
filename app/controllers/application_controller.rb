@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
+  REDIRECT_AFTER_SIGN_IN = :redirect_after_sign_in
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -7,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   def authenticate_officer!
     unless officer_signed_in?
+      session[REDIRECT_AFTER_SIGN_IN] = request.fullpath
+
       redirect_to(
         new_authentication_path,
         alert: t("authentication.unauthenticated"),
@@ -42,5 +48,11 @@ class ApplicationController < ActionController::Base
 
   def demo_mode?
     ENV.fetch("DEMO_MODE") == "true"
+  end
+
+  private
+
+  def redirect_after_sign_in_path
+    session.fetch(REDIRECT_AFTER_SIGN_IN, people_path)
   end
 end

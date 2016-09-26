@@ -9,8 +9,9 @@ class AuthenticationsController < ApplicationController
     if authentication.attempt_sign_on
       officer = Officer.find_or_create_by(authentication.officer_information)
       session[:officer_id] = officer.id
+
       redirect_to(
-        people_path,
+        redirect_after_sign_in_path,
         notice: t("authentication.sign_in.success", name: officer.name),
       )
     else

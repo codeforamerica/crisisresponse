@@ -1,7 +1,9 @@
 require "rails_helper"
 
 feature "Officer sign-in" do
-  scenario "unauthenticated officer is redirected to sign in" do
+  scenario "officer is redirected to sign in then back to the requested page" do
+    officer_name = "Foo Bar"
+    FakeAuthentication.new(name: officer_name).stub_success
     person = create(:person)
 
     visit person_path(person)
@@ -9,6 +11,14 @@ feature "Officer sign-in" do
     expect(page).to have_content t("authentication.unauthenticated")
     expect(page).not_to have_content(t("authentication.sign_out.link"))
     expect(current_path).to eq(new_authentication_path)
+
+    fill_in :authentication_username, with: "Foobar"
+    fill_in :authentication_password, with: "Password"
+    click_on t("authentication.sign_in.link")
+
+    expect(page).
+      to have_content(t("authentication.sign_in.success", name: officer_name))
+    expect(current_path).to eq(person_path(person))
   end
 
   scenario "user signs in" do
