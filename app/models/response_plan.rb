@@ -74,6 +74,19 @@ class ResponsePlan < ApplicationRecord
     submitted_for_approval_at.present? && ! approved?
   end
 
+  def to_h
+    attributes.merge(
+      response_strategies: response_strategies.map(&:attributes),
+      contacts: contacts.map(&:attributes),
+      deescalation_techniques: deescalation_techniques.map(&:attributes),
+      triggers: triggers.map(&:attributes),
+    )
+  end
+
+  def to_json
+    to_h.to_json
+  end
+
   private
 
   def approved_at_is_present_if_approver_exists
