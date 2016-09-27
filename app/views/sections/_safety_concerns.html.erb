@@ -9,8 +9,10 @@
   </div>
 
   <div class="section-body safety-concern-history">
+    <h3>History</h3>
+
     <% if plan && plan.safety_concerns.any? %>
-      <% plan && plan.safety_concerns_by_category.each do |category, concerns| %>
+      <% plan.safety_concerns_by_category.each do |category, concerns| %>
         <div class="concern-category">
           <span class="concern-category-header">
             <%= category %>
@@ -21,6 +23,20 @@
       <% end %>
     <% else %>
       <p><%= t("safety_concerns.none") %></p>
+    <% end %>
+  </div>
+
+  <div class="section-body triggers">
+    <h3>Triggers</h3>
+
+    <% if plan && plan.triggers.any? %>
+      <% plan.triggers.each do |trigger| %>
+        <div class="trigger">
+          <span class="trigger-title"><%= trigger.title %></span>
+          <span class="trigger-description"><%= trigger.description %></span>
+        </div>
+      <% end %>
+    <% else %>
     <% end %>
   </div>
 </section>

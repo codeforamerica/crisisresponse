@@ -11,6 +11,7 @@ Contact.destroy_all
 Image.destroy_all
 ResponseStrategy.destroy_all
 SafetyConcern.destroy_all
+Trigger.destroy_all
 
 PageView.destroy_all
 Suggestion.destroy_all
@@ -268,6 +269,16 @@ SafetyConcern.create!(
   category: :chemical,
   description: "Needles have been found on Martha.",
   response_plan: martha.response_plans.last,
+)
+
+Trigger.create!(
+  response_plan: biff.response_plans.last,
+  title: "Don't send female officers",
+)
+Trigger.create!(
+  response_plan: biff.response_plans.last,
+  title: "Don't call TANNEN \"Biff\"",
+  description: "Try calling him \"B-Tan\".",
 )
 
 ResponsePlan.all.each do |plan|

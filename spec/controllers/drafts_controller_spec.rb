@@ -205,7 +205,7 @@ RSpec.describe DraftsController do
 
       it "copies over triggers" do
         officer = create(:officer, :admin)
-        original = create(:trigger, description: "bar")
+        original = create(:trigger, title: "foo", description: "bar")
 
         post(
           :create,
@@ -214,6 +214,7 @@ RSpec.describe DraftsController do
         )
 
         clone = ResponsePlan.last.triggers.first
+        expect(clone.title).to eq(original.title)
         expect(clone.description).to eq(original.description)
         expect(clone).to be_persisted
       end
