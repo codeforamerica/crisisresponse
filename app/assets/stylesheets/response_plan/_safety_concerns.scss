@@ -49,14 +49,3 @@
     @include light-font;
   }
 }
-
-.safety-concerns-empty,
-.triggers-empty {
-  a,
-  span {
-    @include light-font;
-    display: block;
-    margin-bottom: $tiny-spacing;
-    text-align: center;
-  }
-}

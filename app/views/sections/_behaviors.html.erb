@@ -1,12 +1,12 @@
-<% if person.recent_incidents.frequent_behaviors.any? %>
-  <section class="profile-behaviors">
-    <div class="section-header section-header-transparent">
-      <div class="section-header-text">
-        <span class="section-title">Behaviors</span>
-      </div>
+<section class="profile-behaviors">
+  <div class="section-header section-header-transparent">
+    <div class="section-header-text">
+      <span class="section-title">Behaviors</span>
     </div>
+  </div>
 
-    <div class="section-body">
+  <div class="section-body">
+    <% if person.recent_incidents.frequent_behaviors.any? %>
       <ul>
         <% person.
           recent_incidents.
@@ -30,6 +30,36 @@
           </li>
         <% end %>
       </ul>
+    <% else %>
+      <div class="section-body-empty">
+        <span>No known behaviors.</span>
+      </div>
+    <% end %>
+  </div>
+
+  <% if plan.try(:baseline).present? || plan.try(:elevated).present? %>
+    <div class="section-body">
+      <h3>Possible Demeanors</h3>
+
+      <% if plan.baseline.present? %>
+        <div class="demeanor">
+          <span class="demeanor-title">Baseline</span>
+
+          <span class="demeanor-description">
+            <%= plan.baseline %>
+          </span>
+        </div>
+      <% end %>
+
+      <% if plan.elevated.present? %>
+        <div class="demeanor">
+          <span class="demeanor-title">Elevated</span>
+
+          <span class="demeanor-description">
+            <%= plan.elevated %>
+          </span>
+        </div>
+      <% end %>
     </div>
-  </section>
-<% end %>
+  <% end %>
+</section>
