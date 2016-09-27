@@ -14,6 +14,10 @@ section {
     width: 100%;
   }
 
+  .section-header-red {
+    background-color: $safety-section-header-background;
+  }
+
   .section-header-grey {
     background-color: $medium-gray;
   }

@@ -41,6 +41,10 @@ This list will continually change.
 **Please check this periodically**
 using the menu on the top right of the screen in the app.
 
+* As of 6/6/2016, officer safety information is not yet available.
+* **Always check RMS for safety concerns**,
+  even once “officer safety” is live in the app.
+
 ## How to Get in Touch
 
 ### Code for America (seattle@codeforamerica.org)

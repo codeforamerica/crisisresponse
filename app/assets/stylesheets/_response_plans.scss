@@ -5,3 +5,18 @@ $bullet-size: 3rem;
   @include span-columns(8 of 8);
   counter-reset: response-strategy-counter;
 }
+
+.safety-concerns {
+  li {
+    margin-bottom: $small-spacing;
+  }
+}
+
+.needs-approval {
+  @include fill-parent;
+  background-color: $needs-approval-background-color;
+  color: $needs-approval-text-color;
+  margin-bottom: $base-spacing;
+  padding: $small-spacing;
+  text-align: center;
+}

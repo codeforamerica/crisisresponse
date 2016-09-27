@@ -36,6 +36,13 @@ class DraftsController < ApplicationController
     deescalation_techniques_attributes: [:_destroy, :id, :description],
     person_attributes: PERSON_ATTRIBUTES,
     response_strategies_attributes: [:_destroy, :description, :id, :title],
+    safety_concerns_attributes: [
+      :_destroy,
+      :category,
+      :description,
+      :id,
+      :physical_or_threat,
+    ],
     triggers_attributes: [:_destroy, :id, :description],
   ].freeze
 
@@ -64,6 +71,7 @@ class DraftsController < ApplicationController
           :contacts,
           :deescalation_techniques,
           :response_strategies,
+          :safety_concerns,
           :triggers,
         ])
       source = "from_previous"

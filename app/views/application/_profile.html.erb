@@ -26,6 +26,7 @@ Optional variables:
     <%= render "urgent_incident_count", person: person %>
 
     <%= render "sections/behaviors", person: person %>
+    <%= render "sections/safety_concerns", person: person, plan: plan %>
 
     <% if plan %>
       <%= render "sections/deescalation_techniques", plan: plan %>

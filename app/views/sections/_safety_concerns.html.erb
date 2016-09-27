@@ -1,0 +1,38 @@
+<section class="safety-concerns">
+  <div class="section-header
+    <%= plan && plan.safety_concerns.any? ? "section-header-red" : "section-header-grey"  %>
+    ">
+    <%= image_tag("section-icons/safety_concerns.svg", class: "section-icon") %>
+    <div class="section-header-text">
+      <span class="section-title">Officer Safety</span>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <% if plan && plan.safety_concerns.any? %>
+      <% plan && plan.safety_concerns_by_category.each do |category, concerns| %>
+        <div class="concern_category concern_category-<%= category %>">
+          <div class="safety-concern-icons">
+            <%= image_tag("safety_icons/#{category}-#{theme}.svg") %>
+
+            <% if concerns.any?(&:physical?) %>
+              <span class="physical-threat-icon">P</span>
+            <% end %>
+
+            <% if concerns.any?(&:threat?) %>
+              <span class="physical-threat-icon">T</span>
+            <% end %>
+          </div>
+
+          <ul>
+            <% concerns.each do |concern| %>
+              <li><%= concern.description %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Officer safety information is still under development.</p>
+    <% end %>
+  </div>
+</section>
