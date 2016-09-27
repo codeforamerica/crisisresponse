@@ -1,45 +1,41 @@
 <section class="profile-physicals">
   <div class="section-body">
     <%= render "identity", person: person %>
+  </div>
 
-    <hr/>
-
-    <% if person.aliases.any? %>
-      <div class="aliases">
-        <div class="aliases-title">
-          Aliases
-        </div>
-
-        <ul>
-          <% person.aliases.each do |aka| %>
-            <li><%= aka.name %></li>
-          <% end %>
-        </ul>
+  <% if person.aliases.any? %>
+    <div class="section-body aliases">
+      <div class="aliases-title">
+        Aliases
       </div>
 
-      <hr/>
-    <% end %>
-
-    <div class="physical">
-      <span class="shorthand-description">
-        <%= person.shorthand_description %>
-      </span>
-
-      <span class="hair-color">
-        <%= inline_svg "physical/hair.svg", class: "hair-color-icon" %>
-        <%= person.hair_color.to_s.humanize %>
-      </span>
-
-      <span class="eye-color">
-        <%= inline_svg "physical/eye.svg", class: "eye-color-icon" %>
-        <%= person.eye_color.to_s.humanize %>
-      </span>
-
-      <% if person.scars_and_marks.present? %>
-        <span class="scars-marks">
-          <%= person.scars_and_marks.to_s.humanize %>
-        </span>
-      <% end %>
+      <ul>
+        <% person.aliases.each do |aka| %>
+          <li><%= aka.name %></li>
+        <% end %>
+      </ul>
     </div>
+  <% end %>
+
+  <div class="section-body physical">
+    <span class="shorthand-description">
+      <%= person.shorthand_description %>
+    </span>
+
+    <span class="hair-color">
+      <%= inline_svg "physical/hair.svg", class: "hair-color-icon" %>
+      <%= person.hair_color.to_s.humanize %>
+    </span>
+
+    <span class="eye-color">
+      <%= inline_svg "physical/eye.svg", class: "eye-color-icon" %>
+      <%= person.eye_color.to_s.humanize %>
+    </span>
+
+    <% if person.scars_and_marks.present? %>
+      <span class="scars-marks">
+        <%= person.scars_and_marks.to_s.humanize %>
+      </span>
+    <% end %>
   </div>
 </section>
