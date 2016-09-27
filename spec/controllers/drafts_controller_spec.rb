@@ -183,6 +183,28 @@ RSpec.describe DraftsController do
         expect(clone).to be_persisted
       end
 
+      it "copies over safety concerns" do
+        officer = create(:officer, :admin)
+        original = create(
+          :safety_concern,
+          category: "assaultive_law",
+          physical_or_threat: :threat,
+          description: "knife",
+        )
+
+        post(
+          :create,
+          params: { person_id: original.response_plan.person_id },
+          session: { officer_id: officer.id },
+        )
+
+        clone = ResponsePlan.last.safety_concerns.first
+        expect(clone.description).to eq(original.description)
+        expect(clone.category).to eq(original.category)
+        expect(clone.physical_or_threat).to eq(original.physical_or_threat)
+        expect(clone).to be_persisted
+      end
+
       it "copies over triggers" do
         officer = create(:officer, :admin)
         original = create(:trigger, description: "bar")
