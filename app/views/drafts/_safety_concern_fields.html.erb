@@ -24,5 +24,12 @@
   </div>
 
   <%= f.input :description %>
+  <%= f.input(
+    :occurred_on,
+    as: :string,
+    placeholder: "mm-dd-yyyy",
+    input_html: { value: (l(f.object.occurred_on) rescue nil) },
+  ) %>
+
   <%= link_to_remove_association "remove safety concern", f %>
 </div>

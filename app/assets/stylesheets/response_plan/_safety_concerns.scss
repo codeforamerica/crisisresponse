@@ -1,6 +1,11 @@
 .profile-safety-concerns {
   @include span-columns(4 of 8);
   @include omega;
+
+  .section-header {
+    @include icon-color($base-font-color);
+    color: $base-font-color;
+  }
 }
 
 .concern-category {
@@ -34,7 +39,7 @@
 }
 
 .trigger {
-  margin-bottom: $small-spacing;
+  margin-bottom: $base-spacing;
 
   &-title,
   &-description {
