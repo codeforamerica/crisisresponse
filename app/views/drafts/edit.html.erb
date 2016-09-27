@@ -23,7 +23,7 @@
         }
       ) %>
 
-      <%= render "nested_form", f: person, relationship: :aliases, html_classes: [] %>
+      <%= render "nested_form", f: person, relationship: :aliases %>
 
       <%= person.input(
         :race,
@@ -60,7 +60,7 @@
     <%= f.fields_for :person do |person| %>
       <%= person.input :location_name %>
       <%= person.input :location_address %>
-      <%= render "nested_form", f: person, relationship: :images, html_classes: [] %>
+      <%= render "nested_form", f: person, relationship: :images %>
     <% end %>
 
     <%= render(
@@ -71,7 +71,13 @@
     ) %>
 
     <%= render "nested_form", f: f, relationship: :deescalation_techniques %>
-    <%= render "nested_form", f: f, relationship: :triggers %>
+
+    <%= render(
+      "nested_form",
+      f: f,
+      relationship: :triggers,
+      html_classes: ["multi-field"],
+    ) %>
 
     <%= render(
       "nested_form",

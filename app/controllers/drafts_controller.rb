@@ -42,7 +42,7 @@ class DraftsController < ApplicationController
       :description,
       :id,
     ],
-    triggers_attributes: [:_destroy, :id, :description],
+    triggers_attributes: [:_destroy, :id, :title, :description],
   ].freeze
 
   before_action :authenticate_officer!

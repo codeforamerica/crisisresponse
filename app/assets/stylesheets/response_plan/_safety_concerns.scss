@@ -32,3 +32,20 @@
     font-size: 0.8em;
   }
 }
+
+.trigger {
+  margin-bottom: $small-spacing;
+
+  &-title,
+  &-description {
+    display: block;
+  }
+
+  &-title {
+    @include heavy-font;
+  }
+
+  &-description {
+    @include light-font;
+  }
+}

@@ -103,13 +103,23 @@ feature "Officer views a response plan" do
   scenario "They see triggers" do
     sign_in_officer
     response_plan = create(:response_plan)
-    step_1 = create(:trigger, response_plan: response_plan, description: "Ask about their dog")
-    step_2 = create(:trigger, response_plan: response_plan, description: "Talk about the weather")
+    step_1 = create(
+      :trigger,
+      response_plan: response_plan,
+      title: "Ask about their dog",
+      description: "Its name is Fluffy",
+    )
+    step_2 = create(
+      :trigger,
+      response_plan: response_plan,
+      title: "Talk about the weather",
+    )
 
     visit person_path(response_plan.person)
 
+    expect(page).to have_content(step_1.title)
     expect(page).to have_content(step_1.description)
-    expect(page).to have_content(step_2.description)
+    expect(page).to have_content(step_2.title)
   end
 
   scenario "They see the response plan steps" do
@@ -181,7 +191,7 @@ feature "Officer views a response plan" do
     scenario "they see the safety concerns" do
       sign_in_officer
       response_plan = create(:response_plan)
-      concern = create(
+      create(
         :safety_concern,
         response_plan: response_plan,
         description: "Owns a gun",
