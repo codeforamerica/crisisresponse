@@ -22,7 +22,9 @@
         </div>
       <% end %>
     <% else %>
-      <p><%= t("safety_concerns.none") %></p>
+      <div class="safety-concerns-empty">
+        <span><%= t("safety_concerns.none") %></span>
+      </div>
     <% end %>
   </div>
 
@@ -37,6 +39,14 @@
         </div>
       <% end %>
     <% else %>
+      <div class="triggers-empty">
+        <span><%= t("profile.triggers.none") %></span>
+
+        <%= link_to new_suggestion_path do %>
+          <%= inline_svg "edit.svg" %>
+          <%= t("profile.triggers.new") %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </section>
