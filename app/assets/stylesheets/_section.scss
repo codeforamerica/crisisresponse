@@ -26,6 +26,10 @@ section {
     display: block;
     padding: $small-spacing $base-spacing;
     overflow: hidden;
+
+    &:not(last-child) {
+      border-bottom: $base-border;
+    }
   }
 
   .section-icon {

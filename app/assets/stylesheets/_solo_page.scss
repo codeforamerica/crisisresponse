@@ -11,13 +11,5 @@
     padding: $small-spacing $base-spacing;
     text-align: right;
     text-transform: uppercase;
-
-    &:first-child {
-      border-bottom: $base-border;
-    }
-
-    &:last-child {
-      border-top: $base-border;
-    }
   }
 }

@@ -12,10 +12,6 @@
     transform: translateY(-1px);
     box-shadow: $shadow-level-1;
   }
-
-  &:not(last-child) {
-    border-bottom: $base-border;
-  }
 }
 
 .person-name,
