@@ -1,38 +1,36 @@
-<section class="safety-concerns">
+<section class="profile-safety-concerns">
   <div class="section-header
-    <%= plan && plan.safety_concerns.any? ? "section-header-red" : "section-header-grey"  %>
+    <%= plan && plan.safety_concerns.any? ? "section-header-yellow" : "section-header-grey"  %>
     ">
-    <%= image_tag("section-icons/safety_concerns.svg", class: "section-icon") %>
+    <%= inline_svg("section-icons/safety_concerns.svg", class: "section-icon") %>
     <div class="section-header-text">
       <span class="section-title">Officer Safety</span>
     </div>
   </div>
 
-  <div class="section-body">
+  <div class="section-body safety-concern-history">
     <% if plan && plan.safety_concerns.any? %>
       <% plan && plan.safety_concerns_by_category.each do |category, concerns| %>
-        <div class="concern_category concern_category-<%= category %>">
-          <div class="safety-concern-icons">
-            <%= image_tag("safety_icons/#{category}-#{theme}.svg") %>
+        <div class="concern-category">
+          <span class="concern-category-header">
+            <%= category %>
+          </span>
 
-            <% if concerns.any?(&:physical?) %>
-              <span class="physical-threat-icon">P</span>
-            <% end %>
+          <% concerns.each do |concern| %>
+            <span class="concern-description">
+              <%= concern.description %>
+            </span>
 
-            <% if concerns.any?(&:threat?) %>
-              <span class="physical-threat-icon">T</span>
+            <% if false #concern.occurred_at %>
+              <span class="concern-date">
+                <%= l(concern.occurred_at.to_date) %>
+              </span>
             <% end %>
-          </div>
-
-          <ul>
-            <% concerns.each do |concern| %>
-              <li><%= concern.description %></li>
-            <% end %>
-          </ul>
+          <% end %>
         </div>
       <% end %>
     <% else %>
-      <p>Officer safety information is still under development.</p>
+      <p><%= t("safety_concerns.none") %></p>
     <% end %>
   </div>
 </section>

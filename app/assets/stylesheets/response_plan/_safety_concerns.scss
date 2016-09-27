@@ -1,32 +1,19 @@
-.safety-concerns {
-  .safety-concern-icons {
-    @include span-columns(1 of 4);
-    text-align: center;
+.profile-safety-concerns {
+  @include span-columns(4 of 8);
+  @include omega;
+}
 
-    img {
-      @include fill-parent;
-    }
+.concern-category-header {
+  @include heavy-font;
+  display: block;
+  text-transform: uppercase;
+}
 
-    .physical-threat-icon {
-      display: inline-block;
-      padding: 0 $small-spacing;
-      background-color: $action-color;
-      color: $card-background;
-    }
-  }
+.concern-description {
+  @include light-font;
+}
 
-  ul {
-    @include span-columns(3 of 4);
-    list-style: inside;
-  }
-
-  @include media($medium-screen-up) {
-    .safety-concern-icons {
-      @include span-columns(1 of 8);
-    }
-
-    ul {
-      @include span-columns(3 of 8);
-    }
-  }
+.concern-date {
+  @include light-font;
+  color: $secondary-text-color;
 }

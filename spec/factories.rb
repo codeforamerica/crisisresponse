@@ -123,14 +123,6 @@ FactoryGirl.define do
     category { SafetyConcern::CATEGORIES.sample }
     description "History of violence"
     response_plan
-
-    physical_or_threat do
-      if SafetyConcern::ASSAULTIVE_CATEGORIES.include? category
-        [:physical, :threat].sample
-      else
-        nil
-      end
-    end
   end
 
   factory :trigger do

@@ -210,12 +210,11 @@ ActiveRecord::Schema.define(version: 20160927153910) do
   end
 
   create_table "safety_concerns", force: :cascade do |t|
-    t.integer  "response_plan_id",   null: false
-    t.string   "category",           null: false
-    t.string   "description",        null: false
-    t.string   "physical_or_threat"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "response_plan_id", null: false
+    t.string   "category",         null: false
+    t.string   "description",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["response_plan_id"], name: "index_safety_concerns_on_response_plan_id", using: :btree
   end
 

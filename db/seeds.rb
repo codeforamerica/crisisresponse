@@ -250,7 +250,6 @@ Image.create!(source: image("tannen_martha/2.jpg"), person: martha)
 SafetyConcern.create!(
   category: :assaultive_law,
   description: "RMS caution entry for being assaultive to and threatening law enforcement",
-  physical_or_threat: :physical,
   response_plan: biff.response_plans.last,
 )
 SafetyConcern.create!(

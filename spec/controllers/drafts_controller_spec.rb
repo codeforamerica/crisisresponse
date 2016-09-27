@@ -188,7 +188,6 @@ RSpec.describe DraftsController do
         original = create(
           :safety_concern,
           category: "assaultive_law",
-          physical_or_threat: :threat,
           description: "knife",
         )
 
@@ -201,7 +200,6 @@ RSpec.describe DraftsController do
         clone = ResponsePlan.last.safety_concerns.first
         expect(clone.description).to eq(original.description)
         expect(clone.category).to eq(original.category)
-        expect(clone.physical_or_threat).to eq(original.physical_or_threat)
         expect(clone).to be_persisted
       end
 
