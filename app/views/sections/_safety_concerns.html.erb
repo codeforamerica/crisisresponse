@@ -15,7 +15,7 @@
       <% plan.safety_concerns_by_category.each do |category, concerns| %>
         <div class="concern-category">
           <span class="concern-category-header">
-            <%= category %>
+            <%= t("safety_concerns.categories.#{category}.title") %>
           </span>
 
           <%= render concerns %>

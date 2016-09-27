@@ -1,10 +1,7 @@
 class SafetyConcern < ActiveRecord::Base
-  ASSAULTIVE_CATEGORIES = %w[
+  CATEGORIES = %w[
     assaultive_law
     assaultive_public
-  ].freeze
-
-  CATEGORIES = ASSAULTIVE_CATEGORIES + %w[
     weapon
     chemical
   ].freeze
