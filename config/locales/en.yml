@@ -92,16 +92,19 @@ en:
       new_draft: + Update response plan
 
   profile:
+    actions:
+      title: Admin Actions
+    core:
+      incident_count:
+        recent: within the last 48 hours
     suggestions:
       new: Notify CRT
       prompt:
         first: "Know one of %{name}'s triggers?"
         second: Are they trending?
-    core:
-      incident_count:
-        recent: within the last 48 hours
-    actions:
-      title: Admin Actions
+    triggers:
+      new: Suggest a trigger
+      none: No known triggers.
 
   safety_concerns:
     none: No known officer safety cautions.
