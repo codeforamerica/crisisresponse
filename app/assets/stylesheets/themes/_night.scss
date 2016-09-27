@@ -58,6 +58,7 @@ $arrow_down: image_url("arrow_down-night.svg");
 // Borders
 $base-border-color: $light-gray;
 $base-border: 1px solid $base-border-color;
+$dashed-border: 1px dashed $base-border-color;
 $dark-border: 1px solid $dark-gray;
 $selected-border: 3px solid $blue;
 $field-hover-border-color: shade($base-border-color, 20%);

@@ -249,17 +249,19 @@ Image.create!(source: image("tannen_martha/2.jpg"), person: martha)
 
 SafetyConcern.create!(
   category: :assaultive_law,
-  description: "RMS caution entry for being assaultive to and threatening law enforcement",
+  description: "Spit at an officer",
+  occurred_on: Date.new(1998, 1, 10),
   response_plan: biff.response_plans.last,
 )
 SafetyConcern.create!(
   category: :weapon,
-  description: "Tannen is most often armed with some sort of sharp instrument (knife, box knife, antler).",
+  description: "Had 9mm pistol at house",
+  occurred_on: Date.new(2005, 6, 8),
   response_plan: biff.response_plans.last,
 )
 SafetyConcern.create!(
   category: :weapon,
-  description: "Sometimes has 9mm pistol on his person",
+  description: "Often armed with sharp instrument",
   response_plan: biff.response_plans.last,
 )
 SafetyConcern.create!(

@@ -16,17 +16,7 @@
             <%= category %>
           </span>
 
-          <% concerns.each do |concern| %>
-            <span class="concern-description">
-              <%= concern.description %>
-            </span>
-
-            <% if false #concern.occurred_at %>
-              <span class="concern-date">
-                <%= l(concern.occurred_at.to_date) %>
-              </span>
-            <% end %>
-          <% end %>
+          <%= render concerns %>
         </div>
       <% end %>
     <% else %>

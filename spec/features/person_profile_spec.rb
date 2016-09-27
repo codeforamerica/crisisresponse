@@ -167,7 +167,7 @@ feature "Officer views a response plan" do
   end
 
   context "when there are no safety concerns" do
-    pending "they see a note saying there are no concerns" do
+    scenario "they see a note saying there are no concerns" do
       sign_in_officer
       response_plan = create(:response_plan)
 

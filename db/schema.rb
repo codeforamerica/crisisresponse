@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 20160927153910) do
     t.integer  "response_plan_id", null: false
     t.string   "category",         null: false
     t.string   "description",      null: false
+    t.date     "occurred_on"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["response_plan_id"], name: "index_safety_concerns_on_response_plan_id", using: :btree
