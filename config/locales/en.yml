@@ -105,6 +105,11 @@ en:
     triggers:
       new: Suggest a trigger
       none: No known triggers.
+    deescalation_techniques:
+      new: Suggest a technique
+      none: No known deescalation techniques.
+    general_techniques:
+      none: No recommendations.
 
   safety_concerns:
     none: No known officer safety cautions.
