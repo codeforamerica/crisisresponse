@@ -27,9 +27,9 @@ Optional variables:
 
     <%= render "sections/behaviors", person: person, plan: plan %>
     <%= render "sections/safety_concerns", person: person, plan: plan %>
+    <%= render "sections/deescalation_techniques", person: person, plan: plan %>
 
     <% if plan %>
-      <%= render "sections/deescalation_techniques", plan: plan %>
       <%= render "sections/response_strategies", plan: plan %>
     <% end %>
 

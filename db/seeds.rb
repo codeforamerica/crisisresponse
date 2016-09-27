@@ -283,6 +283,14 @@ Trigger.create!(
   description: "Try calling him \"B-Tan\".",
 )
 
+biff.response_plans.last.deescalation_techniques.create(
+  description: 'Call him "Sarge." It helps him focus.',
+)
+
+biff.response_plans.last.deescalation_techniques.create(
+  description: "Mention his dog.",
+)
+
 ResponsePlan.all.each do |plan|
   plan.update(approver: sergeant)
 end

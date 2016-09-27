@@ -1,22 +1,28 @@
-  .profile-deescalation {
+.profile-deescalation {
+  ul {
+    list-style: outside;
+    padding-left: $base-spacing;
+  }
+
+  li {
+    margin-bottom: $tiny-spacing;
+  }
+
+  @include media($medium-screen-up) {
+    display: flex;
+    flex-flow: row wrap;
+
     .section-header {
-      .section-title {
-        @include heavy-font;
-      }
-
-      color: $deescalation-section-header-color;
-      margin-bottom: $small-spacing;
+      flex: 0 0 100%;
     }
 
-    ul {
-      list-style: inside;
+    .deescalation-specific,
+    .deescalation-general {
+      flex: 0 0 50%;
     }
 
-    li {
-      margin-bottom: $tiny-spacing;
-    }
-
-    @include media($medium-screen-up) {
-      @include span-columns(5 of 8);
+    .deescalation-specific {
+      border-right: $base-border;
     }
   }
+}

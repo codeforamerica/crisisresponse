@@ -1,18 +1,45 @@
-<% if plan.deescalation_techniques.any? %>
-  <section class="profile-deescalation">
-
-    <div class="section-header section-header-muted">
-      <div class="section-header-text">
-        <span class="section-title">De-escalation Techniques</span>
-      </div>
+<section class="profile-deescalation">
+  <div class="section-header">
+    <%= inline_svg "section-icons/deescalation_techniques.svg", class: "section-icon" %>
+    <div class="section-header-text">
+      <span class="section-title">De-escalation Techniques</span>
     </div>
+  </div>
 
-    <div class="section-body">
+  <div class="section-body deescalation-specific">
+    <h3>Specific Techniques</h3>
+
+    <% if plan && plan.deescalation_techniques.any? %>
       <ul>
         <% plan.deescalation_techniques.each do |technique| %>
           <li><%= technique.description %></li>
         <% end %>
       </ul>
-    </div>
-  </section>
-<% end %>
+    <% else%>
+      <div class="section-body-empty">
+        <span><%= t("profile.deescalation_techniques.none") %></span>
+
+        <%= link_to new_suggestion_path do %>
+          <%= inline_svg "edit.svg" %>
+          <%= t("profile.deescalation_techniques.new") %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="section-body deescalation-general">
+    <h3>General Best Practices</h3>
+
+    <% if general_techniques_for(person).any? %>
+      <ul>
+        <% general_techniques_for(person).first(4).each do |technique| %>
+          <li><%= technique %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="section-body-empty">
+        <span><%= t("profile.general_techniques.none") %></span>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -15,7 +15,9 @@ section {
   }
 
   .section-header-yellow {
+    @include icon-color($base-font-color);
     background-color: $yellow;
+    color: $base-font-color;
   }
 
   .section-header-grey {
