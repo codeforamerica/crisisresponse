@@ -104,7 +104,7 @@ en:
       title: Admin Actions
 
   safety_concerns:
-    none: No officer safety concerns.
+    none: No known officer safety cautions.
     categories:
       assaultive_law:
         title: "P1: Law Enforcement"

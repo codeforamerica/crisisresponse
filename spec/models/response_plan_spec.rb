@@ -204,9 +204,9 @@ RSpec.describe ResponsePlan, type: :model do
   describe "#safety_concerns_by_category" do
     it "returns a hash of safety concerns sorted by category" do
       plan = create(:response_plan)
-      one = create(:safety_concern, response_plan: plan, category: :assaultive_law, physical_or_threat: :threat, description: "1")
-      two = create(:safety_concern, response_plan: plan, category: :assaultive_public, physical_or_threat: :threat, description: "2")
-      three = create(:safety_concern, response_plan: plan, category: :assaultive_law, physical_or_threat: :threat, description: "3")
+      one = create(:safety_concern, response_plan: plan, category: :assaultive_law, description: "1")
+      two = create(:safety_concern, response_plan: plan, category: :assaultive_public, description: "2")
+      three = create(:safety_concern, response_plan: plan, category: :assaultive_law, description: "3")
 
       concerns = plan.safety_concerns_by_category
 

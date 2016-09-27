@@ -41,7 +41,6 @@ class DraftsController < ApplicationController
       :category,
       :description,
       :id,
-      :physical_or_threat,
     ],
     triggers_attributes: [:_destroy, :id, :description],
   ].freeze
