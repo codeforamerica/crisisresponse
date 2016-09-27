@@ -318,6 +318,15 @@ end
 create_incidents_for(gregory)
 create_incidents_for(martha)
 
+# Create a recent incident
+RMS::CrisisIncident.create(
+  reported_at: 1.second.ago,
+  go_number: "2016000123",
+  narrative: NARRATIVE,
+  rms_person: gregory.rms_person,
+  xml_crisis_id: "000000",
+)
+
 biff.aliases.create(name: "B-Tan")
 
 gregory.update(visible: true)
