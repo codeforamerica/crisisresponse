@@ -1,0 +1,11 @@
+<div class="concern">
+  <span class="concern-description">
+    <%= safety_concern.description %>
+  </span>
+
+  <% if safety_concern.occurred_on %>
+    <span class="concern-date">
+      <%= l(safety_concern.occurred_on.to_date) %>
+    </span>
+  <% end %>
+</div>

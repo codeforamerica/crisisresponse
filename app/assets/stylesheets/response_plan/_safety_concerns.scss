@@ -3,17 +3,32 @@
   @include omega;
 }
 
-.concern-category-header {
-  @include heavy-font;
-  display: block;
-  text-transform: uppercase;
+.concern-category {
+  border-bottom: $dashed-border;
+  margin-bottom: $small-spacing;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &-header {
+    @include heavy-font;
+    display: block;
+    text-transform: uppercase;
+  }
 }
 
-.concern-description {
-  @include light-font;
-}
+.concern {
+  margin-bottom: $small-spacing;
 
-.concern-date {
-  @include light-font;
-  color: $secondary-text-color;
+  .concern-description,
+  .concern-date {
+    @include light-font;
+    display: block;
+  }
+
+  .concern-date {
+    color: $secondary-text-color;
+    font-size: 0.8em;
+  }
 }
