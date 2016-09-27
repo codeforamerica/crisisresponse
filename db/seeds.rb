@@ -62,6 +62,8 @@ ResponsePlan.create!(
   person: biff,
   author: officer,
   background_info: "TANNEN, Biff (aka B-Tan) has a history of mental health issues and drug dependency. TANNEN has been diagnosed with Bi-Polar disorder and Poly-Substance abuse. He was last enrolled with DESC through the criminal justice liaison program back in 2010.  TANNEN is currently enrolled with DESC as terms of his probation. TANNEN has been using the cell phone number, 206.123.4556.  ",
+  baseline: "Easily distracted, avoids eye contact",
+  elevated: "Erratic movements, shouts threats",
   private_notes: nil,
 )
 

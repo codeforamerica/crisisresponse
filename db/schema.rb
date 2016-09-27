@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927181835) do
+ActiveRecord::Schema.define(version: 20160927194544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(version: 20160927181835) do
     t.text     "private_notes"
     t.integer  "person_id"
     t.datetime "submitted_for_approval_at"
+    t.string   "baseline"
+    t.string   "elevated"
     t.index ["approver_id"], name: "index_response_plans_on_approver_id", using: :btree
     t.index ["author_id"], name: "index_response_plans_on_author_id", using: :btree
     t.index ["person_id"], name: "index_response_plans_on_person_id", using: :btree

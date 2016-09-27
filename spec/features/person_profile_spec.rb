@@ -144,6 +144,22 @@ feature "Officer views a response plan" do
     expect(page).to have_content(background_text)
   end
 
+  scenario "They see demeanors" do
+    sign_in_officer
+    baseline = "Easily distracted, avoids eye contact"
+    elevated = "Erratic movements, shouts threats"
+    response_plan = create(
+      :response_plan,
+      baseline: baseline,
+      elevated: elevated,
+    )
+
+    visit person_path(response_plan.person)
+
+    expect(page).to have_content(baseline)
+    expect(page).to have_content(elevated)
+  end
+
   scenario "They see emergency contacts" do
     sign_in_officer
     response_plan = create(:response_plan)

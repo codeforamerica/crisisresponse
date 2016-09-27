@@ -34,3 +34,20 @@
   color: $secondary-text-color;
   font-size: 0.8em;
 }
+
+.demeanor {
+  margin-bottom: $small-spacing;
+
+  &-title,
+  &-description {
+    display: block;
+  }
+
+  &-title {
+    @include heavy-font;
+  }
+
+  &-description {
+    @include light-font;
+  }
+}

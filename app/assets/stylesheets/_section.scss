@@ -67,4 +67,14 @@ section {
     background-color: $card-background;
     color: $base-font-color;
   }
+
+  .section-body-empty {
+    a,
+    span {
+      @include light-font;
+      display: block;
+      margin-bottom: $tiny-spacing;
+      text-align: center;
+    }
+  }
 }
