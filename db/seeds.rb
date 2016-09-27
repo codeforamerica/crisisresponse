@@ -121,6 +121,25 @@ ResponsePlan.create!(
   private_notes: nil,
 )
 
+shana = Person.new.tap { |p| p.save!(validate: false) }
+RMS::Person.create!(
+  person: shana,
+  pin: "000000",
+  first_name: "Shana",
+  last_name: "Mills",
+  middle_initial: "F",
+  sex: "Female",
+  race: "WHITE",
+  height_in_inches: 63,
+  weight_in_pounds: 130,
+  hair_color: "blonde",
+  eye_color: "blue",
+  date_of_birth: Date.new(1985, 10, 5),
+  scars_and_marks: "Small star tattoo on wrist",
+  location_name: "The Morrison",
+  location_address: "509 3rd Ave, Seattle, WA 98104",
+)
+
 Contact.create!(
   response_plan: biff.response_plans.last,
   name: "Ofc. Smith",
@@ -253,6 +272,7 @@ Image.create!(source: image("tannen_biff/1.png"), person: biff)
 Image.create!(source: image("tannen_gregory/1.png"), person: gregory)
 Image.create!(source: image("tannen_martha/1.png"), person: martha)
 Image.create!(source: image("tannen_martha/2.jpg"), person: martha)
+Image.create!(source: image("mills_shana/1.png"), person: shana)
 
 SafetyConcern.create!(
   category: :assaultive_law,
@@ -310,7 +330,7 @@ ResponsePlan.all.each do |plan|
 end
 
 def create_incidents_for(person)
-  (6..12).to_a.sample.times do
+  (7..12).to_a.sample.times do
     behavior_attrs = RMS::CrisisIncident::BEHAVIORS.
       sample(3).
       map { |behavior| [behavior, true] }.
@@ -337,10 +357,12 @@ def create_incidents_for(person)
   end
 end
 
-create_incidents_for(gregory)
 create_incidents_for(biff)
+create_incidents_for(gregory)
+create_incidents_for(shana)
 
 biff.recent_incidents.last.update!(veteran: true)
+shana.recent_incidents.last.update!(veteran: true)
 
 # Create a recent incident
 RMS::CrisisIncident.create(
