@@ -22,11 +22,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-content {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  overflow: scroll;
   bottom: 0;
 
   &:before {
