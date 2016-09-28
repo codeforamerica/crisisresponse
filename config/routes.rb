@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :feedbacks, only: [:new, :create]
   resources :incidents, only: :show
-  resources :people, only: [:index, :show]
+  resources :people, only: [:index, :new, :create, :show]
   resources :preferences, only: :create
   resources :suggestions, only: [:new, :create, :show]
 

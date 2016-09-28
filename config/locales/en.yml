@@ -86,7 +86,13 @@ en:
     show:
       title: Template Narrative
 
+  menu:
+    new_person: Add a New Person
+
   people:
+    create:
+      success: Added %{name}. Next, create a response plan for them.
+      failure: Errors prevented the person from being saved.
     show:
       new_plan: + Add a response plan
       new_draft: + Update response plan
