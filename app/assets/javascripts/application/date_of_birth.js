@@ -1,6 +1,6 @@
 $(function(){
   var date_of_birth_fields = $(
-    "#search_date_of_birth, #response_plan_person_attributes_date_of_birth"
+    "#search_date_of_birth, #response_plan_person_attributes_date_of_birth, #person_date_of_birth"
   );
 
   date_of_birth_fields.

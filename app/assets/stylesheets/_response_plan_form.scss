@@ -1,4 +1,5 @@
-.response_plan_form {
+.response_plan_form,
+.new_person {
   & > * > label {
     @include span-columns(2 of 12);
   }

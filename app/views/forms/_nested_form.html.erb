@@ -6,7 +6,7 @@
 
   <div class="nested-field-container <%= relationship.to_s.singularize %>-fields">
     <%= f.simple_fields_for relationship do |nested_form| %>
-      <%= render "#{relationship.to_s.singularize}_fields", f: nested_form %>
+      <%= render "forms/#{relationship.to_s.singularize}_fields", f: nested_form %>
     <% end %>
 
     <div class="links">
@@ -14,6 +14,7 @@
         "+ Add #{relationship.to_s.singularize.humanize.downcase}",
         f,
         relationship,
+        partial: "forms/#{relationship.to_s.singularize}_fields",
       ) %>
     </div>
   </div>

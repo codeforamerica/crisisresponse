@@ -1,26 +1,6 @@
 # frozen_string_literal: true
 
 class DraftsController < ApplicationController
-  PERSON_ATTRIBUTES = [
-    :date_of_birth,
-    :eye_color,
-    :first_name,
-    :hair_color,
-    :height_feet,
-    :height_inches,
-    :id,
-    :last_name,
-    :location_address,
-    :location_name,
-    :middle_initial,
-    :race,
-    :scars_and_marks,
-    :sex,
-    :weight_in_pounds,
-    aliases_attributes: [:_destroy, :id, :name],
-    images_attributes: [:_destroy, :id, :source],
-  ].freeze
-
   PERMITTED_PARAMS = [
     :background_info,
     :private_notes,
@@ -34,7 +14,7 @@ class DraftsController < ApplicationController
       :relationship,
     ],
     deescalation_techniques_attributes: [:_destroy, :id, :description],
-    person_attributes: PERSON_ATTRIBUTES,
+    person_attributes: PeopleController::PERSON_ATTRIBUTES,
     response_strategies_attributes: [:_destroy, :description, :id, :title],
     safety_concerns_attributes: [
       :_destroy,

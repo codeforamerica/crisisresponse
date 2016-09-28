@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.feature "Response Plan Lifecycle" do
@@ -88,6 +90,30 @@ RSpec.feature "Response Plan Lifecycle" do
       scenario "they can delete a draft that they've created"
 
       scenario "they can not delete a draft that another officer created"
+
+      scenario "draft a plan for a person who is not in the system", :js do
+        officer = create(:officer, :admin)
+        sign_in_officer(officer)
+
+        visit people_path
+        find(".menu-icon").trigger("click")
+        click_on t("menu.new_person")
+
+        fill_in "First name", with: "John"
+        fill_in "Last name", with: "Doe"
+        fill_in "DOB", with: "01-02-1980"
+        select "White", from: "Race"
+        select "Male", from: "Sex"
+        click_on "Create Person"
+
+        person = Person.last
+        expect(page).
+          to have_content t("people.create.success", name: "Doe, John")
+        expect(person.first_name).to eq("John")
+        expect(person.last_name).to eq("Doe")
+        expect(person.date_of_birth).to eq(Date.new(1980, 1, 2))
+        expect(page).to have_link t("people.show.new_plan")
+      end
     end
   end
 

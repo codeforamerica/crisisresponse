@@ -9,6 +9,7 @@
   <% if current_officer.try(:admin?) %>
     <%= link_to t("drafts.index.link"), drafts_path %>
     <%= link_to t("submissions.index.link"), submissions_path %>
+    <%= link_to t("menu.new_person"), new_person_path %>
   <% end %>
 
   <%= link_to("About", page_path("about")) %>
