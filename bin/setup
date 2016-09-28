@@ -14,6 +14,8 @@ touch .env.local
 
 # Only if this isn't CI
 if [ -z "$CI" ]; then
+  docker pull docker/compose:1.8.0
+
   # Build the docker image
   docker-compose build
 
