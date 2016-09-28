@@ -68,7 +68,7 @@ module RMS
     end
 
     def formatted_go_number
-      "#{go_number[0...4]}-#{go_number[4..-1]}"
+      GO.new(go_number).display
     end
   end
 end

@@ -9,5 +9,5 @@ class SafetyConcern < ActiveRecord::Base
   belongs_to :response_plan
 
   validates :category, presence: true, inclusion: { in: CATEGORIES }
-  validates :description, presence: true
+  validates :title, presence: true
 end

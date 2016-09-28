@@ -19,33 +19,76 @@
 }
 
 .concern {
-  margin-bottom: $small-spacing;
+  margin: $base-spacing 0;
 
-  .concern-description,
-  .concern-date {
-    @include light-font;
+  span {
     display: block;
   }
 
-  .concern-date {
+  .concern-title {
+    line-height: 1.2;
+  }
+
+  .concern-go,
+  .concern-date,
+  .concern-description {
     color: $secondary-text-color;
     font-size: 0.8em;
+  }
+
+  .concern-go,
+  .concern-date {
+    @include light-font;
+    display: inline;
+  }
+
+  .concern-go {
+    padding-right: $small-spacing;
+  }
+
+  .concern-go + .concern-date {
+    border-left: $base-border;
+    padding-left: $small-spacing;
   }
 }
 
 .trigger {
-  margin-bottom: $base-spacing;
+  margin: $base-spacing 0;
 
-  &-title,
-  &-description {
+  span {
     display: block;
   }
 
-  &-title {
-    @include heavy-font;
+  .trigger-title {
+    line-height: 1.2;
   }
 
-  &-description {
+  .trigger-go,
+  .trigger-date,
+  .trigger-description {
+    color: $secondary-text-color;
+    font-size: 0.8em;
+  }
+
+  .trigger-go {
     @include light-font;
   }
+
+  .trigger-go {
+    padding-right: $small-spacing;
+  }
+}
+
+.safety-concerns-expand {
+  text-align: center;
+}
+
+.profile-safety-concerns.collapsed .concern-collapsable,
+.profile-safety-concerns.collapsed .trigger-collapsable {
+  display: none;
+}
+
+.profile-safety-concerns.collapsed .concern-date {
+  border-left: 0;
+  padding: 0;
 }

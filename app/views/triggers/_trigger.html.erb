@@ -1,0 +1,13 @@
+<div class="trigger">
+  <span class="trigger-title"><%= trigger.title %></span>
+
+  <% if trigger.go_number.present? %>
+    <span class="trigger-go trigger-collapsable">
+      <%= GO.new(trigger.go_number).display %>
+    </span>
+  <% end %>
+
+  <span class="trigger-description trigger-collapsable">
+    <%= trigger.description %>
+  </span>
+</div>

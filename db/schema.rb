@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927194544) do
+ActiveRecord::Schema.define(version: 20160928232446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,10 +214,12 @@ ActiveRecord::Schema.define(version: 20160927194544) do
   create_table "safety_concerns", force: :cascade do |t|
     t.integer  "response_plan_id", null: false
     t.string   "category",         null: false
-    t.string   "description",      null: false
+    t.string   "title",            null: false
     t.date     "occurred_on"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "description"
+    t.string   "go_number"
     t.index ["response_plan_id"], name: "index_safety_concerns_on_response_plan_id", using: :btree
   end
 
@@ -238,6 +240,7 @@ ActiveRecord::Schema.define(version: 20160927194544) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "description"
+    t.string   "go_number"
     t.index ["response_plan_id"], name: "index_triggers_on_response_plan_id", using: :btree
   end
 
