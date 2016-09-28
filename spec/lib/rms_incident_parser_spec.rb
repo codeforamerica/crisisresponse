@@ -316,4 +316,109 @@ describe RMSIncidentParser do
       expect(parser.xml_crisis_id).to eq(1234)
     end
   end
+
+  describe "#dicv" do
+    let(:attribute) { :dicv }
+    let(:rms_key) { "CHBK_DICV" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#bodycam" do
+    let(:attribute) { :bodycam }
+    let(:rms_key) { "CHBK_BODYCAM" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#cit_officer_requested" do
+    let(:attribute) { :cit_officer_requested }
+    let(:rms_key) { "CHBK_CITOFF_REQUESTED" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#cit_officer_dispatched" do
+    let(:attribute) { :cit_officer_dispatched }
+    let(:rms_key) { "CHBK_CITOFF_DISPATCHED" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#cit_officer_arrived" do
+    let(:attribute) { :cit_officer_arrived }
+    let(:rms_key) { "CHBK_CITOFF_ARRIVED" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#behavior_other" do
+    let(:attribute) { :behavior_other }
+    let(:rms_key) { "CHBK_BEHAVIOR_OTHER" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#weapon_knife" do
+    let(:attribute) { :weapon_knife }
+    let(:rms_key) { "CHBK_WPN_KNIFE" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#weapon_gun" do
+    let(:attribute) { :weapon_gun }
+    let(:rms_key) { "CHBK_WPN_GUN" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#weapon_other" do
+    let(:attribute) { :weapon_other }
+    let(:rms_key) { "CHBK_WPN_OTH" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#handcuffs" do
+    let(:attribute) { :handcuffs }
+    let(:rms_key) { "CHBK_HANDCUFFS" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#reportable_force_used" do
+    let(:attribute) { :reportable_force_used }
+    let(:rms_key) { "CHBK_REPORTABLE_FORCE_USED" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#unable_to_contact" do
+    let(:attribute) { :unable_to_contact }
+    let(:rms_key) { "CHBK_DISPO_UNABLE_TO_CONTACT" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#cit_certified" do
+    let(:attribute) { :cit_certified }
+    let(:rms_key) { "CIT_CERTIFIED_YN" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#supervisor_responded_to_scene" do
+    let(:attribute) { :supervisor_responded_to_scene }
+    let(:rms_key) { "SUPV_RESPONDED_SCENE_YN" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
+
+  describe "#injuries" do
+    let(:attribute) { :injuries }
+    let(:rms_key) { "INJURIES_YN_DK" }
+
+    it_should_behave_like "a boolean attribute is parsed out"
+  end
 end

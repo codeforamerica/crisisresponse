@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017233739) do
+ActiveRecord::Schema.define(version: 20161018225158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 20161017233739) do
   end
 
   create_table "rms_crisis_incidents", force: :cascade do |t|
-    t.integer  "rms_person_id",             null: false
+    t.integer  "rms_person_id",                 null: false
     t.datetime "reported_at"
     t.string   "go_number"
     t.boolean  "weapon"
@@ -183,11 +183,26 @@ ActiveRecord::Schema.define(version: 20161017233739) do
     t.boolean  "voluntary_commit"
     t.boolean  "arrested"
     t.boolean  "verbalization"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "xml_crisis_id",             null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "xml_crisis_id",                 null: false
     t.text     "narrative"
     t.boolean  "veteran"
+    t.boolean  "dicv"
+    t.boolean  "bodycam"
+    t.boolean  "cit_officer_requested"
+    t.boolean  "cit_officer_dispatched"
+    t.boolean  "cit_officer_arrived"
+    t.boolean  "behavior_other"
+    t.boolean  "weapon_knife"
+    t.boolean  "weapon_gun"
+    t.boolean  "weapon_other"
+    t.boolean  "handcuffs"
+    t.boolean  "reportable_force_used"
+    t.boolean  "unable_to_contact"
+    t.boolean  "cit_certified"
+    t.boolean  "supervisor_responded_to_scene"
+    t.boolean  "injuries"
     t.index ["rms_person_id"], name: "index_rms_crisis_incidents_on_rms_person_id", using: :btree
   end
 
