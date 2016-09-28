@@ -65,4 +65,18 @@
       top: 0;
     }
   }
+
+  @include media($medium-screen-up) {
+    .expand {
+      display: none;
+    }
+
+    .response-strategy-description {
+      max-height: none;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
 }
