@@ -210,12 +210,14 @@ feature "Officer views a response plan" do
       create(
         :safety_concern,
         response_plan: response_plan,
-        description: "Owns a gun",
+        title: "Owns a gun",
+        description: "He showed it to an officer",
       )
 
       visit person_path(response_plan.person)
 
       expect(page).to have_content("Owns a gun")
+      expect(page).to have_content("He showed it to an officer")
     end
   end
 end

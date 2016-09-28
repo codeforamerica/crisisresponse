@@ -1,11 +1,21 @@
 <div class="concern">
-  <span class="concern-description">
-    <%= safety_concern.description %>
+  <span class="concern-title">
+    <%= safety_concern.title %>
   </span>
 
-  <% if safety_concern.occurred_on %>
+  <% if safety_concern.go_number.present? %>
+    <span class="concern-go concern-collapsable">
+      <%= GO.new(safety_concern.go_number).display %>
+    </span>
+  <% end %>
+
+  <% if safety_concern.occurred_on.present? %>
     <span class="concern-date">
       <%= l(safety_concern.occurred_on.to_date) %>
     </span>
   <% end %>
+
+  <span class="concern-description concern-collapsable">
+    <%= safety_concern.description %>
+  </span>
 </div>

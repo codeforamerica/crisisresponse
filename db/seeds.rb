@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation
 # needed to seed the database with its default values.
 # The data can then be loaded with `rake db:seed`
@@ -19,7 +21,9 @@ ResponsePlan.destroy_all
 Person.destroy_all
 Officer.destroy_all
 
-NARRATIVE = <<-NARRATIVE.freeze
+GO_NUMBER = "201600123456"
+
+NARRATIVE = <<-NARRATIVE
 Danish icing gingerbread gummies jujubes topping. Chocolate cake sweet roll pudding ice cream chocolate cake cookie toffee soufflé jelly beans. Bonbon sesame snaps biscuit danish jujubes marzipan cake croissant jelly beans. Tootsie roll cake wafer. Marzipan pie tiramisu gummies. Bonbon carrot cake oat cake carrot cake pastry toffee macaroon. Jujubes powder fruitcake toffee soufflé tiramisu. Jelly marzipan tootsie roll. Marshmallow chocolate bar toffee jelly beans croissant. Soufflé cake gummi bears jelly chocolate bar candy. Carrot cake lemon drops jelly beans candy canes cheesecake cake. Carrot cake brownie cookie cheesecake dragée tootsie roll muffin pudding. Toffee marshmallow icing caramels macaroon. Lollipop pudding chupa chups. Donut chupa chups chocolate danish. Croissant ice cream chocolate cake cake cotton candy pudding gummi bears cake.
 
 Apple pie cake gingerbread gummi bears bear claw toffee. Sugar plum cupcake candy cookie wafer marzipan danish. Biscuit powder oat cake soufflé dessert. Cotton candy soufflé cake candy cupcake danish chupa chups candy pastry. Sweet roll dragée apple pie bear claw gingerbread cookie soufflé. Chupa chups tart candy canes pie donut. Cheesecake dragée chocolate marzipan dragée lollipop. Jelly jelly-o wafer liquorice cotton
@@ -252,43 +256,53 @@ Image.create!(source: image("tannen_martha/2.jpg"), person: martha)
 
 SafetyConcern.create!(
   category: :assaultive_law,
-  description: "Spit at an officer",
+  title: "Spit at an officer",
+  description: "TANNEN spit at an officer while being arrested.",
+  go_number: GO_NUMBER,
   occurred_on: Date.new(1998, 1, 10),
   response_plan: biff.response_plans.last,
 )
 SafetyConcern.create!(
   category: :weapon,
-  description: "Had 9mm pistol at house",
+  title: "Had 9mm pistol at house",
+  description: "TANNEN had a 9mm pistol in his house.",
+  go_number: GO_NUMBER,
   occurred_on: Date.new(2005, 6, 8),
   response_plan: biff.response_plans.last,
 )
 SafetyConcern.create!(
   category: :weapon,
-  description: "Often armed with sharp instrument",
+  title: "Often armed with sharp instrument",
+  description: "TANNEN had a box cutter concealed in his sleeve.",
+  go_number: GO_NUMBER,
   response_plan: biff.response_plans.last,
 )
 SafetyConcern.create!(
   category: :chemical,
-  description: "Needles have been found on Martha.",
+  title: "Needles have been found on Martha.",
   response_plan: martha.response_plans.last,
 )
 
 Trigger.create!(
   response_plan: biff.response_plans.last,
   title: "Don't send female officers",
+  description: "TANNEN started shouting when a female officer arrived at the scene, declared that he wouldn’t talk to women.",
+  go_number: GO_NUMBER,
 )
 Trigger.create!(
   response_plan: biff.response_plans.last,
   title: "Don't call TANNEN \"Biff\"",
-  description: "Try calling him \"B-Tan\".",
+  description: "TANNEN lost focus and kicked a parking meter after an officer called him Biff.",
+  go_number: GO_NUMBER,
 )
 
-biff.response_plans.last.deescalation_techniques.create(
+DeescalationTechnique.create!(
   description: 'Call him "Sarge." It helps him focus.',
+  response_plan: biff.response_plans.last,
 )
-
-biff.response_plans.last.deescalation_techniques.create(
+DeescalationTechnique.create!(
   description: "Mention his dog.",
+  response_plan: biff.response_plans.last,
 )
 
 ResponsePlan.all.each do |plan|
@@ -313,7 +327,7 @@ def create_incidents_for(person)
       merge(disposition_attrs).
       merge(behavior_attrs).
       merge(
-        go_number: "20160001234",
+        go_number: GO_NUMBER,
         narrative: NARRATIVE,
         reported_at: (1..40).to_a.sample.weeks.ago,
         rms_person: person.rms_person,
@@ -329,7 +343,7 @@ create_incidents_for(martha)
 # Create a recent incident
 RMS::CrisisIncident.create(
   reported_at: 1.second.ago,
-  go_number: "2016000123",
+  go_number: GO_NUMBER,
   narrative: NARRATIVE,
   rms_person: gregory.rms_person,
   xml_crisis_id: "000000",

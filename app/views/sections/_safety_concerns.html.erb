@@ -1,4 +1,4 @@
-<section class="profile-safety-concerns">
+<section class="profile-safety-concerns collapsed">
   <div class="section-header
     <%= plan && plan.safety_concerns.any? ? "section-header-yellow" : "section-header-grey"  %>
     ">
@@ -33,10 +33,7 @@
 
     <% if plan && plan.triggers.any? %>
       <% plan.triggers.each do |trigger| %>
-        <div class="trigger">
-          <span class="trigger-title"><%= trigger.title %></span>
-          <span class="trigger-description"><%= trigger.description %></span>
-        </div>
+        <%= render trigger %>
       <% end %>
     <% else %>
       <div class="section-body-empty">
@@ -48,5 +45,16 @@
         <% end %>
       </div>
     <% end %>
+  </div>
+
+  <div class="section-body safety-concerns-expand">
+    <a
+       href=""
+       class="toggle button"
+       data-toggle-target=".profile-safety-concerns"
+       data-toggle-text="Hide Details"
+       >
+       See Details
+    </a>
   </div>
 </section>

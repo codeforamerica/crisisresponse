@@ -121,7 +121,7 @@ FactoryGirl.define do
 
   factory :safety_concern do
     category { SafetyConcern::CATEGORIES.sample }
-    description "History of violence"
+    title "History of violence"
     response_plan
   end
 
