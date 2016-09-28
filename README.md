@@ -57,7 +57,7 @@ We use [Docker] to make it easy
 to develop, package, and deploy the application
 on any platform.
 
-Before starting, install Docker ([mac], [windows], [linux]) and [Docker Compose].
+Before starting, install Docker ([mac], [windows], [linux]).
 
 #### Mac or Windows VM setup
 
@@ -85,20 +85,12 @@ $ docker run --rm hello-world
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 ...
-
-$ docker-compose version
-# should print something like:
-docker-compose version 1.8.0, build f3628c7
-docker-py version: 1.9.0
-CPython version: 2.7.9
-OpenSSL version: OpenSSL 1.0.2h  3 May 2016
 ```
 
 [Docker]: https://www.docker.com/
 [mac]: https://docs.docker.com/mac/
 [windows]: https://docs.docker.com/windows/
 [linux]: https://docs.docker.com/linux/
-[Docker Compose]: https://docs.docker.com/compose/install/
 [install docker-machine]: https://docs.docker.com/machine/install-machine
 [VirtualBox]: https://www.virtualbox.org/wiki/Downloads
 
@@ -114,7 +106,7 @@ $ git clone git@github.com:codeforamerica/crisisresponse.git && cd crisisrespons
 $ ./bin/setup
 
 # Run the server
-$ docker-compose up
+$ ./bin/docker-compose up
 ```
 
 After those commands,
@@ -127,10 +119,10 @@ that you'll need after you change the application's dependencies:
 ```bash
 # After updating the `Dockerfile` or `Gemfile`,
 # you'll need to rebuild the application container.
-$ docker-compose build
+$ ./bin/docker-compose build
 
 # Push a new docker image to Docker Hub:
-$ docker-compose build && docker push codeforamerica/crisisresponse
+$ ./bin/docker-compose build && docker push codeforamerica/crisisresponse
 ```
 
 ### Running Tests
@@ -147,7 +139,7 @@ or run an individual test file with `./bin/test spec/my/test/file.rb`.
 * run:
 
   ```bash
-  $ app run --rm web rails c
+  $ ./bin/docker-compose run --rm web rails c
   ```
 
 * Inside the rails console, type:
@@ -172,10 +164,10 @@ under the `backups/` subfolder.
 
 ```bash
 # Create a backup of the database
-$ docker-compose run --rm backup
+$ ./bin/docker-compose run --rm backup
 
 # Restore a backup
-$ docker-compose run --rm restore backups/2016-01-02_12:00:00.sql
+$ ./bin/docker-compose run --rm restore backups/2016-01-02_12:00:00.sql
 ```
 
 ## Development Guidelines
