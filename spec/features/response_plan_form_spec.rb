@@ -14,8 +14,6 @@ feature "Response Plan Form" do
       fill_in "First name", with: "John"
       fill_in "Last name", with: "Doe"
       fill_in "DOB", with: "01-30-1980"
-      select "White", from: "Race"
-      select "Male", from: "Sex"
       click_on "Update Response plan"
 
       expect(page).to have_content t("drafts.update.success", name: "John Doe")

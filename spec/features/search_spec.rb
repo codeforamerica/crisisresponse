@@ -134,9 +134,9 @@ feature "Search" do
     end
 
     scenario "Officer searches by hair color" do
-      brown = create(:person, hair_color: "Brown")
-      black = create(:person, hair_color: "Black")
-      other = create(:person, hair_color: "Blonde")
+      brown = create(:person, hair_color: "brown")
+      black = create(:person, hair_color: "black")
+      other = create(:person, hair_color: "blonde")
 
       sign_in_officer
       visit people_path
@@ -145,9 +145,9 @@ feature "Search" do
       check_option(:hair_color, "Black")
       run_search
 
-      expect(page).to have_content(brown.hair_color)
-      expect(page).to have_content(black.hair_color)
-      expect(page).not_to have_content(other.hair_color)
+      expect(page).to have_content(brown.hair_color.titlecase)
+      expect(page).to have_content(black.hair_color.titlecase)
+      expect(page).not_to have_content(other.hair_color.titlecase)
     end
 
     scenario "Officer searches by eye color" do

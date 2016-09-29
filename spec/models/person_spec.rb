@@ -198,9 +198,9 @@ RSpec.describe Person, type: :model do
     specify { expect_identical_assignment_to_not_update_person(:weight_in_pounds, 200) }
 
     specify { expect_different_assignment_to_update_person(:date_of_birth, Date.today, 20.years.ago.to_date) }
-    specify { expect_different_assignment_to_update_person(:eye_color, "Blue", "Brown") }
+    specify { expect_different_assignment_to_update_person(:eye_color, "blue", "brown") }
     specify { expect_different_assignment_to_update_person(:first_name, "Foo", "Bar") }
-    specify { expect_different_assignment_to_update_person(:hair_color, "Brown", "black") }
+    specify { expect_different_assignment_to_update_person(:hair_color, "brown", "black") }
     specify { expect_different_assignment_to_update_person(:height_in_inches, 50, 60) }
     specify { expect_different_assignment_to_update_person(:last_name, "Foo", "Bar") }
     specify { expect_different_assignment_to_update_person(:location_address, "foo", "bar") }

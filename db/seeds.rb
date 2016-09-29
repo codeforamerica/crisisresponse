@@ -47,7 +47,10 @@ sergeant = Officer.create!(
   username: "jones",
 )
 
-biff = Person.create!(
+biff = Person.new.tap { |p| p.save!(validate: false) }
+RMS::Person.create!(
+  person: biff,
+  pin: "000000",
   first_name: "Biff",
   last_name: "TANNEN",
   middle_initial: "R",
@@ -55,8 +58,8 @@ biff = Person.create!(
   race: "WHITE",
   height_in_inches: 70,
   weight_in_pounds: 220,
-  hair_color: "Blonde",
-  eye_color: "Green",
+  hair_color: "blonde",
+  eye_color: "green",
   date_of_birth: Date.new(1980, 7, 14),
   scars_and_marks: "Small tattoo on arm",
   location_name: "The Morrison",
@@ -82,8 +85,8 @@ RMS::Person.create!(
   race: "AFRICAN AMERICAN/BLACK",
   height_in_inches: 70,
   weight_in_pounds: 180,
-  hair_color: "Black",
-  eye_color: "Brown",
+  hair_color: "black",
+  eye_color: "brown",
   date_of_birth: Date.new(1998, 5, 12),
   scars_and_marks: nil,
   location_name: nil,
@@ -96,10 +99,7 @@ ResponsePlan.create!(
   private_notes: nil,
 )
 
-martha = Person.new.tap { |p| p.save!(validate: false) }
-RMS::Person.create!(
-  person: martha,
-  pin: "000000",
+martha = Person.create!(
   first_name: "Martha",
   last_name: "Tannen",
   middle_initial: "S",
@@ -107,8 +107,8 @@ RMS::Person.create!(
   race: "ASIAN (ALL)/PACIFIC ISLANDER",
   height_in_inches: 63,
   weight_in_pounds: 110,
-  hair_color: "Black",
-  eye_color: "Brown",
+  hair_color: "black",
+  eye_color: "brown",
   date_of_birth: Date.new(1955, 7, 17),
   scars_and_marks: nil,
   location_name: nil,
