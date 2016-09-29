@@ -43,6 +43,8 @@ feature "Response Plan Form" do
       select "White", from: "Race"
       select "Male", from: "Sex"
       fill_in "Background info", with: "Lorem Ipsum Dolor Si Amet"
+      fill_in "Baseline", with: "Baseline behavior"
+      fill_in "Elevated", with: "Elevated behavior"
       fill_in "Location name", with: "The Morrison Hotel"
       fill_in "Location address", with: "509 3rd Ave"
       fill_in "Private notes", with: "These notes should be private"
@@ -61,6 +63,8 @@ feature "Response Plan Form" do
       expect(page).to have_content("Brown")
       expect(page).to have_content("Spider tattoo on neck")
       expect(page).to have_content("Lorem Ipsum Dolor Si Amet")
+      expect(page).to have_content("Baseline behavior")
+      expect(page).to have_content("Elevated behavior")
       expect(page).not_to have_content("These notes should be private")
     end
 

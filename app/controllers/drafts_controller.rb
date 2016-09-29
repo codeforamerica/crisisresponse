@@ -3,6 +3,8 @@
 class DraftsController < ApplicationController
   PERMITTED_PARAMS = [
     :background_info,
+    :baseline,
+    :elevated,
     :private_notes,
     contacts_attributes: [
       :_destroy,
