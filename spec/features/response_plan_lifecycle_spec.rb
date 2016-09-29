@@ -102,8 +102,6 @@ RSpec.feature "Response Plan Lifecycle" do
         fill_in "First name", with: "John"
         fill_in "Last name", with: "Doe"
         fill_in "DOB", with: "01-02-1980"
-        select "White", from: "Race"
-        select "Male", from: "Sex"
         click_on "Create Person"
 
         person = Person.last

@@ -45,8 +45,8 @@ feature "Officer views a response plan" do
     sign_in_officer
     person = create(
       :person,
-      eye_color: "Green",
-      hair_color: "Brown",
+      eye_color: "green",
+      hair_color: "brown",
       height_in_inches: 70,
       race: "WHITE",
       scars_and_marks: "Skull tattoo on neck",

@@ -8,8 +8,6 @@ class Person < ApplicationRecord
   URGENT_TIMEFRAME = 7.days
   RECENT_TIMEFRAME = 1.year
 
-  attr_accessor :height_feet, :height_inches
-
   before_create :generate_analytics_token
 
   has_many :aliases, dependent: :destroy
@@ -130,6 +128,28 @@ class Person < ApplicationRecord
     end
   end
 
+  def height_feet
+    height_in_inches.to_i / 12
+  end
+
+  def height_feet=(value)
+    inches = height_inches
+    height = value.to_i * 12 + inches
+
+    self.height_in_inches = height.zero? ? nil : height
+  end
+
+  def height_inches
+    height_in_inches.to_i % 12
+  end
+
+  def height_inches=(value)
+    feet = height_feet
+    height = height_feet * 12 + value.to_i
+
+    self.height_in_inches = height.zero? ? nil : height
+  end
+
   def incidents_since(moment)
     crisis_incidents.where(reported_at: (moment..Time.current))
   end
@@ -159,17 +179,9 @@ class Person < ApplicationRecord
       order(reported_at: :desc)
   end
 
-  def save(*args)
-    if height_feet && height_inches
-      self.height_in_inches = height_feet.to_i * 12 + height_inches.to_i
-    end
-
-    super(*args)
-  end
-
   def shorthand_description
     [
-      RMS::RACE_CODES.fetch(race) + RMS::SEX_CODES.fetch(sex),
+      RMS::RACE_CODES.fetch(race, "U") + RMS::SEX_CODES.fetch(sex, "U"),
       height_in_feet_and_inches,
       weight_in_pounds ? "#{weight_in_pounds} lb" : nil,
     ].compact.join(" – ")
@@ -178,10 +190,8 @@ class Person < ApplicationRecord
   private
 
   def height_in_feet_and_inches
-    if height_in_inches
-      "#{height_in_inches / 12}'#{height_in_inches % 12}\""
-    else
-      nil
+    unless height_feet.zero? && height_inches.zero?
+      "#{height_feet}'#{height_inches}\""
     end
   end
 
