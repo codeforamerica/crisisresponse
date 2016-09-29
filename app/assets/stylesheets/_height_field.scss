@@ -1,0 +1,13 @@
+.height-field {
+  input[type="number"] {
+    width: $tiny-field-width;
+    display: inline-block;
+  }
+
+  label {
+    font-weight: normal;
+    display: inline-block;
+    margin-left: $tiny-spacing;
+    margin-right: $small-spacing;
+  }
+}
