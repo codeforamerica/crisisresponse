@@ -39,22 +39,22 @@
       <div class="section-body-empty">
         <span><%= t("profile.triggers.none") %></span>
 
-        <%= link_to new_suggestion_path do %>
+        <%= link_to new_suggestion_path(person_id: person.id) do %>
           <%= inline_svg "edit.svg" %>
           <%= t("profile.triggers.new") %>
         <% end %>
       </div>
     <% end %>
-  </div>
 
-  <div class="section-body safety-concerns-expand">
-    <a
-       href=""
-       class="toggle button"
-       data-toggle-target=".profile-safety-concerns"
-       data-toggle-text="Hide Details"
-       >
-       See Details
-    </a>
+    <div class="safety-concerns-expand">
+      <a
+         href=""
+         class="toggle button"
+         data-toggle-target=".profile-safety-concerns"
+         data-toggle-text="Hide Details"
+         >
+         See Details
+      </a>
+    </div>
   </div>
 </section>

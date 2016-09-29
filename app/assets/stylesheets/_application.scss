@@ -11,11 +11,13 @@
 
 @import "mixins/*";
 
+@import "authentication";
 @import "behaviors";
 @import "deescalation_techniques";
 @import "feedbacks";
 @import "filters";
 @import "footer";
+@import "form";
 @import "header";
 @import "height_field";
 @import "icons";
@@ -27,7 +29,6 @@
 @import "pagination";
 @import "person";
 @import "recently_viewed";
-@import "form";
 @import "response_plans";
 @import "response_strategies";
 @import "search";

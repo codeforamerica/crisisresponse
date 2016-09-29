@@ -9,22 +9,31 @@
   <div class="section-body deescalation-specific">
     <h3>Specific Techniques</h3>
 
+    <% if person.veteran? %>
+      <div class="deescalation-veteran">
+        <%= inline_svg "veteran.svg", class: "deescalation-veteran-icon" %>
+        Veteran
+      </div>
+    <% end %>
+
     <% if plan && plan.deescalation_techniques.any? %>
       <ul>
         <% plan.deescalation_techniques.each do |technique| %>
           <li><%= technique.description %></li>
         <% end %>
       </ul>
-    <% else%>
+    <% else %>
       <div class="section-body-empty">
         <span><%= t("profile.deescalation_techniques.none") %></span>
-
-        <%= link_to new_suggestion_path do %>
-          <%= inline_svg "edit.svg" %>
-          <%= t("profile.deescalation_techniques.new") %>
-        <% end %>
       </div>
     <% end %>
+
+    <div class="section-body-empty">
+      <%= link_to new_suggestion_path(person_id: person.id) do %>
+        <%= inline_svg "edit.svg" %>
+        <%= t("profile.deescalation_techniques.new") %>
+      <% end %>
+    </div>
   </div>
 
   <div class="section-body deescalation-general">

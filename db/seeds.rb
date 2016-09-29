@@ -340,6 +340,8 @@ end
 create_incidents_for(gregory)
 create_incidents_for(biff)
 
+biff.recent_incidents.last.update!(veteran: true)
+
 # Create a recent incident
 RMS::CrisisIncident.create(
   reported_at: 1.second.ago,

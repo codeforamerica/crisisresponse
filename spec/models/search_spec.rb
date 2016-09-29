@@ -189,7 +189,7 @@ describe Search do
 
       it "parses dates in 'mm-dd-yyyy'" do
         match = create(:person, date_of_birth: Date.new(1980, 01, 02))
-        mismatch = create(:person, date_of_birth: Date.new(1978, 01, 02))
+        mismatch = create(:person, date_of_birth: Date.new(1970, 01, 02))
 
         matches = Search.new(date_of_birth: "01-02-1980").close_matches
 
@@ -259,7 +259,7 @@ describe Search do
           date_of_birth: Date.new(1980, 01, 02),
         )
 
-        matches = Search.new(name: "Jon Doh", date_of_birth: "01-02-1985").close_matches
+        matches = Search.new(name: "Jon Doh", date_of_birth: "01-02-1990").close_matches
 
         expect(matches).to eq([])
       end

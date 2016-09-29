@@ -8,13 +8,21 @@
     margin-bottom: $tiny-spacing;
   }
 
+  .deescalation-veteran {
+    margin: $small-spacing 0;
+
+    &-icon {
+      vertical-align: bottom;
+    }
+  }
+
   @include media($medium-screen-up) {
     .deescalation-specific,
     .deescalation-general {
       border-bottom: 0;
       display: inline-block;
       float: left;
-      max-width: 50%
+      width: 50%
     }
 
     .deescalation-specific {

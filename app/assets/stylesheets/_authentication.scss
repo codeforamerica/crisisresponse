@@ -1,0 +1,13 @@
+.sign_in {
+  .section-header {
+    @include heavy-font;
+  }
+
+  label {
+    line-height: 1;
+  }
+
+  .hint {
+    color: $secondary-text-color;
+  }
+}
