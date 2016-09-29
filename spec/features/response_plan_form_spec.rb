@@ -39,7 +39,7 @@ feature "Response Plan Form" do
       fill_in :response_plan_person_attributes_height_inches, with: 3
       select "Blue", from: "Eye color"
       select "Brown", from: "Hair color"
-      fill_in "Scars and marks", with: "Spider tattoo on neck"
+      fill_in "Scars, Marks, and Tattoos", with: "Spider tattoo on neck"
       select "White", from: "Race"
       select "Male", from: "Sex"
       fill_in "Background info", with: "Lorem Ipsum Dolor Si Amet"

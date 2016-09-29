@@ -1,22 +1,20 @@
-<% label ||= relationship.to_s.titleize %>
+<section class="form nested-form <%= relationship.to_s %>">
+  <label class="section-header">
+    <%= relationship.to_s.titleize %>
+  </label>
 
-<section class="form">
-  <div class="nested-form <%= relationship.to_s %>">
-    <label class="section-body"><%= label %></label>
+  <div class="nested-field-container <%= relationship.to_s.singularize %>-fields">
+    <%= f.simple_fields_for relationship do |nested_form| %>
+      <%= render "forms/#{relationship.to_s.singularize}_fields", f: nested_form %>
+    <% end %>
 
-    <div class="nested-field-container <%= relationship.to_s.singularize %>-fields">
-      <%= f.simple_fields_for relationship do |nested_form| %>
-        <%= render "forms/#{relationship.to_s.singularize}_fields", f: nested_form %>
-      <% end %>
-
-      <div class="links section-body">
-        <%= link_to_add_association(
-          "+ Add #{relationship.to_s.singularize.humanize.downcase}",
-          f,
-          relationship,
-          partial: "forms/#{relationship.to_s.singularize}_fields",
-        ) %>
-    </div>
+    <div class="links section-body">
+      <%= link_to_add_association(
+        "+ Add #{relationship.to_s.singularize.humanize.downcase}",
+        f,
+        relationship,
+        partial: "forms/#{relationship.to_s.singularize}_fields",
+      ) %>
     </div>
   </div>
 </section>

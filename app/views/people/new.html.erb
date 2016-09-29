@@ -1,4 +1,17 @@
 <%= simple_form_for @person do |f| %>
   <%= render "forms/person_fields", form: f %>
-  <%= f.button :submit %>
+
+  <section class="form">
+    <div class="section-body">
+      Before saving,
+      please make sure that this person does not already exist in the app.
+      Duplicate records for the same person
+      cause confusion for patrol officers
+      and are difficult to correct.
+    </div>
+
+    <div class="section-body">
+      <%= f.button :submit %>
+    </div>
+  </section>
 <% end %>
