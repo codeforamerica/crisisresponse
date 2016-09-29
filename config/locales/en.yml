@@ -158,6 +158,8 @@ en:
         body: Describe your feedback
         person_name: Feedback for
         urgent: URGENT Update
+      person:
+        scars_and_marks: Scars, Marks, and Tattoos
     placeholders:
       feedback:
         name: First Last

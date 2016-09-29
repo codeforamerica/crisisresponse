@@ -1,4 +1,8 @@
 <section class="form">
+  <div class="section-header">
+    Identification
+  </div>
+
   <div class="section-body">
     <%= form.input :first_name %>
     <%= form.input :middle_initial %>
@@ -23,6 +27,10 @@
 <%= render "forms/nested_form", f: form, relationship: :aliases %>
 
 <section class="form">
+  <div class="section-header">
+    Physical Characteristics
+  </div>
+
   <div class="section-body">
     <%= form.input(
       :race,
@@ -56,6 +64,10 @@
 </section>
 
 <section class="form">
+  <div class="section-header">
+    Location
+  </div>
+
   <div class="section-body">
     <%= form.input :location_name %>
     <%= form.input :location_address %>
