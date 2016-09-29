@@ -1,22 +1,24 @@
-<section class="profile-response-strategies">
-  <div class="section-header">
-    <%= inline_svg "section-icons/response-plan.svg", class: "section-icon" %>
-    <div class="section-header-text">
-      <span class="section-title">Response Plan</span>
-    </div>
-  </div>
-
-  <div class="section-body">
-    <% plan.response_strategies.each do |strategy| %>
-      <div class="response-strategy mobile-collapsed">
-        <h3><%= strategy.title %></h3>
-
-        <div class="response-strategy-description">
-          <%= simple_format strategy.description %>
-        </div>
-
-        <a href="#" class="expand" data-text-swap="Hide">Read More</a>
+<% if plan.response_strategies.any? %>
+  <section class="profile-response-strategies">
+    <div class="section-header">
+      <%= inline_svg "section-icons/response-plan.svg", class: "section-icon" %>
+      <div class="section-header-text">
+        <span class="section-title">Response Plan</span>
       </div>
-    <% end %>
-  </div>
-</section>
+    </div>
+
+    <div class="section-body">
+      <% plan.response_strategies.each do |strategy| %>
+        <div class="response-strategy mobile-collapsed">
+          <h3><%= strategy.title %></h3>
+
+          <div class="response-strategy-description">
+            <%= simple_format strategy.description %>
+          </div>
+
+          <a href="#" class="expand" data-text-swap="Hide">Read More</a>
+        </div>
+      <% end %>
+    </div>
+  </section>
+<% end %>

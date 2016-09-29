@@ -5,7 +5,6 @@
 
 .concern-category {
   border-bottom: $dashed-border;
-  margin-bottom: $small-spacing;
 
   &:last-child {
     border-bottom: 0;
@@ -14,18 +13,20 @@
   &-header {
     @include heavy-font;
     display: block;
+    margin-bottom: $small-spacing;
     text-transform: uppercase;
   }
 }
 
 .concern {
-  margin: $base-spacing 0;
+  margin-bottom: $base-spacing;
 
   span {
     display: block;
   }
 
   .concern-title {
+    @include light-font;
     line-height: 1.2;
   }
 
@@ -81,6 +82,7 @@
 
 .safety-concerns-expand {
   text-align: center;
+  margin-top: $base-spacing;
 }
 
 .profile-safety-concerns.collapsed .concern-collapsable,

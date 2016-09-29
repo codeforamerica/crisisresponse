@@ -19,7 +19,7 @@
 
 .behavior-name {
   @include span-columns(2.5 of 4);
-  font-size: 0.8em;
+  @include light-font;
 }
 
 .behavior-count {

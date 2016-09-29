@@ -187,6 +187,10 @@ class Person < ApplicationRecord
     ].compact.join(" – ")
   end
 
+  def veteran?
+    crisis_incidents.any?(&:veteran)
+  end
+
   private
 
   def height_in_feet_and_inches

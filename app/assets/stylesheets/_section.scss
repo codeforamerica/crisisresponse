@@ -37,6 +37,7 @@ section {
   .section-icon {
     height: $icon-size;
     width: $icon-size;
+    margin-right: $small-spacing;
   }
 
   .section-header-text {
@@ -75,6 +76,12 @@ section {
       display: block;
       margin-bottom: $tiny-spacing;
       text-align: center;
+    }
+
+    a {
+      font-size: 0.8em;
+      text-transform: uppercase;
+      margin-top: $base-spacing;
     }
   }
 }
