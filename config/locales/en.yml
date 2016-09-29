@@ -144,9 +144,9 @@ en:
     form:
       label: Search by name, DOB, or physical description
     hints:
-      age: (will search +/- 5 yrs.)
-      height: (will search +/- 2 in.)
-      weight: (will search +/- 10 lbs.)
+      age: "(will search +/- %{range} yrs.)"
+      height: "(will search +/- %{range} in.)"
+      weight: "(will search +/- %{range} lbs.)"
     options:
       show: "More options"
       hide: "Fewer options"
