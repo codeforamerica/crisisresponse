@@ -9,20 +9,20 @@
   }
 
   @include media($medium-screen-up) {
-    display: flex;
-    flex-flow: row wrap;
-
-    .section-header {
-      flex: 0 0 100%;
-    }
-
     .deescalation-specific,
     .deescalation-general {
-      flex: 0 0 50%;
+      border-bottom: 0;
+      display: inline-block;
+      float: left;
+      max-width: 50%
     }
 
     .deescalation-specific {
       border-right: $base-border;
+    }
+
+    .deescalation-general {
+      border-left: $base-border;
     }
   }
 }
