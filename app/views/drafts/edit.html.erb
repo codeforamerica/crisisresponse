@@ -3,46 +3,39 @@
 <% end %>
 
 <%= simple_form_for(@response_plan, url: draft_path(@response_plan)) do |f| %>
-  <div class="response_plan_form">
-    <%= f.fields_for :person do |person_form| %>
-      <%= render "forms/person_fields", form: person_form %>
-    <% end %>
+  <%= f.fields_for :person do |person_form| %>
+    <%= render "forms/person_fields", form: person_form %>
+  <% end %>
 
-    <%= f.input :background_info %>
+  <section class="form">
+    <div class="section-body">
+      <%= f.input :background_info %>
+    </div>
+  </section>
 
-    <%= render(
-      "forms/nested_form",
-      f: f,
-      relationship: :safety_concerns,
-      html_classes: ["multi-field"],
-    ) %>
+  <%= render "forms/nested_form", f: f, relationship: :safety_concerns %>
+  <%= render "forms/nested_form", f: f, relationship: :deescalation_techniques %>
 
-    <%= render "forms/nested_form", f: f, relationship: :deescalation_techniques %>
+  <%= render(
+    "forms/nested_form",
+    f: f,
+    relationship: :triggers,
+  ) %>
 
-    <%= render(
-      "forms/nested_form",
-      f: f,
-      relationship: :triggers,
-      html_classes: ["multi-field"],
-    ) %>
+  <%= render "forms/nested_form", f: f, relationship: :contacts %>
 
-    <%= render(
-      "forms/nested_form",
-      f: f,
-      relationship: :contacts,
-      html_classes: ["multi-field"],
-    ) %>
+  <%= render(
+    "forms/nested_form",
+    f: f,
+    relationship: :response_strategies,
+    label: "Response Plan",
+  ) %>
 
-    <%= render(
-      "forms/nested_form",
-      f: f,
-      relationship: :response_strategies,
-      label: "Response Plan",
-      html_classes: ["multi-field"],
-    ) %>
+  <section class="form">
+    <div class="section-body">
+      <%= f.input :private_notes %>
 
-    <%= f.input :private_notes %>
-
-    <%= f.button :submit %>
-  </div>
+      <%= f.button :submit %>
+    </div>
+  </section>
 <% end %>

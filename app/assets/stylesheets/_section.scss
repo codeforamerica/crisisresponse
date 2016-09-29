@@ -10,7 +10,7 @@ section {
     background-color: $section-header-color;
     color: $section-header-font-color;
     display: flex;
-    padding: $small-spacing;
+    padding: $small-spacing $base-spacing;
     width: 100%;
   }
 
@@ -44,7 +44,6 @@ section {
     font-weight: normal;
     line-height: 1;
     margin-bottom: 0;
-    margin-left: $small-spacing;
   }
 
   .section-title {
