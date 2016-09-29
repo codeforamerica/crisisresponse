@@ -11,11 +11,13 @@
       <div class="fields">
         <div class="basic-search-fields">
           <%= f.input :name, placeholder: "Enter name or alias" %>
-          <%= f.input :date_of_birth,
+          <%= f.input(
+            :date_of_birth,
             label: "DOB",
             placeholder: "mm-dd-yyyy",
-            input_html: { value: (l(@search.date_of_birth) rescue nil) }
-          %>
+            input_html: { value: (l(@search.date_of_birth) rescue nil) },
+            # hint: t("search.hints.age", range: Search::DATE_OF_BIRTH_RANGE_IN_YEARS),
+          ) %>
         </div>
 
         <div class="actions">
@@ -23,8 +25,14 @@
         </div>
 
         <div class="physicals-search-fields collapsed">
-          <%= f.input :age, as: :integer, hint: t("search.hints.age") %>
+          <%= f.input(
+            :age,
+            as: :integer,
+            hint: t("search.hints.age", range: Search::AGE_RANGE_IN_YEARS),
+          ) %>
+
           <%= f.input :sex, as: :check_boxes, collection: RMS::SEX_CODES.keys %>
+
           <%= f.input(
             :race,
             as: :check_boxes,
@@ -38,7 +46,7 @@
             :weight_in_pounds,
             as: :integer,
             label: "Weight",
-            hint: t("search.hints.weight"),
+            hint: t("search.hints.weight", range: Search::WEIGHT_RANGE_IN_POUNDS),
           ) %>
 
           <div class="hair-color-field collapsed">

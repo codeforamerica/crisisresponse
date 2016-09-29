@@ -5,6 +5,9 @@
     <%= form.label :height_feet, label: "'" %>
     <%= form.input_field :height_inches, as: :integer, label: false %>
     <%= form.label :height_inches, label: '"' %>
-    <span class="hint"><%= t("search.hints.height") %></span>
+
+    <span class="hint">
+      <%= t("search.hints.height", range: Search::HEIGHT_RANGE_IN_INCHES) %>
+    </span>
   </div>
 </div>

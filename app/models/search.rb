@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class is responsible for searching the people in our app,
 # based on their name date of birth, and physical characteristics.
 #
@@ -29,6 +31,11 @@ class Search
     :sex,
     :race,
   ]
+
+  DATE_OF_BIRTH_RANGE_IN_YEARS = 1
+  AGE_RANGE_IN_YEARS = 5
+  HEIGHT_RANGE_IN_INCHES = 2
+  WEIGHT_RANGE_IN_POUNDS = 10
 
   attr_accessor(*SEARCHABLE_ATTRS)
 
@@ -65,41 +72,41 @@ class Search
     end
 
     if date_of_birth.present?
-      date_of_birth_range = range(date_of_birth, 1.year)
-      people = query_value_based_on_range(people, :date_of_birth, date_of_birth_range)
+      date_of_birth_range = range(date_of_birth, DATE_OF_BIRTH_RANGE_IN_YEARS.years)
+      people = query_for_range(people, :date_of_birth, date_of_birth_range)
     end
 
     if age.present?
       expected_dob = (Date.today - age.to_i.years)
-      expected_dob_range = range(expected_dob, 5.years)
-      people = query_value_based_on_range(people, :date_of_birth, expected_dob_range)
+      expected_dob_range = range(expected_dob, AGE_RANGE_IN_YEARS.years)
+      people = query_for_range(people, :date_of_birth, expected_dob_range)
     end
 
     if height_inches.present? || height_feet.present?
       height_in_inches = height_feet.to_i * 12 + height_inches.to_i
-      height_range = range(height_in_inches.to_i, 3)
-      people = query_value_based_on_range(people, :height_in_inches, height_range)
+      height_range = range(height_in_inches.to_i, HEIGHT_RANGE_IN_INCHES)
+      people = query_for_range(people, :height_in_inches, height_range)
     end
 
     if weight_in_pounds.present?
-      weight_range = range(weight_in_pounds.to_i, 25)
-      people = query_value_based_on_range(people, :weight_in_pounds, weight_range)
+      weight_range = range(weight_in_pounds.to_i, WEIGHT_RANGE_IN_POUNDS)
+      people = query_for_range(people, :weight_in_pounds, weight_range)
     end
 
     if eye_color.any?
-      people = query_for_array_of_values(people, :eye_color, eye_color)
+      people = query_for_list(people, :eye_color, eye_color)
     end
 
     if hair_color.any?
-      people = query_for_array_of_values(people, :hair_color, hair_color)
+      people = query_for_list(people, :hair_color, hair_color)
     end
 
     if race.any?
-      people = query_for_array_of_values(people, :race, race)
+      people = query_for_list(people, :race, race)
     end
 
     if sex.any?
-      people = query_for_array_of_values(people, :sex, sex)
+      people = query_for_list(people, :sex, sex)
     end
 
     people.order(<<-SQL)
@@ -149,7 +156,7 @@ class Search
   # for an attribute that falls within a given range of values.
   #
   # e.g. `date_of_birth BETWEEN 1969 AND 1970`
-  def query_value_based_on_range(relation, attribute, range)
+  def query_for_range(relation, attribute, range)
     relation.where(<<-SQL)
       people.#{attribute} BETWEEN '#{range.min}' AND '#{range.max}'
       OR (
@@ -163,7 +170,7 @@ class Search
   # for an attribute that is included in a list of values.
   #
   # e.g. `hair_color IN ('black','brown')`
-  def query_for_array_of_values(relation, attribute, values)
+  def query_for_list(relation, attribute, values)
     selected_values = "(#{values.map {|s| "'#{s}'"}.join(",")})"
 
     relation.where(<<-SQL)
