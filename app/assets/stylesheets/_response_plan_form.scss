@@ -1,19 +1,9 @@
-$large-field-width: 100%;
-$base-field-width: 20em;
-$small-field-width: 10em;
-$tiny-field-width: 3em;
-
 .form {
   margin: $base-spacing auto;
   width: $optimal-reading-width;
 
   label {
     @include light-font;
-  }
-
-  .input {
-    @include fill-parent;
-    overflow: hidden;
   }
 
   input,
@@ -26,23 +16,13 @@ $tiny-field-width: 3em;
     width: $large-field-width;
   }
 
-  .height-field {
-    overflow: hidden;
+  .remove_fields {
+    clear: both;
+    display: block;
+  }
 
-    .hint {
-      display: none;
-    }
-
-    input[type='number'] {
-      width: $tiny-field-width;
-      display: inline-block;
-    }
-
-    label {
-      display: inline-block;
-      margin-right: $base-spacing;
-      margin-left: $tiny-spacing;
-    }
+  .height-field .hint {
+    display: none;
   }
 
   #response_plan_person_attributes_middle_initial {
@@ -57,34 +37,13 @@ $tiny-field-width: 3em;
     width: $large-field-width;
   }
 
-  .nested-form {
-    @include fill-parent;
-    overflow: hidden;
-  }
-
-  .multi-field .nested-fields {
-    padding-top: $small-spacing;
-
-    &:not(:first-child) {
-      margin-top: $small-spacing;
-    }
-  }
-
   .image-fields img {
-    @include span-columns(3 of 6);
-    margin-bottom: $small-spacing;
+    width: $small-field-width;
   }
 
   input[type="submit"] {
     display: block;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .safety_concern-fields {
-    .input,
-    .remove_fields {
-      @include fill-parent;
-    }
   }
 }

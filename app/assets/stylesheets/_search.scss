@@ -7,25 +7,12 @@
     @include light-font;
   }
 
-  .physicals-search-fields.collapsed {
-    display: none;
+  .hint {
+    margin-left: $base-spacing;
   }
 
-  .height-field {
-    overflow: hidden;
-
-    input {
-      @include span-columns(1 of 4);
-      display: inline-block;
-      margin-right: 0;
-    }
-
-    label {
-      display: inline-block;
-      float: left;
-      margin-right: $base-spacing;
-      margin-left: $tiny-spacing;
-    }
+  .physicals-search-fields.collapsed {
+    display: none;
   }
 
   .hair-color-field.collapsed,
@@ -44,8 +31,13 @@
 
   .toggle-hair-options,
   .toggle-eye-options {
-    margin-top: -1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: -$base-spacing;
+    margin-bottom: $base-spacing;
+  }
+
+  input[type="number"] {
+    display: inline-block;
+    width: $tiny-field-width
   }
 
   .actions input[type='submit'] {
@@ -77,13 +69,6 @@
 
     .input > label {
       text-align: right;
-    }
-
-    input[type="number"] {
-      @include span-columns(1 of 10);
-      display: inline-block;
-      float: none;
-      margin-right: $base-spacing;
     }
 
     .basic-search-fields {
@@ -155,11 +140,6 @@
     .eye-color-field {
       overflow: hidden;
       margin-bottom: $base-spacing;
-    }
-
-    .height-field input {
-      @include span-columns(1 of 8);
-      margin-right: 0;
     }
   }
 }
