@@ -120,22 +120,10 @@ en:
   safety_concerns:
     none: No known officer safety cautions.
     categories:
-      assaultive_law:
-        title: Aslt. to Law Enforcement
-        subtitle: History of assault or threat to assault to law enforcement.
-        example: E.g. Grabbed at officer's duty belt.
-      assaultive_public:
-        title: Aslt. to Public
-        subtitle: History of assaultive behavior to non-officers.
-        example: E.g. spitting.
-      weapon:
-        title: Weapons
-        subtitle: History of weapons possession.
-        example: E.g. Guns, knives.
-      chemical:
-        title: Chemical dependencies
-        subtitle: History of encouters while on drugs.
-        example: ""
+      assaultive_law: Aslt. to Law Enforcement
+      assaultive_public: Aslt. to Public
+      weapon: Weapons
+      chemical: Chemical dependencies
 
   search:
     filters:

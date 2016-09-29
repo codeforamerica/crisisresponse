@@ -1,44 +1,60 @@
-.response_plan_form,
-.new_person {
-  & > * > label {
-    @include span-columns(2 of 12);
+$large-field-width: 100%;
+$base-field-width: 20em;
+$small-field-width: 10em;
+$tiny-field-width: 3em;
+
+.form {
+  margin: $base-spacing auto;
+  width: $optimal-reading-width;
+
+  label {
+    @include light-font;
+  }
+
+  .input {
+    @include fill-parent;
+    overflow: hidden;
+  }
+
+  input,
+  select {
+    width: $base-field-width;
   }
 
   textarea {
     height: 10em;
-  }
-
-  & > .input {
-    @include fill-parent;
-    overflow: hidden;
-
-    input,
-    select,
-    textarea,
-    .height-field {
-      @include span-columns(6 of 12);
-    }
+    width: $large-field-width;
   }
 
   .height-field {
     overflow: hidden;
 
+    .hint {
+      display: none;
+    }
+
     input[type='number'] {
-      @include span-columns(1 of 6);
+      width: $tiny-field-width;
       display: inline-block;
-      margin-right: 0;
     }
 
     label {
       display: inline-block;
-      float: left;
       margin-right: $base-spacing;
       margin-left: $tiny-spacing;
     }
   }
 
   #response_plan_person_attributes_middle_initial {
-    @include span-columns(0.5 of 6);
+    width: $tiny-field-width;
+  }
+
+  #response_plan_person_attributes_date_of_birth {
+    width: $small-field-width;
+  }
+
+  #response_plan_person_attributes_location_address {
+    width: $large-field-width;
   }
 
   .nested-form {
@@ -46,66 +62,7 @@
     overflow: hidden;
   }
 
-  .nested-field-container {
-    @include span-columns(8 of 12);
-    margin-bottom: $base-spacing;
-
-    .input {
-      @include span-columns(6 of 8);
-      margin-bottom: 0;
-    }
-
-    .remove_fields {
-      vertical-align: sub;
-    }
-  }
-
-  .nested-fields {
-    overflow: hidden;
-
-    .collection_input_set {
-      margin-bottom: $small-spacing;
-
-      .radio {
-        @include fill-parent;
-        display: block;
-        overflow: hidden;
-      }
-
-      label.radio_buttons {
-        @include fill-parent;
-      }
-
-      input[type="radio"] {
-        @include span-columns(1 of 8);
-        height: $base-spacing;
-      }
-
-      .category-label {
-        @include span-columns(7 of 8);
-        float: none;
-        overflow: hidden;
-        margin-bottom: $small-spacing;
-      }
-
-      .category-title,
-      .category-subtitle {
-        @include fill-parent;
-        display: block;
-      }
-
-      .category-subtitle {
-        @include light-font;
-      }
-
-      .category-example {
-        font-style: italic;
-      }
-    }
-  }
-
   .multi-field .nested-fields {
-    border-top: $base-border;
     padding-top: $small-spacing;
 
     &:not(:first-child) {
@@ -114,7 +71,7 @@
   }
 
   .image-fields img {
-    @include span-columns(4 of 6);
+    @include span-columns(3 of 6);
     margin-bottom: $small-spacing;
   }
 

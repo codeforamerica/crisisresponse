@@ -1,27 +1,9 @@
-<div class="nested-fields">
-
-  <div class="collection_input_set response_plan_safety_concerns_category">
-    <label>Safety Type</label>
-
-    <% SafetyConcern::CATEGORIES.each.with_index do |category, priority| %>
-      <span class="radio">
-        <%= f.radio_button :category, category %>
-        <%= f.label(:category, class: "category-label") do %>
-          <span class="category-title">
-            <%= t("safety_concerns.categories.#{category}.title") %>
-          </span>
-
-          <span class="category-subtitle">
-            <%= t("safety_concerns.categories.#{category}.subtitle") %>
-
-            <span class="category-example">
-              <%= t("safety_concerns.categories.#{category}.example") %>
-            </span>
-          </span>
-        <% end %>
-      </span>
-    <% end %>
-  </div>
+<div class="nested-fields section-body">
+  <%= f.input(
+    :category,
+    collection: SafetyConcern::CATEGORIES,
+    label_method: lambda { |cat| t("safety_concerns.categories.#{cat}") },
+  ) %>
 
   <%= f.input :title %>
   <%= f.input(
@@ -34,5 +16,5 @@
   <%= f.input :description %>
   <%= f.input :go_number %>
 
-  <%= link_to_remove_association "remove safety concern", f %>
+  <%= link_to_remove_association "Remove safety concern", f %>
 </div>

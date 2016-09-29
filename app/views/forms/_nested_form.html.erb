@@ -1,21 +1,22 @@
 <% label ||= relationship.to_s.titleize %>
-<% html_classes ||= [] %>
 
-<div class="nested-form <%= relationship.to_s %> <%= html_classes.join(" ") %>">
-  <label><%= label %></label>
+<section class="form">
+  <div class="nested-form <%= relationship.to_s %>">
+    <label class="section-body"><%= label %></label>
 
-  <div class="nested-field-container <%= relationship.to_s.singularize %>-fields">
-    <%= f.simple_fields_for relationship do |nested_form| %>
-      <%= render "forms/#{relationship.to_s.singularize}_fields", f: nested_form %>
-    <% end %>
+    <div class="nested-field-container <%= relationship.to_s.singularize %>-fields">
+      <%= f.simple_fields_for relationship do |nested_form| %>
+        <%= render "forms/#{relationship.to_s.singularize}_fields", f: nested_form %>
+      <% end %>
 
-    <div class="links">
-      <%= link_to_add_association(
-        "+ Add #{relationship.to_s.singularize.humanize.downcase}",
-        f,
-        relationship,
-        partial: "forms/#{relationship.to_s.singularize}_fields",
-      ) %>
+      <div class="links section-body">
+        <%= link_to_add_association(
+          "+ Add #{relationship.to_s.singularize.humanize.downcase}",
+          f,
+          relationship,
+          partial: "forms/#{relationship.to_s.singularize}_fields",
+        ) %>
+    </div>
     </div>
   </div>
-</div>
+</section>

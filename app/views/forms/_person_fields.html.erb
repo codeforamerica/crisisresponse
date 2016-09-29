@@ -1,52 +1,65 @@
-<%= form.input :first_name %>
-<%= form.input :middle_initial %>
-<%= form.input :last_name %>
+<section class="form">
+  <div class="section-body">
+    <%= form.input :first_name %>
+    <%= form.input :middle_initial %>
+    <%= form.input :last_name %>
 
-<%= form.input(
-  :date_of_birth,
-  as: :string,
-  label: "DOB",
-  placeholder: "mm-dd-yyyy",
-  input_html: {
-    value: (
-      l(form.object.date_of_birth) rescue
-      params[:response_plan][:person_attributes][:date_of_birth] rescue
-      nil
-    )
-  }
-) %>
+    <%= form.input(
+      :date_of_birth,
+      as: :string,
+      label: "DOB",
+      placeholder: "mm-dd-yyyy",
+      input_html: {
+        value: (
+          l(form.object.date_of_birth) rescue
+          params[:response_plan][:person_attributes][:date_of_birth] rescue
+          nil
+        )
+      }
+    ) %>
+  </div>
+</section>
 
 <%= render "forms/nested_form", f: form, relationship: :aliases %>
 
-<%= form.input(
-  :race,
-  collection: RMS::RACE_CODES.keys,
-  label_method: lambda { |race| race.titlecase.gsub("/", " / ") },
-  required: true,
-) %>
-<%= form.input(
-  :sex,
-  collection: RMS::SEX_CODES.keys,
-  label_method: lambda { |sex| sex.titlecase },
-  required: true
-) %>
+<section class="form">
+  <div class="section-body">
+    <%= form.input(
+      :race,
+      collection: RMS::RACE_CODES.keys,
+      label_method: lambda { |race| race.titlecase.gsub("/", " / ") },
+      required: true,
+    ) %>
+    <%= form.input(
+      :sex,
+      collection: RMS::SEX_CODES.keys,
+      label_method: lambda { |sex| sex.titlecase },
+      required: true
+    ) %>
 
-<%= form.input :weight_in_pounds, as: :integer, label: "Weight" %>
-<%= render "application/height_fields", form: form %>
+    <%= form.input :weight_in_pounds, as: :integer, label: "Weight" %>
+    <%= render "application/height_fields", form: form %>
 
-<%= form.input(
-  :eye_color,
-  collection: RMS::EYE_COLOR_CODES.values,
-  label_method: lambda(&:titlecase),
-) %>
-<%= form.input(
-  :hair_color,
-  collection: RMS::HAIR_COLOR_CODES.values,
-  label_method: lambda(&:titlecase),
-) %>
+    <%= form.input(
+      :eye_color,
+      collection: RMS::EYE_COLOR_CODES.values,
+      label_method: lambda(&:titlecase),
+    ) %>
+    <%= form.input(
+      :hair_color,
+      collection: RMS::HAIR_COLOR_CODES.values,
+      label_method: lambda(&:titlecase),
+    ) %>
 
-<%= form.input :scars_and_marks %>
+    <%= form.input :scars_and_marks %>
+  </div>
+</section>
 
-<%= form.input :location_name %>
-<%= form.input :location_address %>
+<section class="form">
+  <div class="section-body">
+    <%= form.input :location_name %>
+    <%= form.input :location_address %>
+  </div>
+</section>
+
 <%= render "forms/nested_form", f: form, relationship: :images %>
