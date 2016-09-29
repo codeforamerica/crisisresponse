@@ -338,7 +338,7 @@ def create_incidents_for(person)
 end
 
 create_incidents_for(gregory)
-create_incidents_for(martha)
+create_incidents_for(biff)
 
 # Create a recent incident
 RMS::CrisisIncident.create(

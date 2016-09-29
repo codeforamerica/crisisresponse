@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928232446) do
+ActiveRecord::Schema.define(version: 20160929000327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 20160928232446) do
     t.date     "occurred_on"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "description"
+    t.text     "description"
     t.string   "go_number"
     t.index ["response_plan_id"], name: "index_safety_concerns_on_response_plan_id", using: :btree
   end
@@ -239,7 +239,7 @@ ActiveRecord::Schema.define(version: 20160928232446) do
     t.integer  "response_plan_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "description"
+    t.text     "description"
     t.string   "go_number"
     t.index ["response_plan_id"], name: "index_triggers_on_response_plan_id", using: :btree
   end
