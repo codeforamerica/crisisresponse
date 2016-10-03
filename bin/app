@@ -1,0 +1,6 @@
+# Read the environment variables from .env and .env.local
+# when we're starting the application.
+# This allows the `docker-compose.yml` file
+# to interpolate variables like `$PORT`
+# that are set in the local env file.
+env $(cat .env .env.local | sed "/^#/d") ./bin/docker-compose $@
