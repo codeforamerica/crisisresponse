@@ -17,9 +17,9 @@ if [ -z "$CI" ]; then
   docker pull docker/compose:1.8.0
 
   # Build the docker image
-  docker-compose build
+  ./bin/docker-compose build
 
   # Set up the database for our app
-  docker-compose run web rake db:create db:migrate
-  docker-compose run web rake db:seed
+  ./bin/docker-compose run web rake db:create db:migrate
+  ./bin/docker-compose run web rake db:seed
 fi
