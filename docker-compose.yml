@@ -30,9 +30,6 @@ services:
     build: .
     image: codeforamerica/crisisresponse
     command: ./bin/serve
-    env_file:
-      - .env
-      - .env.local
     ports:
       - "$PORT:3000"
     links:
