@@ -9,8 +9,10 @@ set -e
 # Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
 mkdir -p .git/safe
 
-# Make sure .env.local exists - our docker-compose configuration depends on it.
-touch .env.local
+# Make sure .env exists
+if [ ! -f .env ]; then
+  cp .sample.env .env
+fi
 
 # Only if this isn't CI
 if [ -z "$CI" ]; then
