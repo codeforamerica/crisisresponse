@@ -1,7 +1,10 @@
 <div class="page-title-actions">
-  <% if plan %>
+  <% if person.draft %>
+    <%= t("people.show.draft.exists", name: person.first_name) %>
+    <%= link_to t("people.show.draft.show"), draft_path(person.draft) %>
+  <% elsif plan %>
     <%= link_to(
-      t("people.show.new_draft"),
+      t("people.show.draft.new"),
       drafts_path(person_id: person.id),
       method: :post,
     ) %>

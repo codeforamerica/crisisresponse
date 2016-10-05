@@ -21,16 +21,31 @@ RSpec.feature "Response Plan Lifecycle" do
           t("drafts.create.success.from_scratch", name: person.name)
       end
 
-      scenario "they can draft a new plan for a person who already has one" do
+      scenario "they can create a draft for a person who already has a plan" do
         officer = create(:officer, :admin)
         sign_in_officer(officer)
         person = create(:response_plan, :approved).person
 
         visit person_path(person)
-        click_on t("people.show.new_draft")
+        click_on t("people.show.draft.new")
 
         expect(page).to have_content \
           t("drafts.create.success.from_previous", name: person.name)
+      end
+
+      scenario "they cannot create a draft for someone who already has a draft" do
+        officer = create(:officer, :admin)
+        sign_in_officer(officer)
+        draft = create(:response_plan, :draft)
+        person = draft.person
+
+        visit person_path(person)
+        expect(page).not_to have_link t("people.show.draft.new")
+        expect(page).
+          to have_content t("people.show.draft.exists", name: person.first_name)
+
+        click_on t("people.show.draft.show")
+        expect(current_path).to eq(draft_path(draft))
       end
 
       scenario "updating a draft" do
@@ -40,7 +55,7 @@ RSpec.feature "Response Plan Lifecycle" do
         sign_in_officer(officer)
 
         visit person_path(person)
-        click_on t("people.show.new_draft")
+        click_on t("people.show.draft.new")
         fill_in "Background info", with: "Lorem Ipsum dolor si amet."
         click_on "Update Response plan"
 
@@ -57,10 +72,10 @@ RSpec.feature "Response Plan Lifecycle" do
     end
 
     context "when the officer is an admin" do
-      scenario "they can edit a draft that they created" do
+      scenario "they can edit a draft they didn't create" do
         officer = create(:officer, :admin)
         sign_in_officer(officer)
-        plan = create(:response_plan, :draft, author: officer)
+        plan = create(:response_plan, :draft)
 
         visit drafts_path
         click_on "Profile"
@@ -68,9 +83,6 @@ RSpec.feature "Response Plan Lifecycle" do
 
         expect(current_path).to eq(edit_draft_path(plan))
       end
-
-      # Not sure if we want to do this or not
-      scenario "they can(not?) edit a draft that someone else has created"
 
       scenario "they can submit a draft for approval" do
         officer = create(:officer, :admin)
@@ -87,9 +99,7 @@ RSpec.feature "Response Plan Lifecycle" do
         expect(page).not_to have_content(plan.person.shorthand_description)
       end
 
-      scenario "they can delete a draft that they've created"
-
-      scenario "they can not delete a draft that another officer created"
+      scenario "they can delete a draft"
 
       scenario "draft a plan for a person who is not in the system", :js do
         officer = create(:officer, :admin)

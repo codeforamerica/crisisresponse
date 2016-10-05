@@ -51,7 +51,7 @@ class ResponsePlan < ApplicationRecord
   end
 
   def self.drafts
-    where(submitted_for_approval_at: nil)
+    where(submitted_for_approval_at: nil).where(approved_at: nil)
   end
 
   def self.submitted
