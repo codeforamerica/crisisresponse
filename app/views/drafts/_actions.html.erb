@@ -3,14 +3,16 @@
 </div>
 
 <div class="page-title-actions">
-  <%= link_to t("drafts.show.edit"), edit_draft_path(plan) %>
+  <%= link_to t("drafts.show.edit"), edit_draft_path(plan) %>,
   <br/>
-  or
   <strong>
     <%= link_to(
       t("drafts.show.submit"),
       submissions_path(response_plan_id: plan),
       method: :post,
     ) %>
-  </strong>
+  </strong>,
+  <br/>
+  or
+  <%= link_to t("drafts.show.destroy"), draft_path(plan), method: :delete %>.
 </div>

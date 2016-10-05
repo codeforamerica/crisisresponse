@@ -8,4 +8,11 @@
     approve_submission_path(plan),
     method: :patch,
   ) %>
+  <br/>
+  or
+  <%= link_to(
+    t("submissions.show.destroy"),
+    submission_path(plan),
+    method: :delete,
+  ) %>.
 </div>

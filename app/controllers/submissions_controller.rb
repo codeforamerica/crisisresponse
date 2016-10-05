@@ -1,4 +1,9 @@
+# frozen_string_literal: true
+
 class SubmissionsController < ApplicationController
+  before_action :authenticate_officer!
+  before_action :authorize_admin
+
   # Display a list of response plans pending approval
   def index
     @submissions = ResponsePlan.submitted
@@ -29,18 +34,29 @@ class SubmissionsController < ApplicationController
   # and making it visible to patrol officers
   def approve
     plan = ResponsePlan.find(params[:id])
-    plan.approver = current_officer
 
-    if plan.save
-      redirect_to(
-        person_path(plan.person),
-        notice: t(".success", name: plan.person.name),
-      )
+    if plan.approved?
+      flashes = { alert: t(".failure.already_approved", name: plan.person.name) }
+    elsif !plan.submitted?
+      flashes = { alert: t(".failure.not_submitted", name: plan.person.name) }
     else
-      redirect_to(
-        person_path(plan.person),
-        alert: t(".failure"),
-      )
+      plan.update!(approver: current_officer)
+      flashes = { notice: t(".success", name: plan.person.name) }
+    end
+
+    redirect_to person_path(plan.person), flashes
+  end
+
+  # Revert a submitted response plan back into draft mode,
+  # so CRT officers can continue to make edits to it.
+  def destroy
+    plan = ResponsePlan.find(params[:id])
+
+    if plan.submitted?
+      plan.update!(submitted_for_approval_at: nil)
+      redirect_to draft_path(plan), notice: t(".success", name: plan.person.name)
+    else
+      redirect_to person_path(plan.person), alert: t(".failure")
     end
   end
 end

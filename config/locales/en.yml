@@ -27,6 +27,8 @@ en:
       success:
         from_previous: "Created a new draft for %{name}'s response plan."
         from_scratch: "Created a new draft for %{name}'s response plan."
+    destroy:
+      success: Deleted the draft
     index:
       link: Your Drafts
       title: Your Drafts
@@ -35,6 +37,7 @@ en:
       edit: Continue editing your response plan
       submit: Submit for approval
       title: Draft
+      destroy: Delete this draft
     update:
       success: "Updated %{name}'s response plan"
 
@@ -97,8 +100,11 @@ en:
       new_plan: + Add a response plan
       draft:
         new: + Update response plan
-        exists: A new response plan draft is in progress for %{name}.
-        show: View existing draft.
+        exists: A new response plan for %{name} is being drafted.
+        show: View existing draft
+      submission:
+        exists: A new response plan for %{name} is awaiting submission.
+        show: View submitted plan
 
   profile:
     actions:
@@ -175,19 +181,25 @@ en:
 
   submissions:
     approve:
-      failure: You cannot approve response plans that you wrote.
+      failure:
+        not_submitted: You cannot approve plans that have not been submitted for approval.
+        already_approved: "%{name}'s plan has already been approved."
       success: "Approved %{name}'s response plan. It is now visible to patrol officers"
     create:
       success:
         text: Submitted for approval.
         link: View pending response plan.
       failure: Could not submit the response plan.
+    destroy:
+      failure: "Could not revert %{name}'s plan back into a draft."
+      success: "Reverted %{name}'s plan back to a draft"
     index:
       link: Pending Approval
       title: Pending Approval
     show:
       approve: Approve
       description: This plan will not be visible to patrol officers until it is approved.
+      destroy: Revert back to a draft for more edits
       title: Pending Approval
 
   suggestions:
