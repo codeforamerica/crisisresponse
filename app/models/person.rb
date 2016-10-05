@@ -19,6 +19,7 @@ class Person < ApplicationRecord
   has_many :images, dependent: :destroy
   has_many :response_plans
   has_one :rms_person, class_name: "RMS::Person"
+  has_one :draft, -> { drafts }, class_name: "ResponsePlan"
 
   pg_search_scope(
     :search,

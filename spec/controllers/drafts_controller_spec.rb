@@ -27,13 +27,13 @@ RSpec.describe DraftsController do
     it "only shows plans that are drafts" do
       officer = create(:officer, :admin)
       draft = create(:response_plan, :draft, author: officer)
-      _draft_from_other_officer = create(:response_plan, :draft)
+      draft_from_other_officer = create(:response_plan, :draft)
       _pending = create(:response_plan, :submission)
       _approved = create(:response_plan, :approved)
 
       get :index, session: { officer_id: officer.id }
 
-      expect(assigns(:drafts)).to eq([draft])
+      expect(assigns(:drafts)).to eq([draft, draft_from_other_officer])
     end
   end
 
@@ -226,7 +226,6 @@ RSpec.describe DraftsController do
     it "redirects if the officer is not an admin"
     it "redirects if the plan has been approved"
     it "redirects if the plan has been submitted for approval"
-    it "redirects if the current officer did not create the draft"
 
     it "assigns the plan if it is still in draft form" do
       officer = create(:officer, :admin)
@@ -245,11 +244,6 @@ RSpec.describe DraftsController do
   describe "PATCH #update" do
     it "redirects if the officer is not signed in"
     it "redirects if the officer is not an admin"
-
-    context "if the current officer did not create the draft" do
-      it "does not update the plan"
-      it "redirects to the person's page"
-    end
 
     context "if the plan has been submitted for approval" do
       it "does not update the plan"

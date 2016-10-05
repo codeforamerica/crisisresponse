@@ -34,7 +34,7 @@ class DraftsController < ApplicationController
   before_action :authorize_admin
 
   def index
-    @drafts = ResponsePlan.drafts.where(author: current_officer)
+    @drafts = ResponsePlan.drafts
   end
 
   def show

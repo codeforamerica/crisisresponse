@@ -95,7 +95,10 @@ en:
       failure: Errors prevented the person from being saved.
     show:
       new_plan: + Add a response plan
-      new_draft: + Update response plan
+      draft:
+        new: + Update response plan
+        exists: A new response plan draft is in progress for %{name}.
+        show: View existing draft.
 
   profile:
     actions:

@@ -42,10 +42,11 @@ RSpec.describe ResponsePlan, type: :model do
   end
 
   describe ".drafts" do
-    it "returns response plans that have not been submitted for approval" do
+    it "returns response plans that have not been submitted or approved" do
       draft = create(:response_plan, :draft)
       create(:response_plan, :submission)
       create(:response_plan, :approved)
+      create(:response_plan, :approved, submitted_for_approval_at: nil)
 
       expect(ResponsePlan.drafts).to eq([draft])
     end
