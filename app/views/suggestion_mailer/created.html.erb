@@ -4,7 +4,8 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>New suggestion for <%= suggestion.person_name %>'s response plan</h1>
+    <h1>New suggestion for <%= @suggestion.person_name %>'s response plan</h1>
+
     <div>
       Submitted at <%= l @suggestion.created_at %>
       by <%= @suggestion.officer.name %>.
