@@ -1,60 +1,58 @@
 <div class="section-body person" role="link" data-link="<%= link %>">
-  <%= cache person do %>
-    <%= image_tag person.profile_image_url %>
+  <%= image_tag person.profile_image_url %>
 
-    <div class="person-information">
-      <span class="person-name">
-        <%= person.last_name.to_s.upcase %>,
-        <%= person.first_name.to_s.titleize %>
-        <%= person.middle_initial.to_s.titleize %>
-      </span>
+  <div class="person-information">
+    <span class="person-name">
+      <%= person.last_name.to_s.upcase %>,
+      <%= person.first_name.to_s.titleize %>
+      <%= person.middle_initial.to_s.titleize %>
+    </span>
 
-      <div class="person-information-profile">
-        <% if person.date_of_birth %>
-          <span class="person-dob">
-            <%= l person.date_of_birth %>
-          </span>
-        <% end %>
-
-        <div class="person-description">
-          <%= person.shorthand_description %>
-        </div>
-      </div>
-
-      <% if person.recent_incidents.frequent_behaviors.any? %>
-        <div class="person-top-behavior">
-          <span class="person-top-behavior-text">
-            <%= t([
-              :incidents,
-              :behaviors,
-              person.recent_incidents.frequent_behaviors.keys.first,
-            ].join(".")) %>
-          </span>
-        </div>
+    <div class="person-information-profile">
+      <% if person.date_of_birth %>
+        <span class="person-dob">
+          <%= l person.date_of_birth %>
+        </span>
       <% end %>
 
-      <div class="person-incident-count">
-        <span class="bold">
-          <%= person.recent_incidents.count %>
-        </span>
-        CRISIS Calls
-      </div>
-
-      <div class="person-links">
-        <% if person.recent_incidents.any? %>
-          <%= link_to(
-            "Last Report",
-            incident_path(person.recent_incidents.first),
-            target: "_blank",
-          ) %>
-        <% end %>
-
-        <% if person.active_plan %>
-          <%= link_to "Response Plan", link, class: "person-link-plan button" %>
-        <% else %>
-          <%= link_to "Profile", link, class: "person-link-profile button" %>
-        <% end %>
+      <div class="person-description">
+        <%= person.shorthand_description %>
       </div>
     </div>
-  <% end %>
+
+    <% if person.recent_incidents.frequent_behaviors.any? %>
+      <div class="person-top-behavior">
+        <span class="person-top-behavior-text">
+          <%= t([
+            :incidents,
+            :behaviors,
+            person.recent_incidents.frequent_behaviors.keys.first,
+          ].join(".")) %>
+        </span>
+      </div>
+    <% end %>
+
+    <div class="person-incident-count">
+      <span class="bold">
+        <%= person.recent_incidents.count %>
+      </span>
+      CRISIS Calls
+    </div>
+
+    <div class="person-links">
+      <% if person.recent_incidents.any? %>
+        <%= link_to(
+          "Last Report",
+          incident_path(person.recent_incidents.first),
+          target: "_blank",
+        ) %>
+      <% end %>
+
+      <% if person.active_plan %>
+        <%= link_to "Response Plan", link, class: "person-link-plan button" %>
+      <% else %>
+        <%= link_to "Profile", link, class: "person-link-profile button" %>
+      <% end %>
+    </div>
+  </div>
 </div>
