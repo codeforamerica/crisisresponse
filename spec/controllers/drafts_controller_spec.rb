@@ -35,11 +35,28 @@ RSpec.describe DraftsController do
 
       expect(assigns(:drafts)).to eq([draft, draft_from_other_officer])
     end
+
+    it "rejects non-admins" do
+      officer = create(:officer)
+
+      get :index, session: { officer_id: officer.id }
+
+      expect(response).to redirect_to(people_path)
+    end
   end
 
   describe "GET #show" do
     it "assigns the response plan to `@response_plan`"
     it "assigns the person to `@person`"
+
+    it "rejects non-admins" do
+      officer = create(:officer)
+      draft = create(:response_plan, :draft)
+
+      get :show, params: { id: draft.id }, session: { officer_id: officer.id }
+
+      expect(response).to redirect_to(people_path)
+    end
   end
 
   describe "POST #create" do
@@ -76,14 +93,9 @@ RSpec.describe DraftsController do
     end
 
     context "when the person has a response plan in draft form" do
-      it "ignores the information in the non-approved plan" do
+      it "does not create a new draft" do
         officer = create(:officer, :admin)
-        original = create(
-          :response_plan,
-          approved_at: nil,
-          approver: nil,
-          background_info: "hello",
-        )
+        original = create(:response_plan, :draft)
 
         expect do
           post(
@@ -91,16 +103,26 @@ RSpec.describe DraftsController do
             params: { person_id: original.person_id },
             session: { officer_id: officer.id },
           )
-        end.to change(ResponsePlan, :count).by(1)
-
-        plan = ResponsePlan.last
-        expect(plan.person).to eq(original.person)
-        expect(plan.author).to eq(officer)
-        expect(plan.background_info).not_to eq(original.background_info)
+        end.not_to change(ResponsePlan, :count)
       end
     end
 
-    context "when the person already has a response plan" do
+    context "when the person has a response plan awaiting approval" do
+      it "does not create a new draft" do
+        officer = create(:officer, :admin)
+        original = create(:response_plan, :submission)
+
+        expect do
+          post(
+            :create,
+            params: { person_id: original.person_id },
+            session: { officer_id: officer.id },
+          )
+        end.not_to change(ResponsePlan, :count)
+      end
+    end
+
+    context "when the person has an active response plan" do
       it "makes a copy of the response plan as a draft for the user to edit" do
         officer = create(:officer, :admin)
         original = create(:response_plan, background_info: "hello")
@@ -258,6 +280,52 @@ RSpec.describe DraftsController do
     context "when everything checks out okay" do
       it "updates the plan and associated records"
       it "redirects to the draft preview page"
+    end
+  end
+
+  describe "DELETE #destroy" do
+    it "rejects non-admins" do
+      officer = create(:officer)
+      draft = create(:response_plan, :draft)
+
+      delete(
+        :destroy,
+        params: { id: draft.id },
+        session: { officer_id: officer.id },
+      )
+
+      expect(response).to redirect_to(people_path)
+      expect(draft.reload).to be_persisted
+    end
+
+    it "removes a draft" do
+      officer = create(:officer, :admin)
+      draft = create(:response_plan, :draft)
+
+      delete(
+        :destroy,
+        params: { id: draft.id },
+        session: { officer_id: officer.id },
+      )
+
+      expect(response).to redirect_to(drafts_path)
+      expect { draft.reload }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "fails for plans that have already been submitted" do
+      officer = create(:officer, :admin)
+      submission = create(:response_plan, :submission)
+
+      expect do
+        delete(
+          :destroy,
+          params: { id: submission.id },
+          session: { officer_id: officer.id },
+        )
+      end.to raise_error(ActiveRecord::RecordNotFound)
+
+      expect(submission.reload).to be_persisted
+      expect(submission).to be_submitted
     end
   end
 end

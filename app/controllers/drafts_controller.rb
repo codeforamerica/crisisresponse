@@ -44,7 +44,12 @@ class DraftsController < ApplicationController
   def create
     person = Person.find(params.fetch(:person_id))
 
-    if person.active_plan
+    if person.response_plans.any?(&:draft?)
+      redirect_to person_path(person), alert: t(".failure.draft_exists")
+    elsif person.response_plans.any?(&:submitted?)
+      redirect_to person_path(person), alert: t(".failure.submission_exists")
+    elsif person.active_plan
+      # Copy over attributes from the active plan into the new draft.
       plan = person.active_plan.deep_clone(
         except: [
           :approver_id,
@@ -58,18 +63,11 @@ class DraftsController < ApplicationController
           :safety_concerns,
           :triggers,
         ])
-      source = "from_previous"
+      save_and_redirect_to_edit(plan, source: "from_previous")
     else
       plan = ResponsePlan.new(person: person, author: current_officer)
-      source = "from_scratch"
+      save_and_redirect_to_edit(plan, source: "from_previous")
     end
-
-    plan.save!
-
-    redirect_to(
-      edit_draft_path(plan),
-      notice: t(".success.#{source}", name: person.name),
-    )
   end
 
   def edit
@@ -91,6 +89,17 @@ class DraftsController < ApplicationController
     end
   end
 
+  # Remove a ResponsePlan draft from the database.
+  def destroy
+    plan = ResponsePlan.drafts.find(params[:id])
+
+    if plan.destroy
+      redirect_to drafts_path, notice: t(".success")
+    else
+      redirect_to person_path(plan.person), alert: t(".failure")
+    end
+  end
+
   private
 
   def response_plan_params
@@ -98,5 +107,14 @@ class DraftsController < ApplicationController
     dob = permitted[:person_attributes][:date_of_birth]
     permitted[:person_attributes][:date_of_birth] = Date.strptime(dob, "%m-%d-%Y")
     permitted
+  end
+
+  def save_and_redirect_to_edit(plan, source:)
+    plan.save!(validate: false)
+
+    redirect_to(
+      edit_draft_path(plan),
+      notice: t(".success.#{source}", name: plan.person.name),
+    )
   end
 end

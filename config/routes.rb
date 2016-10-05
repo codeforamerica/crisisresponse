@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :preferences, only: :create
   resources :suggestions, only: [:new, :create, :show]
 
-  resources :drafts, only: [:index, :show, :create, :edit, :update]
-  resources :submissions, only: [:index, :show, :create] do
+  resources :drafts, only: [:index, :show, :create, :edit, :update, :destroy]
+  resources :submissions, only: [:index, :show, :create, :destroy] do
     member { patch :approve }
   end
 

@@ -1,7 +1,12 @@
 <div class="page-title-actions">
   <% if person.draft %>
     <%= t("people.show.draft.exists", name: person.first_name) %>
+    <br/>
     <%= link_to t("people.show.draft.show"), draft_path(person.draft) %>
+  <% elsif person.submission %>
+    <%= t("people.show.submission.exists", name: person.first_name) %>
+    <br/>
+    <%= link_to t("people.show.submission.show"), submission_path(person.submission) %>
   <% elsif plan %>
     <%= link_to(
       t("people.show.draft.new"),

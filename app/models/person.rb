@@ -19,7 +19,10 @@ class Person < ApplicationRecord
   has_many :images, dependent: :destroy
   has_many :response_plans
   has_one :rms_person, class_name: "RMS::Person"
+
+  # Easily access response plans that are in draft or submission mode.
   has_one :draft, -> { drafts }, class_name: "ResponsePlan"
+  has_one :submission, -> { submitted }, class_name: "ResponsePlan"
 
   pg_search_scope(
     :search,
