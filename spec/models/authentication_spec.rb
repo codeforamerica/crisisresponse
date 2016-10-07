@@ -3,15 +3,72 @@
 require "rails_helper"
 
 describe Authentication do
+  WHITELIST_GROUP = "OU=SuperGroup,DC=DOMAIN,DC=DOMAIN"
+  BLACKLIST_GROUP = "CN=Group,OU=SuperGroup,DC=DOMAIN,DC=DOMAIN"
+
   describe "#attempt_sign_on" do
-    it "returns false if the officer does not exist in ActiveDirectory"
-    it "returns false if the officer does not belong to the whitelist group"
-    it "returns false if the officer does belongs to the blacklist group"
-    it "returns true if the officer satisfies the group requirements"
+    it "returns false if the officer does not exist in ActiveDirectory" do
+      skip "Stub the behavior that Net::LDAP uses when there is not a person"
+
+      auth = Authentication.new(username: "foo", password: "bar")
+      result = auth.attempt_sign_on
+
+      expect(result).to eq(false)
+    end
+
+    it "returns false if the officer does not belong to the whitelist group" do
+      stub_env_vars
+
+      stub_ldap_object(memberof: [
+        "CN=AcceptableGroup,OU=OtherGroup,DC=Domain,DC=Domain",
+      ])
+
+      auth = Authentication.new(username: "foo", password: "bar")
+      result = auth.attempt_sign_on
+
+      expect(result).to be_falsey
+    end
+
+
+    it "returns false if the officer does belongs to the blacklist group" do
+      stub_env_vars
+      stub_ldap_object(memberof: [
+        BLACKLIST_GROUP,
+      ])
+
+      auth = Authentication.new(username: "foo", password: "bar")
+      result = auth.attempt_sign_on
+
+      expect(result).to be_falsey
+    end
+
+    it "returns true if the officer is in another white group besides the black group" do
+      stub_env_vars
+      stub_ldap_object(memberof: [
+        "CN=AcceptableGroup,#{WHITELIST_GROUP}",
+        BLACKLIST_GROUP,
+      ])
+
+      auth = Authentication.new(username: "foo", password: "bar")
+      result = auth.attempt_sign_on
+
+      expect(result).to be_truthy
+    end
+
+    it "returns true if the officer is in a whitelist subgroup that is not the blacklist" do
+      stub_env_vars
+      stub_ldap_object(memberof: ["CN=AcceptableGroup,#{WHITELIST_GROUP}"])
+
+      auth = Authentication.new(username: "foo", password: "bar")
+      result = auth.attempt_sign_on
+
+      expect(result).to be_truthy
+    end
   end
 
   describe "#officer_information" do
     it "parses out the officer's name" do
+      stub_env_vars
       stub_ldap_object(givenname: ["First"], sn: ["Last"])
 
       auth = Authentication.new(username: "foo", password: "bar")
@@ -22,6 +79,7 @@ describe Authentication do
     end
 
     it "parses out the officer's username" do
+      stub_env_vars
       stub_ldap_object(cn: ["username"])
 
       auth = Authentication.new(username: "foo", password: "bar")
@@ -32,6 +90,7 @@ describe Authentication do
     end
 
     pending "parses out the officer's email" do
+      stub_env_vars
       stub_ldap_object(mail: ["example@seattle.gov"])
 
       auth = Authentication.new(username: "foo", password: "bar")
@@ -44,10 +103,25 @@ describe Authentication do
 
   private
 
-  def stub_ldap_object(overrides = {})
-    ldap_object = default_ldap_attributes.merge(overrides)
+  def stub_env_vars
+    allow(ENV).to receive(:fetch)
+    allow(ENV).to receive(:fetch).
+      with("LDAP_WHITELIST_GROUP").
+      and_return(WHITELIST_GROUP)
+    allow(ENV).to receive(:fetch).
+      with("LDAP_BLACKLIST_GROUP").
+      and_return(BLACKLIST_GROUP)
+  end
 
-    fake_ldap_connection = double(bind: true, search: [ldap_object])
+  def stub_ldap_object(overrides = {})
+    ldap_result = default_ldap_attributes.merge(overrides)
+
+    fake_ldap_connection = double(
+      "LDAP connection",
+      bind: true,
+      search: [ldap_result],
+    )
+
     allow(Net::LDAP).to receive(:new).and_return(fake_ldap_connection)
     fake_ldap_connection
   end

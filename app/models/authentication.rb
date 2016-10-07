@@ -1,18 +1,22 @@
 class Authentication
   include ActiveModel::Model
 
-  attr_accessor :username, :password
+  def initialize(params = {})
+    @username = params[:username]
+    @password = params[:password]
+  end
+
+  attr_reader :username, :password
 
   def attempt_sign_on
-    ldap_object.bind
+    ldap_object.bind &&
+      belongs_to_valid_whitelist_group
   end
 
   def officer_information
-    object = ldap_object.search(base: ldap_user_path).first
-
     {
-      name: "#{object[:givenname].first} #{object[:sn].first}",
-      username: object[:cn].first,
+      name: "#{ldap_result[:givenname].first} #{ldap_result[:sn].first}",
+      username: ldap_result[:cn].first,
     }
   end
 
@@ -30,8 +34,27 @@ class Authentication
     )
   end
 
+  def ldap_result
+    @ldap_result ||= ldap_object.search(base: ldap_user_path).first
+  end
+
   def ldap_user_path
     namespace = ENV.fetch('LDAP_NAMESPACE')
     "cn=#{username},#{namespace}"
+  end
+
+  def belongs_to_valid_whitelist_group
+    Array(ldap_result[:memberof]).
+      select { |group| group.ends_with?(white_list) }.
+      without(black_list).
+      any?
+  end
+
+  def white_list
+    ENV.fetch("LDAP_WHITELIST_GROUP")
+  end
+
+  def black_list
+    ENV.fetch("LDAP_BLACKLIST_GROUP")
   end
 end
