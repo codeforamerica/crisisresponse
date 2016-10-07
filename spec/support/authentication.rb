@@ -25,6 +25,9 @@ class FakeAuthentication
       sn: [name.split(" ").last],
       mail: ["foo@seattle.gov"],
       cn: [username],
+      memberof: [
+        "CN=ValidSubgroup,#{ENV.fetch('LDAP_WHITELIST_GROUP')}",
+      ],
     }
 
     double(bind: true, search: [ldap_identity_information])
