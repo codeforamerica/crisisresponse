@@ -15,6 +15,7 @@ Optional variables:
     <%= render "sections/location", person: person %>
 
     <%= render "sections/suggestion", person: person %>
+    <%= render "sections/about", plan: person.response_plans.first, section_class: "printonly" %>
   </div>
 
   <div class="right-column">
@@ -47,6 +48,6 @@ Optional variables:
 
     <%= render "sections/background_info", plan: plan %>
     <%= render "sections/incidents", person: person %>
-    <%= render "sections/about", person: person %>
+    <%= render "sections/about", plan: person.response_plans.first, section_class: "noprint" %>
   <% end %>
 </div>

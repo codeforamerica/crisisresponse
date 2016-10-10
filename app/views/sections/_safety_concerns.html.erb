@@ -1,4 +1,11 @@
-<section class="profile-safety-concerns collapsed">
+<section class="
+         profile-safety-concerns
+         collapsed
+         <%= (
+         plan && plan.safety_concerns.any? ||
+         plan && plan.triggers.any?
+         ) ? "" : "section-empty" %>
+         ">
   <div class="section-header
     <%= plan && plan.safety_concerns.any? ? "section-header-yellow" : "section-header-grey"  %>
     ">
@@ -8,10 +15,8 @@
     </div>
   </div>
 
-  <div class="section-body safety-concern-history">
-    <h3>History</h3>
-
-    <% if plan && plan.safety_concerns.any? %>
+  <% if plan && plan.safety_concerns.any? %>
+    <div class="section-body safety-concern-history">
       <% plan.safety_concerns_by_category.each do |category, concerns| %>
         <div class="concern-category">
           <span class="concern-category-header">
@@ -21,40 +26,44 @@
           <%= render concerns %>
         </div>
       <% end %>
-    <% else %>
-      <div class="section-body-empty">
-        <span><%= t("safety_concerns.none") %></span>
-      </div>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <div class="section-body safety-concern-history section-body-empty">
+      <h3>History</h3>
 
-  <div class="section-body triggers">
-    <h3>Triggers</h3>
+      <span><%= t("safety_concerns.none") %></span>
+    </div>
+  <% end %>
 
-    <% if plan && plan.triggers.any? %>
+  <% if plan && plan.triggers.any? %>
+    <div class="section-body triggers">
+      <h3>Triggers</h3>
+
       <% plan.triggers.each do |trigger| %>
         <%= render trigger %>
       <% end %>
-    <% else %>
-      <div class="section-body-empty">
-        <span><%= t("profile.triggers.none") %></span>
-
-        <%= link_to new_suggestion_path(person_id: person.id) do %>
-          <%= inline_svg "edit.svg" %>
-          <%= t("profile.triggers.new") %>
-        <% end %>
-      </div>
-    <% end %>
-
-    <div class="safety-concerns-expand">
-      <a
-         href=""
-         class="toggle button"
-         data-toggle-target=".profile-safety-concerns"
-         data-toggle-text="Hide Details"
-         >
-         See Details
-      </a>
     </div>
+  <% else %>
+    <div class="section-body triggers section-body-empty">
+      <h3>Triggers</h3>
+
+      <span><%= t("profile.triggers.none") %></span>
+
+      <%= link_to new_suggestion_path(person_id: person.id) do %>
+        <%= inline_svg "edit.svg" %>
+        <%= t("profile.triggers.new") %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="safety-concerns-expand">
+    <a
+       href=""
+       class="toggle button"
+       data-toggle-target=".profile-safety-concerns"
+       data-toggle-text="Hide Details"
+       >
+       See Details
+    </a>
   </div>
 </section>

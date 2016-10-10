@@ -1,11 +1,3 @@
-.profile-behaviors {
-  @include span-columns(4 of 4);
-
-  @include media($medium-screen-up) {
-    @include span-columns(4 of 8);
-  }
-}
-
 .behavior {
   border-bottom: $dashed-border;
   margin-bottom: $tiny-spacing;
@@ -49,5 +41,11 @@
 
   &-description {
     @include light-font;
+  }
+}
+
+@include media($medium-screen-up) {
+  .profile-behaviors {
+    @include span-columns(4 of 8);
   }
 }

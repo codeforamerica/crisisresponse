@@ -1,28 +1,30 @@
-<section class="profile-about">
-  <div class="section-header section-header-muted">
-    <div class="section-header-text">
-      <span class="section-title">About the Plan</span>
-    </div>
-  </div>
-
-  <div class="section-body">
-    <div class="about-label author-label">Prepared by</div>
-    <div class="author-name"><%= person.response_plans.first.author.name %></div>
-    <div class="author-unit">Crisis Response Unit</div>
-
-    <div class="about-label date-label">Prepared on</div>
-    <div class="created-date"><%= l person.response_plans.first.updated_at.to_date %></div>
-
-    <% if person.response_plans.first.approver.present? %>
-      <div class="about-label approver-label">Approved by</div>
-      <div class="approver-name">
-        <div><%= person.response_plans.first.approver.name %></div>
+<% if plan %>
+  <section class="profile-about <%= section_class %>">
+    <div class="section-header section-header-muted">
+      <div class="section-header-text">
+        <span class="section-title">About the Plan</span>
       </div>
-    <% end %>
-  </div>
+    </div>
 
-  <%= render(
-    "section_dialer",
-    phone: ENV.fetch("ADMINISTRATOR_CONTACT_PHONE"),
-  ) %>
+    <div class="section-body">
+      <div class="about-label author-label">Prepared by</div>
+      <div class="author-name"><%= plan.author.name %></div>
+      <div class="author-unit">Crisis Response Unit</div>
+
+      <div class="about-label date-label">Prepared on</div>
+      <div class="created-date"><%= l plan.updated_at.to_date %></div>
+
+      <% if plan.approver.present? %>
+        <div class="about-label approver-label">Approved by</div>
+        <div class="approver-name">
+          <div><%= plan.approver.name %></div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= render(
+      "section_dialer",
+      phone: ENV.fetch("ADMINISTRATOR_CONTACT_PHONE"),
+    ) %>
 </section>
+<% end %>
