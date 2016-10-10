@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   position: relative;
+  font-size: 22px;
 }
 
 html {
@@ -10,7 +11,6 @@ html {
 
 body {
   font-family: $base-font-family;
-  font-size: 22px;
   min-height: 100%;
   width: 100%;
   background-color: $body-background-color;
@@ -61,4 +61,8 @@ h1, h2, h3, h4, h5, h6 {
 .full-column {
   @include fill-parent;
   overflow: hidden;
+}
+
+.printonly {
+  display: none !important;
 }

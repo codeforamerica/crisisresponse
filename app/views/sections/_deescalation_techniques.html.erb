@@ -1,4 +1,11 @@
-<section class="profile-deescalation">
+<section class="
+         profile-deescalation
+         <%= (
+           person.veteran? ||
+           plan && plan.deescalation_techniques.any? ||
+           general_techniques_for(person).any?
+         ) ? "" : "section-empty" %>
+         ">
   <div class="section-header">
     <%= inline_svg "section-icons/deescalation_techniques.svg", class: "section-icon" %>
     <div class="section-header-text">

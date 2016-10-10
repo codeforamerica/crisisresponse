@@ -1,12 +1,101 @@
 @charset "utf-8";
 
+@import "themes/day";
+
 @import "normalize-rails";
 @import "bourbon";
 @import "base/grid-settings";
 @import "neat";
-@import "base/base";
-@import "refills/flashes";
 
+html,
 body {
-  font-size: 8px;
+  font-size: 10px;
+}
+
+.content {
+  padding-top: 0;
+}
+
+* {
+  background: none !important;
+}
+
+.mobile-collapsed {
+  .expand {
+    display: none;
+  }
+
+  .response-strategy-description {
+    max-height: none;
+    page-break-inside : auto;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.response-strategy,
+p {
+  page-break-inside : auto;
+}
+
+.left-column {
+  @include span-columns(4 of 12);
+}
+
+.right-column {
+  @include span-columns(8 of 12);
+  @include omega;
+}
+
+section {
+  border: $base-border;
+  box-shadow: none;
+}
+
+.section {
+  &-empty,
+  &-body-empty {
+    display: none !important;
+  }
+
+  &-icon {
+    display: none;
+  }
+}
+
+section .section-header {
+  color: $medium-gray;
+}
+
+.profile-contact {
+  @include span-columns(4 of 12);
+}
+
+.flashes,
+.footer,
+.header,
+.main-content::before,
+.menu,
+.page-title,
+.safety-concerns-expand {
+  display: none;
+}
+
+.noprint {
+  display: none !important;
+}
+
+.printonly {
+  display: block !important;
+}
+
+.profile-behaviors,
+.profile-safety-concerns {
+  @include span-columns(4 of 8);
+}
+
+.profile-safety-concerns {
+  @include omega;
 }
