@@ -1,0 +1,14 @@
+<section class="profile-print-about printonly">
+  <div class="section-body">
+    <p>
+    For more information,
+    visit <%= link_to request.original_url %>
+    on the SPD network.
+    </p>
+
+    <p>
+    If you have any suggestions for how to improve this plan,
+    please contact <%= mail_to ENV.fetch("CONTENT_SUGGESTION_EMAIL") %>.
+    </p>
+  </div>
+</section>
