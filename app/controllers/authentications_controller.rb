@@ -1,6 +1,10 @@
 class AuthenticationsController < ApplicationController
   def new
-    render locals: { sign_in: Authentication.new }
+    if current_officer
+      redirect_to root_path
+    else
+      render locals: { sign_in: Authentication.new }
+    end
   end
 
   def create
