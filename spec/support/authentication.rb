@@ -9,31 +9,36 @@ class FakeAuthentication
   attr_reader :name, :username
 
   def stub_failure
-    allow(Net::LDAP).to receive(:new).and_return(failed_authentication_result)
+    allow(Authentication).to receive(:new).and_return(failed_authentication)
   end
 
   def stub_success
-    allow(Net::LDAP).
-      to receive(:new).and_return(successful_authentication_result)
+    allow(Authentication).to receive(:new).and_return(successful_authentication)
   end
 
   private
 
-  def successful_authentication_result
-    ldap_identity_information = {
-      givenname: [name.split(" ").first],
-      sn: [name.split(" ").last],
-      mail: ["foo@seattle.gov"],
-      cn: [username],
-      memberof: [
-        "CN=ValidSubgroup,#{ENV.fetch('LDAP_WHITELIST_GROUP')}",
-      ],
-    }
-
-    double(bind: true, search: [ldap_identity_information])
+  def successful_authentication
+    Authentication.new.tap do |auth|
+      allow(auth).to receive(:attempt_sign_on).and_return(true)
+      allow(auth).to receive(:officer_information).and_return(
+        username: username,
+        name: name,
+      )
+    end
   end
 
-  def failed_authentication_result
-    double(bind: false)
+  def failed_authentication
+    Authentication.new.tap do |auth|
+      allow(auth).to receive(:attempt_sign_on).and_return(false)
+      allow(auth).to receive(:officer_information).and_return({})
+    end
+  end
+
+  def default_stubbed_methods
+    {
+      model_name: Authentication.new.model_name,
+      to_key: Authentication.new.to_key,
+    }
   end
 end
