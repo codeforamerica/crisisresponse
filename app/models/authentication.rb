@@ -10,7 +10,7 @@ class Authentication
 
   def attempt_sign_on
     ldap_object.bind &&
-      belongs_to_valid_whitelist_group
+      (overriden_permitted?(username) || white_list.include?(username))
   end
 
   def officer_information
@@ -39,22 +39,42 @@ class Authentication
   end
 
   def ldap_user_path
-    namespace = ENV.fetch('LDAP_NAMESPACE')
-    "cn=#{username},#{namespace}"
+    "CN=#{username},#{namespace}"
   end
 
-  def belongs_to_valid_whitelist_group
-    Array(ldap_result[:memberof]).
-      select { |group| group.ends_with?(white_list) }.
-      without(black_list).
-      any?
+  def overriden_permitted?(username)
+    ENV.fetch("PERMITTED_USERNAME_OVERRIDES", "").split(",").include?(username)
   end
 
+  # Traverses the ActiveDirectory `LDAP_WHITELIST_GROUP`
+  # and any of its subtrees
+  # to find users.
+  #
+  # When we search for an LDAP group,
+  # the result is in the form:
+  # [
+  #   {
+  #     member: ["list", "of, "users", "or", "subgroups"]
+  #     ...other fields
+  #   }
+  #   ...other search results
+  # ]
+  #
+  # A limitation of this method is that it requires the group tree
+  # to have a depth of 2 at every leaf.
+  # If that is not the case, the function is likely to fail with an error.
   def white_list
-    ENV.fetch("LDAP_WHITELIST_GROUP")
+    supergroup = ldap_object.search(base: ENV.fetch("LDAP_WHITELIST_GROUP"))
+    subgroups = supergroup.first[:member]
+
+    @white_list ||= subgroups.map do |subgroup|
+      ldap_object.search(base: subgroup).first[:member]
+    end.flatten.map do |full_name|
+      full_name.split(",").first.split("=").last
+    end
   end
 
-  def black_list
-    ENV.fetch("LDAP_BLACKLIST_GROUP")
+  def namespace
+    ENV.fetch('LDAP_NAMESPACE')
   end
 end
