@@ -6,7 +6,9 @@ feature "Night mode" do
 
     header_color = get_header_background_color
 
+    day_toggle = find(".change-theme-toggle .day-theme")
     expect(header_color).to eq("rgb(74, 74, 74)")
+    expect(day_toggle).to match_selector(".selected")
   end
 
   scenario "Officer switches to night mode", :js do
@@ -16,7 +18,9 @@ feature "Night mode" do
     find(".change-theme").click
 
     header_color = get_header_background_color
+    night_toggle = find(".change-theme-toggle .night-theme")
     expect(header_color).to eq("rgb(33, 33, 33)")
+    expect(night_toggle).to match_selector(".selected")
   end
 
   scenario "Officer stays on the page they were viewing" do
