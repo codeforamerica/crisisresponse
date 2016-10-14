@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def theme
-    session[:theme] || :day
+    session[:theme] || "day"
   end
 
   def demo_mode?

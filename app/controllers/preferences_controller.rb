@@ -7,7 +7,7 @@ class PreferencesController < ApplicationController
   private
 
   def inactive_theme
-    toggle(:day, :night, theme)
+    toggle("day", "night", theme)
   end
 
   def toggle(first, second, current)
