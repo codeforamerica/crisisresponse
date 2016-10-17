@@ -137,8 +137,7 @@ class Person < ApplicationRecord
   end
 
   def height_feet=(value)
-    inches = height_inches
-    height = value.to_i * 12 + inches
+    height = value.to_i * 12 + height_inches
 
     self.height_in_inches = height.zero? ? nil : height
   end
@@ -148,7 +147,6 @@ class Person < ApplicationRecord
   end
 
   def height_inches=(value)
-    feet = height_feet
     height = height_feet * 12 + value.to_i
 
     self.height_in_inches = height.zero? ? nil : height
@@ -204,7 +202,7 @@ class Person < ApplicationRecord
   end
 
   def cache_if_record_is_persisted(cache_label)
-    if persisted?
+    if persisted? && !changed?
       Rails.cache.fetch([self, cache_label]) { yield }
     else
       yield
