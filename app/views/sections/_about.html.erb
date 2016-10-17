@@ -7,24 +7,24 @@
     </div>
 
     <div class="section-body">
-      <div class="about-label author-label">Prepared by</div>
-      <div class="author-name"><%= plan.author.name %></div>
-      <div class="author-unit">Crisis Response Unit</div>
-
-      <div class="about-label date-label">Prepared on</div>
-      <div class="created-date"><%= l plan.updated_at.to_date %></div>
-
       <% if plan.approver.present? %>
         <div class="about-label approver-label">Approved by</div>
         <div class="approver-name">
           <div><%= plan.approver.name %></div>
         </div>
       <% end %>
+
+      <div class="about-label date-label">Created on</div>
+      <div class="created-date"><%= l plan.updated_at.to_date %></div>
+
+      <div class="about-label author-label">CRT Contact</div>
+      <div class="author-name"><%= plan.author.name %></div>
+      <div class="author-unit">Crisis Response Unit</div>
     </div>
 
     <%= render(
       "section_dialer",
       phone: ENV.fetch("ADMINISTRATOR_CONTACT_PHONE"),
     ) %>
-</section>
+  </section>
 <% end %>
