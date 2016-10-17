@@ -26,7 +26,7 @@ feature "Response Plan Form" do
     scenario "Officer fills in all information" do
       admin_officer = create(:officer, :admin)
       sign_in_officer(admin_officer)
-      person = create(:person)
+      person = create(:person, height_in_inches: 3)
 
       visit person_path(person)
       click_on t("people.show.new_plan")
