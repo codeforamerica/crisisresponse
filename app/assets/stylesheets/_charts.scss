@@ -2,6 +2,12 @@
   margin-bottom: $base-spacing;
 }
 
+.chart.collapsed {
+  .chart-field:nth-child(n + 5) {
+    display: none;
+  }
+}
+
 .chart-field {
   @include fill-parent;
   margin-bottom: $small-spacing;
@@ -32,5 +38,11 @@
 .chart-field-frequency {
   @include light-font;
   color: $secondary-text-color;
+  font-size: 0.8em;
+}
+
+.additional-bars-toggle {
+  @include light-font;
+  @include shift(4);
   font-size: 0.8em;
 }

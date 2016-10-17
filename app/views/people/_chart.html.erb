@@ -1,25 +1,22 @@
-<div class="chart <%= category %>">
-  <% incidents.by_frequency(category).each do |field, frequency| %>
-    <div class="chart-field">
-      <span class="chart-label">
-        <%= t("incidents.#{category}.#{field}") %>
-      </span>
+<div class="chart <%= category %> collapsed">
+  <% incidents.by_frequency(category).each do |field, occurrences| %>
+    <%= render(
+      "application/chart_bar",
+      category: category,
+      field: field,
+      occurrences: occurrences,
+      incident_count: incidents.count,
+    ) %>
+  <% end %>
 
-      <div class="chart-bar-background">
-        <div
-           class="chart-bar"
-           style="width: <%= frequency / incidents.count.to_f * 100 %>%">
-           &nbsp;
-        </div>
-      </div>
-
-      <div class="chart-field-count">
-        <%= frequency %>
-
-        <span class="chart-field-frequency">
-          (<%= 100 * frequency / incidents.count %>%)
-        </span>
-      </div>
-    </div>
+  <% if incidents.by_frequency(category).count > 4 %>
+    <a
+       href="#"
+       class="toggle additional-bars-toggle"
+       data-toggle-target=".chart.<%=category%>"
+       data-toggle-text="Hide less frequent"
+       >
+       Show less frequent
+    </a>
   <% end %>
 </div>

@@ -1,0 +1,21 @@
+<div class="chart-field">
+  <span class="chart-label">
+    <%= t("incidents.#{category}.#{field}") %>
+  </span>
+
+  <div class="chart-bar-background">
+    <div
+       class="chart-bar"
+       style="width: <%= occurrences / incident_count.to_f * 100 %>%">
+       &nbsp;
+    </div>
+  </div>
+
+  <div class="chart-field-count">
+    <%= occurrences %>
+
+    <span class="chart-field-frequency">
+      (<%= 100 * occurrences / incident_count %>%)
+    </span>
+  </div>
+</div>
