@@ -27,21 +27,7 @@
       <% end %>
     </div>
 
-    <div class="section-body">
-      <h3>Behaviors</h3>
-      <%= render "chart",
-        incidents: person.recent_incidents,
-        category: :behaviors %>
-
-      <h3>Nature of Crisis</h3>
-      <%= render "chart",
-        incidents: person.recent_incidents,
-        category: :nature_of_crisis %>
-
-      <h3>Disposition</h3>
-      <%= render "chart",
-        incidents: person.recent_incidents,
-        category: :dispositions %>
-    </div>
+    <%= render "sections/charts_for_timeframe", person: person, timeframe: 2.years, html_class: nil %>
+    <%= render "sections/charts_for_timeframe", person: person, timeframe: 3.months, html_class: "collapsed" %>
   </section>
 <% end %>

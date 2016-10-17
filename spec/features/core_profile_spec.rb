@@ -50,6 +50,19 @@ feature "Core Profile" do
     expect(current_path).to eq(incident_path(incident))
   end
 
+  it "shows 3-month and 2-year graphs", :js do
+    sign_in_officer
+    rms_person = create(:rms_person)
+    create(:incident, reported_at: 2.months.ago, rms_person: rms_person)
+    create(:incident, reported_at: 18.months.ago, rms_person: rms_person)
+
+    visit person_path(rms_person.person)
+    within(".profile-incidents") { expect(page).to have_content("2 CRISIS calls") }
+
+    find(".incident-charts-toggle").trigger(:click)
+    within(".profile-incidents") { expect(page).to have_content("1 CRISIS calls") }
+  end
+
   scenario "admins can view non-visible profiles" do
     admin = create(:officer, :admin)
     sign_in_officer(admin)

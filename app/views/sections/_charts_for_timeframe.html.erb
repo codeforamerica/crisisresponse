@@ -1,0 +1,30 @@
+<div class="section-body incident-charts <%= html_class %>">
+  <div class="incident-charts-header">
+    <a
+      class="toggle incident-charts-toggle"
+      data-toggle-target=".incident-charts"
+      >
+      <span class="incident-charts-toggle-option <%= "active" if timeframe == 2.years %>">2 years</span>
+      <span class="incident-charts-toggle-option <%= "active" if timeframe == 3.months %>">3 months</span>
+    </a>
+
+    <span class="incident-charts-incident-count">
+      <%= person.incidents_since(timeframe.ago).count %> CRISIS calls
+    </span>
+  </div>
+
+  <h3>Behaviors</h3>
+  <%= render "chart",
+    incidents: person.incidents_since(timeframe.ago),
+    category: :behaviors %>
+
+  <h3>Nature of Crisis</h3>
+  <%= render "chart",
+    incidents: person.incidents_since(timeframe.ago),
+    category: :nature_of_crisis %>
+
+  <h3>Disposition</h3>
+  <%= render "chart",
+    incidents: person.incidents_since(timeframe.ago),
+    category: :dispositions %>
+</div>

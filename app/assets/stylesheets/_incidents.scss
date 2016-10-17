@@ -124,3 +124,38 @@
     }
   }
 }
+
+.incident-charts.collapsed {
+  display: none;
+}
+
+.incident-charts-header {
+  display: block;
+  margin-bottom: $base-spacing;
+  overflow: hidden;
+}
+
+.incident-charts-toggle {
+  @include span-columns(4 of 12);
+  border-radius: 4px;
+  border: 1px solid $action-color;
+  display: inline-block;
+
+  &-option {
+    display: inline-block;
+    float: left;
+    padding: 0.325rem;
+    text-align: center;
+    width: 50%;
+  }
+
+  .active {
+    background-color: $action-color;
+    color: $card-background;
+  }
+}
+
+.incident-charts-incident-count {
+  @include heavy-font;
+  font-size: 1.2em;
+}
