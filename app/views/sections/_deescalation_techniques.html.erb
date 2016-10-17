@@ -36,7 +36,7 @@
     <% end %>
 
     <div class="section-body-empty">
-      <%= link_to new_suggestion_path(person_id: person.id) do %>
+      <%= link_to new_suggestion_path(person_id: person.id), target: "blank" do %>
         <%= inline_svg "edit.svg" %>
         <%= t("profile.deescalation_techniques.new") %>
       <% end %>

@@ -49,7 +49,7 @@
 
       <span><%= t("profile.triggers.none") %></span>
 
-      <%= link_to new_suggestion_path(person_id: person.id) do %>
+      <%= link_to new_suggestion_path(person_id: person.id), target: "blank" do %>
         <%= inline_svg "edit.svg" %>
         <%= t("profile.triggers.new") %>
       <% end %>
