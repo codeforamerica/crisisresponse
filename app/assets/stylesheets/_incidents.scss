@@ -103,6 +103,12 @@
     position: relative;
   }
 
+  .incidents-container.collapsed {
+    .incident:nth-child(n+4) {
+      display: none;
+    }
+  }
+
   .incidents-container {
     padding-bottom: $tiny-spacing;
 
