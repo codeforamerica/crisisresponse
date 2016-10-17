@@ -10,7 +10,7 @@ RSpec.describe "Navigation" do
     scenario "officers can access drafts from home page", :js do
       visit root_path
       open_menu
-      click_on t("drafts.index.link") # "Your Drafts"
+      click_on t("drafts.index.link") # "Drafts"
 
       expect(page).to have_header t("drafts.index.title")
     end

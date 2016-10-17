@@ -30,8 +30,8 @@ en:
     destroy:
       success: Deleted the draft
     index:
-      link: Your Drafts
-      title: Your Drafts
+      link: Drafts
+      title: Drafts
     show:
       description: This plan will not be visible to patrol officers until it is approved.
       edit: Continue editing your response plan

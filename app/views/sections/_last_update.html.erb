@@ -1,0 +1,17 @@
+<% if plan %>
+  <section class="profile-last-updated">
+    <div class="section-header section-header-muted">
+      <div class="section-header-text">
+        <span class="section-title">
+          Last Manual CRT Update
+        </span>
+      </div>
+    </div>
+
+    <div class="section-body">
+      <span class="last-updated-at">
+        <%= l(plan.updated_at.to_date) %>
+      </span>
+    </div>
+  </section>
+<% end %>

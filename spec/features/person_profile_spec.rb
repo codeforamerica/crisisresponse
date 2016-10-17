@@ -181,15 +181,38 @@ feature "Officer views a response plan" do
   end
 
   scenario "They see the author and approver" do
-    sign_in_officer
     author = create(:officer, name: "Jacques Clouseau")
     approver = create(:officer, name: "Sherlock Holmes")
     response_plan = create(:response_plan, author: author, approver: approver)
 
+    sign_in_officer
     visit person_path(response_plan.person)
 
-    expect(page).to have_content("Prepared by Jacques Clouseau")
+    expect(page).to have_content("CRT Contact Jacques Clouseau")
     expect(page).to have_content("Approved by Sherlock Holmes")
+  end
+
+  scenario "last updated date is based on most recent approved data" do
+    plan = create(:response_plan, created_at: 3.weeks.ago)
+    time = Time.current
+    create(:safety_concern, response_plan: plan, created_at: time)
+
+    sign_in_officer
+    visit person_path(plan.person)
+
+    expect(page).to have_content("Last Manual CRT Update #{l(time.to_date)}")
+  end
+
+  scenario "created at date is based on first response plan" do
+    time = 3.weeks.ago
+    first_plan = create(:response_plan, created_at: time)
+    new_plan = create(:response_plan, created_at: 3.minutes.ago)
+
+    sign_in_officer
+    visit person_path(new_plan.person)
+
+    expect(page).
+      to have_content("Created on #{l(first_plan.updated_at.to_date)}")
   end
 
   context "when there are no safety concerns" do
