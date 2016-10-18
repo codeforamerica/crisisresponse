@@ -92,23 +92,30 @@ feature "Response Plan Form" do
   end
 
   feature "nested forms", :js do
-    scenario "adding a nested response strategy" do
+    scenario "adding a nested safety concern" do
       officer = create(:officer, :admin)
       sign_in_officer(officer)
       plan = create(:response_plan)
       person = plan.person
 
       visit edit_draft_path(plan)
-      click_on "+ Add response strategy"
-      first("input[name*='[title]']").set("Response strategy 1")
-      first("textarea[name*='[description]']").set("Response strategy description 1")
+      click_on "+ Add safety concern"
+      within(".safety_concern-fields") do
+        select("Aslt. to Law Enforcement", from: "Category")
+        fill_in("Title", with: "Spit at an officer")
+        fill_in("Occurred on", with: "01-02-2016")
+        fill_in("Description", with: "Spit at an officer")
+        fill_in("Go number", with: "2016010101")
+      end
       click_on "Update Response plan"
 
       person.reload
       new_plan = person.response_plans.last
-      expect(page).to have_content("Response strategy 1")
-      expect(new_plan.response_strategies.first.description).
-        to eq("Response strategy description 1")
+      expect(page).to have_content("Aslt. to Law Enforcement".upcase)
+      find(".profile-safety-concerns .toggle").trigger(:click)
+      expect(page).to have_content("01-02-2016")
+      expect(new_plan.safety_concerns.first.description).
+        to eq("Spit at an officer")
     end
 
     scenario "removing a nested alias" do
