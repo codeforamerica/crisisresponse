@@ -169,6 +169,17 @@ feature "Search" do
       end
     end
 
+    scenario "person without response strategies is labeled as having a 'profile'" do
+      plan = create(:safety_concern).response_plan
+
+      sign_in_officer
+      visit people_path
+
+      within(".person") do
+        expect(page).to have_content("PROFILE")
+      end
+    end
+
     scenario "admins can see non-visible profiles" do
       admin = create(:officer, :admin)
       sign_in_officer(admin)
