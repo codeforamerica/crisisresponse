@@ -14,4 +14,8 @@ class SafetyConcern < ActiveRecord::Base
   def occurred_on=(value)
     super(Date.strptime(value, "%m-%d-%Y"))
   end
+
+  def go_number=(value)
+    super(value.scan(/\d/).join)
+  end
 end
