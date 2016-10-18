@@ -10,4 +10,8 @@ class SafetyConcern < ActiveRecord::Base
 
   validates :category, presence: true, inclusion: { in: CATEGORIES }
   validates :title, presence: true
+
+  def occurred_on=(value)
+    super(Date.strptime(value, "%m-%d-%Y"))
+  end
 end

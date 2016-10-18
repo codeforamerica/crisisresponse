@@ -18,5 +18,5 @@
 
   <%= link_to_remove_association "Remove safety concern", f %>
 
-  <script>mask_date_fields();</script>
+  <script>if (window.mask_date_fields) { window.mask_date_fields(); }</script>
 </div>
