@@ -15,11 +15,13 @@
       <% end %>
 
       <div class="about-label date-label">Created on</div>
-      <div class="created-date"><%= l plan.updated_at.to_date %></div>
+      <div class="created-date">
+        <%= l person.response_plans.first.updated_at.to_date %>
+      </div>
 
-      <div class="about-label author-label">CRT Contact</div>
-      <div class="author-name"><%= plan.author.name %></div>
-      <div class="author-unit">Crisis Response Unit</div>
+      <div class="about-label assignee-label">CRT Contact</div>
+      <div class="assignee-name"><%= plan.assignee.try(:name) %></div>
+      <div class="assignee-unit">Crisis Response Unit</div>
     </div>
 
     <%= render(

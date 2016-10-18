@@ -180,16 +180,31 @@ feature "Officer views a response plan" do
     expect(page).to have_content(contact.notes)
   end
 
-  scenario "They see the author and approver" do
-    author = create(:officer, name: "Jacques Clouseau")
-    approver = create(:officer, name: "Sherlock Holmes")
-    response_plan = create(:response_plan, author: author, approver: approver)
+  scenario "They see the most recent assignee and approver" do
+    original_assignee = create(:officer, name: "Jacques Clouseau")
+    new_assignee = create(:officer, name: "Bruce Wayne")
+    original_approver = create(:officer, name: "Sherlock Holmes")
+    new_approver = create(:officer, name: "Nancy Drew")
+
+    original_plan = create(
+      :plan,
+      approver: original_approver,
+      assignee: original_assignee,
+      approved_at: 2.weeks.ago,
+    )
+    new_plan = create(
+      :plan,
+      approver: new_approver,
+      assignee: new_assignee,
+      approved_at: 2.days.ago,
+      person: original_plan.person,
+    )
 
     sign_in_officer
-    visit person_path(response_plan.person)
+    visit person_path(original_plan.person)
 
-    expect(page).to have_content("CRT Contact Jacques Clouseau")
-    expect(page).to have_content("Approved by Sherlock Holmes")
+    expect(page).to have_content("CRT Contact #{new_assignee.name}")
+    expect(page).to have_content("Approved by #{new_approver.name}")
   end
 
   scenario "last updated date is based on most recent approved data" do
@@ -205,14 +220,19 @@ feature "Officer views a response plan" do
 
   scenario "created at date is based on first response plan" do
     time = 3.weeks.ago
-    first_plan = create(:response_plan, created_at: time)
-    new_plan = create(:response_plan, created_at: 3.minutes.ago)
+    original_plan = create(:response_plan, created_at: time, updated_at: time)
+    new_plan = create(
+      :response_plan,
+      created_at: 3.minutes.ago,
+      updated_at: 3.minutes.ago,
+      person: original_plan.person,
+    )
 
     sign_in_officer
     visit person_path(new_plan.person)
 
     expect(page).
-      to have_content("Created on #{l(first_plan.updated_at.to_date)}")
+      to have_content("Created on #{l(time.to_date)}")
   end
 
   context "when there are no safety concerns" do

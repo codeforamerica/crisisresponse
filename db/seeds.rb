@@ -68,6 +68,7 @@ RMS::Person.create!(
 ResponsePlan.create!(
   person: biff,
   author: officer,
+  assignee: officer,
   background_info: "TANNEN, Biff (aka B-Tan) has a history of mental health issues and drug dependency. TANNEN has been diagnosed with Bi-Polar disorder and Poly-Substance abuse. He was last enrolled with DESC through the criminal justice liaison program back in 2010.  TANNEN is currently enrolled with DESC as terms of his probation. TANNEN has been using the cell phone number, 206.123.4556.  ",
   baseline: "Easily distracted, avoids eye contact",
   elevated: "Erratic movements, shouts threats",
@@ -117,6 +118,7 @@ martha = Person.create!(
 ResponsePlan.create!(
   person: martha,
   author: officer,
+  assignee: sergeant,
   background_info: "Ms. TANNEN is a 60 y/o female who frequently calls 911 and has frequent contacts with law-enforcement to report several conspiracies in which she is the central figure and target, such as people referring to her as a _stripper cop_, working undercover, KC Sheriff_s, and people trying to steal the rights music she has written.  On occasion, she has also made calls regarding higher priority incidents to include someone pulling a gun on her in public.  ",
   private_notes: nil,
 )

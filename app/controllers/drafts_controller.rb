@@ -2,6 +2,7 @@
 
 class DraftsController < ApplicationController
   PERMITTED_PARAMS = [
+    :assignee_id,
     :background_info,
     :baseline,
     :elevated,

@@ -3,6 +3,18 @@
 <% end %>
 
 <%= simple_form_for(@response_plan, url: draft_path(@response_plan)) do |f| %>
+  <section class="form">
+    <div class="section-header">Assignee</div>
+    <div class="section-body">
+      <%= f.input(
+        :assignee_id,
+        collection: Officer.where(role: Officer::ADMIN),
+        value_method: :id,
+        selected: f.object.assignee_id || current_officer,
+      ) %>
+    </div>
+  </section>
+
   <%= f.fields_for :person do |person_form| %>
     <%= render "forms/person_fields", form: person_form %>
   <% end %>
@@ -32,9 +44,7 @@
   ) %>
 
   <section class="form">
-    <div class="section-header">
-      Save
-    </div>
+    <div class="section-header">Save</div>
 
     <div class="section-body">
       <%= f.input :private_notes %>
