@@ -15,10 +15,10 @@ $black: #000000;
 $base-background-color: $white;
 $body-background-color: $dark-gray;
 
-// Header & Footer
+// Header
 $header-font-color: $white;
 $header-background-color: $off-black;
-$menu-background-color: $header-background-color;
+$menu-background-color: lighten($header-background-color, 10%);
 $change-theme-button-background-color: $header-font-color;
 $change-theme-button-color: $header-background-color;
 
