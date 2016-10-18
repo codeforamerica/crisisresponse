@@ -132,6 +132,10 @@ class Person < ApplicationRecord
     end
   end
 
+  def has_nominal_response_plan?
+    active_plan.try(:response_strategies).try(:any?)
+  end
+
   def height_feet
     height_in_inches.to_i / 12
   end
