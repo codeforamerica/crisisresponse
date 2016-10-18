@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929000327) do
+ActiveRecord::Schema.define(version: 20161017233739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20160929000327) do
     t.datetime "submitted_for_approval_at"
     t.string   "baseline"
     t.string   "elevated"
+    t.integer  "assignee_id"
     t.index ["approver_id"], name: "index_response_plans_on_approver_id", using: :btree
     t.index ["author_id"], name: "index_response_plans_on_author_id", using: :btree
     t.index ["person_id"], name: "index_response_plans_on_person_id", using: :btree
@@ -250,6 +251,7 @@ ActiveRecord::Schema.define(version: 20160929000327) do
   add_foreign_key "images", "people"
   add_foreign_key "page_views", "officers"
   add_foreign_key "page_views", "people"
+  add_foreign_key "response_plans", "officers", column: "assignee_id"
   add_foreign_key "response_plans", "people"
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "rms_crisis_incidents", "rms_people"

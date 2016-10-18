@@ -58,7 +58,7 @@ FactoryGirl.define do
     visible true
   end
 
-  factory :response_plan do
+  factory :response_plan, aliases: [:plan] do
     person
     author
     approver

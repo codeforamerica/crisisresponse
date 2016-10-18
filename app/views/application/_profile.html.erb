@@ -16,7 +16,7 @@ Optional variables:
     <%= render "sections/last_update", plan: plan %>
 
     <%= render "sections/suggestion", person: person %>
-    <%= render "sections/about", plan: person.response_plans.first, section_class: "printonly" %>
+    <%= render "sections/about", plan: plan, person: person, section_class: "printonly" %>
     <%= render "sections/print_about", person: person %>
   </div>
 
@@ -50,6 +50,6 @@ Optional variables:
 
     <%= render "sections/background_info", plan: plan %>
     <%= render "sections/incidents", person: person %>
-    <%= render "sections/about", plan: person.response_plans.first, section_class: "noprint" %>
+    <%= render "sections/about", plan: plan, person: person, section_class: "noprint" %>
   <% end %>
 </div>

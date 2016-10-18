@@ -37,8 +37,9 @@ class ResponsePlan < ApplicationRecord
     allow_destroy: true,
   )
 
-  belongs_to :author, class_name: "Officer"
   belongs_to :approver, class_name: "Officer"
+  belongs_to :assignee, class_name: "Officer"
+  belongs_to :author, class_name: "Officer"
 
   validate :approved_at_is_present_if_approver_exists
   validate :approver_is_present_if_approved_at_exists
