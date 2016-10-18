@@ -37,6 +37,8 @@ class Search
   HEIGHT_RANGE_IN_INCHES = 2
   WEIGHT_RANGE_IN_POUNDS = 10
 
+  IGNORED_CHARACTERS = ","
+
   attr_accessor(*SEARCHABLE_ATTRS)
 
   def initialize(attributes = {}, candidates = Person.all)
@@ -68,7 +70,7 @@ class Search
       joins("LEFT OUTER JOIN rms_people ON rms_people.person_id = people.id")
 
     if name.present?
-      people = people.search(name)
+      people = people.search(name.tr(IGNORED_CHARACTERS, ""))
     end
 
     if date_of_birth.present?
