@@ -1,4 +1,4 @@
-$icon-size: 2.5rem;
+$icon-size: $large-spacing;
 
 section {
   @include fill-parent;
@@ -72,10 +72,13 @@ section {
   .section-body-empty {
     a,
     span {
-      @include light-font;
       display: block;
       margin-bottom: $tiny-spacing;
       text-align: center;
+    }
+
+    span {
+      @include light-font;
     }
 
     a {

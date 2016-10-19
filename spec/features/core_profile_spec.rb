@@ -57,10 +57,14 @@ feature "Core Profile" do
     create(:incident, reported_at: 18.months.ago, rms_person: rms_person)
 
     visit person_path(rms_person.person)
-    within(".profile-incidents") { expect(page).to have_content("2 CRISIS calls") }
+    within(".profile-incidents") do
+      expect(page).to have_content("1 CRISIS calls")
+    end
 
     find(".incident-charts-toggle").trigger(:click)
-    within(".profile-incidents") { expect(page).to have_content("1 CRISIS calls") }
+    within(".profile-incidents") do
+      expect(page).to have_content("2 CRISIS calls")
+    end
   end
 
   scenario "admins can view non-visible profiles" do

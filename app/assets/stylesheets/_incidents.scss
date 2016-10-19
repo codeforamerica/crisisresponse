@@ -129,6 +129,10 @@
   display: none;
 }
 
+.incident-charts h3 {
+  margin-bottom: $small-spacing;
+}
+
 .incident-charts-header {
   display: block;
   margin-bottom: $base-spacing;
@@ -136,10 +140,11 @@
 }
 
 .incident-charts-toggle {
-  @include span-columns(4 of 12);
-  border-radius: 4px;
-  border: 1px solid $action-color;
+  @include fill-parent;
+  border-radius: 10px;
+  border: 4px solid $action-color;
   display: inline-block;
+  margin-bottom: $small-spacing;
 
   &-option {
     display: inline-block;
@@ -156,6 +161,25 @@
 }
 
 .incident-charts-incident-count {
+  @include fill-parent;
+  text-align: center;
+}
+
+.incident-charts-incident-number {
+  line-height: 1;
+  vertical-align: middle;
   @include heavy-font;
-  font-size: 1.2em;
+  font-size: 2em;
+}
+
+.profile-incidents .section-body {
+  padding: $large-spacing $base-spacing;
+}
+
+@include media($medium-screen-up) {
+
+  .incident-charts-toggle,
+  .incident-charts-incident-count {
+    @include span-columns(4 of 12);
+  }
 }

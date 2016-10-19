@@ -1,5 +1,5 @@
 .profile-safety-concerns {
-  @include span-columns(4 of 8);
+  @include fill-parent;
   @include omega;
 }
 
@@ -82,7 +82,8 @@
 
 .safety-concerns-expand {
   text-align: center;
-  margin-top: $base-spacing;
+  margin-top: $small-spacing;
+  margin-bottom: $small-spacing;
 }
 
 .profile-safety-concerns.collapsed .concern-collapsable,
@@ -93,4 +94,10 @@
 .profile-safety-concerns.collapsed .concern-date {
   border-left: 0;
   padding: 0;
+}
+
+@include media($medium-screen-up) {
+  .profile-safety-concerns {
+    @include span-columns(4 of 8);
+  }
 }

@@ -1,5 +1,5 @@
 .chart {
-  margin-bottom: $base-spacing;
+  margin-bottom: $large-spacing;
 }
 
 .chart.collapsed {
@@ -15,19 +15,20 @@
 }
 
 .chart-label {
-  @include span-columns(4 of 12);
+  @include fill-parent;
+  display: block;
   font-size: 0.8em;
-  text-align: right;
 }
 
 .chart-bar-background {
-  @include span-columns(4 of 12);
+  @include span-columns(2.5 of 4);
   background-color: lighten($action-color, 40%);
 }
 
 .chart-bar {
   background-color: $action-color;
   padding-left: 1px;
+  height: 100%;
 }
 
 .chart-field-count {
@@ -45,4 +46,15 @@
   @include light-font;
   @include shift(4);
   font-size: 0.8em;
+}
+
+@include media($medium-screen-up) {
+  .chart-label {
+    @include span-columns(4 of 12);
+    text-align: right;
+  }
+
+  .chart-bar-background {
+    @include span-columns(4 of 12);
+  }
 }
