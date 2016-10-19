@@ -4,12 +4,15 @@
       class="toggle incident-charts-toggle"
       data-toggle-target=".incident-charts"
       >
-      <span class="incident-charts-toggle-option <%= "active" if timeframe == 2.years %>">2 years</span>
       <span class="incident-charts-toggle-option <%= "active" if timeframe == 3.months %>">3 months</span>
+      <span class="incident-charts-toggle-option <%= "active" if timeframe == 2.years %>">2 years</span>
     </a>
 
     <span class="incident-charts-incident-count">
-      <%= person.incidents_since(timeframe.ago).count %> CRISIS calls
+      <span class="incident-charts-incident-number">
+        <%= person.incidents_since(timeframe.ago).count %>
+      </span>
+        CRISIS calls
     </span>
   </div>
 

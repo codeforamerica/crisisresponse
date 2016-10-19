@@ -48,8 +48,8 @@
         ) %>
       <% end %>
 
-      <% if person.has_nominal_response_plan? %>
-        <%= link_to "Response Plan", link, class: "person-link-plan button" %>
+      <% if person.active_plan.try(:background_info).present? %>
+        <%= link_to t("people.person.response_plan"), link, class: "person-link-plan button" %>
       <% else %>
         <%= link_to "Profile", link, class: "person-link-profile button" %>
       <% end %>

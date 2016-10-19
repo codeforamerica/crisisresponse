@@ -105,6 +105,8 @@ en:
       submission:
         exists: A new response plan for %{name} is awaiting submission.
         show: View submitted plan
+    person:
+      response_plan: CRU Bulletin
 
   profile:
     actions:

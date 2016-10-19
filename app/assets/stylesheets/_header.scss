@@ -35,10 +35,10 @@
 
   .home-icon,
   .menu-icon {
-    height: $header-height / 2;
-    margin-left: $base-spacing;
-    margin-top: $header-height / 4;
-    width: $header-height / 2;
+    height: $base-spacing;
+    margin-left: $small-spacing;
+    vertical-align: sub;
+    width: $base-spacing;;
   }
 
   .identity-name,
@@ -56,6 +56,8 @@
   .header-title {
     display: inline-block;
     width: 60%;
+    overflow: visible;
+    white-space: nowrap;
   }
 
   .header-title,
@@ -69,5 +71,15 @@
     display: inline-block;
     float: right;
     width: 40%;
+  }
+}
+
+@include media($medium-screen-up) {
+  .home-icon,
+  .menu-icon {
+    height: $header-height / 2;
+    margin-left: $base-spacing;
+    margin-top: $header-height / 4;
+    width: $header-height / 2;
   }
 }

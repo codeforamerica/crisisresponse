@@ -29,7 +29,9 @@
           <li><%= technique.description %></li>
         <% end %>
       </ul>
-    <% else %>
+    <% end %>
+
+    <% unless person.veteran? || plan && plan.deescalation_techniques.any? %>
       <div class="section-body-empty">
         <span><%= t("profile.deescalation_techniques.none") %></span>
       </div>
