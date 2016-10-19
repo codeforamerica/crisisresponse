@@ -56,14 +56,16 @@
     </div>
   <% end %>
 
-  <div class="safety-concerns-expand">
-    <a
-       href=""
-       class="toggle button"
-       data-toggle-target=".profile-safety-concerns"
-       data-toggle-text="Hide Details"
-       >
-       See Details
-    </a>
-  </div>
+  <% if plan && (plan.triggers.any? || plan.safety_concerns.any?) %>
+    <div class="safety-concerns-expand">
+      <a
+         href=""
+         class="toggle button"
+         data-toggle-target=".profile-safety-concerns"
+         data-toggle-text="Hide Details"
+         >
+         See Details
+      </a>
+    </div>
+  <% end %>
 </section>

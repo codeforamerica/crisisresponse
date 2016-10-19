@@ -1,6 +1,5 @@
 .profile-safety-concerns {
   @include fill-parent;
-  @include omega;
 }
 
 .concern-category {
@@ -99,5 +98,6 @@
 @include media($medium-screen-up) {
   .profile-safety-concerns {
     @include span-columns(4 of 8);
+    @include omega;
   }
 }
