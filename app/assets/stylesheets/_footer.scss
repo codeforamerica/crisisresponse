@@ -1,57 +1,17 @@
-$fab-size: 2 * $base-spacing;
-
 .footer {
-  @include icon-color($fab-icon-color);
-  background-color: $fab-background-color;
-  border-radius: 50%;
+  background-color: $header-background-color;
   bottom: 0;
-  bottom: $base-spacing;
   box-shadow: $shadow-level-4;
-  display: block;
+  color: $header-font-color;
   font-size: 1rem;
-  height: $fab-size;
   padding: $small-spacing;
   position: fixed;
-  right: $base-spacing;
-  width: $fab-size;
+  display: block;
+  width: 100%;
   z-index: 1;
+}
 
-  svg {
-    height: 100%;
-    width: 100%;
-  }
-
-  &:after,
-  &:before {
-    opacity: 0;
-    transition: opacity $base-duration $base-timing;
-  }
-
-  &:before {
-    background-color: $fab-callout-background-color;
-    border-radius: 4px;
-    bottom: 0;
-    box-shadow: $shadow-level-4;
-    color: $fab-callout-text-color;
-    content: "Leave Feedback";
-    display: block;
-    padding: $small-spacing;
-    position: absolute;
-    right: $fab-size + $base-spacing;
-    white-space: nowrap;
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    right: $fab-size;
-    border: $small-spacing solid transparent;
-    border-left: calc(#{$small-spacing} + 1px) solid $fab-callout-background-color;
-    bottom: 25%;
-  }
-
-  &:hover:before,
-  &:hover:after {
-    opacity: 1;
-  }
+.footer-content {
+  margin: auto;
+  width: $page-width;
 }

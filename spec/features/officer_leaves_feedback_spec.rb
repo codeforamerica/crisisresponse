@@ -8,7 +8,7 @@ feature "Feedback" do
     response_plan = create(:response_plan)
 
     visit person_path(response_plan.person)
-    find(".footer").click
+    click_on "Leave Feedback"
     fill_in :feedback_name, with: "Sandlin Grayson"
     fill_in :feedback_description, with: "foobar"
     click_on "Submit Feedback"
