@@ -205,14 +205,54 @@ describe RMSImporter do
   end
 
   describe "threshold" do
-    it "updates the person's visibility" do
-      stub_crisis_incidents
-      person = create(:person, visible: true)
+    context "when the person has not been visible before" do
+      it "makes them visible to patrol officers" do
+        allow(ENV).to receive(:fetch)
+        allow(ENV).to receive(:fetch).
+          with("RECENT_CRISIS_INCIDENT_THRESHOLD").
+          and_return(1)
 
-      RMSImporter.new.import
+        person = create(:person, visible: false)
+        rms_person = create(:rms_person, person: person)
+        stub_crisis_incidents(
+          "REPORTED_ON_DATE" => 1.week.ago.to_date.strftime("%m/%d/%Y"),
+          "PIN" => rms_person.pin,
+        )
 
-      person.reload
-      expect(person).not_to be_visible
+        expect { RMSImporter.new.import }.to change(Visibility, :count).by(1)
+
+        visibility = Visibility.last
+        expect(visibility.person).to eq(person)
+        expect(visibility.creation_notes).
+          to eq("[AUTO] Person crossed the threshold of 1 RMS Crisis Incident")
+        expect(person.reload).to be_visible
+      end
+    end
+
+    context "when the person is visible" do
+      it "doesn't change their visibility" do
+        stub_crisis_incidents
+        person = create(:person)
+        visibility = create(:visibility, person: person)
+
+        expect { RMSImporter.new.import }.not_to change(Visibility, :count)
+
+        expect(visibility.person).to eq(person)
+        expect(person.reload).to be_visible
+      end
+    end
+
+    context "when the person has previously been visible" do
+      # TODO do we actually want to do this?
+      it "doesn't change their visibility" do
+        stub_crisis_incidents
+        person = create(:person, visible: false)
+        create(:visibility, :removed, person: person)
+
+        expect { RMSImporter.new.import }.not_to change(Visibility, :count)
+
+        expect(person.reload).not_to be_visible
+      end
     end
   end
 

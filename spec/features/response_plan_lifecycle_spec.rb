@@ -166,6 +166,7 @@ RSpec.feature "Response Plan Lifecycle" do
         expect(page).
           to have_content t("submissions.approve.success", name: person.name)
         expect(page).to have_content plan.background_info
+        expect(person.reload).to be_visible
       end
 
       scenario "they can kick a submission back down to draft status" do

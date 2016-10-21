@@ -2,8 +2,11 @@ require "oci8"
 require "csv"
 require "rms_person_parser"
 require "rms_incident_parser"
+require "action_view/helpers/text_helper"
 
 class RMSImporter
+  include ActionView::Helpers::TextHelper
+
   SQL_QUERY = <<-SQL.freeze
     select crisis.*,person.*,particulars.*
     from intspd.xml_crisis crisis
@@ -24,7 +27,7 @@ class RMSImporter
     results = query(SQL_QUERY)
     results.each { |result| parse_sql_result(result) }
 
-    Person.update_visibility
+    update_visibility
 
     log_unimported_incidents
     log_duplicate_incidents(results)
@@ -132,6 +135,38 @@ class RMSImporter
     end
 
     results
+  end
+
+  def update_visibility(
+    threshold = ENV.fetch("RECENT_CRISIS_INCIDENT_THRESHOLD").to_i
+  )
+    rms_people_over_threshold = RMS::CrisisIncident.
+      where(reported_at: (Person::RECENT_TIMEFRAME.ago..Time.current)).
+      group(:rms_person_id).
+      count.
+      reject { |_, incident_count| incident_count < threshold }.
+      keys
+
+    people_over_threshold = RMS::Person.
+      where(id: rms_people_over_threshold).
+      pluck(:person_id)
+
+    people_with_current_or_former_visibility = Visibility.pluck(:person_id).uniq
+
+    new_people_over_threshold =
+      people_over_threshold - people_with_current_or_former_visibility
+
+    new_people_over_threshold.each do |person_id|
+      Visibility.create!(
+        person_id: person_id,
+        creation_notes: crossed_threshold_message(threshold),
+      )
+    end
+  end
+
+  def crossed_threshold_message(threshold)
+    threshold_text = pluralize(threshold, "RMS Crisis Incident")
+    "[AUTO] Person crossed the threshold of #{threshold_text}"
   end
 
   def connection

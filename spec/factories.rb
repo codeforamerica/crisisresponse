@@ -27,7 +27,7 @@ FactoryGirl.define do
     response_plan
   end
 
-  factory :officer, aliases: [:author, :approver] do
+  factory :officer, aliases: [:author, :approver, :created_by, :removed_by] do
     name "Johnson"
     phone "222-333-4444"
     sequence(:username) { |n| "officer_#{n}" }
@@ -55,7 +55,16 @@ FactoryGirl.define do
     hair_color "black"
     eye_color "blue"
     date_of_birth { 25.years.ago }
-    visible true
+
+    transient do
+      visible true
+    end
+
+    after(:create) do |person, evaluator|
+      if evaluator.visible
+        create(:visibility, person: person)
+      end
+    end
   end
 
   factory :response_plan, aliases: [:plan] do
@@ -128,5 +137,20 @@ FactoryGirl.define do
   factory :trigger do
     description "MyString"
     response_plan
+  end
+
+  factory :visibility do
+    person
+    created_by
+    creation_notes "Crossed incident threshold"
+    removed_at nil
+    removal_notes nil
+    removed_by nil
+
+    trait :removed do
+      removed_by
+      removed_at { Time.current }
+      removal_notes "They've moved away from Seattle"
+    end
   end
 end
