@@ -18,6 +18,7 @@ class Person < ApplicationRecord
   )
   has_many :images, dependent: :destroy
   has_many :response_plans
+  has_many :visibilities, dependent: :destroy
   has_one :rms_person, class_name: "RMS::Person"
 
   # Easily access response plans that are in draft or submission mode.
@@ -80,29 +81,6 @@ class Person < ApplicationRecord
   fallback_to_rms_person(:weight_in_pounds)
   fallback_to_rms_person(:weight_in_pounds)
   fallback_to_rms_person(:weight_in_pounds)
-
-  def self.update_visibility(
-    threshold = ENV.fetch("RECENT_CRISIS_INCIDENT_THRESHOLD").to_i
-  )
-    Person.update_all(visible: false)
-
-    over_threhsold = RMS::CrisisIncident.
-      where(reported_at: (RECENT_TIMEFRAME.ago..Time.current)).
-      group(:rms_person_id).
-      count.
-      reject { |_, incident_count| incident_count < threshold }.
-      keys
-
-    people_ids =
-      RMS::Person.find(over_threhsold).pluck(:person_id) +
-      ResponsePlan.approved.pluck(:person_id)
-
-    Person.where(id: people_ids).update_all(visible: true)
-  end
-
-  def self.publicly_visible
-    where(visible: true)
-  end
 
   def active_plan
     @active_plan ||= active_plan_at(Time.current)
@@ -195,6 +173,10 @@ class Person < ApplicationRecord
 
   def veteran?
     crisis_incidents.any?(&:veteran)
+  end
+
+  def visible?
+    visibilities.where(removed_at: nil).any?
   end
 
   private

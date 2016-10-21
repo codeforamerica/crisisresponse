@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018225158) do
+ActiveRecord::Schema.define(version: 20161020200410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(version: 20161018225158) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "sex"
@@ -113,9 +113,7 @@ ActiveRecord::Schema.define(version: 20161018225158) do
     t.string   "analytics_token"
     t.string   "location_name"
     t.string   "location_address"
-    t.boolean  "visible",          default: false, null: false
     t.string   "middle_initial"
-    t.index ["visible"], name: "index_people_on_visible", using: :btree
   end
 
   create_table "response_plans", force: :cascade do |t|
@@ -260,6 +258,20 @@ ActiveRecord::Schema.define(version: 20161018225158) do
     t.index ["response_plan_id"], name: "index_triggers_on_response_plan_id", using: :btree
   end
 
+  create_table "visibilities", force: :cascade do |t|
+    t.integer  "person_id"
+    t.text     "creation_notes"
+    t.integer  "created_by_id"
+    t.datetime "removed_at"
+    t.text     "removal_notes"
+    t.integer  "removed_by_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["created_by_id"], name: "index_visibilities_on_created_by_id", using: :btree
+    t.index ["person_id"], name: "index_visibilities_on_person_id", using: :btree
+    t.index ["removed_by_id"], name: "index_visibilities_on_removed_by_id", using: :btree
+  end
+
   add_foreign_key "aliases", "people"
   add_foreign_key "contacts", "response_plans"
   add_foreign_key "deescalation_techniques", "response_plans"
@@ -275,4 +287,7 @@ ActiveRecord::Schema.define(version: 20161018225158) do
   add_foreign_key "suggestions", "officers"
   add_foreign_key "suggestions", "people"
   add_foreign_key "triggers", "response_plans"
+  add_foreign_key "visibilities", "officers", column: "created_by_id"
+  add_foreign_key "visibilities", "officers", column: "removed_by_id"
+  add_foreign_key "visibilities", "people"
 end

@@ -87,7 +87,8 @@ class PeopleController < ApplicationController
     if current_officer.admin?
       Person.all
     else
-      Person.publicly_visible
+      people_ids = Visibility.where(removed_at: nil).pluck(:person_id)
+      Person.where(id: people_ids)
     end
   end
 end
