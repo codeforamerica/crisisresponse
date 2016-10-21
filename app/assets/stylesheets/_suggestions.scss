@@ -17,3 +17,12 @@
 #suggestion_body {
   height: 10em;
 }
+
+.new_suggestion label {
+  @include light-font;
+}
+
+label[for='suggestion_urgent'] {
+  @include heavy-font;
+  color: $red;
+}

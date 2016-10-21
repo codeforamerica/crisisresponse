@@ -1,8 +1,13 @@
 <section class="suggestion solo-page">
+  <div class="section-header section-header-blue-inverted">
+    <div class="section-title">Request an update to a response plan</div>
+    <div class="secondary-text">This form will send an email to the SPD Crisis Response Unit.</div>
+  </div>
+
   <div class="section-body">
     <%= simple_form_for(@suggestion) do |form| %>
       <%= form.input :person_id, as: :hidden %>
-      <%= form.input :person_name, disabled: true %>
+      <%= form.input :person_name, disabled: true, hint: "(auto-filled)" %>
       <%= form.input :body %>
       <%= form.input :urgent %>
       <%= form.button :submit %>

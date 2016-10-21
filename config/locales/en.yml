@@ -87,7 +87,7 @@ en:
       voluntary_commit: Voluntary committal
       arrested: Arrested
     show:
-      title: Template Narrative
+      title: Crisis Template Narrative
 
   menu:
     new_person: Add a New Person
@@ -117,8 +117,8 @@ en:
     suggestions:
       new: Notify CRT
       prompt:
-        first: "Know one of %{name}'s triggers?"
-        second: Are they trending?
+        first: "Know %{name}'s triggers or hooks?"
+        second: "Want to send feedback to CRT on %{name}?"
     triggers:
       new: Suggest a trigger
       none: No known triggers.

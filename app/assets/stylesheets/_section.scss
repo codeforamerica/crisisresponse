@@ -5,13 +5,21 @@ section {
   @include card;
 
   .section-header {
-    @include icon-color($section-header-font-color);
     align-items: center;
-    background-color: $section-header-color;
-    color: $section-header-font-color;
-    display: flex;
     padding: $small-spacing $base-spacing;
     width: 100%;
+  }
+
+  .section-header-blue {
+    @include icon-color($section-header-font-color);
+    background-color: $section-header-color;
+    color: $section-header-font-color;
+  }
+
+  .section-header-blue-inverted {
+    @include icon-color($blue);
+    background-color: $card-background;
+    color: $blue;
   }
 
   .section-header-yellow {
