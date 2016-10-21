@@ -10,7 +10,8 @@ feature "Officer views a response plan" do
     )
 
     visit people_path
-    find(".person-description", text: person.shorthand_description).click
+    find(".person-description", text: person.shorthand_description).
+      trigger(:click)
 
     expect(page).to have_content("DOE, John")
     expect(page).to have_content(l(person.date_of_birth))

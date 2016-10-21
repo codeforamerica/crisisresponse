@@ -15,7 +15,8 @@ select {
 
 label {
   font-weight: 600;
-  margin-bottom: $small-spacing / 2;
+  margin-bottom: $tiny-spacing;
+  padding-top: $field-padding;
 
   &.required::after {
     content: "*";
@@ -43,7 +44,7 @@ select[multiple=multiple] {
   font-family: $base-font-family;
   font-size: $base-font-size;
   margin-bottom: $small-spacing;
-  padding: $base-spacing / 3;
+  padding: $field-padding;
   transition: border-color $base-duration $base-timing;
   width: 100%;
 
@@ -79,11 +80,22 @@ input[type="search"] {
 input[type="checkbox"],
 input[type="radio"] {
   display: inline;
-  margin-right: $small-spacing / 2;
+  margin-right: $tiny-spacing;
+  vertical-align: baseline;
 
   + label {
     display: inline-block;
+    vertical-align: middle;
   }
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  border-radius: 3px;
+  border: 3px solid $medium-gray;
+  display: inline-block;
+  height: 1em;
+  width: 1em;
 }
 
 input[type="file"] {
@@ -111,4 +123,16 @@ select {
 
 .input {
   margin-bottom: $base-spacing;
+}
+
+.field_with_hint {
+  input {
+    margin-right: 0 !important;
+    display: inline-block !important;
+  }
+
+  .hint {
+    margin-left: $small-spacing;
+    font-style: italic;
+  }
 }

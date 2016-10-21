@@ -7,10 +7,6 @@
     @include light-font;
   }
 
-  .hint {
-    margin-left: $base-spacing;
-  }
-
   .physicals-search-fields.collapsed {
     display: none;
   }
@@ -49,11 +45,12 @@
   }
 
   input[type="checkbox"] + label {
+    @include light-font;
     border: $base-border;
     box-shadow: $shadow-level-1;
     margin-bottom: $small-spacing;
     margin-right: $base-spacing;
-    padding: $small-spacing;
+    padding: $field-padding;
     text-transform: capitalize;
   }
 
@@ -93,6 +90,11 @@
       }
     }
 
+    .search_date_of_birth {
+      white-space: nowrap;
+      overflow: visible;
+    }
+
     .actions {
       @include span-columns(4 of 12);
       @include omega;
@@ -102,6 +104,10 @@
       @include fill-parent;
       clear: both;
       padding-top: $base-spacing;
+
+      label {
+        @include heavy-font;
+      }
 
       .collection_input_set {
         @include span-columns(10 of 12);

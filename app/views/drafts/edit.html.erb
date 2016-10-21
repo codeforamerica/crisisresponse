@@ -4,7 +4,7 @@
 
 <%= simple_form_for(@response_plan, url: draft_path(@response_plan)) do |f| %>
   <section class="form">
-    <div class="section-header">Assignee</div>
+    <div class="section-header section-header-blue">Assignee</div>
     <div class="section-body">
       <%= f.input(
         :assignee_id,
@@ -20,7 +20,7 @@
   <% end %>
 
   <section class="form">
-    <div class="section-header">
+    <div class="section-header section-header-blue">
       Context
     </div>
 
@@ -44,7 +44,7 @@
   ) %>
 
   <section class="form">
-    <div class="section-header">Save</div>
+    <div class="section-header section-header-blue">Save</div>
 
     <div class="section-body">
       <%= f.input :private_notes %>

@@ -27,12 +27,14 @@ $small-field-width: 10em;
 $tiny-field-width: 3em;
 
 // Other Sizes
-$base-border-radius: 3px;
 $base-spacing: $base-line-height * 1rem;
 $large-spacing: 2.5rem;
 $small-spacing: $base-spacing / 2;
 $tiny-spacing: $small-spacing / 2;
+
+$base-border-radius: 3px;
 $base-z-index: 0;
+$field-padding: $base-spacing / 3;
 $optimal-reading-width: 40em;
 
 // Layout sizes
