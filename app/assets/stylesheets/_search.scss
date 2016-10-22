@@ -146,23 +146,46 @@
 
     .search_eye_color,
     .search_hair_color {
-      overflow: visible;
-
-      .collection_input_set {
-        max-width: 60%;
-        width: auto;
-      }
-    }
-
-    .toggle-hair-options,
-    .toggle-eye-options {
-      display: inline-block;
+      overflow: hidden;
     }
 
     .hair-color-field,
     .eye-color-field {
       overflow: hidden;
       margin-bottom: $base-spacing;
+
+      &.collapsed {
+        .checkbox:nth-child(n) {
+          display: inline-block;
+        }
+
+        .collection_input_set {
+          white-space: nowrap;
+          position: relative;
+
+          &:after {
+            background-image: linear-gradient(to right, $transparent, $card-background);
+            bottom: 0;
+            content: "";
+            display: block;
+            left: 75%;
+            position: absolute;
+            right: 0;
+            top: 0;
+          }
+        }
+      }
+
+      .collection_input_set {
+        @include span-columns(10 of 12);
+        white-space: normal;
+      }
+    }
+
+    .toggle-hair-options,
+    .toggle-eye-options {
+      @include shift(2);
+      margin-bottom: 0;
     }
   }
 }
