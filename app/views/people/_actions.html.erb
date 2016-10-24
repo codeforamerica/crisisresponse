@@ -1,13 +1,41 @@
 <div class="page-title-actions">
   <% if person.draft %>
-    <%= t("people.show.draft.exists", name: person.first_name) %>
+    <p>
+    <%= t("people.show.draft.exists", name: person.last_name) %>
     <br/>
     <%= link_to t("people.show.draft.show"), draft_path(person.draft) %>
-  <% elsif person.submission %>
-    <%= t("people.show.submission.exists", name: person.first_name) %>
+    </p>
+  <% end %>
+
+  <% if person.submission %>
+    <p>
+    <%= t("people.show.submission.exists", name: person.last_name) %>
     <br/>
     <%= link_to t("people.show.submission.show"), submission_path(person.submission) %>
-  <% elsif plan %>
+    </p>
+  <% end %>
+
+  <% if person.visible? %>
+    <p>
+    <%= t("people.show.visibility.exists", name: person.last_name) %>
+    <br/>
+    <%= link_to(
+      t("people.show.visibility.show"),
+      edit_person_visibility_path(person_id: person),
+    ) %>
+    </p>
+  <% else %>
+    <p>
+    <%= t("people.show.visibility.does_not_exist", name: person.last_name) %>
+    <br/>
+    <%= link_to(
+      t("people.show.visibility.new"),
+      new_person_visibility_path(person_id: person.id),
+    ) %>
+    </p>
+  <% end %>
+
+  <% if plan %>
     <%= link_to(
       t("people.show.draft.new"),
       drafts_path(person_id: person.id),

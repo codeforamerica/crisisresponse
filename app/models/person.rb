@@ -176,7 +176,7 @@ class Person < ApplicationRecord
   end
 
   def visible?
-    visibilities.where(removed_at: nil).any?
+    visibilities.active.any?
   end
 
   private
