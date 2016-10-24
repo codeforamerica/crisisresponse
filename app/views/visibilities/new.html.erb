@@ -1,0 +1,14 @@
+<section class="visibility solo-page">
+  <div class="section-header">
+    Make <%= @visibility.person.name %>'s profile visible to patrol officers.
+  </div>
+
+  <div class="section-body">
+    <%= simple_form_for @visibility, url: person_visibility_path(person_id: @visibility.person_id) do |f| %>
+      <%= f.input :creation_notes, label: "Notes" %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+
+  <a class="section-body close-page" onclick="window.close()">Close</a>
+</section>

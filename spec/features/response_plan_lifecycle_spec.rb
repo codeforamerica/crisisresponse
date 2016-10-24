@@ -48,7 +48,7 @@ RSpec.feature "Response Plan Lifecycle" do
         visit person_path(person)
         expect(page).not_to have_link t("people.show.draft.new")
         expect(page).
-          to have_content t("people.show.draft.exists", name: person.first_name)
+          to have_content t("people.show.draft.exists", name: person.last_name)
 
         click_on t("people.show.draft.show")
         expect(current_path).to eq(draft_path(draft))
@@ -63,7 +63,7 @@ RSpec.feature "Response Plan Lifecycle" do
         visit person_path(person)
         expect(page).not_to have_link t("people.show.draft.new")
         expect(page).to have_content \
-          t("people.show.submission.exists", name: person.first_name)
+          t("people.show.submission.exists", name: person.last_name)
 
         click_on t("people.show.submission.show")
         expect(current_path).to eq(submission_path(submission))

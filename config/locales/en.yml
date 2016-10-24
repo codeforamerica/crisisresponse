@@ -105,6 +105,11 @@ en:
       submission:
         exists: A new response plan for %{name} is awaiting submission.
         show: View submitted plan
+      visibility:
+        exists: "%{name}'s profile is visible to patrol officers."
+        does_not_exist: "%{name}'s profile is hidden from patrol officers."
+        show: "Hide from patrol officers"
+        new: "Share with patrol officers"
     person:
       response_plan: CRU Bulletin
 
@@ -221,3 +226,9 @@ en:
 
   titles:
     application: RideAlong Response
+
+  visibilities:
+    create:
+      success: "%{name}'s profile is now visible to patrol officers"
+    update:
+      success: "%{name}'s profile is no longer visible to patrol officers"
