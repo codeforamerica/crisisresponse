@@ -137,36 +137,56 @@ class RMSImporter
     results
   end
 
-  def update_visibility(
-    threshold = ENV.fetch("RECENT_CRISIS_INCIDENT_THRESHOLD").to_i
-  )
-    rms_people_over_threshold = RMS::CrisisIncident.
+  def update_visibility
+    new_visibilities = []
+
+    new_people_over_threshold.each do |person_id|
+      new_visibilities << Visibility.create!(
+        person_id: person_id,
+        creation_notes: crossed_threshold_message,
+      )
+    end
+
+    alert_for_new_visibilities(new_visibilities)
+  end
+
+  def new_people_over_threshold
+    people_over_threshold - people_with_current_or_former_visibility
+  end
+
+  def people_with_current_or_former_visibility
+    Visibility.pluck(:person_id).uniq
+  end
+
+  def people_over_threshold
+    RMS::Person.
+      where(id: rms_people_over_threshold).
+      pluck(:person_id)
+  end
+
+  def rms_people_over_threshold
+    RMS::CrisisIncident.
       where(reported_at: (Person::RECENT_TIMEFRAME.ago..Time.current)).
       group(:rms_person_id).
       count.
       reject { |_, incident_count| incident_count < threshold }.
       keys
-
-    people_over_threshold = RMS::Person.
-      where(id: rms_people_over_threshold).
-      pluck(:person_id)
-
-    people_with_current_or_former_visibility = Visibility.pluck(:person_id).uniq
-
-    new_people_over_threshold =
-      people_over_threshold - people_with_current_or_former_visibility
-
-    new_people_over_threshold.each do |person_id|
-      Visibility.create!(
-        person_id: person_id,
-        creation_notes: crossed_threshold_message(threshold),
-      )
-    end
   end
 
-  def crossed_threshold_message(threshold)
+  def crossed_threshold_message
     threshold_text = pluralize(threshold, "RMS Crisis Incident")
     "[AUTO] Person crossed the threshold of #{threshold_text}"
+  end
+
+  def threshold
+    ENV.fetch("RECENT_CRISIS_INCIDENT_THRESHOLD").to_i
+  end
+
+  def alert_for_new_visibilities(visibilities)
+    visibilities.each do |visibility|
+      message = VisibilityMailer.crossed_threshold(visibility)
+      EmailService.send(message)
+    end
   end
 
   def connection

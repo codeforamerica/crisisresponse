@@ -1,5 +1,6 @@
 require "rails_helper"
 require "rms_importer"
+require "email_service"
 
 describe RMSImporter do
   it "uses the credentials stored in the ENV variables" do
@@ -211,6 +212,7 @@ describe RMSImporter do
         allow(ENV).to receive(:fetch).
           with("RECENT_CRISIS_INCIDENT_THRESHOLD").
           and_return(1)
+        allow(EmailService).to receive(:send)
 
         person = create(:person, visible: false)
         rms_person = create(:rms_person, person: person)
@@ -226,6 +228,11 @@ describe RMSImporter do
         expect(visibility.creation_notes).
           to eq("[AUTO] Person crossed the threshold of 1 RMS Crisis Incident")
         expect(person.reload).to be_visible
+
+        expect(EmailService).to have_received(:send) do |message|
+          expect(message.subject).
+            to eq("[RideAlong Response] New Core Profile Generated - #{l(Date.today)}")
+        end
       end
     end
 
