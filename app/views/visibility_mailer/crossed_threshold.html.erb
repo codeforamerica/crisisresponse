@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    A new core profile has been generated.
+
+    <h1><%= @person.name %></h1>
+    <h2><%= l(@person.date_of_birth) %></h2>
+
+    <div>
+      Core profiles are generated once a person has had at least
+      <%= ENV.fetch("RECENT_CRISIS_INCIDENT_THRESHOLD") %>
+      crisis incident templates filled out within the past 365 days.
+    </div>
+
+    <%= link_to "View Core Profile", person_url(@person) %>
+  </body>
+</html>

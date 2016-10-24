@@ -12,6 +12,6 @@ class SuggestionMailer < ApplicationMailer
       subject = URGENT_PREFIX + subject
     end
 
-    mail(to: ENV.fetch("CONTENT_SUGGESTION_EMAIL"), subject: subject)
+    mail(to: ENV.fetch("CONTENT_ADMIN_EMAIL"), subject: subject)
   end
 end

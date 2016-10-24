@@ -14,7 +14,7 @@ RSpec.describe SuggestionMailer, type: :mailer do
     it "pulls the recipients from the ENV variable" do
       recipients = ["foo@bar.com", "baz@bar.com"]
       allow(ENV).to receive(:fetch).
-        with("CONTENT_SUGGESTION_EMAIL").
+        with("CONTENT_ADMIN_EMAIL").
         and_return(recipients.join(","))
 
       mail = SuggestionMailer.created(create(:suggestion))
