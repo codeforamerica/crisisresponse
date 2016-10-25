@@ -3,6 +3,7 @@ require "csv"
 require "rms_person_parser"
 require "rms_incident_parser"
 require "action_view/helpers/text_helper"
+require "email_service"
 
 class RMSImporter
   include ActionView::Helpers::TextHelper

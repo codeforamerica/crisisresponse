@@ -111,7 +111,7 @@ en:
         show: "Hide from patrol officers"
         new: "Share with patrol officers"
     person:
-      response_plan: CRU Bulletin
+      response_plan: Crisis Bulletin
 
   profile:
     actions:

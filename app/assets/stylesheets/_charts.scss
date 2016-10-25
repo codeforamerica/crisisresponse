@@ -44,8 +44,11 @@
 
 .additional-bars-toggle {
   @include light-font;
-  @include shift(4);
   font-size: 0.8em;
+
+  @include media($medium-screen-up) {
+    @include shift(4 of 12);
+  }
 }
 
 @include media($medium-screen-up) {
