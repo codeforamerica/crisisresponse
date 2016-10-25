@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 
   resources :people, only: [:index, :new, :create, :show] do
     resource :visibility, only: [:edit, :new, :update, :create]
+    resource :review, only: [:new, :create]
   end
 
+  resources :profiles, only: [:index]
   resource :account, only: [:edit, :update]
   resources :officers, only: [:index, :edit, :update]
 

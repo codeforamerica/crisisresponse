@@ -1,0 +1,14 @@
+<section class="review solo-page">
+  <div class="section-header">
+    Review <%= @review.person.name %>'s profile
+  </div>
+
+  <div class="section-body">
+    <%= simple_form_for @review, url: person_review_path(person_id: @review.person_id) do |f| %>
+      <%= f.input :notes, label: "Notes" %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+
+  <a class="section-body close-page" onclick="window.close()">Close</a>
+</section>

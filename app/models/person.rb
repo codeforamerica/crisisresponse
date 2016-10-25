@@ -19,6 +19,7 @@ class Person < ApplicationRecord
   has_many :images, dependent: :destroy
   has_many :response_plans
   has_many :visibilities, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_one :rms_person, class_name: "RMS::Person"
 
   # Easily access response plans that are in draft or submission mode.
@@ -110,6 +111,12 @@ class Person < ApplicationRecord
     end
   end
 
+  def due_for_review?
+    cutoff = ENV.fetch("PROFILE_REVIEW_TIMEFRAME_IN_MONTHS").to_i.months.ago
+
+    last_reviewed_on < cutoff
+  end
+
   def has_nominal_response_plan?
     active_plan.try(:response_strategies).try(:any?)
   end
@@ -136,6 +143,15 @@ class Person < ApplicationRecord
 
   def incidents_since(moment)
     crisis_incidents.where(reported_at: (moment..Time.current))
+  end
+
+  def last_reviewed_on
+    [
+      response_plans.approved.pluck(:approved_at),
+      visibilities.active.pluck(:created_at),
+      reviews.pluck(:created_at),
+      created_at,
+    ].flatten.compact.sort.last.to_date
   end
 
   def name
@@ -173,6 +189,23 @@ class Person < ApplicationRecord
 
   def veteran?
     crisis_incidents.any?(&:veteran)
+  end
+
+  def visibility_status
+    visibility = visibilities.last
+
+    status = "HIDDEN"
+    reason = "(auto)"
+
+    if visible?
+      status = "VISIBLE"
+    end
+
+    if visibility.try(:created_by) || visibility.try(:removed_by)
+      reason = "(manual)"
+    end
+
+    "#{status} #{reason}"
   end
 
   def visible?

@@ -1,0 +1,20 @@
+.profiles {
+  margin-bottom: $large-spacing;
+}
+
+.profiles-title {
+  margin-bottom: $tiny-spacing;
+}
+
+.profile.section-body {
+  width: 100%;
+  display: table-row;
+}
+
+.profile-visibility {
+  color: $red;
+
+  &-visible {
+    color: $green;
+  }
+}

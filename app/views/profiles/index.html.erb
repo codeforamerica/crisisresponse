@@ -1,0 +1,7 @@
+<h1 class="profiles-title"><%= t("profiles.index.due_for_review.title") %></h1>
+<p><%= t("profiles.index.due_for_review.subtitle") %></p>
+<%= render "review_list", profiles: @due_for_review %>
+
+<h1 class="profiles-title"><%= t("profiles.index.patrol.title") %></h1>
+<p><%= t("profiles.index.patrol.subtitle") %></p>
+<%= render "profiles_list", profiles: @people %>
