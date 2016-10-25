@@ -14,6 +14,11 @@ $zoom-control-height: 1.5em;
   display: block;
 }
 
+.location-supportive-housing {
+  @include tag;
+  margin: $tiny-spacing 0;
+}
+
 .location-map.collapsed {
   display: none;
 }

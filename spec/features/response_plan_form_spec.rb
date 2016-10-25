@@ -48,6 +48,8 @@ feature "Response Plan Form" do
       fill_in "Elevated", with: "Elevated behavior"
       fill_in "Location name", with: "The Morrison Hotel"
       fill_in "Location address", with: "509 3rd Ave"
+      find("#response_plan_person_attributes_location_supportive_housing").
+        set(true)
       fill_in "Private notes", with: "These notes should be private"
       click_on "Update Response plan"
 

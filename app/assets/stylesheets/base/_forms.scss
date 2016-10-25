@@ -96,6 +96,14 @@ input[type="checkbox"] {
   display: inline-block;
   height: 1em;
   width: 1em;
+
+  &:checked {
+    background-color: $dark-gray;
+  }
+}
+
+.boolean label {
+  padding: 0;
 }
 
 input[type="file"] {

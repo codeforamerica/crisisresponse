@@ -65,6 +65,7 @@ RMS::Person.create!(
   location_name: "The Morrison",
   location_address: "509 3rd Ave, Seattle, WA, 98104",
 )
+biff.update(location_supportive_housing: true)
 ResponsePlan.create!(
   person: biff,
   author: officer,
@@ -281,7 +282,7 @@ SafetyConcern.create!(
   title: "Spit at an officer",
   description: "TANNEN spit at an officer while being arrested.",
   go_number: GO_NUMBER,
-  occurred_on: Date.new(1998, 1, 10),
+  occurred_on: I18n.l(Date.new(1998, 1, 10)),
   response_plan: biff.response_plans.last,
 )
 SafetyConcern.create!(
@@ -289,7 +290,7 @@ SafetyConcern.create!(
   title: "Had 9mm pistol at house",
   description: "TANNEN had a 9mm pistol in his house.",
   go_number: GO_NUMBER,
-  occurred_on: Date.new(2005, 6, 8),
+  occurred_on: I18n.l(Date.new(2005, 6, 8)),
   response_plan: biff.response_plans.last,
 )
 SafetyConcern.create!(
@@ -377,6 +378,7 @@ RMS::CrisisIncident.create(
 
 biff.aliases.create(name: "B-Tan")
 
-gregory.update(visible: true)
-martha.update(visible: true)
-biff.update(visible: true)
+Visibility.create!(person: gregory, creation_notes: "Created as sample data")
+Visibility.create!(person: martha, creation_notes: "Created as sample data")
+Visibility.create!(person: biff, creation_notes: "Created as sample data")
+Visibility.create!(person: shana, creation_notes: "Created as sample data")

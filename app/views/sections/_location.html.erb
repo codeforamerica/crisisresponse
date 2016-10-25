@@ -23,6 +23,12 @@
           <%= person.address_line_two %>
         </span>
       </span>
+
+      <% if person.location_supportive_housing %>
+        <span class="location-supportive-housing">
+          Supportive Housing
+        </span>
+      <% end %>
     </div>
 
     <div class="location-map">

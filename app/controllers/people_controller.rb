@@ -12,6 +12,7 @@ class PeopleController < ApplicationController
     :last_name,
     :location_address,
     :location_name,
+    :location_supportive_housing,
     :middle_initial,
     :race,
     :scars_and_marks,
