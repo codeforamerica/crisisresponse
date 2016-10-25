@@ -41,6 +41,7 @@ class SubmissionsController < ApplicationController
       flashes = { alert: t(".failure.not_submitted", name: plan.person.name) }
     else
       plan.update!(approver: current_officer)
+      create_approval_visibility(plan.person)
       flashes = { notice: t(".success", name: plan.person.name) }
     end
 
@@ -57,6 +58,18 @@ class SubmissionsController < ApplicationController
       redirect_to draft_path(plan), notice: t(".success", name: plan.person.name)
     else
       redirect_to person_path(plan.person), alert: t(".failure")
+    end
+  end
+
+  private
+
+  def create_approval_visibility(person)
+    unless person.visible?
+      Visibility.create!(
+        person: person,
+        created_by: current_officer,
+        creation_notes: "A response plan was approved and published to patrol",
+      )
     end
   end
 end
