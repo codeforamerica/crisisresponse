@@ -61,6 +61,69 @@ RSpec.describe Person, type: :model do
     end
   end
 
+  describe "#due_for_review?" do
+    it "is false if the person is not visible" do
+      person = create(:person, visible: false)
+
+      expect(person).not_to be_due_for_review
+    end
+
+    it "is false if the person has been visible less than the threshold" do
+      person = create(:person, visible: false)
+      visibility = create(:visibility, person: person, created_at: after_threshold)
+
+      expect(person).not_to be_due_for_review
+    end
+
+    it "is false if the person has been reviewed less than the threshold ago" do
+      person = create(:person, visible: false, created_at: before_threshold)
+      visibility = create(:visibility, person: person, created_at: before_threshold)
+      review = create(:review, person: person, created_at: after_threshold)
+
+      expect(person).not_to be_due_for_review
+    end
+
+    it "is false if the person's response plan has been updated recently" do
+      person = create(:person, visible: false)
+      visibility = create(:visibility, person: person, created_at: before_threshold)
+      response_plan = create(
+        :response_plan,
+        :approved,
+        person: person,
+        created_at: after_threshold,
+      )
+
+      expect(person).not_to be_due_for_review
+    end
+
+    it "is true if the person has been visible longer than the threshold" do
+      person = create(:person, visible: false, created_at: before_threshold)
+      create(:visibility, person: person, created_at: before_threshold)
+
+      expect(person).to be_due_for_review
+    end
+
+    it "is true if the person has not been reviewed within the threshold" do
+      person = create(:person, visible: false, created_at: before_threshold)
+      visibility = create(:visibility, person: person, created_at: before_threshold)
+      review = create(:review, person: person, created_at: before_threshold)
+
+      expect(person).to be_due_for_review
+    end
+
+    def after_threshold
+      (threshold - 1).months.ago
+    end
+
+    def before_threshold
+      (threshold + 1).months.ago
+    end
+
+    def threshold
+      ENV.fetch("PROFILE_REVIEW_TIMEFRAME_IN_MONTHS").to_i
+    end
+  end
+
   describe "#incidents_since" do
     it "returns the number of incidents since a given time" do
       rms_person = create(:rms_person)

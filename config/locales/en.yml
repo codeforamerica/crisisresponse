@@ -57,6 +57,11 @@ en:
         create: Search
       suggestion:
         create: Submit
+      visibility:
+        create: Share profile
+        update: Hide profile
+      review:
+        create: Mark as reviewed
 
   incidents:
     behaviors:
@@ -124,6 +129,9 @@ en:
         new: + Add information
         exists: A new response plan for %{name} is being drafted.
         show: View existing draft
+      review:
+        required: "%{name}'s profile is due for a review."
+        new: Mark as reviewed
       submission:
         exists: A new response plan for %{name} is awaiting submission.
         show: View submitted plan
@@ -152,6 +160,19 @@ en:
       none: No known deescalation techniques.
     general_techniques:
       none: No recommendations.
+
+  profiles:
+    index:
+      due_for_review:
+        title: Profiles that require review
+        subtitle: The profiles in the list below are manually visible core profiles and crisis bulletins that haven't had a manual update in the past 6 months.
+      patrol:
+        title: All profiles
+        subtitle: All profiles in the app, both hidden and visible.
+
+  reviews:
+    create:
+      success: "%{name}'s profile has been reviewed."
 
   safety_concerns:
     none: No known officer safety cautions.

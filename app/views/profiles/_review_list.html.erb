@@ -1,0 +1,25 @@
+<section class="profiles">
+  <table>
+    <thead class="section-header section-header-blue">
+      <tr>
+        <th>Name</th>
+        <th>Last Update</th>
+        <th>Type</th>
+        <th>Responsible Officer</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% profiles.each do |profile| %>
+        <tr class="section-body profile">
+          <td><%= profile.name %></td>
+          <td><%= l(profile.last_reviewed_on) %></td>
+          <td><%= profile.active_plan ? "Crisis Bulletin" : "Core Profile" %></td>
+          <td><%= profile.active_plan.try(:assignee).try(:name) %></td>
+          <td><%= link_to "REVIEW", person_path(profile) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

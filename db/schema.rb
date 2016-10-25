@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024232151) do
+ActiveRecord::Schema.define(version: 20161025010819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,16 @@ ActiveRecord::Schema.define(version: 20161024232151) do
     t.index ["response_plan_id"], name: "index_response_strategies_on_response_plan_id", using: :btree
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "person_id",     null: false
+    t.integer  "created_by_id", null: false
+    t.text     "notes"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["created_by_id"], name: "index_reviews_on_created_by_id", using: :btree
+    t.index ["person_id"], name: "index_reviews_on_person_id", using: :btree
+  end
+
   create_table "rms_crisis_incidents", force: :cascade do |t|
     t.integer  "rms_person_id",                 null: false
     t.datetime "reported_at"
@@ -260,7 +270,7 @@ ActiveRecord::Schema.define(version: 20161024232151) do
   end
 
   create_table "visibilities", force: :cascade do |t|
-    t.integer  "person_id"
+    t.integer  "person_id",      null: false
     t.text     "creation_notes"
     t.integer  "created_by_id"
     t.datetime "removed_at"
@@ -282,6 +292,8 @@ ActiveRecord::Schema.define(version: 20161024232151) do
   add_foreign_key "response_plans", "officers", column: "assignee_id"
   add_foreign_key "response_plans", "people"
   add_foreign_key "response_strategies", "response_plans"
+  add_foreign_key "reviews", "officers", column: "created_by_id"
+  add_foreign_key "reviews", "people"
   add_foreign_key "rms_crisis_incidents", "rms_people"
   add_foreign_key "rms_people", "people"
   add_foreign_key "safety_concerns", "response_plans"

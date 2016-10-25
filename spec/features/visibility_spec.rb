@@ -10,7 +10,7 @@ RSpec.feature "Visibility" do
     visit person_path(person)
     click_on t("people.show.visibility.new")
     fill_in "Notes", with: "This person is dangerous to officers"
-    click_on "Create Visibility"
+    click_on t("helpers.submit.visibility.create")
 
     expect(page).
       to have_content t("visibilities.create.success", name: person.last_name)
@@ -26,7 +26,7 @@ RSpec.feature "Visibility" do
     visit person_path(person)
     click_on t("people.show.visibility.show")
     fill_in "Notes", with: "This person has moved out of Seattle"
-    click_on "Update Visibility"
+    click_on t("helpers.submit.visibility.update")
 
     expect(page).
       to have_content t("visibilities.update.success", name: person.last_name)

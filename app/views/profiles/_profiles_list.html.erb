@@ -1,0 +1,31 @@
+<section class="profiles">
+  <table>
+    <thead class="section-header section-header-blue">
+      <tr>
+        <th>Name</th>
+        <th>DOB</th>
+        <th>Type</th>
+        <th># Calls</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% profiles.each do |profile| %>
+        <tr class="section-body profile">
+          <td><%= profile.display_name %></td>
+          <td><%= l(profile.date_of_birth) %></td>
+          <td><%= profile.active_plan ? "Crisis Bulletin" : "Core Profile" %></td>
+          <td><%= profile.crisis_incidents.count %></td>
+          <td>
+            <span class="profile-visibility profile-visibility-<%= "visible" if profile.visible? %>">
+              <%= profile.visibility_status %>
+            </span>
+          </td>
+          <td><%= link_to "Edit", person_path(profile) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

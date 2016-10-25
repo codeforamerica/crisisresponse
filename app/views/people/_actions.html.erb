@@ -35,6 +35,15 @@
     </p>
   <% end %>
 
+  <% if person.due_for_review? %>
+    <%= t("people.show.review.required", name: person.last_name) %>
+    <br/>
+    <%= link_to(
+      t("people.show.review.new"),
+      new_person_review_path(person_id: person.id),
+    ) %>
+  <% end %>
+
   <% if person.response_plans.drafts.none? &&
        person.response_plans.submitted.none? %>
     <%= link_to(

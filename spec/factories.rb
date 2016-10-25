@@ -106,6 +106,12 @@ FactoryGirl.define do
     response_plan
   end
 
+  factory :review do
+    person
+    created_by
+    notes "Looks good to me."
+  end
+
   factory :rms_person, class: "RMS::Person" do
     person
     first_name "John"
