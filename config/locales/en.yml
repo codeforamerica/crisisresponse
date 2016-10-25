@@ -176,6 +176,7 @@ en:
         urgent: URGENT Update
       person:
         scars_and_marks: Scars, Marks, and Tattoos
+        location_supportive_housing: Supportive housing?
     placeholders:
       feedback:
         name: First Last

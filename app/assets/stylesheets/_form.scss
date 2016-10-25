@@ -6,7 +6,7 @@
     @include light-font;
   }
 
-  input,
+  input:not([type='checkbox']),
   select {
     width: $base-field-width;
   }
