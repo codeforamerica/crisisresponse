@@ -181,6 +181,22 @@ RSpec.feature "Response Plan Lifecycle" do
         expect(current_path).to eq draft_path(plan)
         expect(page).to have_link t("drafts.show.edit")
       end
+
+      scenario "approved plans are immediately visible" do
+        officer = create(:officer, :admin)
+        person = create(:person, visible: false)
+        plan = create(:response_plan, :submission, person: person)
+
+        sign_in_officer(officer)
+        visit submission_path(plan)
+        click_on t("submissions.show.approve")
+
+        visibility = Visibility.last
+        expect(person.reload).to be_visible
+        expect(visibility.creation_notes).
+          to eq("A response plan was approved and published to patrol")
+        expect(visibility.created_by).to eq(officer)
+      end
     end
   end
 end
