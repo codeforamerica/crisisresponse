@@ -58,6 +58,7 @@ group :development, :test do
   gem "bundler-audit", require: false
   gem "dotenv-rails"
   gem "factory_girl_rails"
+  gem "fuubar"
   gem "pry-byebug"
   gem "pry-rails"
   gem "rails-controller-testing"
