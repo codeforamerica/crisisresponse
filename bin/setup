@@ -14,6 +14,11 @@ if [ ! -f .env ]; then
   cp .sample.env .env
 fi
 
+# Make sure bin/serve exists
+if [ ! -f bin/serve ]; then
+  cp bin/serve.dev bin/serve
+fi
+
 # Only if this isn't CI
 if [ -z "$CI" ]; then
   docker pull docker/compose:1.8.0
