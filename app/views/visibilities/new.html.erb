@@ -1,9 +1,31 @@
 <section class="visibility solo-page">
-  <div class="section-header">
+  <div class="section-header section-header-blue-inverted">
     Make <%= @visibility.person.name %>'s profile visible to patrol officers.
   </div>
 
   <div class="section-body">
+    <p>
+    WARNING!
+    </p>
+
+    <p>
+    This action has irreversible side effects.
+    </p>
+
+    <p>
+    <%= @visibility.person.name %>'s profile will stop
+    being automatically shown and hidden
+    based on their crisis incidents.
+    If they drop below
+    <%= pluralize(Threshold::DEFAULT_THRESHOLD, "incidents") %> in a year,
+    they will still be shown to patrol officers.
+    </p>
+
+    <p>
+    Their profile will only be hidden from patrol officers
+    once a CRT officer manually removes them.
+    </p>
+
     <%= simple_form_for @visibility, url: person_visibility_path(person_id: @visibility.person_id) do |f| %>
       <%= f.input :creation_notes, label: "Notes" %>
       <%= f.submit %>

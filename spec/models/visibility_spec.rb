@@ -18,14 +18,33 @@ RSpec.describe Visibility, type: :model do
       expect(visibility.errors[:removal_notes]).to be_empty
     end
 
-    it "requires `removed_by` and `removal_notes` if `removed_at` is set" do
+    it "requires `removal_notes` if `removed_at` is set" do
       visibility = build(:visibility)
 
       visibility.removed_at = Time.current
 
       expect(visibility).not_to be_valid
       expect(visibility.errors[:removal_notes]).to include("can't be blank")
-      expect(visibility.errors[:removed_by]).to include("can't be blank")
+    end
+  end
+
+  describe "removed_automatically?" do
+    it "is true if there is no remover" do
+      visibility = build(:visibility, :removed, removed_by: nil)
+
+      expect(visibility).to be_removed_automatically
+    end
+
+    it "is false if it was removed by an offier" do
+      visibility = build(:visibility, :removed, removed_by: create(:officer))
+
+      expect(visibility).not_to be_removed_automatically
+    end
+
+    it "is false if it is not removed" do
+      visibility = build(:visibility)
+
+      expect(visibility).not_to be_removed_automatically
     end
   end
 end
