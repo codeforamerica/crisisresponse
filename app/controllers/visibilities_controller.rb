@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "threshold"
+
 class VisibilitiesController < ApplicationController
   before_action :authenticate_officer!
   before_action :authorize_admin

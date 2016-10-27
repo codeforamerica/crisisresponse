@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 require "rms_importer"
-require "email_service"
 
 describe RMSImporter do
   it "uses the credentials stored in the ENV variables" do
@@ -161,6 +162,24 @@ describe RMSImporter do
     end
   end
 
+  describe "emails" do
+    it "sends an email when people cross the threshold and become visible" do
+      stub_crisis_incidents
+      visibility = create(:visibility)
+      threshold = double(create_visibilities_over_threshold: [visibility]).
+        as_null_object
+      allow(Threshold).to receive(:new).and_return(threshold)
+      allow(EmailService).to receive(:send)
+
+      RMSImporter.new.import
+
+      expect(EmailService).to have_received(:send) do |message|
+        expect(message.subject).
+          to eq("[RideAlong Response] New Core Profile Generated - #{l(Date.today)}")
+      end
+    end
+  end
+
   describe "logging" do
     it "writes unprocessable data to a log file, along with the error" do
       message = "there was an error"
@@ -202,64 +221,6 @@ describe RMSImporter do
       expect(File.read(filename)).to match(/^123,.+,123,/)
       expect(File.read(filename)).to match(/^123,.+,456,/)
       expect(File.read(filename)).not_to match(/^456,.+,456,/)
-    end
-  end
-
-  describe "threshold" do
-    context "when the person has not been visible before" do
-      it "makes them visible to patrol officers" do
-        allow(ENV).to receive(:fetch)
-        allow(ENV).to receive(:fetch).
-          with("RECENT_CRISIS_INCIDENT_THRESHOLD").
-          and_return(1)
-        allow(EmailService).to receive(:send)
-
-        person = create(:person, visible: false)
-        rms_person = create(:rms_person, person: person)
-        stub_crisis_incidents(
-          "REPORTED_ON_DATE" => 1.week.ago.to_date.strftime("%m/%d/%Y"),
-          "PIN" => rms_person.pin,
-        )
-
-        expect { RMSImporter.new.import }.to change(Visibility, :count).by(1)
-
-        visibility = Visibility.last
-        expect(visibility.person).to eq(person)
-        expect(visibility.creation_notes).
-          to eq("[AUTO] Person crossed the threshold of 1 RMS Crisis Incident")
-        expect(person.reload).to be_visible
-
-        expect(EmailService).to have_received(:send) do |message|
-          expect(message.subject).
-            to eq("[RideAlong Response] New Core Profile Generated - #{l(Date.today)}")
-        end
-      end
-    end
-
-    context "when the person is visible" do
-      it "doesn't change their visibility" do
-        stub_crisis_incidents
-        person = create(:person)
-        visibility = create(:visibility, person: person)
-
-        expect { RMSImporter.new.import }.not_to change(Visibility, :count)
-
-        expect(visibility.person).to eq(person)
-        expect(person.reload).to be_visible
-      end
-    end
-
-    context "when the person has previously been visible" do
-      # TODO do we actually want to do this?
-      it "doesn't change their visibility" do
-        stub_crisis_incidents
-        person = create(:person, visible: false)
-        create(:visibility, :removed, person: person)
-
-        expect { RMSImporter.new.import }.not_to change(Visibility, :count)
-
-        expect(person.reload).not_to be_visible
-      end
     end
   end
 
