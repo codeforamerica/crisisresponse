@@ -1,0 +1,23 @@
+.officer.section-body {
+  width: 100%;
+  display: table-row;
+}
+
+.new_officer_search {
+  margin-bottom: $base-spacing;
+
+  #officer_search_name {
+    width: $small-field-width;
+  }
+
+  label,
+  input {
+    margin-right: $base-spacing;
+  }
+
+  label,
+  input,
+  .officer_search_name {
+    display: inline-block;
+  }
+}

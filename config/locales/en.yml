@@ -1,4 +1,10 @@
 en:
+  accounts:
+    update:
+      success: Your information has been updated.
+    edit:
+      title: Edit Profile
+
   authentication:
     sign_in:
       link: Sign in
@@ -51,6 +57,8 @@ en:
         create: Search
       suggestion:
         create: Submit
+      officer_search:
+        create: Filter by name
 
   incidents:
     behaviors:
@@ -91,6 +99,15 @@ en:
 
   menu:
     new_person: Add a New Person
+    officers: Manage Officers
+    edit_account: Account Info
+
+  officers:
+    index:
+      title: All Officers
+    update:
+      success: "Updated %{name}'s information"
+      success: "Could not update %{name}'s information"
 
   people:
     create:
@@ -177,6 +194,8 @@ en:
       person:
         scars_and_marks: Scars, Marks, and Tattoos
         location_supportive_housing: Supportive housing?
+      officer_search:
+        name: Filter by name
     placeholders:
       feedback:
         name: First Last

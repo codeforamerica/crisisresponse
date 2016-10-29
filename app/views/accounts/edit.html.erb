@@ -1,0 +1,19 @@
+<section class="form">
+  <div class="section-header section-header-blue">
+    <%= t("accounts.edit.title") %>
+  </div>
+
+  <div class="section-body">
+    <%= simple_form_for(
+      current_officer,
+      url: account_path,
+      method: :patch,
+    ) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :unit %>
+      <%= f.input :title %>
+      <%= f.input :phone %>
+      <%= f.submit "Update Account" %>
+    <% end %>
+  </div>
+</section>

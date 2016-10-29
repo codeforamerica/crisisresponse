@@ -19,7 +19,7 @@ class FakeAuthentication
   private
 
   def successful_authentication
-    Authentication.new.tap do |auth|
+    Authentication.new(username: username, password: "password").tap do |auth|
       allow(auth).to receive(:attempt_sign_on).and_return(true)
       allow(auth).to receive(:officer_information).and_return(
         username: username,
