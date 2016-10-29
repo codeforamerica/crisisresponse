@@ -6,10 +6,13 @@
     </div>
   <% end %>
 
+  <%= link_to t("menu.edit_account"), edit_account_path %>
+
   <% if current_officer.try(:admin?) %>
     <%= link_to t("drafts.index.link"), drafts_path %>
     <%= link_to t("submissions.index.link"), submissions_path %>
     <%= link_to t("menu.new_person"), new_person_path %>
+    <%= link_to t("menu.officers"), officers_path %>
   <% end %>
 
   <%= link_to("About", page_path("about")) %>

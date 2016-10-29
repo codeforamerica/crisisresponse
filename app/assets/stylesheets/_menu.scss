@@ -73,6 +73,7 @@ $menu-link-height: 3em;
       color: $toggle-selected-text-color;
       display: inline;
       overflow: hidden;
+      box-shadow: $shadow-level-2;
     }
   }
 }

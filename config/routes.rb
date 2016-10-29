@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     resource :visibility, only: [:edit, :new, :update, :create]
   end
 
+  resource :account, only: [:edit, :update]
+  resources :officers, only: [:index, :edit, :update]
+
   get "/response_plans", to: redirect("/")
   root to: "people#index"
 end

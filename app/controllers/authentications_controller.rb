@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthenticationsController < ApplicationController
   def new
     if current_officer
@@ -11,7 +13,9 @@ class AuthenticationsController < ApplicationController
     authentication = Authentication.new(authentication_params)
 
     if authentication.attempt_sign_on
-      officer = Officer.find_or_create_by(authentication.officer_information)
+      officer = Officer.find_by(username: authentication.username) ||
+        Officer.create!(authentication.officer_information)
+
       session[:officer_id] = officer.id
 
       redirect_to(

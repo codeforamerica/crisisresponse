@@ -1,0 +1,21 @@
+<section class="form">
+  <div class="section-header section-header-blue">
+    Edit Officer Profile
+  </div>
+
+  <div class="section-body">
+    <%= simple_form_for(@officer) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :unit %>
+      <%= f.input :title %>
+      <%= f.input :phone %>
+      <%= f.input(
+        :role,
+        collection: Officer::ROLES,
+        label_method: :titlecase,
+        include_blank: false,
+      ) %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</section>

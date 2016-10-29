@@ -2,6 +2,7 @@
 
 class Officer < ApplicationRecord
   include Analytics
+  include PgSearch
 
   NORMAL = "normal"
   ADMIN = "admin"
@@ -11,19 +12,26 @@ class Officer < ApplicationRecord
 
   validates :name, presence: true
   validates :role, inclusion: { in: ROLES }
+  validates :username, uniqueness: true
 
   has_many(
     :authored_response_plans,
     class_name: "ResponsePlan",
-    foreign_key: :author_id,
     dependent: :destroy,
+    foreign_key: :author_id,
   )
 
   has_many(
     :approved_response_plans,
     class_name: "ResponsePlan",
-    foreign_key: :approver_id,
     dependent: :destroy,
+    foreign_key: :approver_id,
+  )
+
+  pg_search_scope(
+    :search,
+    against: [:name, :username],
+    using: [:dmetaphone, :trigram, :tsearch],
   )
 
   def admin?
