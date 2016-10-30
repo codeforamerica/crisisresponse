@@ -12,7 +12,7 @@
       <%= f.input(
         :role,
         collection: Officer::ROLES,
-        label_method: :titlecase,
+        label_method: lambda{ |role| t("officers.roles.#{role}") },
         include_blank: false,
       ) %>
       <%= f.submit %>

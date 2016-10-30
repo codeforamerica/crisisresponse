@@ -31,7 +31,7 @@ RSpec.feature "Officer profiles" do
     fill_in "Filter by name", with: "jenkins"
     page.execute_script("$('.new_officer_search').submit()")
     find("a", text: "Edit").trigger("click")
-    select "Admin", from: "Role"
+    select t("officers.roles.admin"), from: "Role"
     click_on "Update Officer"
 
     expect(page).

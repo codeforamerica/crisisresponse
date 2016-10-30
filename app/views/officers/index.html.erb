@@ -24,7 +24,7 @@
           <td><%= officer.name %></td>
           <td><%= officer.username %></td>
           <td><%= officer.phone %></td>
-          <td><%= officer.role %></td>
+          <td><%= t("officers.roles.#{officer.role}") %></td>
           <td><%= link_to "Edit", edit_officer_path(officer) %></td>
         </tr>
       <% end %>

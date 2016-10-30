@@ -108,6 +108,10 @@ en:
     update:
       success: "Updated %{name}'s information"
       success: "Could not update %{name}'s information"
+    roles:
+      normal: Patrol
+      admin: CRT
+      owner: Supervisor
 
   people:
     create:
