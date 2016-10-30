@@ -6,7 +6,8 @@ class Officer < ApplicationRecord
 
   NORMAL = "normal"
   ADMIN = "admin"
-  ROLES = [NORMAL, ADMIN].freeze
+  OWNER = "owner"
+  ROLES = [NORMAL, ADMIN, OWNER].freeze
 
   before_create :generate_analytics_token
 
@@ -35,6 +36,10 @@ class Officer < ApplicationRecord
   )
 
   def admin?
-    role == ADMIN
+    [ADMIN, OWNER].include?(role)
+  end
+
+  def owner?
+    role == OWNER
   end
 end

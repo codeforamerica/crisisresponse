@@ -54,7 +54,7 @@ RSpec.describe SubmissionsController do
 
   describe "PATCH #approve" do
     it "approves the response plan if it is pending approval" do
-      officer = create(:officer, :admin)
+      officer = create(:officer, :owner)
       plan = create(:response_plan, :submission)
 
       patch(
@@ -76,7 +76,7 @@ RSpec.describe SubmissionsController do
       patch(
         :approve,
         params: { id: plan },
-        session: { officer_id: create(:officer, :admin).id },
+        session: { officer_id: create(:officer, :owner).id },
       )
 
       expect(response).to redirect_to(person_path(plan.person))
@@ -91,7 +91,7 @@ RSpec.describe SubmissionsController do
       patch(
         :approve,
         params: { id: plan },
-        session: { officer_id: create(:officer, :admin).id },
+        session: { officer_id: create(:officer, :owner).id },
       )
 
       expect(response).to redirect_to(person_path(plan.person))
@@ -100,8 +100,8 @@ RSpec.describe SubmissionsController do
       expect(plan.reload).to be_approved
     end
 
-    it "rejects non-admins" do
-      officer = create(:officer)
+    it "rejects non-owners" do
+      officer = create(:officer, :admin)
       submission = create(:response_plan, :submission)
 
       patch(

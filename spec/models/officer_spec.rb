@@ -16,16 +16,42 @@ RSpec.describe Officer, type: :model do
   end
 
   describe "#admin?" do
+    it "is false if the officer's role is `normal`" do
+      non_admin = build_stubbed(:officer, role: "normal")
+
+      expect(non_admin).not_to be_admin
+    end
+
     it "is true if officer's role is `admin`" do
       admin = build_stubbed(:officer, role: "admin")
 
       expect(admin).to be_admin
     end
 
+    it "is true if officer's role is `owner`" do
+      owner = build_stubbed(:officer, role: "owner")
+
+      expect(owner).to be_admin
+    end
+  end
+
+  describe "#owner?" do
     it "is false if the officer's role is `normal`" do
       non_admin = build_stubbed(:officer, role: "normal")
 
-      expect(non_admin).not_to be_admin
+      expect(non_admin).not_to be_owner
+    end
+
+    it "is false if officer's role is `admin`" do
+      admin = build_stubbed(:officer, role: "admin")
+
+      expect(admin).not_to be_owner
+    end
+
+    it "is true if officer's role is `owner`" do
+      owner = build_stubbed(:officer, role: "owner")
+
+      expect(owner).to be_owner
     end
   end
 end

@@ -3,13 +3,17 @@
 </div>
 
 <div class="page-title-actions">
-  <%= link_to(
-    t("submissions.show.approve"),
-    approve_submission_path(plan),
-    method: :patch,
-  ) %>
-  <br/>
-  or
+  <% if current_officer.owner? %>
+    <%= link_to(
+      t("submissions.show.approve"),
+      approve_submission_path(plan),
+      method: :patch,
+    ) %>
+
+    <br/>
+    or
+  <% end %>
+
   <%= link_to(
     t("submissions.show.destroy"),
     submission_path(plan),
