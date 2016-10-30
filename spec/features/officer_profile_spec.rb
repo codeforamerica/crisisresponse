@@ -24,7 +24,7 @@ RSpec.feature "Officer profiles" do
 
   scenario "admin updates a person's role", :js do
     officer = create(:officer, username: "jenkins")
-    admin = create(:officer, :admin)
+    admin = create(:officer, :owner)
 
     sign_in_officer(admin)
     visit officers_path

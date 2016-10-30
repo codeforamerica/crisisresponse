@@ -3,6 +3,7 @@
 class SubmissionsController < ApplicationController
   before_action :authenticate_officer!
   before_action :authorize_admin
+  before_action :authorize_owner, only: [:approve]
 
   # Display a list of response plans pending approval
   def index

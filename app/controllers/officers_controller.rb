@@ -2,7 +2,7 @@
 
 class OfficersController < ApplicationController
   before_action :authenticate_officer!
-  before_action :authorize_admin
+  before_action :authorize_owner
 
   def index
     @officer_search = OfficerSearch.new(search_params)

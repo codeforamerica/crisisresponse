@@ -29,6 +29,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authorize_owner
+    unless officer_signed_in? && current_officer.owner?
+      redirect_to(
+        people_path,
+        alert: t("authentication.unauthorized.new_response_plan"),
+      )
+    end
+  end
+
   def current_officer
     @current_officer ||=
       if demo_mode?

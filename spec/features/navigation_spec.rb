@@ -1,6 +1,19 @@
 require "rails_helper"
 
 RSpec.describe "Navigation" do
+  context "as an owner" do
+    scenario "admin can view all officers", :js do
+      officer = create(:officer, :owner)
+      sign_in_officer(officer)
+
+      visit root_path
+      open_menu
+      click_on t("menu.officers")
+
+      expect(page).to have_content t("helpers.submit.officer_search.create")
+    end
+  end
+
   context "as an admin" do
     scenario "officers can access drafts from home page", :js do
       officer = create(:officer, :admin)
@@ -24,15 +37,14 @@ RSpec.describe "Navigation" do
       expect(page).to have_header t("submissions.index.title")
     end
 
-    scenario "admin can view all officers", :js do
+    scenario "officers can not view list of all officers", :js do
       officer = create(:officer, :admin)
       sign_in_officer(officer)
 
       visit root_path
       open_menu
-      click_on t("menu.officers")
 
-      expect(page).to have_content t("helpers.submit.officer_search.create")
+      expect(page).not_to have_link t("menu.officers")
     end
   end
 

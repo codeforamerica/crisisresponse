@@ -37,6 +37,10 @@ FactoryGirl.define do
     trait :admin do
       role Officer::ADMIN
     end
+
+    trait :owner do
+      role Officer::OWNER
+    end
   end
 
   factory :page_view do
