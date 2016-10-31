@@ -40,23 +40,25 @@
     @include fill-parent;
   }
 
-  input[type="checkbox"] {
-    display:none;
-  }
+  .physicals-search-fields {
+    input[type="checkbox"] {
+      display:none;
+    }
 
-  input[type="checkbox"] + label {
-    @include light-font;
-    border: $base-border;
-    box-shadow: $shadow-level-1;
-    margin-bottom: $small-spacing;
-    margin-right: $base-spacing;
-    padding: $field-padding;
-    text-transform: capitalize;
-  }
+    input[type="checkbox"] + label {
+      @include light-font;
+      border: $base-border;
+      box-shadow: $shadow-level-1;
+      margin-bottom: $small-spacing;
+      margin-right: $base-spacing;
+      padding: $field-padding;
+      text-transform: capitalize;
+    }
 
-  input[type="checkbox"]:checked + label {
-    background-color: $action-color;
-    color: $button-font-color;
+    input[type="checkbox"]:checked + label {
+      background-color: $action-color;
+      color: $button-font-color;
+    }
   }
 
   @include media($medium-screen-up) {
@@ -75,7 +77,7 @@
         @include span-columns(2 of 8);
       }
 
-      input {
+      input[type='text'] {
         @include span-columns(6 of 8);
         float: none;
       }
@@ -87,6 +89,15 @@
 
       .input {
         margin-bottom: 0;
+      }
+
+      .search_visible input {
+        @include span-columns(2 of 8);
+      }
+
+      .search_visible label {
+        @include span-columns(6 of 8);
+        text-align: left;
       }
     }
 

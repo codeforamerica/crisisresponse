@@ -18,6 +18,8 @@
             input_html: { value: (l(@search.date_of_birth) rescue nil) },
             hint: t("search.hints.age", range: Search::DATE_OF_BIRTH_RANGE_IN_YEARS),
           ) %>
+
+          <%= f.input :visible, as: :boolean %>
         </div>
 
         <div class="actions">
