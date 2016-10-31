@@ -35,17 +35,13 @@
     </p>
   <% end %>
 
-  <% if plan %>
+  <% if person.response_plans.drafts.none? &&
+       person.response_plans.submitted.none? %>
     <%= link_to(
       t("people.show.draft.new"),
       drafts_path(person_id: person.id),
       method: :post,
-    ) %>
-  <% else %>
-    <%= link_to(
-      t("people.show.new_plan"),
-      drafts_path(person_id: person.id),
-      method: :post,
+      class: "button"
     ) %>
   <% end %>
 </div>

@@ -10,7 +10,7 @@ feature "Response Plan Form" do
       person = create(:person)
 
       visit person_path(person)
-      click_on t("people.show.new_plan")
+      click_on t("people.show.draft.new")
       fill_in "First name", with: "John"
       fill_in "Last name", with: "Doe"
       fill_in "DOB", with: "01-30-1980"
@@ -29,7 +29,7 @@ feature "Response Plan Form" do
       person = create(:person, height_in_inches: 3)
 
       visit person_path(person)
-      click_on t("people.show.new_plan")
+      click_on t("people.show.draft.new")
       expect(find("#response_plan_assignee_id").value).to eq(officer.id.to_s)
       fill_in "First name", with: "John"
       fill_in "Middle initial", with: "Q"
@@ -77,7 +77,7 @@ feature "Response Plan Form" do
       person = create(:person)
 
       visit person_path(person)
-      click_on t("people.show.new_plan")
+      click_on t("people.show.draft.new")
       fill_in "First name", with: ""
       click_on "Update Response plan"
 
@@ -89,7 +89,7 @@ feature "Response Plan Form" do
       person = create(:person)
 
       visit person_path(person)
-      expect(page).not_to have_content t("people.show.new_plan")
+      expect(page).not_to have_content t("people.show.draft.new")
     end
   end
 

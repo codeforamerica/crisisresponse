@@ -9,6 +9,10 @@ Optional variables:
 <% plan ||= nil %>
 
 <div class="main">
+  <% if current_officer.admin? %>
+    <%= render "title", person: person, plan: plan %>
+  <% end %>
+
   <div class="left-column">
     <%= render "sections/images", person: person %>
     <%= render "sections/physicals", person: person %>
@@ -21,10 +25,6 @@ Optional variables:
   </div>
 
   <div class="right-column">
-    <% if current_officer.admin? %>
-      <%= render "title", person: person, plan: plan %>
-    <% end %>
-
     <%= render "recent_incident_count", person: person %>
     <%= render "urgent_incident_count", person: person %>
 

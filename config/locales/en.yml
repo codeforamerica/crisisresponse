@@ -120,9 +120,8 @@ en:
       success: Added %{name}. Next, create a response plan for them.
       failure: Errors prevented the person from being saved.
     show:
-      new_plan: + Add a response plan
       draft:
-        new: + Update response plan
+        new: + Add information
         exists: A new response plan for %{name} is being drafted.
         show: View existing draft
       submission:
@@ -137,8 +136,6 @@ en:
       response_plan: Crisis Bulletin
 
   profile:
-    actions:
-      title: Admin Actions
     core:
       incident_count:
         recent: within the last 48 hours
