@@ -3,7 +3,7 @@ en:
     update:
       success: Your information has been updated.
     edit:
-      title: Edit Profile
+      title: Your Profile
 
   authentication:
     sign_in:
@@ -98,7 +98,7 @@ en:
   menu:
     new_person: Add a New Person
     officers: Manage Officers
-    edit_account: Account Info
+    edit_account: Your Profile
 
   officers:
     index:
