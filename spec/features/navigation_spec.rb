@@ -10,7 +10,7 @@ RSpec.describe "Navigation" do
       open_menu
       click_on t("menu.officers")
 
-      expect(page).to have_content t("helpers.submit.officer_search.create")
+      expect(page).to have_content t("officers.index.privileged.title")
     end
   end
 

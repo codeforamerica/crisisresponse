@@ -5,8 +5,11 @@ class OfficersController < ApplicationController
   before_action :authorize_owner
 
   def index
-    @officer_search = OfficerSearch.new(search_params)
-    @officers = @officer_search.results
+    @privileged_officers = Officer.where(role: [Officer::ADMIN, Officer::OWNER])
+
+    @officer_search = OfficerSearch.new search_params.merge(
+      candidates: Officer.where(role: Officer::NORMAL),
+    )
   end
 
   def edit

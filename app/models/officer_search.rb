@@ -3,10 +3,10 @@
 class OfficerSearch
   include ActiveModel::Model
 
-  attr_accessor :name
+  attr_accessor :name, :candidates
 
   def results
-    officers = Officer.all
+    officers = candidates || Officer.all
 
     if name
       officers = officers.search(name)

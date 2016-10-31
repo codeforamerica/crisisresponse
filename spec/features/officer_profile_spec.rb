@@ -30,7 +30,8 @@ RSpec.feature "Officer profiles" do
     visit officers_path
     fill_in "Filter by name", with: "jenkins"
     page.execute_script("$('.new_officer_search').submit()")
-    find("a", text: "Edit").trigger("click")
+    find("a[href='#{edit_officer_path(officer)}']", text: "Edit").
+      trigger("click")
     select t("officers.roles.admin"), from: "Role"
     click_on "Update Officer"
 

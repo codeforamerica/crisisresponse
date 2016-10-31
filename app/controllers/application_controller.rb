@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   def current_officer
     @current_officer ||=
       if demo_mode?
-        Officer.find_by(role: Officer::ADMIN)
+        Officer.find_by(role: Officer::OWNER)
       else
         Officer.find_by(id: session[:officer_id])
       end
