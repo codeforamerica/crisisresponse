@@ -12,7 +12,11 @@ class SafetyConcern < ActiveRecord::Base
   validates :title, presence: true
 
   def occurred_on=(value)
-    super(Date.strptime(value, "%m-%d-%Y"))
+    if value.present?
+      super(Date.strptime(value, "%m-%d-%Y"))
+    else
+      super(nil)
+    end
   end
 
   def go_number=(value)

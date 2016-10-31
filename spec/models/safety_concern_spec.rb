@@ -15,4 +15,24 @@ RSpec.describe SafetyConcern, type: :model do
       expect(concern.go_number).to eq("201601010101")
     end
   end
+
+  describe "#occurred_on=" do
+    it "accepts dates in %m-%d-%Y format" do
+      safety = SafetyConcern.new(occurred_on: "01-02-2016")
+
+      expect(safety.occurred_on).to eq Date.new(2016, 1, 2)
+    end
+
+    it "treats empty strings as nil" do
+      safety = SafetyConcern.new(occurred_on: "")
+
+      expect(safety.occurred_on).to eq nil
+    end
+
+    it "accepts nil" do
+      safety = SafetyConcern.new(occurred_on: nil)
+
+      expect(safety.occurred_on).to eq nil
+    end
+  end
 end
