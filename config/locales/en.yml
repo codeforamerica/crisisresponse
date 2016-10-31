@@ -199,6 +199,8 @@ en:
         location_supportive_housing: Supportive housing?
       officer_search:
         name: Filter by name or username
+      search:
+        visible: Limit results to patrol-visible officers
     placeholders:
       feedback:
         name: First Last

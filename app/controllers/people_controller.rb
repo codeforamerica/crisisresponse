@@ -68,11 +68,12 @@ class PeopleController < ApplicationController
   def search_params
     if params[:search].present?
       params.require(:search).permit(
-        :name,
-        :date_of_birth,
         :age,
+        :date_of_birth,
         :height_feet,
         :height_inches,
+        :name,
+        :visible,
         :weight_in_pounds,
         eye_color: [],
         hair_color: [],

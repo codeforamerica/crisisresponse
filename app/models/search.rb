@@ -27,10 +27,11 @@ class Search
     :height_feet,
     :height_inches,
     :name,
-    :weight_in_pounds,
-    :sex,
     :race,
-  ]
+    :sex,
+    :visible,
+    :weight_in_pounds,
+  ].freeze
 
   AGE_RANGE_IN_YEARS = 5
   DATE_OF_BIRTH_RANGE_IN_YEARS = AGE_RANGE_IN_YEARS
@@ -56,7 +57,7 @@ class Search
   end
 
   def active_filters
-    SEARCHABLE_ATTRS.select do |attr|
+    (SEARCHABLE_ATTRS - [:visible]).select do |attr|
       public_send(attr).present?
     end
   end
@@ -68,6 +69,10 @@ class Search
   def close_matches
     people = @candidates.
       joins("LEFT OUTER JOIN rms_people ON rms_people.person_id = people.id")
+
+    if visible
+      people = people.where(id: Visibility.active.pluck(:person_id))
+    end
 
     if name.present?
       people = people.search(name.tr(IGNORED_CHARACTERS, ""))
