@@ -1,13 +1,20 @@
+.officers {
+  margin-bottom: $large-spacing;
+}
+
+.officers-title {
+  margin-bottom: $tiny-spacing;
+}
+
 .officer.section-body {
   width: 100%;
   display: table-row;
 }
 
 .new_officer_search {
-  margin-bottom: $base-spacing;
-
   #officer_search_name {
     width: $small-field-width;
+    margin-bottom: 0;
   }
 
   label,

@@ -57,8 +57,6 @@ en:
         create: Search
       suggestion:
         create: Submit
-      officer_search:
-        create: Filter by name
 
   incidents:
     behaviors:
@@ -104,7 +102,11 @@ en:
 
   officers:
     index:
-      title: All Officers
+      privileged:
+        title: Current editors and supervisors
+      patrol:
+        title: Available personnel
+        subtitle: People on the list below have view-only access to the app.
     update:
       success: "Updated %{name}'s information"
       failure: "Could not update %{name}'s information"
@@ -199,7 +201,7 @@ en:
         scars_and_marks: Scars, Marks, and Tattoos
         location_supportive_housing: Supportive housing?
       officer_search:
-        name: Filter by name
+        name: Filter by name or username
     placeholders:
       feedback:
         name: First Last

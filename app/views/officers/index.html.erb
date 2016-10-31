@@ -1,3 +1,9 @@
+<h1 class="officers-title"><%= t("officers.index.privileged.title") %></h1>
+<%= render "officers_list", officers: @privileged_officers %>
+
+<h1 class="officers-title"><%= t("officers.index.patrol.title") %></h1>
+<p><%= t("officers.index.patrol.subtitle") %></p>
+
 <%= simple_form_for(
   @officer_search,
   url: officers_path,
@@ -6,28 +12,4 @@
   <%= f.input :name %>
 <% end %>
 
-<section class="officers">
-  <table>
-    <thead class="section-header section-header-blue">
-      <tr>
-        <th>Name</th>
-        <th>Username</th>
-        <th>Phone #</th>
-        <th>Role</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @officer_search.results.each do |officer| %>
-        <tr class="section-body officer">
-          <td><%= officer.name %></td>
-          <td><%= officer.username %></td>
-          <td><%= officer.phone %></td>
-          <td><%= t("officers.roles.#{officer.role}") %></td>
-          <td><%= link_to "Edit", edit_officer_path(officer) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</section>
+<%= render "officers_list", officers: @officer_search.results %>
