@@ -110,7 +110,7 @@ en:
       failure: "Could not update %{name}'s information"
     roles:
       normal: Patrol
-      admin: CRT
+      admin: Editor
       owner: Supervisor
 
   people:

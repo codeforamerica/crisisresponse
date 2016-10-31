@@ -24,7 +24,7 @@ feature "Response Plan Form" do
     end
 
     scenario "Officer fills in all information" do
-      officer = create(:officer, :admin)
+      officer = create(:officer, :owner)
       sign_in_officer(officer)
       person = create(:person, height_in_inches: 3)
 
