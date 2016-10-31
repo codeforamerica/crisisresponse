@@ -8,7 +8,7 @@
     <div class="section-body">
       <%= f.input(
         :assignee_id,
-        collection: Officer.where(role: Officer::ADMIN),
+        collection: Officer.where(role: [Officer::ADMIN, Officer::OWNER]),
         value_method: :id,
         selected: f.object.assignee_id || current_officer,
       ) %>
