@@ -38,7 +38,7 @@ RSpec.feature "Officer Permissions" do
       person = create(:person)
 
       visit person_path(person)
-      click_on t("people.show.new_plan")
+      click_on t("people.show.draft.new")
 
       expect(page).to have_content \
         t("drafts.create.success.from_scratch", name: person.name)
@@ -160,7 +160,7 @@ RSpec.feature "Officer Permissions" do
       expect(person.first_name).to eq("John")
       expect(person.last_name).to eq("Doe")
       expect(person.date_of_birth).to eq(Date.new(1980, 1, 2))
-      expect(page).to have_link t("people.show.new_plan")
+      expect(page).to have_link t("people.show.draft.new")
     end
 
     scenario "they can kick a submission back down to draft status" do
