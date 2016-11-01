@@ -2,6 +2,11 @@
   margin: $base-spacing auto;
   width: $optimal-reading-width;
 
+  &-subheading {
+    font-size: 1.2em;
+    @include heavy-font;
+  }
+
   label {
     @include light-font;
   }
