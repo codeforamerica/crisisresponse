@@ -29,18 +29,27 @@ Danish icing gingerbread gummies jujubes topping. Chocolate cake sweet roll pudd
 Apple pie cake gingerbread gummi bears bear claw toffee. Sugar plum cupcake candy cookie wafer marzipan danish. Biscuit powder oat cake soufflé dessert. Cotton candy soufflé cake candy cupcake danish chupa chups candy pastry. Sweet roll dragée apple pie bear claw gingerbread cookie soufflé. Chupa chups tart candy canes pie donut. Cheesecake dragée chocolate marzipan dragée lollipop. Jelly jelly-o wafer liquorice cotton
 NARRATIVE
 
+Officer.create!(
+  name: "Jane Doe",
+  role: Officer::NORMAL,
+  unit: nil,
+  title: nil,
+  phone: "206-123-4567",
+  username: "doej1",
+)
+
 officer = Officer.create!(
-  name: "Ofc. John Doe",
+  name: "John Doe",
   role: Officer::ADMIN,
   unit: "Crisis Response Team",
   title: nil,
   phone: "206-123-4567",
-  username: "doe",
+  username: "doej2",
 )
 
 sergeant = Officer.create!(
-  name: "Sgt Jones",
-  role: Officer::ADMIN,
+  name: "Jones",
+  role: Officer::OWNER,
   unit: "Crisis Response Team",
   title: nil,
   phone: nil,
