@@ -8,6 +8,6 @@ $(function() {
         autoclear: false
       });
   }
-});
 
-$(window.mask_date_fields);
+  window.mask_date_fields();
+});
