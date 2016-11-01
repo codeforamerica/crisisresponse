@@ -28,4 +28,10 @@
       <% end %>
     </tbody>
   </table>
+
+  <% if profiles.total_count > profiles.size %>
+    <div class="section-body">
+      <%= paginate profiles %>
+    </div>
+  <% end %>
 </section>

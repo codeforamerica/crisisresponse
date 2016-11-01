@@ -12,6 +12,17 @@ RSpec.describe "Navigation" do
 
       expect(page).to have_content t("officers.index.privileged.title")
     end
+
+    scenario "admin can view all profiles due for review", :js do
+      officer = create(:officer, :owner)
+      sign_in_officer(officer)
+
+      visit root_path
+      open_menu
+      click_on t("menu.profiles")
+
+      expect(page).to have_content t("profiles.index.due_for_review.title")
+    end
   end
 
   context "as an admin" do
