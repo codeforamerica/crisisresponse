@@ -108,6 +108,25 @@ input[type="checkbox"] {
   }
 }
 
+input[type="radio"] {
+  -webkit-appearance: none;
+  background-image: image_url("radio_button_unchecked.svg");
+  background-position-x: right;
+  background-repeat: no-repeat;
+  border-radius: 3px;
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:checked {
+    background-image: image_url("radio_button_checked.svg");
+  }
+}
+
 .boolean label {
   padding: 0;
 }

@@ -221,6 +221,8 @@ en:
         location_supportive_housing: Supportive housing?
       officer_search:
         name: Filter by name or username
+      response_plan:
+        assignee_id: Responsible officer
       search:
         visible: Limit results to patrol-visible officers
     placeholders:
