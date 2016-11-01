@@ -219,10 +219,12 @@ en:
       person:
         scars_and_marks: Scars, Marks, and Tattoos
         location_supportive_housing: Supportive housing?
+        location_name: Building name (e.g., The Morrison)
       officer_search:
         name: Filter by name or username
       response_plan:
         assignee_id: Responsible officer
+        private_notes: Internal CRT Notes
       search:
         visible: Limit results to patrol-visible officers
     placeholders:

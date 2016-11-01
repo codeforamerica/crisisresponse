@@ -75,4 +75,10 @@
   </div>
 </section>
 
-<%= render "forms/nested_form", f: form, relationship: :images %>
+<%= render "forms/nested_form", f: form, relationship: :images do %>
+  <div class="section-body">
+    <span class="hint">
+      The first image you upload will be the primary image.
+    </span>
+  </div>
+<% end %>

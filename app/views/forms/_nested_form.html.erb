@@ -4,6 +4,8 @@
   </label>
 
   <div class="nested-field-container <%= relationship.to_s.singularize %>-fields">
+    <%= yield %>
+
     <%= f.simple_fields_for relationship do |nested_form| %>
       <%= render "forms/#{relationship.to_s.singularize}_fields", f: nested_form %>
     <% end %>
