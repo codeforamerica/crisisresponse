@@ -104,6 +104,7 @@ en:
     new_person: Add a New Person
     officers: Manage Officers
     edit_account: Your Profile
+    profiles: Review Profiles
 
   officers:
     index:

@@ -16,6 +16,7 @@
 
   <% if current_officer.try(:owner?) %>
     <%= link_to t("menu.officers"), officers_path %>
+    <%= link_to t("menu.profiles"), profiles_path %>
   <% end %>
 
   <%= link_to("About", page_path("about")) %>
