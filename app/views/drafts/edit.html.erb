@@ -3,18 +3,6 @@
 <% end %>
 
 <%= simple_form_for(@response_plan, url: draft_path(@response_plan)) do |f| %>
-  <section class="form">
-    <div class="section-header section-header-blue">Assignee</div>
-    <div class="section-body">
-      <%= f.input(
-        :assignee_id,
-        collection: Officer.where(role: [Officer::ADMIN, Officer::OWNER]),
-        value_method: :id,
-        selected: f.object.assignee_id || current_officer,
-      ) %>
-    </div>
-  </section>
-
   <%= f.fields_for :person do |person_form| %>
     <%= render "forms/person_fields", form: person_form %>
   <% end %>
@@ -42,6 +30,20 @@
     relationship: :response_strategies,
     label: "Response Plan",
   ) %>
+
+  <section class="form">
+    <div class="section-header section-header-blue">About the Plan</div>
+    <div class="section-body">
+      <%= f.input(
+        :assignee_id,
+        as: :radio_buttons,
+        collection: Officer.where(role: [Officer::ADMIN, Officer::OWNER]),
+        hint: "If your information is out-of-date on the plan, you can update it from #{link_to('your profile page', edit_account_path, target: "blank")}.".html_safe,
+        selected: f.object.assignee_id || current_officer,
+        value_method: :id,
+      ) %>
+    </div>
+  </section>
 
   <section class="form">
     <div class="section-header section-header-blue">Save</div>

@@ -30,7 +30,6 @@ feature "Response Plan Form" do
 
       visit person_path(person)
       click_on t("people.show.draft.new")
-      expect(find("#response_plan_assignee_id").value).to eq(officer.id.to_s)
       fill_in "First name", with: "John"
       fill_in "Middle initial", with: "Q"
       fill_in "Last name", with: "Doe"
@@ -46,11 +45,17 @@ feature "Response Plan Form" do
       fill_in "Background info", with: "Lorem Ipsum Dolor Si Amet"
       fill_in "Baseline", with: "Baseline behavior"
       fill_in "Elevated", with: "Elevated behavior"
-      fill_in "Location name", with: "The Morrison Hotel"
+      fill_in(
+        t("simple_form.labels.person.location_name"),
+        with: "The Morrison Hotel",
+      )
       fill_in "Location address", with: "509 3rd Ave"
-      find("#response_plan_person_attributes_location_supportive_housing").
-        set(true)
-      fill_in "Private notes", with: "These notes should be private"
+      check t("simple_form.labels.person.location_supportive_housing")
+      choose officer.name
+      fill_in(
+        t("simple_form.labels.response_plan.private_notes"),
+        with: "These notes should be private",
+      )
       click_on "Update Response plan"
 
       expect(page).

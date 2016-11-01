@@ -6,7 +6,7 @@
     @include light-font;
   }
 
-  input:not([type='checkbox']),
+  input:not([type='checkbox']):not([type='radio']),
   select {
     width: $base-field-width;
   }
@@ -14,6 +14,31 @@
   textarea {
     height: 10em;
     width: $large-field-width;
+  }
+
+  .radio {
+    display: block;
+
+    label {
+      padding: 0;
+    }
+  }
+
+  label.radio_buttons {
+    margin-bottom: $small-spacing;
+  }
+
+  .radio_buttons {
+    margin-bottom: 0;
+
+    .hint {
+      margin-left: 0;
+    }
+  }
+
+  input[type='radio'] {
+    background-position-x: left;
+    width: $base-spacing;
   }
 
   .remove_fields {
