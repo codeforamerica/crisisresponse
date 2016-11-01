@@ -4,4 +4,15 @@
 
 <h1 class="profiles-title"><%= t("profiles.index.patrol.title") %></h1>
 <p><%= t("profiles.index.patrol.subtitle") %></p>
+
+<div class="profiles-controls">
+  <%= simple_form_for(
+    @search,
+    url: profiles_path,
+    method: :get,
+  ) do |f| %>
+    <%= f.input :name, label: "Filter by name" %>
+  <% end %>
+</div>
+
 <%= render "profiles_list", profiles: @people %>

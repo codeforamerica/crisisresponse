@@ -22,3 +22,21 @@
     color: $green;
   }
 }
+
+.profiles-controls .new_search {
+  #search_name {
+    width: $small-field-width;
+    margin-bottom: 0;
+  }
+
+  label,
+  input {
+    margin-right: $base-spacing;
+  }
+
+  label,
+  input,
+  .search_name {
+    display: inline-block;
+  }
+}
