@@ -107,6 +107,8 @@ en:
     profiles: Review Profiles
 
   officers:
+    edit:
+      help_text: This is the information that will display on crisis bulletins you manage.  Any changes you make will be automatically reflected across the RideAlong Response app.
     index:
       privileged:
         title: Current editors and supervisors
@@ -220,13 +222,15 @@ en:
         scars_and_marks: Scars, Marks, and Tattoos
         location_supportive_housing: Supportive housing?
         location_name: Building name (e.g., The Morrison)
+      officer:
+        name: Title and Name
       officer_search:
         name: Filter by name or username
       response_plan:
         assignee_id: Responsible officer
         private_notes: Internal CRT Notes
       search:
-        visible: Limit results to patrol-visible officers
+        visible: Limit results to patrol-visible profiles
     placeholders:
       feedback:
         name: First Last

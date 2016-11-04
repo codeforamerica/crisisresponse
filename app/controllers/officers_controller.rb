@@ -39,6 +39,6 @@ class OfficersController < ApplicationController
   end
 
   def update_params
-    params.require(:officer).permit(:name, :unit, :title, :phone, :role)
+    params.require(:officer).permit(:name, :phone, :role)
   end
 end

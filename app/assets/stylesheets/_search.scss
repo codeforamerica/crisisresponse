@@ -91,13 +91,19 @@
         margin-bottom: 0;
       }
 
-      .search_visible input {
-        @include span-columns(2 of 8);
-      }
-
-      .search_visible label {
+      .search_visible {
+        @include shift(2);
         @include span-columns(6 of 8);
-        text-align: left;
+
+        input {
+          float: left;
+          height: 1.2em;
+        }
+
+        label {
+          text-align: left;
+          width: auto;
+        }
       }
     }
 

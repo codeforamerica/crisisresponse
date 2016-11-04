@@ -7,7 +7,7 @@
 }
 
 .profiles-title {
-  margin-bottom: $tiny-spacing;
+  margin-bottom: $small-spacing;
 }
 
 .profile.section-body {
@@ -24,9 +24,15 @@
 }
 
 .profiles-controls .new_search {
+  font-size: 0.8rem;
+
   #search_name {
     width: $small-field-width;
     margin-bottom: 0;
+  }
+
+  label {
+    @include light-font;
   }
 
   label,
@@ -39,4 +45,10 @@
   .search_name {
     display: inline-block;
   }
+}
+
+.profiles-description {
+  @include light-font;
+  font-size: 0.8rem;
+  margin-top: -$small-spacing;
 }

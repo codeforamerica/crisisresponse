@@ -9,16 +9,12 @@ RSpec.feature "Officer profiles" do
     sign_in_officer(officer)
     visit edit_account_path
     fill_in :officer_name, with: "Jacques Closeau"
-    fill_in :officer_unit, with: "CRU"
-    fill_in :officer_title, with: "Sergeant"
     fill_in :officer_phone, with: "2223334444"
     click_on "Update Account"
 
     expect(page).to have_content t("accounts.update.success")
     officer.reload
     expect(officer.name).to eq("Jacques Closeau")
-    expect(officer.unit).to eq("CRU")
-    expect(officer.title).to eq("Sergeant")
     expect(officer.phone).to eq("2223334444")
   end
 

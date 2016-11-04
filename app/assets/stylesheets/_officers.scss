@@ -1,9 +1,23 @@
 .officers {
   margin-bottom: $large-spacing;
+
+  nav {
+    margin-bottom: 0;
+  }
 }
 
 .officers-title {
-  margin-bottom: $tiny-spacing;
+  margin-bottom: $small-spacing;
+}
+
+.officer-form-help-text {
+  font-size: 0.8em;
+}
+
+.officers-description {
+  @include light-font;
+  font-size: 0.8rem;
+  margin-top: -$small-spacing;
 }
 
 .officer.section-body {
@@ -12,9 +26,15 @@
 }
 
 .new_officer_search {
+  font-size: 0.8rem;
+
   #officer_search_name {
     width: $small-field-width;
     margin-bottom: 0;
+  }
+
+  label {
+    @include light-font;
   }
 
   label,

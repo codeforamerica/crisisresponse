@@ -3,8 +3,9 @@
   width: $optimal-reading-width;
 
   &-subheading {
-    font-size: 1.2em;
     @include heavy-font;
+    font-size: 1.2em;
+    text-transform: uppercase;
   }
 
   label {
@@ -17,7 +18,7 @@
   }
 
   textarea {
-    height: 10em;
+    height: 15em;
     width: $large-field-width;
   }
 

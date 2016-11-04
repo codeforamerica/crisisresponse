@@ -4,10 +4,12 @@
   </div>
 
   <div class="section-body">
+    <p class="officer-form-help-text">
+      <%= t("officers.edit.help_text") %>
+    </p>
+
     <%= simple_form_for(@officer) do |f| %>
       <%= f.input :name %>
-      <%= f.input :unit %>
-      <%= f.input :title %>
       <%= f.input :phone %>
       <%= f.input(
         :role,

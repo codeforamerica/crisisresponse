@@ -1,10 +1,12 @@
 <div class="menu">
-  <%= link_to preferences_path, method: :post, class: "change-theme" do %>
-    <div class="change-theme-toggle">
-      <span class="theme day-theme <%= "selected" if theme == "day" %>">Light</span>
-      <span class="theme night-theme <%= "selected" if theme == "night" %>">Dark</span>
-    </div>
-  <% end %>
+  <div class="menu-toggle">
+    <%= link_to preferences_path, method: :post, class: "change-theme" do %>
+      <div class="change-theme-toggle">
+        <span class="theme day-theme <%= "selected" if theme == "day" %>">Light</span>
+        <span class="theme night-theme <%= "selected" if theme == "night" %>">Dark</span>
+      </div>
+    <% end %>
+  </div>
 
   <%= link_to t("menu.edit_account"), edit_account_path %>
 
