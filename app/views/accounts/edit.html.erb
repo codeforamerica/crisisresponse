@@ -4,10 +4,8 @@
   </div>
 
   <div class="section-body">
-    <p>
-    This is the information that will display on crisis bulletins you manage.
-    Any changes you make will be automatically reflected
-    across the RideAlong Response app.
+    <p class="officer-form-help-text">
+      <%= t("officers.edit.help_text") %>
     </p>
 
     <%= simple_form_for(
@@ -16,8 +14,6 @@
       method: :patch,
     ) do |f| %>
       <%= f.input :name %>
-      <%= f.input :unit %>
-      <%= f.input :title %>
       <%= f.input :phone %>
       <%= f.submit "Update Account" %>
     <% end %>

@@ -2,7 +2,7 @@
 <%= render "officers_list", officers: @privileged_officers %>
 
 <h1 class="officers-title"><%= t("officers.index.patrol.title") %></h1>
-<p><%= t("officers.index.patrol.subtitle") %></p>
+<p class="officers-description"><%= t("officers.index.patrol.subtitle") %></p>
 
 <%= simple_form_for(
   @officer_search,
@@ -12,4 +12,4 @@
   <%= f.input :name %>
 <% end %>
 
-<%= render "officers_list", officers: @officer_search.results %>
+<%= render "officers_list", officers: @officer_search.results.page(params[:page]) %>

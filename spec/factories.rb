@@ -31,8 +31,6 @@ FactoryGirl.define do
     name "Johnson"
     phone "222-333-4444"
     sequence(:username) { |n| "officer_#{n}" }
-    title "Officer"
-    unit "Crisis Response Unit"
 
     trait :admin do
       role Officer::ADMIN

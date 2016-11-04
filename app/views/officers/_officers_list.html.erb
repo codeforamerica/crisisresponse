@@ -6,7 +6,7 @@
         <th>Username</th>
         <th>Phone #</th>
         <th>Role</th>
-        <th>Action</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -17,9 +17,20 @@
           <td><%= officer.username %></td>
           <td><%= officer.phone %></td>
           <td><%= t("officers.roles.#{officer.role}") %></td>
-          <td><%= link_to "Edit", edit_officer_path(officer) %></td>
+          <td>
+            <%= link_to edit_officer_path(officer) do %>
+              <%= inline_svg "edit.svg" %>
+              Edit
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <% if officers.try(:total_count) && officers.total_count > officers.size %>
+    <div class="section-body">
+      <%= paginate officers %>
+    </div>
+  <% end %>
 </section>

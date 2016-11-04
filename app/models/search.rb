@@ -70,7 +70,7 @@ class Search
     people = @candidates.
       joins("LEFT OUTER JOIN rms_people ON rms_people.person_id = people.id")
 
-    if visible
+    if visible.to_i != 0
       people = people.where(id: Visibility.active.pluck(:person_id))
     end
 
