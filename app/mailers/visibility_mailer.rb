@@ -6,7 +6,7 @@ class VisibilityMailer < ApplicationMailer
     date = visibility.created_at.to_date
 
     mail(
-      to: ENV.fetch("FEEDBACK_EMAIL"),
+      to: ENV.fetch("CONTENT_ADMIN_EMAIL"),
       subject: "[RideAlong Response] New Core Profile Generated - #{l(date)}",
     )
   end
