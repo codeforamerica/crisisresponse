@@ -104,16 +104,7 @@ class DraftsController < ApplicationController
   private
 
   def response_plan_params
-    permitted = params.require(:response_plan).permit(PERMITTED_PARAMS)
-
-    dob = permitted[:person_attributes][:date_of_birth]
-    permitted[:person_attributes][:date_of_birth] = parse_date(dob)
-
-    permitted
-  end
-
-  def parse_date(date)
-    Date.strptime(date, "%m-%d-%Y")
+    params.require(:response_plan).permit(PERMITTED_PARAMS)
   end
 
   def save_and_redirect_to_edit(plan, source:)
