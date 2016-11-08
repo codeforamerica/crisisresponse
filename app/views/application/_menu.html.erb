@@ -21,9 +21,6 @@
     <%= link_to t("menu.profiles"), profiles_path %>
   <% end %>
 
-  <%= link_to("About", page_path("about")) %>
-  <%= link_to("App Updates", page_path("changelog")) %>
-
   <% if officer_signed_in? %>
     <%= link_to(
       t("authentication.sign_out.link"),
