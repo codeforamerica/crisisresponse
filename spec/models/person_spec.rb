@@ -35,6 +35,26 @@ RSpec.describe Person, type: :model do
     end
   end
 
+  describe "#date_of_birth=" do
+    it "parses dates in mm-dd-yyyy format" do
+      person = Person.new(date_of_birth: "01-30-1980")
+
+      expect(person.date_of_birth).to eq(Date.new(1980, 1, 30))
+    end
+
+    it "parses empty strings" do
+      person = Person.new(date_of_birth: "")
+
+      expect(person.date_of_birth).to be_nil
+    end
+
+    it "parses nil" do
+      person = Person.new(date_of_birth: nil)
+
+      expect(person.date_of_birth).to be_nil
+    end
+  end
+
   describe "#display_name" do
     it "displays last name, first name, middle initial" do
       person = build(
@@ -221,6 +241,8 @@ RSpec.describe Person, type: :model do
     specify { expect_to_fallback_to_rms_person_for(:weight_in_pounds) }
 
     specify { expect_identical_assignment_to_not_update_person(:date_of_birth, Date.today) }
+    specify { expect_identical_assignment_to_not_update_person(:date_of_birth, "") }
+    specify { expect_identical_assignment_to_not_update_person(:date_of_birth, nil) }
     specify { expect_identical_assignment_to_not_update_person(:eye_color, "blue") }
     specify { expect_identical_assignment_to_not_update_person(:first_name, "Foo") }
     specify { expect_identical_assignment_to_not_update_person(:hair_color, "brown") }

@@ -103,6 +103,22 @@ class Person < ApplicationRecord
     location_address.split(",")[1..-1].join(",")
   end
 
+  def date_of_birth=(value)
+    parsed = if value.respond_to?(:to_date) && !value.is_a?(String)
+               value.to_date
+             elsif value.present?
+               Date.strptime(value, "%m-%d-%Y")
+             else
+               nil
+             end
+
+    if rms_person.try(:date_of_birth) == value
+      super(nil)
+    else
+      super(parsed)
+    end
+  end
+
   def display_name
     if middle_initial.present?
       "#{last_name}, #{first_name} #{middle_initial}"
