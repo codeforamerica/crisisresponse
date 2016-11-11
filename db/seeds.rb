@@ -32,8 +32,6 @@ NARRATIVE
 Officer.create!(
   name: "Jane Doe",
   role: Officer::NORMAL,
-  unit: nil,
-  title: nil,
   phone: "206-123-4567",
   username: "doej1",
 )
@@ -41,8 +39,6 @@ Officer.create!(
 officer = Officer.create!(
   name: "John Doe",
   role: Officer::ADMIN,
-  unit: "Crisis Response Team",
-  title: nil,
   phone: "206-123-4567",
   username: "doej2",
 )
@@ -50,8 +46,6 @@ officer = Officer.create!(
 sergeant = Officer.create!(
   name: "Jones",
   role: Officer::OWNER,
-  unit: "Crisis Response Team",
-  title: nil,
   phone: nil,
   username: "jones",
 )
