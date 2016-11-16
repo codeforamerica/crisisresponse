@@ -473,6 +473,15 @@ describe Search do
 
         expect(search.close_matches).to eq([match])
       end
+
+      it "guards against SQL injection" do
+        create(:person)
+        search = Search.new(hair_color: <<-INJECTION)
+        '||cast((select chr(95)||chr(33)||chr(64)||chr(53)||chr(100)||chr(105)||chr(108)||chr(101)||chr(109)||chr(109)||chr(97)) as numeric)||'
+        INJECTION
+
+        expect(search.close_matches).to be_empty
+      end
     end
 
     describe "searching by eye_color" do

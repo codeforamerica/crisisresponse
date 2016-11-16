@@ -17,6 +17,8 @@
 # then we fall back to searching the attributes on the `RMS::Person`.
 class Search
   include ActiveModel::Model
+  include ActiveRecord::Sanitization::ClassMethods
+
   validate :proper_date_format
 
   SEARCHABLE_ATTRS = [
@@ -178,7 +180,9 @@ class Search
   #
   # e.g. `hair_color IN ('black','brown')`
   def query_for_list(relation, attribute, values)
-    selected_values = "(#{values.map {|s| "'#{s}'"}.join(",")})"
+    question_marks = ['?'] * values.length
+    condition = "(#{question_marks.join(',')})"
+    selected_values = sanitize_sql_array([condition] + values)
 
     relation.where(<<-SQL)
       people.#{attribute} IN #{selected_values}
@@ -187,5 +191,9 @@ class Search
         AND rms_people.#{attribute} IN #{selected_values}
       )
     SQL
+  end
+
+  def connection
+    ActiveRecord::Base.connection
   end
 end
