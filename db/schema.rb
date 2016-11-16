@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20161104202240) do
     t.string   "username"
     t.string   "analytics_token"
     t.string   "role",            default: "normal", null: false
+    t.string   "email"
     t.index ["username"], name: "index_officers_on_username", unique: true, using: :btree
   end
 
