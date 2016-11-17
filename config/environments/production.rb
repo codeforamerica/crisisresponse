@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.force_ssl = true
   config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
   config.cache_classes = true
   config.eager_load = true
