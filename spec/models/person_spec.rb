@@ -146,12 +146,11 @@ RSpec.describe Person, type: :model do
 
   describe "#incidents_since" do
     it "returns the number of incidents since a given time" do
-      rms_person = create(:rms_person)
-      _old = create(:incident, reported_at: 3.days.ago, rms_person: rms_person)
-      recent = create(:incident, reported_at: 1.day.ago, rms_person: rms_person)
+      has_incidents = create(:person)
+      _old = create(:incident, reported_at: 3.days.ago, person: has_incidents)
+      recent = create(:incident, reported_at: 1.day.ago, person: has_incidents)
 
       has_no_incidents = build_stubbed(:person)
-      has_incidents = rms_person.person
 
       expect(has_no_incidents.incidents_since(2.days.ago)).to eq([])
       expect(has_incidents.incidents_since(2.days.ago)).to eq([recent])
@@ -225,83 +224,4 @@ RSpec.describe Person, type: :model do
     end
   end
 
-  describe "RMS fallbacks" do
-    specify { expect_to_fallback_to_rms_person_for(:date_of_birth) }
-    specify { expect_to_fallback_to_rms_person_for(:eye_color) }
-    specify { expect_to_fallback_to_rms_person_for(:first_name) }
-    specify { expect_to_fallback_to_rms_person_for(:hair_color) }
-    specify { expect_to_fallback_to_rms_person_for(:height_in_inches) }
-    specify { expect_to_fallback_to_rms_person_for(:last_name) }
-    specify { expect_to_fallback_to_rms_person_for(:location_address, "foo") }
-    specify { expect_to_fallback_to_rms_person_for(:location_name, "foo") }
-    specify { expect_to_fallback_to_rms_person_for(:middle_initial) }
-    specify { expect_to_fallback_to_rms_person_for(:race) }
-    specify { expect_to_fallback_to_rms_person_for(:scars_and_marks, "foo") }
-    specify { expect_to_fallback_to_rms_person_for(:sex) }
-    specify { expect_to_fallback_to_rms_person_for(:weight_in_pounds) }
-
-    specify { expect_identical_assignment_to_not_update_person(:date_of_birth, Date.today) }
-    specify { expect_identical_assignment_to_not_update_person(:date_of_birth, "") }
-    specify { expect_identical_assignment_to_not_update_person(:date_of_birth, nil) }
-    specify { expect_identical_assignment_to_not_update_person(:eye_color, "blue") }
-    specify { expect_identical_assignment_to_not_update_person(:first_name, "Foo") }
-    specify { expect_identical_assignment_to_not_update_person(:hair_color, "brown") }
-    specify { expect_identical_assignment_to_not_update_person(:height_in_inches, 60) }
-    specify { expect_identical_assignment_to_not_update_person(:last_name, "Foo") }
-    specify { expect_identical_assignment_to_not_update_person(:location_address, "foo") }
-    specify { expect_identical_assignment_to_not_update_person(:location_name, "foo") }
-    specify { expect_identical_assignment_to_not_update_person(:middle_initial, "A") }
-    specify { expect_identical_assignment_to_not_update_person(:race, "WHITE") }
-    specify { expect_identical_assignment_to_not_update_person(:scars_and_marks, "foo") }
-    specify { expect_identical_assignment_to_not_update_person(:sex, "Male") }
-    specify { expect_identical_assignment_to_not_update_person(:weight_in_pounds, 200) }
-
-    specify { expect_different_assignment_to_update_person(:date_of_birth, Date.today, 20.years.ago.to_date) }
-    specify { expect_different_assignment_to_update_person(:eye_color, "blue", "brown") }
-    specify { expect_different_assignment_to_update_person(:first_name, "Foo", "Bar") }
-    specify { expect_different_assignment_to_update_person(:hair_color, "brown", "black") }
-    specify { expect_different_assignment_to_update_person(:height_in_inches, 50, 60) }
-    specify { expect_different_assignment_to_update_person(:last_name, "Foo", "Bar") }
-    specify { expect_different_assignment_to_update_person(:location_address, "foo", "bar") }
-    specify { expect_different_assignment_to_update_person(:location_name, "foo", "bar") }
-    specify { expect_different_assignment_to_update_person(:race, "WHITE", "UNKNOWN") }
-    specify { expect_different_assignment_to_update_person(:scars_and_marks, "foo", "bar") }
-    specify { expect_different_assignment_to_update_person(:sex, "Male", "Female") }
-    specify { expect_different_assignment_to_update_person(:weight_in_pounds, 200, 180) }
-
-    def expect_to_fallback_to_rms_person_for(attribute, value = nil)
-      factory_options = value ? { attribute => value } : {}
-      person = build(:person)
-      rms_person = build(:rms_person, factory_options)
-      person.rms_person = rms_person
-      person.assign_attributes(attribute => nil)
-
-      actual = person.public_send(attribute)
-      expected = rms_person.public_send(attribute)
-
-      expect(actual).not_to be_nil
-      expect(actual).to eq(expected)
-    end
-
-    def expect_identical_assignment_to_not_update_person(attribute, value)
-      person = build(:person, attribute => nil)
-      person.save(validate: false)
-      create(:rms_person, person: person, attribute => value)
-
-      expect do
-        person.update(attribute => value)
-      end.not_to change { person.reload.attributes[attribute.to_s] }
-    end
-
-    def expect_different_assignment_to_update_person(attribute, old, new)
-      person = build(:person, attribute => nil)
-      person.save(validate: false)
-      create(:rms_person, person: person, attribute => old)
-
-      expect { person.update(attribute => new) }.
-        to change { person.reload.attributes[attribute.to_s] }.
-        from(nil).
-        to(new)
-    end
-  end
 end

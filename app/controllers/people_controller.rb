@@ -30,7 +30,6 @@ class PeopleController < ApplicationController
 
     @people = @search.
       close_matches.
-      includes(:rms_person).
       includes(:images).
       page(params[:page]).
       per(RECORDS_PER_PAGE)

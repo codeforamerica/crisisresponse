@@ -7,8 +7,7 @@ describe Threshold do
   context "when the person has not been visible before" do
     it "makes them visible to patrol officers" do
       person = create(:person, visible: false)
-      rms_person = create(:rms_person, person: person)
-      create(:incident, rms_person: rms_person)
+      create(:incident, person: person)
 
       expect do
         Threshold.new(1).create_visibilities_over_threshold
@@ -17,7 +16,7 @@ describe Threshold do
       visibility = Visibility.last
       expect(visibility.person).to eq(person)
       expect(visibility.creation_notes).
-        to eq("[AUTO] Person crossed the threshold of 1 RMS Crisis Incident")
+        to eq("[AUTO] Person crossed the threshold of 1 Crisis Incident")
       expect(person.reload).to be_visible
     end
   end
@@ -39,8 +38,7 @@ describe Threshold do
   context "when the person has been automatically removed from visiblity" do
     it "updates their visibility" do
       person = create(:person, visible: false)
-      rms_person = create(:rms_person, person: person)
-      create(:incident, rms_person: rms_person)
+      create(:incident, person: person)
       create(:visibility, :removed, person: person, removed_by: nil)
 
       expect do
@@ -53,8 +51,8 @@ describe Threshold do
 
   context "when a person has been manually removed from visibility" do
     it "does not update their visibility" do
-      incident = create(:incident)
-      person = create(:person, rms_person: incident.rms_person, visible: false)
+      person = create(:person, visible: false)
+      incident = create(:incident, person: person)
       create(
         :visibility,
         :removed,

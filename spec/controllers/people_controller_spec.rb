@@ -35,10 +35,7 @@ RSpec.describe PeopleController, type: :controller do
     it "shows people in alphabetical order" do
       officer = create(:officer)
       charlie = create(:person, last_name: "Charlie")
-      alice = create(:rms_person, last_name: "Alice").person
-      alice.last_name = nil
-      alice.save(validate: false)
-      alice.reload
+      alice = create(:person, last_name: "Alice")
       bob = create(:person, last_name: "Bob")
 
       get :index, session: { officer_id: officer.id }

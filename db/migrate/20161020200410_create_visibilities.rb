@@ -7,8 +7,6 @@
 #
 # This migration is forgetful -
 # everyone will be transitioned to non-visible.
-# To correct this, we should run the RMS import script once.
-# The script will reset everybody's visibility.
 class CreateVisibilities < ActiveRecord::Migration[5.0]
   def change
     create_table :visibilities do |t|
