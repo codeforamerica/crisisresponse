@@ -16,6 +16,7 @@ gem "kaminari"
 gem "neat", "~> 1.7.0"
 gem "net-ldap"
 gem "newrelic_rpm", ">= 3.9.8"
+gem 'nokogiri', '>= 1.7.1'
 gem "normalize-rails", "~> 3.0.0"
 gem "pg"
 gem "pg_search"
