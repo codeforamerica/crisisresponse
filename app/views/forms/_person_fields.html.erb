@@ -34,13 +34,13 @@
   <div class="section-body">
     <%= form.input(
       :race,
-      collection: RMS::RACE_CODES.keys,
+      collection: PersonValidations::RACE_CODES.keys,
       label_method: lambda { |race| race.titlecase.gsub("/", " / ") },
       required: true,
     ) %>
     <%= form.input(
       :sex,
-      collection: RMS::SEX_CODES.keys,
+      collection: PersonValidations::SEX_CODES.keys,
       label_method: lambda { |sex| sex.titlecase },
       required: true
     ) %>
@@ -50,12 +50,12 @@
 
     <%= form.input(
       :eye_color,
-      collection: RMS::EYE_COLOR_CODES.values,
+      collection: PersonValidations::EYE_COLOR_CODES.values,
       label_method: lambda(&:titlecase),
     ) %>
     <%= form.input(
       :hair_color,
-      collection: RMS::HAIR_COLOR_CODES.values,
+      collection: PersonValidations::HAIR_COLOR_CODES.values,
       label_method: lambda(&:titlecase),
     ) %>
 

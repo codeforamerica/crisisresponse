@@ -11,16 +11,11 @@ class Person < ApplicationRecord
   before_create :generate_analytics_token
 
   has_many :aliases, dependent: :destroy
-  has_many(
-    :crisis_incidents,
-    through: :rms_person,
-    class_name: "RMS::CrisisIncident",
-  )
+  has_many :crisis_incidents
   has_many :images, dependent: :destroy
   has_many :response_plans
   has_many :visibilities, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  has_one :rms_person, class_name: "RMS::Person"
 
   # Easily access response plans that are in draft or submission mode.
   has_one :draft, -> { drafts }, class_name: "ResponsePlan"
@@ -31,7 +26,6 @@ class Person < ApplicationRecord
     against: [:first_name, :last_name, :middle_initial],
     associated_against: {
       aliases: [:name],
-      rms_person: [:first_name, :last_name, :middle_initial],
     },
     using: {
       dmetaphone: {},
@@ -50,38 +44,6 @@ class Person < ApplicationRecord
     reject_if: :all_blank,
     allow_destroy: true,
   )
-
-  def self.fallback_to_rms_person(attribute)
-    define_method(attribute) do |*args|
-      cache_if_record_is_persisted(attribute) do
-        super(*args) || (rms_person && rms_person.public_send(attribute))
-      end
-    end
-
-    define_method("#{attribute}=") do |value|
-      if rms_person.try(attribute) == value
-        super(nil)
-      else
-        super(value)
-      end
-    end
-  end
-
-  fallback_to_rms_person(:date_of_birth)
-  fallback_to_rms_person(:eye_color)
-  fallback_to_rms_person(:first_name)
-  fallback_to_rms_person(:hair_color)
-  fallback_to_rms_person(:height_in_inches)
-  fallback_to_rms_person(:last_name)
-  fallback_to_rms_person(:location_address)
-  fallback_to_rms_person(:location_name)
-  fallback_to_rms_person(:middle_initial)
-  fallback_to_rms_person(:race)
-  fallback_to_rms_person(:scars_and_marks)
-  fallback_to_rms_person(:sex)
-  fallback_to_rms_person(:weight_in_pounds)
-  fallback_to_rms_person(:weight_in_pounds)
-  fallback_to_rms_person(:weight_in_pounds)
 
   def active_plan
     @active_plan ||= active_plan_at(Time.current)
@@ -112,11 +74,7 @@ class Person < ApplicationRecord
                nil
              end
 
-    if rms_person.try(:date_of_birth) == value
-      super(nil)
-    else
-      super(parsed)
-    end
+    super(parsed)
   end
 
   def display_name
@@ -197,7 +155,7 @@ class Person < ApplicationRecord
 
   def shorthand_description
     [
-      RMS::RACE_CODES.fetch(race, "U") + RMS::SEX_CODES.fetch(sex, "U"),
+      RACE_CODES.fetch(race, "U") + SEX_CODES.fetch(sex, "U"),
       height_in_feet_and_inches,
       weight_in_pounds ? "#{weight_in_pounds} lb" : nil,
     ].compact.join(" – ")

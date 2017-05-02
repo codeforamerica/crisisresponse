@@ -5,8 +5,7 @@
 # The data can then be loaded with `rake db:seed`
 # (or created alongside the db with db:setup).
 
-RMS::CrisisIncident.destroy_all
-RMS::Person.destroy_all
+CrisisIncident.destroy_all
 
 Alias.destroy_all
 Contact.destroy_all
@@ -50,25 +49,23 @@ sergeant = Officer.create!(
   username: "jones",
 )
 
-biff = Person.new.tap { |p| p.save!(validate: false) }
-RMS::Person.create!(
-  person: biff,
-  pin: "000000",
-  first_name: "Biff",
-  last_name: "TANNEN",
-  middle_initial: "R",
-  sex: "Male",
-  race: "WHITE",
-  height_in_inches: 70,
-  weight_in_pounds: 220,
-  hair_color: "blonde",
-  eye_color: "green",
-  date_of_birth: Date.new(1980, 7, 14),
-  scars_and_marks: "Small tattoo on arm",
-  location_name: "The Morrison",
-  location_address: "509 3rd Ave, Seattle, WA, 98104",
+biff = Person.create!(
+    first_name: "Biff",
+    last_name: "TANNEN",
+    middle_initial: "R",
+    sex: "Male",
+    race: "WHITE",
+    height_in_inches: 70,
+    weight_in_pounds: 220,
+    hair_color: "blonde",
+    eye_color: "green",
+    date_of_birth: Date.new(1980, 7, 14),
+    scars_and_marks: "Small tattoo on arm",
+    location_name: "The Morrison",
+    location_address: "509 3rd Ave, Seattle, WA, 98104",
+    location_supportive_housing: true
 )
-biff.update(location_supportive_housing: true)
+
 ResponsePlan.create!(
   person: biff,
   author: officer,
@@ -79,10 +76,7 @@ ResponsePlan.create!(
   private_notes: nil,
 )
 
-gregory = Person.new.tap { |p| p.save!(validate: false) }
-RMS::Person.create!(
-  person: gregory,
-  pin: "000000",
+gregory = Person.create!(
   first_name: "Gregory",
   last_name: "Tannen",
   middle_initial: "M",
@@ -97,6 +91,7 @@ RMS::Person.create!(
   location_name: nil,
   location_address: "S King St & 6th Ave, Seattle, WA, 98104",
 )
+
 ResponsePlan.create!(
   person: gregory,
   author: officer,
@@ -104,10 +99,7 @@ ResponsePlan.create!(
   private_notes: nil,
 )
 
-martha = Person.new.tap { |p| p.save!(validate: false) }
-RMS::Person.create!(
-  person: martha,
-  pin: "000000",
+martha = Person.create!(
   first_name: "Martha",
   last_name: "Adams",
   middle_initial: "S",
@@ -130,10 +122,7 @@ ResponsePlan.create!(
   private_notes: nil,
 )
 
-shana = Person.new.tap { |p| p.save!(validate: false) }
-RMS::Person.create!(
-  person: shana,
-  pin: "000000",
+shana = Person.create!(
   first_name: "Shana",
   last_name: "Wilson",
   middle_initial: "F",
@@ -340,18 +329,18 @@ end
 
 def create_incidents_for(person)
   (7..12).to_a.sample.times do
-    behavior_attrs = RMS::CrisisIncident::BEHAVIORS.
+    behavior_attrs = CrisisIncident::BEHAVIORS.
       sample(3).
       map { |behavior| [behavior, true] }.
       to_h
 
-    disposition_attrs = RMS::CrisisIncident::DISPOSITIONS.
+    disposition_attrs = CrisisIncident::DISPOSITIONS.
       sample(2).
       map { |disposition| [disposition, true] }.to_h
 
-    nature_attrs = { RMS::CrisisIncident::NATURE_OF_CRISIS.sample => true }
+    nature_attrs = { CrisisIncident::NATURE_OF_CRISIS.sample => true }
 
-    RMS::CrisisIncident.create!(
+    CrisisIncident.create!(
       nature_attrs.
       merge(disposition_attrs).
       merge(behavior_attrs).
@@ -359,8 +348,7 @@ def create_incidents_for(person)
         go_number: GO_NUMBER,
         narrative: NARRATIVE,
         reported_at: (1..40).to_a.sample.weeks.ago,
-        rms_person: person.rms_person,
-        xml_crisis_id: "000000",
+        person: person
       ),
     )
   end
@@ -375,12 +363,11 @@ biff.recent_incidents.last.update!(veteran: true)
 shana.recent_incidents.last.update!(veteran: true)
 
 # Create a recent incident
-RMS::CrisisIncident.create(
+CrisisIncident.create(
   reported_at: 1.second.ago,
   go_number: GO_NUMBER,
   narrative: NARRATIVE,
-  rms_person: gregory.rms_person,
-  xml_crisis_id: "000000",
+  person: gregory
 )
 
 biff.aliases.create(name: "B-Tan")
@@ -494,17 +481,16 @@ fftfffftftffffffffffffffftfffffft
 fftfffftffffffffffffffffftfffffft
 "
 
-def add_incidents_for_person(incidents_string, rms_person, narratives)
+def add_incidents_for_person(incidents_string, person, narratives)
   incidents_string.split("\n").each.with_index do |line, incident_index|
     if line.length > 0
       checkbox_attrs = line.chars.map.with_index do |char, index|
         [CHECKBOX_ATTRIBUTES[index], char == "t"]
       end.to_h
 
-      RMS::CrisisIncident.create(checkbox_attrs.merge(
-        rms_person: rms_person,
+      CrisisIncident.create(checkbox_attrs.merge(
+        person: person,
         go_number: GO_NUMBER,
-        xml_crisis_id: "000000",
         reported_at: incident_index.weeks.ago,
         narrative: narratives[incident_index - 1] || NARRATIVE,
       ))
@@ -512,10 +498,7 @@ def add_incidents_for_person(incidents_string, rms_person, narratives)
   end
 end
 
-roger = Person.new.tap { |p| p.save!(validate: false) }
-RMS::Person.create!(
-  person: roger,
-  pin: "000000",
+roger = Person.create!(
   first_name: "Roger",
   last_name: "Smith",
   sex: "Male",
@@ -529,8 +512,8 @@ RMS::Person.create!(
   location_name: "Supportive Housing",
   location_address: "509 3 Av, Seattle, Wa, 98104",
   middle_initial: "A",
+  location_supportive_housing: true
 )
-roger.update!(location_supportive_housing: true)
 
 ResponsePlan.create!(
   person: roger,
@@ -582,21 +565,18 @@ ResponsePlan.create!(
 )
 
 roger_narratives = [
-  "I was on a SPD issued mountain bike in a fully authorized bicycle uniform with my partner Officer Johnson (0000). At approximately 1242 hours we were on routine patrol when I witnessed John Smith (W/M 01/01/1985) punch a light pole and proceed to walk into the street.  I contacted Smith and asked him what was wrong. Smith was calm and compliant and told me that he felt like killing himself. Smith said that approximately three days ago he had overdosed on his medication and was admitted to County Hospital in Seattle. Since Smith overdosed on his medication they took it from him and now he hasn't had his prescription meds in five days.  Smith asked if he could go to the hospital. I requested an AMR to transport Smith to County Hospital.  Smith was compliant and calm during our entire contact.  I screened the voluntary committal with A/Sgt Johnson at the precinct.",
-  "*****THIS INCIDENT WAS CAPTURED ON ICV. I was on uniform patrol in a fully marked vehicle with my partner Officer Johnson. We responded to a suicidal call. The subject Smith is a chronic caller who is known to both Officer Johnson and me. We contacted Smith who initially disregarded officers and made a show of being angry and punching the walls. Smith was hitting the walls hard enough to make noise, but not hard enough to cause damage. When we did not call for Fire or AMR to report to the scene Smith elevated her behavior and began repeating that he was not safe with himself. He then began to cry. I spoke to staff who stated Smith had been trying to get attention \"all day\" and had tried repeatedly to get staff to give him \"meds\" ahead of schedule. Staff said with all of this Smith had still been happy and laughing. Staff stated this all changed when Smith placed marijuana on the counter. After telling multiple times staff pushed the marijuana off onto the floor. This sent Smith into a fit of rage. He began throwing things at staff and stated he was going to kill himself. Officer Hewitt and I took turns talking to Smith and were able to get him to calm down. We were very frank with him about what we believed would happen if he was sent to the hospital. We also re-enforced her good behaviors. This seemed to calm Smith who agreed that going to the hospital would do him no good because they would most likely discharge him immediately. Smith stated he was having difficulty managing his medications and was hoping to see his case worker in the morning. Smith stated he would go to his room and make every effort to get to his appointment in the morning. SPD business cards with Officer Johnson and my name, serial number, and the incident number were given to Smith and Supportive Housing staff.",
+  "I was on a police issued mountain bike in a fully authorized bicycle uniform with my partner Officer Johnson (0000). At approximately 1242 hours we were on routine patrol when I witnessed John Smith (W/M 01/01/1985) punch a light pole and proceed to walk into the street.  I contacted Smith and asked him what was wrong. Smith was calm and compliant and told me that he felt like killing himself. Smith said that approximately three days ago he had overdosed on his medication and was admitted to County Hospital in Seattle. Since Smith overdosed on his medication they took it from him and now he hasn't had his prescription meds in five days.  Smith asked if he could go to the hospital. I requested an AMR to transport Smith to County Hospital.  Smith was compliant and calm during our entire contact.  I screened the voluntary committal with A/Sgt Johnson at the precinct.",
+  "*****THIS INCIDENT WAS CAPTURED ON ICV. I was on uniform patrol in a fully marked vehicle with my partner Officer Johnson. We responded to a suicidal call. The subject Smith is a chronic caller who is known to both Officer Johnson and me. We contacted Smith who initially disregarded officers and made a show of being angry and punching the walls. Smith was hitting the walls hard enough to make noise, but not hard enough to cause damage. When we did not call for Fire or AMR to report to the scene Smith elevated her behavior and began repeating that he was not safe with himself. He then began to cry. I spoke to staff who stated Smith had been trying to get attention \"all day\" and had tried repeatedly to get staff to give him \"meds\" ahead of schedule. Staff said with all of this Smith had still been happy and laughing. Staff stated this all changed when Smith placed marijuana on the counter. After telling multiple times staff pushed the marijuana off onto the floor. This sent Smith into a fit of rage. He began throwing things at staff and stated he was going to kill himself. Officer Hewitt and I took turns talking to Smith and were able to get him to calm down. We were very frank with him about what we believed would happen if he was sent to the hospital. We also re-enforced her good behaviors. This seemed to calm Smith who agreed that going to the hospital would do him no good because they would most likely discharge him immediately. Smith stated he was having difficulty managing his medications and was hoping to see his case worker in the morning. Smith stated he would go to his room and make every effort to get to his appointment in the morning. Business cards with Officer Johnson and my name, serial number, and the incident number were given to Smith and Supportive Housing staff.",
   "ICV was used.  On the listed date and time, I was working a two officer car with Officer Johnson. We were on a call at the Supportive Housing in Seattle. While on the call I onviewed a disturbance, involving Smith and the MHS staff.   Adams explained that overnight the staff had to bar Smith's fiance from the premises and also took away Smith's guest privleges. Smith became very upset and began yelling profanities at the staff members as well as punching walls. Adams stated that Smith never threatened physical violence against them or assaulted anyone. Staff was concerned that Smith may damage property with because of his behavior, but Smith had not broken anything at that point in time.  When we arrived Smith assumed that the staff had called police because of his behavior. I heard Smith say that he was glad police had arrived in case he did something then he could go to jail. Once officers explained the seriousness of the situation to Smith he calmed down and stated that he would be leaving soon to meet with his payee.  I explained to staff that I would be writing a report and documenting the incident.  Business card and case number provided.",
-  "I was working patrol in a marked City of Seattle Police vehicle. I was in full uniform. The patrol vehicle is equipped with a digital in car video system which recorded my involvement. We were dispatched to Mental Health Services.  On arrival I contacted Smith. Smith is well known to officers for his multiple complaints of potential self harm and crisis issues. He also has well documented mental health diagnosis and a SPD crisis plan.  Smith's fiance said that Smith had just taken a handful or her medication. Staff also said that Smith took a three day supply of some of his medications. They said poison control said the medications taken were not enough to overdose, but that he might become lethargic. They said when he began getting a \"a little loopy\" they called 911.  Smith was hard to focus, but he said he only took the medication his sleep and denied doing it for self harm. He had a lot of belongings and his rat with him and he said he was trying to move to suburbs with his fiance. SFD stated that the medication taken was not enough to overdose or would not cause an overdose. Alcohol was also a factor and Smith was alert and oriented, but I do not believe he was an imminent threat to himself.  I provided Smith and his fiance a ride to the ferry dock.",
-  "I was uniformed and in a marked patrol car. I have worked in patrol in the for approximately eighteen years, on all watches. On this day I was working solo when I heard dispatch broadcast the call a caller reporting he was suicidal. Smith is a known, there are two hazard flags linked to him within the last year.  Smith also flagged as being mental in RMS.   I was only a few blocks away. While I was waiting for my back-up I watched Smith walk away from the Supportive Housing facility. A few minutes as my back up was arriving I saw him walk back into the facility. I went in to speak with him and his case manager, Francis Jones.  He told me for about the last year he has been working with Smith on coping skills to help him through times of emotional distress.  Jones said he believed taking Smith to the hospital for a psychiatric evaluation would be detrimental, and would only further ingrain the behavior he has been displaying.  Jones also said when Smith is in an attention seeking behavior mode and receives what he wants it only exacerbates his mental illness.   He convinced him to take a walk with him to talk out options other than calling 911 after he wants to kill himself. Jones and Smith walked off together, I left the immediate area to write my report. I asked dispatch to let me know if 911 center received more calls involving Smith.",
+  "I was working patrol in a marked City of Seattle Police vehicle. I was in full uniform. The patrol vehicle is equipped with a digital in car video system which recorded my involvement. We were dispatched to Mental Health Services.  On arrival I contacted Smith. Smith is well known to officers for his multiple complaints of potential self harm and crisis issues. He also has well documented mental health diagnosis and a crisis plan.  Smith's fiance said that Smith had just taken a handful or her medication. Staff also said that Smith took a three day supply of some of his medications. They said poison control said the medications taken were not enough to overdose, but that he might become lethargic. They said when he began getting a \"a little loopy\" they called 911.  Smith was hard to focus, but he said he only took the medication his sleep and denied doing it for self harm. He had a lot of belongings and his rat with him and he said he was trying to move to suburbs with his fiance. SFD stated that the medication taken was not enough to overdose or would not cause an overdose. Alcohol was also a factor and Smith was alert and oriented, but I do not believe he was an imminent threat to himself.  I provided Smith and his fiance a ride to the ferry dock.",
+  "I was uniformed and in a marked patrol car. I have worked in patrol in the for approximately eighteen years, on all watches. On this day I was working solo when I heard dispatch broadcast the call a caller reporting he was suicidal. Smith is a known, there are two hazard flags linked to him within the last year.  Smith also flagged as being mental. I was only a few blocks away. While I was waiting for my back-up I watched Smith walk away from the Supportive Housing facility. A few minutes as my back up was arriving I saw him walk back into the facility. I went in to speak with him and his case manager, Francis Jones.  He told me for about the last year he has been working with Smith on coping skills to help him through times of emotional distress.  Jones said he believed taking Smith to the hospital for a psychiatric evaluation would be detrimental, and would only further ingrain the behavior he has been displaying.  Jones also said when Smith is in an attention seeking behavior mode and receives what he wants it only exacerbates his mental illness.   He convinced him to take a walk with him to talk out options other than calling 911 after he wants to kill himself. Jones and Smith walked off together, I left the immediate area to write my report. I asked dispatch to let me know if 911 center received more calls involving Smith.",
   "I am familiar which Smith from a few previous encounters.  He lives in Seattle and gets his medication at the Mental Health Services. Today he was very depressed, reporting it the anniversary of he sister's death. He told me County Hospital had seen him as recently as yesterday; none of the DMHPs who evaluated him believed inpatient treatment was appropiate. I spoke with his case worker of almost a year, Francis Jones.  He told me there is a plan in place for Smith; she is choosing not to follow through with coping mechanisms they have set up for her.  Jones suggestion was to have Smith walk outside with him to help him calm down and lift his mood. He agreed, they left the Supportive Housing facility together. SFD was the first to evaluate Smith for this specic 911 call he placed saying he wanted to die.  On of the medics imformed me his concern was, there was chance of a interstinal puncture. Smith declined medical assistance.",
 ]
 
-add_incidents_for_person(rogers_events, roger.rms_person, roger_narratives)
+add_incidents_for_person(rogers_events, roger, roger_narratives)
 Image.create!(source: image("smith_roger/1.png"), person: roger)
 
-angela = Person.new.tap { |p| p.save!(validate: false) }
-RMS::Person.create!(
-  person: angela,
-  pin: "000000",
+angela = Person.create!(
   first_name: "Angela",
   last_name: "SMITH",
   sex: "Female",
@@ -608,8 +588,8 @@ RMS::Person.create!(
   date_of_birth: 28.years.ago,
   location_address: "501 5th Street, Seattle, WA, 98108",
   middle_initial: "B",
+  location_supportive_housing: true
 )
-angela.update!(location_supportive_housing: true)
 
 =begin
 ResponsePlan.create!(
@@ -621,7 +601,7 @@ ResponsePlan.create!(
   response_strategies_attributes: [
     {
       title: "Can be assaultive to officers; Does not like women and police",
-      description: "SMITH has an RMS caution entry for being assaultive to and threatening law enforcement. Case management mentioned that SMITH does not like the police and she does not like men. When agitated she often responds well with structure and humor. ",
+      description: "SMITH has a caution entry for being assaultive to and threatening law enforcement. Case management mentioned that SMITH does not like the police and she does not like men. When agitated she often responds well with structure and humor. ",
     },
     {
       title: "Ask \"Who am I speaking with today?\"",
@@ -670,5 +650,5 @@ angela_narratives = [
 
 Image.create!(source: image("smith_angela/1.png"), person: roger)
 
-add_incidents_for_person(angela_incidents, angela.rms_person, angela_narratives)
+add_incidents_for_person(angela_incidents, angela, angela_narratives)
 Image.create!(source: image("smith_angela/1.png"), person: angela)

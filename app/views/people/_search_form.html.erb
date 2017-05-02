@@ -33,12 +33,12 @@
             hint: t("search.hints.age", range: Search::AGE_RANGE_IN_YEARS),
           ) %>
 
-          <%= f.input :sex, as: :check_boxes, collection: RMS::SEX_CODES.keys %>
+          <%= f.input :sex, as: :check_boxes, collection: PersonValidations::SEX_CODES.keys %>
 
           <%= f.input(
             :race,
             as: :check_boxes,
-            collection: RMS::RACE_CODES.keys,
+            collection: PersonValidations::RACE_CODES.keys,
             label_method: lambda { |race| race.downcase.gsub("/", " / ") },
           ) %>
 
@@ -55,7 +55,7 @@
             <%= f.input(
               :hair_color,
               as: :check_boxes,
-              collection: RMS::HAIR_COLORS,
+              collection: PersonValidations::HAIR_COLORS,
             ) %>
             <%= link_to(
               t("search.options.show"),
@@ -71,7 +71,7 @@
             <%= f.input(
               :eye_color,
               as: :check_boxes,
-              collection: RMS::EYE_COLORS,
+              collection: PersonValidations::EYE_COLORS,
             ) %>
             <%= link_to(
               t("search.options.show"),

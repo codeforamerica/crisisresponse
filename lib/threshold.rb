@@ -49,12 +49,6 @@ class Threshold
       people_with_manually_removed_visibility
   end
 
-  def people_ids_over_threshold
-    RMS::Person.
-      where(id: rms_people_ids_over_threshold).
-      pluck(:person_id)
-  end
-
   def people_with_current_visibility
     Visibility.active.pluck(:person_id).uniq
   end
@@ -65,8 +59,8 @@ class Threshold
       pluck(:person_id)
   end
 
-  def rms_people_ids_over_threshold
-    rms_people_incident_counts.
+  def people_ids_over_threshold
+    people_incident_counts.
       select { |_, incident_count| incident_count >= threshold }.
       keys
   end
@@ -81,15 +75,15 @@ class Threshold
       pluck(:id)
   end
 
-  def rms_people_incident_counts
-    RMS::CrisisIncident.
+  def people_incident_counts
+    CrisisIncident.
       where(reported_at: (Person::RECENT_TIMEFRAME.ago..Time.current)).
-      group(:rms_person_id).
+      group(:person_id).
       count
   end
 
   def crossed_threshold_message
-    threshold_text = pluralize(threshold, "RMS Crisis Incident")
+    threshold_text = pluralize(threshold, "Crisis Incident")
     "[AUTO] Person crossed the threshold of #{threshold_text}"
   end
 end

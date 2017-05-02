@@ -5,12 +5,12 @@ require "rails_helper"
 feature "Core Profile" do
   it "displays the number of crisis incidents in the past year" do
     sign_in_officer
-    rms_person = create(:rms_person)
-    create(:incident, reported_at: 18.months.ago, rms_person: rms_person)
-    create(:incident, reported_at: 6.months.ago, rms_person: rms_person)
-    create(:incident, reported_at: 1.day.ago, rms_person: rms_person)
+    person = create(:person)
+    create(:incident, reported_at: 18.months.ago, person: person)
+    create(:incident, reported_at: 6.months.ago, person: person)
+    create(:incident, reported_at: 1.day.ago, person: person)
 
-    visit person_path(rms_person.person)
+    visit person_path(person)
 
     expect(page).to have_content("2 CRISIS calls (in the last year)")
     expect(page).to have_content("1 CRISIS call within the last 7 days")
@@ -27,22 +27,22 @@ feature "Core Profile" do
 
   it "shows recent behaviors" do
     sign_in_officer
-    rms_person = create(:rms_person)
-    create(:incident, mania: true, rms_person: rms_person)
-    create(:incident, mania: false, rms_person: rms_person)
+    person = create(:person)
+    create(:incident, mania: true, person: person)
+    create(:incident, mania: false, person: person)
 
-    visit person_path(rms_person.person)
+    visit person_path(person)
 
     expect(page).to have_content "Mania 1 (50%)"
   end
 
   it "shows recent incident narratives" do
     sign_in_officer
-    rms_person = create(:rms_person)
+    person = create(:person)
     narrative = "This is a crisis incident narrative."
-    incident = create(:incident, narrative: narrative, rms_person: rms_person)
+    incident = create(:incident, narrative: narrative, person: person)
 
-    visit person_path(rms_person.person)
+    visit person_path(person)
     expect(page).to have_content(narrative)
 
     click_on "Template Narrative >"
@@ -52,11 +52,11 @@ feature "Core Profile" do
 
   it "shows 3-month and 2-year graphs", :js do
     sign_in_officer
-    rms_person = create(:rms_person)
-    create(:incident, reported_at: 2.months.ago, rms_person: rms_person)
-    create(:incident, reported_at: 18.months.ago, rms_person: rms_person)
+    person = create(:person)
+    create(:incident, reported_at: 2.months.ago, person: person)
+    create(:incident, reported_at: 18.months.ago, person: person)
 
-    visit person_path(rms_person.person)
+    visit person_path(person)
     within(".profile-incidents") do
       expect(page).to have_content("1 CRISIS calls")
     end

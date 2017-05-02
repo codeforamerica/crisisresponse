@@ -106,8 +106,6 @@ At the least, you'll have to provide real values for:
 * `LDAP_HOST`
 * `LDAP_NAMESPACE`
 * `LDAP_PORT`
-* `RMS_PASSWORD`
-* `RMS_USERNAME`
 * `SECRET_KEY_BASE`
 
 If you fail to provide any environment variables,

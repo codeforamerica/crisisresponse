@@ -2,7 +2,7 @@
 
 class AddRemainingBooleansToIncidents < ActiveRecord::Migration[5.0]
   def change
-    change_table :rms_crisis_incidents do |t|
+    change_table :crisis_incidents do |t|
       t.boolean :dicv
       t.boolean :bodycam
       t.boolean :cit_officer_requested

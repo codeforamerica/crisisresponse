@@ -37,6 +37,65 @@ ActiveRecord::Schema.define(version: 20161104202240) do
     t.index ["response_plan_id"], name: "index_contacts_on_response_plan_id", using: :btree
   end
 
+  create_table "crisis_incidents", force: :cascade do |t|
+    t.integer  "person_id",                     null: false
+    t.datetime "reported_at"
+    t.string   "go_number"
+    t.boolean  "weapon"
+    t.boolean  "threaten_violence"
+    t.boolean  "biologically_induced"
+    t.boolean  "medically_induced"
+    t.boolean  "chemically_induced"
+    t.boolean  "unknown_crisis_nature"
+    t.boolean  "neglect_self_care"
+    t.boolean  "disorganize_communication"
+    t.boolean  "disoriented_confused"
+    t.boolean  "disorderly_disruptive"
+    t.boolean  "unusual_fright_scared"
+    t.boolean  "belligerent_uncooperative"
+    t.boolean  "hopeless_depressed"
+    t.boolean  "bizarre_unusual_behavior"
+    t.boolean  "suicide_threat_attempt"
+    t.boolean  "mania"
+    t.boolean  "out_of_touch_reality"
+    t.boolean  "halluc_delusion"
+    t.boolean  "excited_delirium"
+    t.boolean  "chronic"
+    t.boolean  "treatment_referral"
+    t.boolean  "resource_declined"
+    t.boolean  "mobile_crisis_team"
+    t.boolean  "grat"
+    t.boolean  "shelter"
+    t.boolean  "no_action_poss_necc"
+    t.boolean  "casemanager_notice"
+    t.boolean  "dmhp_refer"
+    t.boolean  "crisis_clinic"
+    t.boolean  "emergent_ita"
+    t.boolean  "voluntary_commit"
+    t.boolean  "arrested"
+    t.boolean  "verbalization"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.text     "narrative"
+    t.boolean  "veteran"
+    t.boolean  "dicv"
+    t.boolean  "bodycam"
+    t.boolean  "cit_officer_requested"
+    t.boolean  "cit_officer_dispatched"
+    t.boolean  "cit_officer_arrived"
+    t.boolean  "behavior_other"
+    t.boolean  "weapon_knife"
+    t.boolean  "weapon_gun"
+    t.boolean  "weapon_other"
+    t.boolean  "handcuffs"
+    t.boolean  "reportable_force_used"
+    t.boolean  "unable_to_contact"
+    t.boolean  "cit_certified"
+    t.boolean  "supervisor_responded_to_scene"
+    t.boolean  "injuries"
+    t.index ["person_id"], name: "index_crisis_incidents_on_person_id", using: :btree
+  end
+
   create_table "deescalation_techniques", force: :cascade do |t|
     t.string   "description",      null: false
     t.integer  "response_plan_id"
@@ -154,87 +213,6 @@ ActiveRecord::Schema.define(version: 20161104202240) do
     t.index ["person_id"], name: "index_reviews_on_person_id", using: :btree
   end
 
-  create_table "rms_crisis_incidents", force: :cascade do |t|
-    t.integer  "rms_person_id",                 null: false
-    t.datetime "reported_at"
-    t.string   "go_number"
-    t.boolean  "weapon"
-    t.boolean  "threaten_violence"
-    t.boolean  "biologically_induced"
-    t.boolean  "medically_induced"
-    t.boolean  "chemically_induced"
-    t.boolean  "unknown_crisis_nature"
-    t.boolean  "neglect_self_care"
-    t.boolean  "disorganize_communication"
-    t.boolean  "disoriented_confused"
-    t.boolean  "disorderly_disruptive"
-    t.boolean  "unusual_fright_scared"
-    t.boolean  "belligerent_uncooperative"
-    t.boolean  "hopeless_depressed"
-    t.boolean  "bizarre_unusual_behavior"
-    t.boolean  "suicide_threat_attempt"
-    t.boolean  "mania"
-    t.boolean  "out_of_touch_reality"
-    t.boolean  "halluc_delusion"
-    t.boolean  "excited_delirium"
-    t.boolean  "chronic"
-    t.boolean  "treatment_referral"
-    t.boolean  "resource_declined"
-    t.boolean  "mobile_crisis_team"
-    t.boolean  "grat"
-    t.boolean  "shelter"
-    t.boolean  "no_action_poss_necc"
-    t.boolean  "casemanager_notice"
-    t.boolean  "dmhp_refer"
-    t.boolean  "crisis_clinic"
-    t.boolean  "emergent_ita"
-    t.boolean  "voluntary_commit"
-    t.boolean  "arrested"
-    t.boolean  "verbalization"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "xml_crisis_id",                 null: false
-    t.text     "narrative"
-    t.boolean  "veteran"
-    t.boolean  "dicv"
-    t.boolean  "bodycam"
-    t.boolean  "cit_officer_requested"
-    t.boolean  "cit_officer_dispatched"
-    t.boolean  "cit_officer_arrived"
-    t.boolean  "behavior_other"
-    t.boolean  "weapon_knife"
-    t.boolean  "weapon_gun"
-    t.boolean  "weapon_other"
-    t.boolean  "handcuffs"
-    t.boolean  "reportable_force_used"
-    t.boolean  "unable_to_contact"
-    t.boolean  "cit_certified"
-    t.boolean  "supervisor_responded_to_scene"
-    t.boolean  "injuries"
-    t.index ["rms_person_id"], name: "index_rms_crisis_incidents_on_rms_person_id", using: :btree
-  end
-
-  create_table "rms_people", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "sex"
-    t.string   "race"
-    t.integer  "height_in_inches"
-    t.integer  "weight_in_pounds"
-    t.string   "hair_color"
-    t.string   "eye_color"
-    t.date     "date_of_birth"
-    t.string   "scars_and_marks"
-    t.string   "location_name"
-    t.string   "location_address"
-    t.string   "pin",              null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "person_id"
-    t.string   "middle_initial"
-    t.index ["person_id"], name: "index_rms_people_on_person_id", using: :btree
-  end
-
   create_table "safety_concerns", force: :cascade do |t|
     t.integer  "response_plan_id", null: false
     t.string   "category",         null: false
@@ -284,6 +262,7 @@ ActiveRecord::Schema.define(version: 20161104202240) do
 
   add_foreign_key "aliases", "people"
   add_foreign_key "contacts", "response_plans"
+  add_foreign_key "crisis_incidents", "people"
   add_foreign_key "deescalation_techniques", "response_plans"
   add_foreign_key "images", "people"
   add_foreign_key "page_views", "officers"
@@ -293,8 +272,6 @@ ActiveRecord::Schema.define(version: 20161104202240) do
   add_foreign_key "response_strategies", "response_plans"
   add_foreign_key "reviews", "officers", column: "created_by_id"
   add_foreign_key "reviews", "people"
-  add_foreign_key "rms_crisis_incidents", "rms_people"
-  add_foreign_key "rms_people", "people"
   add_foreign_key "safety_concerns", "response_plans"
   add_foreign_key "suggestions", "officers"
   add_foreign_key "suggestions", "people"
