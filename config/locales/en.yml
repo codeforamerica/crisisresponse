@@ -208,8 +208,8 @@ en:
   simple_form:
     hints:
       authentication:
-        username: Same username you use to log into SPD computers (e.g., smithj)
-        password: Same password you use to log into SPD computers
+        username: Same username you use to log into department computers (e.g., smithj)
+        password: Same password you use to log into department computers
     labels:
       feedback:
         description: Feedback

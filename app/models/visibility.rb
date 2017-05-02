@@ -2,7 +2,6 @@
 
 # If `created_by` or `removed_by` are nil,
 # we assume that the visibility was automatically created or removed
-# by the RMS import script.
 class Visibility < ApplicationRecord
   belongs_to :person
   belongs_to :removed_by, class_name: "Officer"

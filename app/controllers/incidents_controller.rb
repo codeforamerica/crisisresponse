@@ -1,5 +1,5 @@
 class IncidentsController < ApplicationController
   def show
-    @incident = RMS::CrisisIncident.find(params[:id])
+    @incident = CrisisIncident.find(params[:id])
   end
 end
